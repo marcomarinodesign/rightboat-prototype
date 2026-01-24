@@ -3,7 +3,6 @@ import Link from "next/link"
 
 import { ArticleCard } from "@/components/blog/article-card"
 import { BoatCard } from "@/components/boats/boat-card"
-import { HeroSearch } from "@/components/search/hero-search"
 import { latestArticles } from "@/data/articles"
 import { featuredBoats, latestBoats } from "@/data/boats"
 import {
@@ -20,14 +19,13 @@ export default function Home() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             Boats for sale
           </p>
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
             The right place to find the right boat.
           </h1>
           <p className="text-lg text-muted-foreground">
             Discover thousands of new and used listings worldwide. Compare
             models, filter by type and location, and contact brokers directly.
           </p>
-          <HeroSearch />
         </div>
         <div className="relative overflow-hidden rounded-3xl border border-border/60 shadow-sm">
           <Image

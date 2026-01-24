@@ -1,9 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
+import { Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
 type AppShellProps = {
   children: React.ReactNode
@@ -29,20 +36,117 @@ export function AppShell({ children }: AppShellProps) {
   )
 }
 
+const navigation = [
+  { name: "Boats for sale", href: "/boats-for-sale" },
+  { name: "New boats", href: "/boats-for-sale" },
+  { name: "Used boats", href: "/boats-for-sale" },
+  { name: "Reviews", href: "/boats-for-sale" },
+]
+
 function SiteHeader() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="text-xl font-semibold text-brand-midnight">
+      <nav
+        aria-label="Global"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
+      >
+        {/* Logo */}
+        <div className="flex lg:flex-1">
+          <Link href="/" className="-m-1.5 p-1.5">
+            <span className="sr-only">Rightboat</span>
+            <span className="text-xl font-semibold text-brand-midnight">
               Rightboat
-            </Link>
-            <span className="rounded-full border border-border/60 px-2 py-1 text-xs text-muted-foreground">
-              Marketplace
             </span>
-          </div>
+          </Link>
+        </div>
 
+        {/* Mobile menu button */}
+        <div className="flex lg:hidden">
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
+              >
+                <span className="sr-only">Open main menu</span>
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full sm:max-w-sm">
+              <SheetHeader>
+                <Link
+                  href="/"
+                  className="text-xl font-semibold text-brand-midnight"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Rightboat
+                </Link>
+              </SheetHeader>
+              <div className="mt-6 flow-root">
+                <div className="-my-6 divide-y divide-border">
+                  {/* Mobile Navigation Links */}
+                  <div className="space-y-2 py-6">
+                    {navigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                  {/* Mobile Actions */}
+                  <div className="py-6">
+                    <div className="mb-4 space-y-3">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="outline" className="w-full justify-start">
+                            Boat types
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56">
+                          <DropdownMenuLabel>Popular types</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem>Sailboats</DropdownMenuItem>
+                          <DropdownMenuItem>Center console</DropdownMenuItem>
+                          <DropdownMenuItem>Yachts</DropdownMenuItem>
+                          <DropdownMenuItem>Catamaran</DropdownMenuItem>
+                          <DropdownMenuItem>Fishing</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                    <Button
+                      className="w-full"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Sell your boat
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex lg:gap-x-8">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-sm font-semibold leading-6 text-foreground hover:text-primary"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
           <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -63,28 +167,7 @@ function SiteHeader() {
             <Button size="sm">Sell your boat</Button>
           </div>
         </div>
-
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex flex-1 items-center gap-2">
-            <Input placeholder="Search by make, model or keyword" />
-            <Button variant="secondary">Search</Button>
-          </div>
-          <nav className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-            <Link href="/boats-for-sale" className="hover:text-foreground">
-              Boats for sale
-            </Link>
-            <Link href="/boats-for-sale" className="hover:text-foreground">
-              New boats
-            </Link>
-            <Link href="/boats-for-sale" className="hover:text-foreground">
-              Used boats
-            </Link>
-            <Link href="/boats-for-sale" className="hover:text-foreground">
-              Reviews
-            </Link>
-          </nav>
-        </div>
-      </div>
+      </nav>
     </header>
   )
 }
