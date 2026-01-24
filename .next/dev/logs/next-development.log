@@ -364,3 +364,17 @@ https://nextjs.org/docs/messages/module-not-found
 [01:47:22.979] Browser WARN    Select is changing from controlled to uncontrolled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
 [01:48:04.353] Server  WARN    Error: Route "/boats-for-sale/[make]/[model]/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
 [01:49:16.123] Server  LOG     ✓ Compiled in 52ms
+[01:57:14.211] Server  LOG     ✓ Compiled in 20ms
+[01:57:44.472] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:57:46.149] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:57:56.058] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:07:00.823] Server  LOG     ✓ Compiled in 30ms
+[02:07:05.978] Server  LOG     ✓ Compiled in 65ms
+[02:07:44.432] Server  LOG     ✓ Compiled in 69ms
+[02:08:55.718] Server  LOG     ✓ Compiled in 62ms
+[02:09:29.458] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:12:13.573] Server  LOG     ✓ Compiled in 32ms
+[02:18:22.534] Server  LOG     ✓ Compiled in 62ms
+[02:38:23.700] Server  LOG     ✓ Compiled in 34ms
+[03:35:49.330] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[03:39:59.574] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

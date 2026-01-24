@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///Users/marcomarino/Projects/rightboat-prototype/src/app/propel/page.tsx"],"sourcesContent":["export default function PropelPage() {\n  return (\n    <div>\n      <h1 className=\"text-3xl font-bold\">Propel</h1>\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;kBACC,cAAA,8OAAC;YAAG,WAAU;sBAAqB;;;;;;;;;;;AAGzC"}}]
+}

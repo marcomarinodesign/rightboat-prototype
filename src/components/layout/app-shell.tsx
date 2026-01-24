@@ -31,10 +31,9 @@ export function AppShell({ children }: AppShellProps) {
 
 const navigation = [
   { name: "Boat for sale", href: "/boats-for-sale" },
-  { name: "Power boats", href: "/boats-for-sale?type=powerboats" },
-  { name: "Sail boats", href: "/boats-for-sale?type=sailboats" },
   { name: "Research & Advice", href: "/research-advice" },
   { name: "Broker/Dealer?", href: "/broker-dealer" },
+  { name: "Propel", href: "/propel" },
 ]
 
 function SiteHeader() {

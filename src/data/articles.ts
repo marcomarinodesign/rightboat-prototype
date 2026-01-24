@@ -5,6 +5,9 @@ export type Article = {
   excerpt: string
   image: string
   href: string
+  category?: string
+  author?: string
+  readingTime?: string
 }
 
 export const latestArticles: Article[] = [

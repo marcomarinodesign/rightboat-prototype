@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { Article } from "@/data/articles"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 type ArticleCardProps = {
   article: Article
@@ -21,9 +22,16 @@ export function ArticleCard({ article }: ArticleCardProps) {
         />
       </Link>
       <CardHeader className="space-y-2">
-        <p className="text-xs uppercase tracking-wide text-muted-foreground">
-          {article.date}
-        </p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">
+            {article.date}
+          </p>
+          {article.category && (
+            <Badge variant="secondary" className="text-xs">
+              {article.category}
+            </Badge>
+          )}
+        </div>
         <Link
           href={article.href}
           className="text-lg font-semibold leading-tight transition-colors group-hover:text-primary"
