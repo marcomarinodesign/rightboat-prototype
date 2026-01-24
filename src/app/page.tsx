@@ -16,7 +16,7 @@ export default function Home() {
     <div className="space-y-[60px]">
       <section className="space-y-6 text-center">
         <div className="space-y-6">
-          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+          <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
             The right place to find the right boat.
           </h1>
           <p className="text-lg text-muted-foreground">

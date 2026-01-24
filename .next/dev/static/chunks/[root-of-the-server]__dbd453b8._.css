@@ -666,10 +666,6 @@
     margin-top: calc(var(--spacing) * 6);
   }
 
-  .mt-10 {
-    margin-top: calc(var(--spacing) * 10);
-  }
-
   .mt-auto {
     margin-top: auto;
   }
@@ -844,10 +840,6 @@
 
   .w-44 {
     width: calc(var(--spacing) * 44);
-  }
-
-  .w-56 {
-    width: calc(var(--spacing) * 56);
   }
 
   .w-auto {
@@ -1390,10 +1382,6 @@
 
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
-  }
-
-  .pt-12 {
-    padding-top: calc(var(--spacing) * 12);
   }
 
   .pr-1 {
