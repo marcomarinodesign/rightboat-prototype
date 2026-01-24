@@ -1,3 +1,5 @@
 {
+  "/boats-for-sale/[make]/[model]/[id]/page": "app/boats-for-sale/[make]/[model]/[id]/page.js",
+  "/boats-for-sale/page": "app/boats-for-sale/page.js",
   "/page": "app/page.js"
 }

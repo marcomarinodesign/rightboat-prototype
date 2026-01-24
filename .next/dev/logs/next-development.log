@@ -3,3 +3,364 @@
 [00:00:47.269] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:00:47.449] Browser WARN    Image with src "https://www.rightboat.com/boat_images/image_24409432/097f028a7bc24851a5ef0cdda048d6bd7afffa9733b74d0d91b14d2265880802.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:17:10.205] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:21:08.993] Browser ERROR   ./src/app/page.tsx:41:17
+Parsing ecmascript source code failed
+  39 |           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+  40 |         </div>
+> 41 |       </section>
+     |                 ^
+> 42 |
+     | ^
+> 43 |       <section className="space-y-6" aria-labelledby="featured-heading">
+     | ^^^^^^^
+  44 |         <div className="flex items-center justify-between">
+  45 |           <h2 id="featured-heading" className="text-2xl font-bold">
+  46 |             Featured boats
+
+Expected '</', got 'jsx text (
+
+      )'
+[01:21:28.500] Server  ERROR   ⨯ ReferenceError: Image is not defined
+[01:21:28.638] Browser ERROR   uncaughtError: ReferenceError: Image is not defined
+[01:21:31.208] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:21:31.382] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:21:31.531] Browser WARN    Image with src "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:23:19.685] Server  LOG     ✓ Compiled in 32ms
+[01:23:21.544] Server  LOG     ✓ Compiled in 69ms
+[01:23:21.822] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:23:22.729] Server  LOG     ✓ Compiled in 16ms
+[01:23:32.765] Server  LOG     ✓ Compiled in 14ms
+[01:23:33.271] Server  LOG     ✓ Compiled in 14ms
+[01:24:22.557] Server  LOG     ✓ Compiled in 22ms
+[01:24:26.759] Server  LOG     ✓ Compiled in 16ms
+[01:25:33.596] Server  LOG     ✓ Compiled in 34ms
+[01:25:33.847] Server  LOG     ✓ Compiled in 11ms
+[01:30:48.138] Server  ERROR   ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:48.249] Server  ERROR   ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:48.373] Server  ERROR   ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:48.496] Server  ERROR   ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:48.603] Server  ERROR   ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:48.715] Server  ERROR   ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:49.006] Browser ERROR   uncaughtError: Error: Event handlers cannot be passed to Client Component props.
+  <button className=... ref=... onClick={function onClick} children=...>
+                                        ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+[01:30:52.040] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:30:52.180] Browser ERROR   Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously tries to update the component. Move this work to useEffect instead.
+[01:30:52.328] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+                            className="public_sans_68951cab-module__tOx8xW__variable geist_mono_8d43a2aa-module__8Li5z..."
+-                           style={{cursor:"crosshair"}}
+                          >
+                  ...
+
+[01:32:42.346] Server  LOG     ✓ Compiled in 46ms
+[01:33:00.032] Server  LOG     ✓ Compiled in 34ms
+[01:33:20.757] Server  LOG     ✓ Compiled in 33ms
+[01:33:36.159] Server  LOG     ✓ Compiled in 17ms
+[01:33:53.892] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:34:07.805] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.805] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.826] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.826] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.827] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.828] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.828] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.829] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.829] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.830] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.830] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.830] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.831] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.831] Server  ERROR   ⨯ ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:34:07.858] Server  LOG     ✓ Compiled in 91ms
+[01:34:07.961] Browser ERROR   ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/home/home-categories'
+  4 | import { ArticleCard } from "@/components/blog/article-card"
+  5 | import { BoatCard } from "@/components/boats/boat-card"
+> 6 | import { HomeCategories } from "@/components/home/home-categories"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { PopularModels } from "@/components/home/popular-models"
+  8 | import { PremiumBrands } from "@/components/home/premium-brands"
+  9 | import { WhyRightboat } from "@/components/home/why-rightboat"
+
+Import map: aliased to relative './src/components/home/home-categories' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found
+[01:34:32.500] Server  LOG     ✓ Compiled in 35ms
+[01:34:32.778] Server  ERROR   ⨯ Error: Module [project]/node_modules/next/image.js [app-ssr] (ecmascript) was instantiated because it was required from module [project]/src/components/layout/app-shell.tsx [app-ssr] (ecmascript), but the module factory is not available.
+[01:34:32.786] Server  LOG     ✓ Compiled in 48ms
+[01:34:32.970] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:34:33.003] Server  LOG     ✓ Compiled in 1ms
+[01:34:33.091] Browser ERROR   uncaughtError: Error: Module [project]/node_modules/next/image.js [app-client] (ecmascript) was instantiated because it was required from module [project]/src/components/layout/app-shell.tsx [app-client] (ecmascript), but the module factory is not available. It might have been deleted in an HMR update.
+[01:34:35.944] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:35:11.546] Server  LOG     ✓ Compiled in 34ms
+[01:41:37.493] Server  LOG     ✓ Compiled in 35ms
+[01:41:43.923] Server  LOG     ✓ Compiled in 19ms
+[01:41:51.886] Server  LOG     ✓ Compiled in 68ms
+[01:41:52.181] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:42:08.571] Server  LOG     ✓ Compiled in 21ms
+[01:47:17.074] Browser WARN    Select is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
+[01:47:22.979] Browser WARN    Select is changing from controlled to uncontrolled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
+[01:48:04.353] Server  WARN    Error: Route "/boats-for-sale/[make]/[model]/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[01:49:16.123] Server  LOG     ✓ Compiled in 52ms

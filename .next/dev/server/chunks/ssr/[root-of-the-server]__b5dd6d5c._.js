@@ -73,7 +73,7 @@ const CardHeader = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f
 CardHeader.displayName = "CardHeader";
 const CardTitle = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["forwardRef"](({ className, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: ref,
-        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["cn"])("text-2xl font-semibold leading-none tracking-tight", className),
+        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["cn"])("text-2xl font-bold leading-none tracking-tight", className),
         ...props
     }, void 0, false, {
         fileName: "[project]/src/components/ui/card.tsx",
@@ -604,6 +604,230 @@ const listingBoats = [
         location: "Stockton, CA",
         broker: "Delta Marine",
         image: "https://www.rightboat.com/boat_images/image_25295516/8df73503854541399d20db81bbb9cc21b20b9ea45237491dbc57d2e78b8de765.webp"
+    },
+    {
+        id: "rb600123",
+        make: "Boston Whaler",
+        model: "280 Outrage",
+        makeSlug: "boston-whaler",
+        modelSlug: "280-outrage",
+        year: 2019,
+        condition: "Used",
+        length: "28 ft",
+        price: "$285,000",
+        location: "Miami, FL",
+        broker: "United Yacht Sales",
+        image: "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp"
+    },
+    {
+        id: "rb600456",
+        make: "Grady-White",
+        model: "Freedom 335",
+        makeSlug: "grady-white",
+        modelSlug: "freedom-335",
+        year: 2022,
+        condition: "Used",
+        length: "33.5 ft",
+        price: "$425,000",
+        location: "Charleston, SC",
+        broker: "Yacht Sales International",
+        image: "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp"
+    },
+    {
+        id: "rb600789",
+        make: "Cobalt",
+        model: "R6",
+        makeSlug: "cobalt",
+        modelSlug: "r6",
+        year: 2023,
+        condition: "New",
+        length: "26 ft",
+        price: "$189,500",
+        location: "Lake of the Ozarks, MO",
+        broker: "Cobalt Boats",
+        image: "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp"
+    },
+    {
+        id: "rb601012",
+        make: "Beneteau",
+        model: "Oceanis 38.1",
+        makeSlug: "beneteau",
+        modelSlug: "oceanis-38-1",
+        year: 2020,
+        condition: "Used",
+        length: "38 ft",
+        price: "$245,000",
+        location: "Annapolis, MD",
+        broker: "Annapolis Yacht Sales",
+        image: "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp"
+    },
+    {
+        id: "rb601345",
+        make: "Malibu",
+        model: "Wakesetter 23 LSV",
+        makeSlug: "malibu",
+        modelSlug: "wakesetter-23-lsv",
+        year: 2021,
+        condition: "Used",
+        length: "23 ft",
+        price: "$125,000",
+        location: "Austin, TX",
+        broker: "Austin Marine",
+        image: "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp"
+    },
+    {
+        id: "rb601678",
+        make: "Sunseeker",
+        model: "68 Manhattan",
+        makeSlug: "sunseeker",
+        modelSlug: "68-manhattan",
+        year: 2018,
+        condition: "Used",
+        length: "68 ft",
+        price: "$2,450,000",
+        location: "Monaco",
+        broker: "Sunseeker Monaco",
+        image: "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp"
+    },
+    {
+        id: "rb602011",
+        make: "Lagoon",
+        model: "42",
+        makeSlug: "lagoon",
+        modelSlug: "42",
+        year: 2019,
+        condition: "Used",
+        length: "42 ft",
+        price: "$485,000",
+        location: "St. Martin",
+        broker: "Multihull Company",
+        image: "https://www.rightboat.com/boat_images/image_26952275/9cf7a9d25233460d95f14f6e1cf506b3b99fe89a7b304c4898be4e64cd876e10.webp"
+    },
+    {
+        id: "rb602344",
+        make: "Parker",
+        model: "2320 SC",
+        makeSlug: "parker",
+        modelSlug: "2320-sc",
+        year: 2020,
+        condition: "Used",
+        length: "23 ft",
+        price: "$89,500",
+        location: "Morehead City, NC",
+        broker: "Carolina Yacht Sales",
+        image: "https://www.rightboat.com/boat_images/image_24409432/097f028a7bc24851a5ef0cdda048d6bd7afffa9733b74d0d91b14d2265880802.webp"
+    },
+    {
+        id: "rb602677",
+        make: "Azimut",
+        model: "55 Fly",
+        makeSlug: "azimut",
+        modelSlug: "55-fly",
+        year: 2017,
+        condition: "Used",
+        length: "55 ft",
+        price: "$1,250,000",
+        location: "Cannes, France",
+        broker: "Azimut Yachts",
+        image: "https://www.rightboat.com/boat_images/image_25862466/fbf1a2c2e9134e67b7b26a684a31824c18eaba91bb0f43feb2dc09f1ec23ac8f.webp"
+    },
+    {
+        id: "rb603010",
+        make: "Chris-Craft",
+        model: "Catalina 30",
+        makeSlug: "chris-craft",
+        modelSlug: "catalina-30",
+        year: 2022,
+        condition: "New",
+        length: "30 ft",
+        price: "$295,000",
+        location: "Sarasota, FL",
+        broker: "Chris-Craft Dealers",
+        image: "https://www.rightboat.com/boat_images/image_25295516/8df73503854541399d20db81bbb9cc21b20b9ea45237491dbc57d2e78b8de765.webp"
+    },
+    {
+        id: "rb603343",
+        make: "Tiara",
+        model: "43 Open",
+        makeSlug: "tiara",
+        modelSlug: "43-open",
+        year: 2016,
+        condition: "Used",
+        length: "43 ft",
+        price: "$675,000",
+        location: "Grand Rapids, MI",
+        broker: "Tiara Yachts",
+        image: "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp"
+    },
+    {
+        id: "rb603676",
+        make: "Fairline",
+        model: "Targa 45",
+        makeSlug: "fairline",
+        modelSlug: "targa-45",
+        year: 2019,
+        condition: "Used",
+        length: "45 ft",
+        price: "$850,000",
+        location: "Southampton, UK",
+        broker: "Fairline Yachts",
+        image: "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp"
+    },
+    {
+        id: "rb604009",
+        make: "Mastercraft",
+        model: "X26",
+        makeSlug: "mastercraft",
+        modelSlug: "x26",
+        year: 2023,
+        condition: "New",
+        length: "26 ft",
+        price: "$149,900",
+        location: "Orlando, FL",
+        broker: "Mastercraft Dealers",
+        image: "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp"
+    },
+    {
+        id: "rb604342",
+        make: "Sea Ray",
+        model: "Sundancer 350",
+        makeSlug: "sea-ray",
+        modelSlug: "sundancer-350",
+        year: 2015,
+        condition: "Used",
+        length: "35 ft",
+        price: "$195,000",
+        location: "San Diego, CA",
+        broker: "Sea Ray West",
+        image: "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp"
+    },
+    {
+        id: "rb604675",
+        make: "Bayliner",
+        model: "Element E18",
+        makeSlug: "bayliner",
+        modelSlug: "element-e18",
+        year: 2024,
+        condition: "New",
+        length: "18 ft",
+        price: "$32,500",
+        location: "Seattle, WA",
+        broker: "Bayliner Northwest",
+        image: "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp"
+    },
+    {
+        id: "rb605008",
+        make: "Princess",
+        model: "V58",
+        makeSlug: "princess",
+        modelSlug: "v58",
+        year: 2020,
+        condition: "Used",
+        length: "58 ft",
+        price: "$1,850,000",
+        location: "Portsmouth, UK",
+        broker: "Princess Yachts",
+        image: "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp"
     }
 ];
 const detailGallery = [
@@ -923,7 +1147,6 @@ function BoatsForSalePage() {
         className: "space-y-10",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "space-y-3",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "text-sm text-muted-foreground",
@@ -944,19 +1167,11 @@ function BoatsForSalePage() {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "text-3xl font-semibold",
+                        className: "mb-8 text-3xl font-bold",
                         children: "Boats for sale"
                     }, void 0, false, {
                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
                         lineNumber: 28,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-muted-foreground",
-                        children: "Receive new listings in your email. Browse featured brokers and explore 30,000+ new and used boats."
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                        lineNumber: 29,
                         columnNumber: 9
                     }, this)
                 ]
@@ -970,7 +1185,7 @@ function BoatsForSalePage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$filters$2f$boats$2d$for$2d$sale$2d$filters$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BoatsForSaleFilters"], {}, void 0, false, {
                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                        lineNumber: 36,
+                        lineNumber: 32,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -983,7 +1198,7 @@ function BoatsForSalePage() {
                                         children: "Results"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 39,
+                                        lineNumber: 35,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -994,13 +1209,13 @@ function BoatsForSalePage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 40,
+                                        lineNumber: 36,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 38,
+                                lineNumber: 34,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Select"], {
@@ -1011,12 +1226,12 @@ function BoatsForSalePage() {
                                             placeholder: "Sort by"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                            lineNumber: 46,
+                                            lineNumber: 42,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 45,
+                                        lineNumber: 41,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -1026,7 +1241,7 @@ function BoatsForSalePage() {
                                                 children: "Featured"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 49,
+                                                lineNumber: 45,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1034,7 +1249,7 @@ function BoatsForSalePage() {
                                                 children: "Price (low to high)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 50,
+                                                lineNumber: 46,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1042,7 +1257,7 @@ function BoatsForSalePage() {
                                                 children: "Price (high to low)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 51,
+                                                lineNumber: 47,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1050,25 +1265,25 @@ function BoatsForSalePage() {
                                                 children: "Newest listings"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 52,
+                                                lineNumber: 48,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 48,
+                                        lineNumber: 44,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 44,
+                                lineNumber: 40,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                        lineNumber: 37,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1077,18 +1292,18 @@ function BoatsForSalePage() {
                                 boat: boat
                             }, boat.id, false, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 59,
+                                lineNumber: 55,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                        lineNumber: 57,
+                        lineNumber: 53,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                lineNumber: 35,
+                lineNumber: 31,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1098,11 +1313,11 @@ function BoatsForSalePage() {
                         className: "space-y-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                className: "text-2xl font-semibold",
+                                className: "text-2xl font-bold",
                                 children: "Receive new listings"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 66,
+                                lineNumber: 62,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1110,7 +1325,7 @@ function BoatsForSalePage() {
                                 children: "Get alerts for new boats that match your preferences."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 67,
+                                lineNumber: 63,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1121,26 +1336,26 @@ function BoatsForSalePage() {
                                         className: "max-w-xs"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 71,
+                                        lineNumber: 67,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
                                         children: "Subscribe"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 72,
+                                        lineNumber: 68,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 70,
+                                lineNumber: 66,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                        lineNumber: 65,
+                        lineNumber: 61,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1149,11 +1364,11 @@ function BoatsForSalePage() {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "text-sm font-semibold uppercase tracking-widest text-muted-foreground",
+                                        className: "text-sm font-bold uppercase tracking-widest text-muted-foreground",
                                         children: "Search by manufacturer"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 77,
+                                        lineNumber: 73,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1164,28 +1379,28 @@ function BoatsForSalePage() {
                                                 children: brand
                                             }, brand, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 82,
+                                                lineNumber: 78,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 80,
+                                        lineNumber: 76,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 76,
+                                lineNumber: 72,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "text-sm font-semibold uppercase tracking-widest text-muted-foreground",
+                                        className: "text-sm font-bold uppercase tracking-widest text-muted-foreground",
                                         children: "Search by type"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 93,
+                                        lineNumber: 89,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1196,29 +1411,29 @@ function BoatsForSalePage() {
                                                 children: type
                                             }, type, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 98,
+                                                lineNumber: 94,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 92,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 92,
+                                lineNumber: 88,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "md:col-span-2",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "text-sm font-semibold uppercase tracking-widest text-muted-foreground",
+                                        className: "text-sm font-bold uppercase tracking-widest text-muted-foreground",
                                         children: "Search by location"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 109,
+                                        lineNumber: 105,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1229,30 +1444,30 @@ function BoatsForSalePage() {
                                                 children: location
                                             }, location, false, {
                                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                                lineNumber: 114,
+                                                lineNumber: 110,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                        lineNumber: 112,
+                                        lineNumber: 108,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                                lineNumber: 108,
+                                lineNumber: 104,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                        lineNumber: 75,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/boats-for-sale/page.tsx",
-                lineNumber: 64,
+                lineNumber: 60,
                 columnNumber: 7
             }, this)
         ]
