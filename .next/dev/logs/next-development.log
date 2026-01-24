@@ -1,34 +1,5 @@
-[00:00:01.603] Server  LOG     ✓ Ready in 1375ms
-[00:00:03.288] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:14:04.953] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:14:05.299] Browser WARN    Image with src "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+[00:00:00.578] Server  LOG     ✓ Ready in 362ms
+[00:00:01.779] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:47.269] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:47.449] Browser WARN    Image with src "https://www.rightboat.com/boat_images/image_24409432/097f028a7bc24851a5ef0cdda048d6bd7afffa9733b74d0d91b14d2265880802.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:14:06.163] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:14:06.336] Browser WARN    Image with src "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[01:19:50.699] Server  LOG     ✓ Compiled in 0ms
-[01:19:50.917] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:26:26.301] Server  LOG     ✓ Compiled in 54ms
-[01:27:27.590] Server  LOG     ✓ Compiled in 77ms
-[01:27:27.818] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:27:41.604] Server  ERROR   ⨯ ReferenceError: HeroSearch is not defined
-[01:27:41.734] Browser ERROR   uncaughtError: ReferenceError: HeroSearch is not defined
-[01:27:42.707] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:28:08.686] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:28:09.880] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:28:38.334] Server  LOG     ✓ Compiled in 35ms
-[01:28:38.407] Server  ERROR   ⨯ ReferenceError: Input is not defined
-[01:28:38.414] Browser ERROR   uncaughtError: ReferenceError: Input is not defined
-[01:28:38.486] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:28:38.600] Browser ERROR   uncaughtError: ReferenceError: Input is not defined
-[01:28:51.550] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:28:51.636] Server  LOG     ✓ Compiled in 22ms
-[01:28:51.691] Server  ERROR   ⨯ ReferenceError: Input is not defined
-[01:28:51.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:28:51.886] Browser ERROR   uncaughtError: ReferenceError: Input is not defined
-[01:29:14.346] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[01:29:14.444] Server  LOG     ✓ Compiled in 20ms
-[01:29:14.638] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:29:48.819] Server  LOG     ✓ Compiled in 22ms
-[01:29:52.172] Server  LOG     ✓ Compiled in 17ms
-[01:31:18.040] Server  LOG     ✓ Compiled in 41ms

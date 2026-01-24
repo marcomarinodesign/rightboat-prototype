@@ -1,0 +1,54 @@
+import {
+  Globe,
+  ShieldCheck,
+  GitCompare,
+  Award,
+  BookOpen,
+  type LucideIcon,
+} from "lucide-react"
+
+import { benefits } from "@/data/benefits"
+
+const iconMap: Record<string, LucideIcon> = {
+  Globe,
+  ShieldCheck,
+  Compare: GitCompare,
+  Award,
+  BookOpen,
+}
+
+export function WhyRightboat() {
+  return (
+    <section className="space-y-6" aria-labelledby="why-heading">
+      <div>
+        <h2 id="why-heading" className="text-2xl font-semibold">
+          Why Use Rightboat?
+        </h2>
+        <p className="mt-2 text-muted-foreground">
+          Everything you need to find and compare boats from trusted sources
+        </p>
+      </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {benefits.map((benefit) => {
+          const Icon = iconMap[benefit.icon] || Globe
+          return (
+            <div
+              key={benefit.id}
+              className="space-y-4 rounded-lg border border-border/60 bg-card p-6"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">{benefit.title}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {benefit.description}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}

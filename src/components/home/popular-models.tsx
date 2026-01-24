@@ -1,0 +1,79 @@
+import Image from "next/image"
+import Link from "next/link"
+
+import { popularModels } from "@/data/models"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+
+export function PopularModels() {
+  return (
+    <section className="space-y-6" aria-labelledby="models-heading">
+      <div>
+        <h2 id="models-heading" className="text-2xl font-semibold">
+          Popular Models
+        </h2>
+        <p className="mt-2 text-muted-foreground">
+          Discover the most searched and trending boat models
+        </p>
+      </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {popularModels.map((model) => {
+          const href = `/boats-for-sale/${model.brandSlug}/${model.slug}`
+          return (
+            <Card
+              key={model.id}
+              className="group overflow-hidden border-border/60 transition-all hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <Link href={href} className="relative block overflow-hidden">
+                <Image
+                  src={model.image}
+                  alt={`${model.brand} ${model.name}`}
+                  width={640}
+                  height={420}
+                  className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </Link>
+              <CardHeader className="space-y-2">
+                <div className="text-xs uppercase tracking-wide text-muted-foreground">
+                  {model.brand}
+                </div>
+                <Link
+                  href={href}
+                  className="text-lg font-semibold leading-tight transition-colors group-hover:text-primary"
+                >
+                  {model.name}
+                </Link>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Length: </span>
+                    <span className="font-medium">{model.length}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Type: </span>
+                    <span className="font-medium">{model.type}</span>
+                  </div>
+                </div>
+                <div className="text-sm">
+                  <span className="text-muted-foreground">Price range: </span>
+                  <span className="font-medium">{model.priceRange}</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full"
+                  size="sm"
+                >
+                  <Link href={href}>View model</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
