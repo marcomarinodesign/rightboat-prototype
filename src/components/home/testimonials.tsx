@@ -7,7 +7,7 @@ export function Testimonials() {
   return (
     <section className="space-y-6" aria-labelledby="testimonials-heading">
       <div>
-        <h2 id="testimonials-heading" className="text-2xl font-semibold">
+        <h2 id="testimonials-heading" className="text-2xl font-bold">
           Our Testimonials
         </h2>
         <p className="mt-2 text-muted-foreground">

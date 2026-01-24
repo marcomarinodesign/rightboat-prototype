@@ -41,7 +41,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
             <p className="text-sm uppercase tracking-wide text-muted-foreground">
               {boat.condition} • {boat.length}
             </p>
-            <h1 className="text-3xl font-semibold">
+            <h1 className="text-3xl font-bold">
               {boat.year} {boat.make} {boat.model}
             </h1>
             <p className="text-lg text-muted-foreground">{boat.location}</p>
@@ -61,7 +61,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
           </div>
 
           <Card>
-            <CardHeader className="text-lg font-semibold">
+            <CardHeader className="text-lg font-bold">
               Key specifications
             </CardHeader>
             <CardContent className="grid gap-6 md:grid-cols-3">
@@ -81,7 +81,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
               <p className="text-sm uppercase tracking-wide text-muted-foreground">
                 Price
               </p>
-              <h2 className="text-3xl font-semibold">{boat.price}</h2>
+              <h2 className="text-3xl font-bold">{boat.price}</h2>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -96,7 +96,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
           </Card>
 
           <Card>
-            <CardHeader className="text-lg font-semibold">Video tour</CardHeader>
+            <CardHeader className="text-lg font-bold">Video tour</CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <Link
                 href="https://www.youtube.com/watch?v=vpQNSZkrLag"
@@ -115,7 +115,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
           </Card>
 
           <Card>
-            <CardHeader className="text-lg font-semibold">
+            <CardHeader className="text-lg font-bold">
               Listing details
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
@@ -135,7 +135,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
 
       <section className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Similar boats</h2>
+          <h2 className="text-2xl font-bold">Similar boats</h2>
           <Link href="/boats-for-sale" className="text-sm text-primary">
             View more details
           </Link>

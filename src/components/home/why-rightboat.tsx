@@ -21,7 +21,7 @@ export function WhyRightboat() {
   return (
     <section className="space-y-6" aria-labelledby="why-heading">
       <div>
-        <h2 id="why-heading" className="text-2xl font-semibold">
+        <h2 id="why-heading" className="text-2xl font-bold">
           Why Use Rightboat?
         </h2>
         <p className="mt-2 text-muted-foreground">
@@ -40,7 +40,7 @@ export function WhyRightboat() {
                 <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">{benefit.title}</h3>
+                <h3 className="text-lg font-bold">{benefit.title}</h3>
                 <p className="text-sm text-muted-foreground">
                   {benefit.description}
                 </p>

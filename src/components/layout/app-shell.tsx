@@ -2,17 +2,10 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
   Sheet,
   SheetContent,
@@ -28,7 +21,7 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <main className="mx-auto w-full max-w-7xl px-4 pb-24 pt-12 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-7xl px-4 pb-24 pt-4 sm:px-6 lg:px-8">
         {children}
       </main>
       <SiteFooter />
@@ -37,10 +30,11 @@ export function AppShell({ children }: AppShellProps) {
 }
 
 const navigation = [
-  { name: "Boats for sale", href: "/boats-for-sale" },
-  { name: "New boats", href: "/boats-for-sale" },
-  { name: "Used boats", href: "/boats-for-sale" },
-  { name: "Reviews", href: "/boats-for-sale" },
+  { name: "Boat for sale", href: "/boats-for-sale" },
+  { name: "Power boats", href: "/boats-for-sale?type=powerboats" },
+  { name: "Sail boats", href: "/boats-for-sale?type=sailboats" },
+  { name: "Research & Advice", href: "/research-advice" },
+  { name: "Broker/Dealer?", href: "/broker-dealer" },
 ]
 
 function SiteHeader() {
@@ -56,9 +50,14 @@ function SiteHeader() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Rightboat</span>
-            <span className="text-xl font-semibold text-brand-midnight">
-              Rightboat
-            </span>
+            <Image
+              src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
+              alt="Rightboat"
+              width={120}
+              height={40}
+              className="h-[26px] w-auto"
+              priority
+            />
           </Link>
         </div>
 
@@ -78,10 +77,15 @@ function SiteHeader() {
               <SheetHeader>
                 <Link
                   href="/"
-                  className="text-xl font-semibold text-brand-midnight"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Rightboat
+                  <Image
+                    src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
+                    alt="Rightboat"
+                    width={120}
+                    height={40}
+                    className="h-[26px] w-auto"
+                  />
                 </Link>
               </SheetHeader>
               <div className="mt-6 flow-root">
@@ -102,22 +106,13 @@ function SiteHeader() {
                   {/* Mobile Actions */}
                   <div className="py-6">
                     <div className="mb-4 space-y-3">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="outline" className="w-full justify-start">
-                            Boat types
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56">
-                          <DropdownMenuLabel>Popular types</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem>Sailboats</DropdownMenuItem>
-                          <DropdownMenuItem>Center console</DropdownMenuItem>
-                          <DropdownMenuItem>Yachts</DropdownMenuItem>
-                          <DropdownMenuItem>Catamaran</DropdownMenuItem>
-                          <DropdownMenuItem>Fishing</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Signup
+                      </Button>
                     </div>
                     <Button
                       className="w-full"
@@ -148,22 +143,9 @@ function SiteHeader() {
         {/* Desktop Actions */}
         <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
           <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  Boat types
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-44">
-                <DropdownMenuLabel>Popular types</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Sailboats</DropdownMenuItem>
-                <DropdownMenuItem>Center console</DropdownMenuItem>
-                <DropdownMenuItem>Yachts</DropdownMenuItem>
-                <DropdownMenuItem>Catamaran</DropdownMenuItem>
-                <DropdownMenuItem>Fishing</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button variant="outline" size="sm">
+              Signup
+            </Button>
             <Button size="sm">Sell your boat</Button>
           </div>
         </div>

@@ -136,4 +136,18 @@
   body {
     @apply bg-background text-foreground;
   }
+  h1, h2, h3, h4 {
+    @apply font-bold;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -21,15 +21,11 @@ import {
 export default function BoatsForSalePage() {
   return (
     <div className="space-y-10">
-      <div className="space-y-3">
+      <div>
         <div className="text-sm text-muted-foreground">
           <Link href="/">Home</Link> / Boats for sale
         </div>
-        <h1 className="text-3xl font-semibold">Boats for sale</h1>
-        <p className="text-muted-foreground">
-          Receive new listings in your email. Browse featured brokers and
-          explore 30,000+ new and used boats.
-        </p>
+        <h1 className="mb-8 text-3xl font-bold">Boats for sale</h1>
       </div>
 
       <div className="space-y-6">
@@ -63,7 +59,7 @@ export default function BoatsForSalePage() {
 
       <section className="grid gap-6 rounded-2xl border border-border/60 bg-muted/20 p-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-3">
-          <h2 className="text-2xl font-semibold">Receive new listings</h2>
+          <h2 className="text-2xl font-bold">Receive new listings</h2>
           <p className="text-sm text-muted-foreground">
             Get alerts for new boats that match your preferences.
           </p>
@@ -74,7 +70,7 @@ export default function BoatsForSalePage() {
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
               Search by manufacturer
             </h3>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -90,7 +86,7 @@ export default function BoatsForSalePage() {
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
               Search by type
             </h3>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -106,7 +102,7 @@ export default function BoatsForSalePage() {
             </div>
           </div>
           <div className="md:col-span-2">
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
               Search by location
             </h3>
             <div className="mt-3 flex flex-wrap gap-2">

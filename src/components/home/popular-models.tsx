@@ -9,7 +9,7 @@ export function PopularModels() {
   return (
     <section className="space-y-6" aria-labelledby="models-heading">
       <div>
-        <h2 id="models-heading" className="text-2xl font-semibold">
+        <h2 id="models-heading" className="text-2xl font-bold">
           Popular Models
         </h2>
         <p className="mt-2 text-muted-foreground">
@@ -39,7 +39,7 @@ export function PopularModels() {
                 </div>
                 <Link
                   href={href}
-                  className="text-lg font-semibold leading-tight transition-colors group-hover:text-primary"
+                  className="text-lg font-bold leading-tight transition-colors group-hover:text-primary"
                 >
                   {model.name}
                 </Link>
