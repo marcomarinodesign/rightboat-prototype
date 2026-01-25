@@ -10,6 +10,7 @@ import { TestimonialsCarousel } from "@/components/blocks/testimonials-carousel"
 import { StatsSection } from "@/components/blocks/stats-section"
 import { BrandLogo } from "@/components/blocks/brand-logo"
 import { CtaSection5 } from "@/components/blocks/cta-section-5"
+import { IconContainer } from "@/components/ui/icon-container"
 import { premiumBrands } from "@/data/brands"
 
 export default function PropelPage() {
@@ -53,19 +54,31 @@ export default function PropelPage() {
             title: "Enhanced visibility",
             description:
               "Your listings stand out more to buyers browsing on Rightboat.",
-            icon: <Eye className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <Eye />
+              </IconContainer>
+            ),
           },
           {
             title: "Targeted audience",
             description:
               "Reach people actively looking for boats in your segment.",
-            icon: <Target className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <Target />
+              </IconContainer>
+            ),
           },
           {
             title: "Rightboat integration",
             description:
               "Propel works within the Rightboat marketplace—no separate platform.",
-            icon: <CheckCircle2 className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <CheckCircle2 />
+              </IconContainer>
+            ),
           },
         ]}
         headingId="what-is-propel-heading"
@@ -81,7 +94,11 @@ export default function PropelPage() {
             title: "Brokers",
             description:
               "Independent or boutique brokers listing client boats. Benefit: your inventory reaches more serious buyers without extra legwork.",
-            icon: <Briefcase className="h-5 w-5 text-primary" />,
+            icon: (
+              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
+                <Briefcase />
+              </IconContainer>
+            ),
             link: { text: "Learn more", href: "#" },
           },
           {
@@ -89,7 +106,11 @@ export default function PropelPage() {
             title: "Dealers",
             description:
               "Dealerships and multi-listing businesses. Benefit: clearer presence on Rightboat and more qualified leads.",
-            icon: <Store className="h-5 w-5 text-primary" />,
+            icon: (
+              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
+                <Store />
+              </IconContainer>
+            ),
             link: { text: "Learn more", href: "#" },
           },
           {
@@ -97,7 +118,11 @@ export default function PropelPage() {
             title: "Private sellers",
             description:
               "Individuals selling their own boat. Benefit: your listing gets in front of more buyers than a standard listing.",
-            icon: <User className="h-5 w-5 text-primary" />,
+            icon: (
+              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
+                <User />
+              </IconContainer>
+            ),
             link: { text: "Learn more", href: "#" },
           },
         ]}
@@ -113,25 +138,41 @@ export default function PropelPage() {
             title: "List on Rightboat",
             description:
               "Add your boats to the Rightboat marketplace as you normally would.",
-            icon: <List className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <List />
+              </IconContainer>
+            ),
           },
           {
             title: "Qualify for Propel",
             description:
               "Meet the program criteria—listing quality and completeness matter.",
-            icon: <CheckCircle2 className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <CheckCircle2 />
+              </IconContainer>
+            ),
           },
           {
             title: "Get enhanced visibility",
             description:
               "Your listings receive improved placement and clearer positioning.",
-            icon: <Eye className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <Eye />
+              </IconContainer>
+            ),
           },
           {
             title: "Connect with more buyers",
             description:
               "Buyers find you more easily and can reach out with less friction.",
-            icon: <Users className="h-5 w-5" />,
+            icon: (
+              <IconContainer className="size-10 mb-0">
+                <Users />
+              </IconContainer>
+            ),
           },
         ]}
         headingId="how-propel-works-heading"
@@ -148,25 +189,41 @@ export default function PropelPage() {
             title: "Increased visibility",
             description:
               "Your listings appear more prominently to buyers browsing Rightboat.",
-            icon: <TrendingUp className="h-6 w-6" />,
+            icon: (
+              <IconContainer className="size-12 mb-0">
+                <TrendingUp />
+              </IconContainer>
+            ),
           },
           {
             title: "More relevant traffic",
             description:
               "Reach people who are actively searching for boats like yours.",
-            icon: <Target className="h-6 w-6" />,
+            icon: (
+              <IconContainer className="size-12 mb-0">
+                <Target />
+              </IconContainer>
+            ),
           },
           {
             title: "Clearer positioning",
             description:
               "Buyers can better understand who you are and what you offer.",
-            icon: <Shield className="h-6 w-6" />,
+            icon: (
+              <IconContainer className="size-12 mb-0">
+                <Shield />
+              </IconContainer>
+            ),
           },
           {
             title: "Less friction",
             description:
               "Makes it easier for buyers to find you and start a conversation.",
-            icon: <Zap className="h-6 w-6" />,
+            icon: (
+              <IconContainer className="size-12 mb-0">
+                <Zap />
+              </IconContainer>
+            ),
           },
         ]}
         headingId="why-use-propel-heading"

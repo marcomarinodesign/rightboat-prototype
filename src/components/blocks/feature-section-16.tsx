@@ -94,11 +94,7 @@ export function FeatureSection16({
         <div className="bg-muted/80 dark:bg-card/80 flex flex-1 flex-col gap-4 rounded-lg p-6 lg:max-w-lg lg:justify-between lg:gap-8 lg:p-8 border border-border/50">
           <div className="flex flex-col items-start gap-6">
             {/* Icon container */}
-            {activeFeature.icon && (
-              <div className="bg-card flex h-10 w-10 shrink-0 items-center justify-center rounded-md border shadow-xs">
-                {activeFeature.icon}
-              </div>
-            )}
+            {activeFeature.icon}
             <h3 className="text-foreground text-4xl font-bold mb-[200px]">
               {activeFeature.title}
             </h3>

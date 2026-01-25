@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { IconContainer } from "@/components/ui/icon-container"
 
 export interface FeatureSection9Props {
   title: string
@@ -39,11 +40,7 @@ export function FeatureSection9({
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => (
           <div key={index} className="flex flex-col items-center space-y-3 text-center">
-            {feature.icon && (
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                {feature.icon}
-              </div>
-            )}
+            {feature.icon}
             <h3 className="text-lg font-semibold">{feature.title}</h3>
             <p className="text-sm text-muted-foreground">{feature.description}</p>
           </div>

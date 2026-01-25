@@ -1142,7 +1142,7 @@ function PropelPage() {
                             children: "marine professionals"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 24,
+                            lineNumber: 25,
                             columnNumber: 13
                         }, void 0)
                     ]
@@ -1155,7 +1155,7 @@ function PropelPage() {
                 headingId: "propel-hero-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 19,
+                lineNumber: 20,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -1168,7 +1168,7 @@ function PropelPage() {
                         children: "Trusted by the best companies"
                     }, void 0, false, {
                         fileName: "[project]/src/app/propel/page.tsx",
-                        lineNumber: 34,
+                        lineNumber: 35,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1177,18 +1177,18 @@ function PropelPage() {
                                 brand: brand
                             }, brand.id, false, {
                                 fileName: "[project]/src/app/propel/page.tsx",
-                                lineNumber: 42,
+                                lineNumber: 43,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/propel/page.tsx",
-                        lineNumber: 40,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 33,
+                lineNumber: 34,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$feature$2d$section$2d$5$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["FeatureSection5"], {
@@ -1202,7 +1202,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 56,
+                            lineNumber: 57,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1213,7 +1213,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 62,
+                            lineNumber: 63,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1224,7 +1224,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 68,
+                            lineNumber: 69,
                             columnNumber: 19
                         }, void 0)
                     }
@@ -1232,7 +1232,7 @@ function PropelPage() {
                 headingId: "what-is-propel-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 48,
+                lineNumber: 49,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$feature$2d$section$2d$16$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["FeatureSection16"], {
@@ -1247,7 +1247,7 @@ function PropelPage() {
                             className: "h-5 w-5 text-primary"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 84,
+                            lineNumber: 85,
                             columnNumber: 19
                         }, void 0),
                         link: {
@@ -1263,7 +1263,7 @@ function PropelPage() {
                             className: "h-5 w-5 text-primary"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 92,
+                            lineNumber: 93,
                             columnNumber: 19
                         }, void 0),
                         link: {
@@ -1279,7 +1279,7 @@ function PropelPage() {
                             className: "h-5 w-5 text-primary"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 100,
+                            lineNumber: 101,
                             columnNumber: 19
                         }, void 0),
                         link: {
@@ -1291,7 +1291,7 @@ function PropelPage() {
                 headingId: "who-is-propel-for-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 75,
+                lineNumber: 76,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$feature$2d$section$2d$5$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["FeatureSection5"], {
@@ -1305,7 +1305,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 116,
+                            lineNumber: 117,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1316,7 +1316,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 122,
+                            lineNumber: 123,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1327,7 +1327,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 128,
+                            lineNumber: 129,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1338,7 +1338,7 @@ function PropelPage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 134,
+                            lineNumber: 135,
                             columnNumber: 19
                         }, void 0)
                     }
@@ -1348,7 +1348,7 @@ function PropelPage() {
                 className: "scroll-mt-20"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 108,
+                lineNumber: 109,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$feature$2d$section$2d$9$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["FeatureSection9"], {
@@ -1362,7 +1362,7 @@ function PropelPage() {
                             className: "h-6 w-6"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 151,
+                            lineNumber: 152,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1373,7 +1373,7 @@ function PropelPage() {
                             className: "h-6 w-6"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 157,
+                            lineNumber: 158,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1384,7 +1384,7 @@ function PropelPage() {
                             className: "h-6 w-6"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 163,
+                            lineNumber: 164,
                             columnNumber: 19
                         }, void 0)
                     },
@@ -1395,7 +1395,7 @@ function PropelPage() {
                             className: "h-6 w-6"
                         }, void 0, false, {
                             fileName: "[project]/src/app/propel/page.tsx",
-                            lineNumber: 169,
+                            lineNumber: 170,
                             columnNumber: 19
                         }, void 0)
                     }
@@ -1403,7 +1403,7 @@ function PropelPage() {
                 headingId: "why-use-propel-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 143,
+                lineNumber: 144,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$testimonials$2d$carousel$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["TestimonialsCarousel"], {
@@ -1430,7 +1430,7 @@ function PropelPage() {
                 headingId: "testimonials-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 176,
+                lineNumber: 177,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$stats$2d$section$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["StatsSection"], {
@@ -1453,7 +1453,7 @@ function PropelPage() {
                 headingId: "stats-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 204,
+                lineNumber: 205,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$blocks$2f$cta$2d$section$2d$5$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CtaSection5"], {
@@ -1470,13 +1470,13 @@ function PropelPage() {
                 headingId: "propel-cta-heading"
             }, void 0, false, {
                 fileName: "[project]/src/app/propel/page.tsx",
-                lineNumber: 225,
+                lineNumber: 226,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/propel/page.tsx",
-        lineNumber: 17,
+        lineNumber: 18,
         columnNumber: 5
     }, this);
 }

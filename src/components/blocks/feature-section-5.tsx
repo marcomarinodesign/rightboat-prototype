@@ -1,6 +1,7 @@
 import Image from "next/image"
 
 import { cn } from "@/lib/utils"
+import { IconContainer } from "@/components/ui/icon-container"
 
 export interface FeatureSection5Props {
   title: string
@@ -64,11 +65,7 @@ export function FeatureSection5({
         <div className="grid gap-6 sm:grid-cols-2">
           {features.map((feature, index) => (
             <div key={index} className="space-y-2">
-              {feature.icon && (
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  {feature.icon}
-                </div>
-              )}
+              {feature.icon}
               <h3 className="text-lg font-semibold">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </div>

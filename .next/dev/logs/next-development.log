@@ -390,3 +390,17 @@ Import trace:
     ./src/app/globals.css [Client Component Browser]
     ./src/app/layout.tsx [Server Component]
 [00:10:04.729] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:14:16.179] Server  LOG     ✓ Compiled in 69ms
+[02:15:18.157] Server  LOG     ✓ Compiled in 17ms
+[02:15:20.509] Server  LOG     ✓ Compiled in 46ms
+[02:15:55.304] Server  LOG     ✓ Compiled in 20ms
+[02:15:55.815] Server  LOG     ✓ Compiled in 18ms
+[02:18:09.442] Server  LOG     ✓ Compiled in 48ms
+[02:19:29.279] Server  LOG     ✓ Compiled in 41ms
+[02:19:29.389] Browser WARN    Select is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
+[02:19:37.937] Server  LOG     ✓ Compiled in 23ms
+[02:19:39.128] Server  LOG     ✓ Compiled in 12ms
+[02:19:40.399] Server  LOG     ✓ Compiled in 14ms
+[02:22:01.610] Server  LOG     ✓ Compiled in 38ms
+[02:22:44.640] Server  LOG     ✓ Compiled in 38ms
+[02:22:59.110] Server  LOG     ✓ Compiled in 22ms

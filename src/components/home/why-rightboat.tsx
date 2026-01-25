@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 
 import { benefits } from "@/data/benefits"
+import { IconContainer } from "@/components/ui/icon-container"
 
 const iconMap: Record<string, LucideIcon> = {
   Globe,
@@ -36,9 +37,9 @@ export function WhyRightboat() {
               key={benefit.id}
               className="space-y-4 rounded-lg border border-border/60 bg-card p-6"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
-              </div>
+              <IconContainer className="size-12 mb-0">
+                <Icon aria-hidden="true" />
+              </IconContainer>
               <div className="space-y-2">
                 <h3 className="text-lg font-bold">{benefit.title}</h3>
                 <p className="text-sm text-muted-foreground">

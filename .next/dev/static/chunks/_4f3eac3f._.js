@@ -104,20 +104,13 @@ function FeatureSection16({ title, description, featureSets, image, headingId, s
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col items-start gap-6",
                                 children: [
-                                    activeFeature.icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "bg-card flex h-10 w-10 shrink-0 items-center justify-center rounded-md border shadow-xs",
-                                        children: activeFeature.icon
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                        lineNumber: 98,
-                                        columnNumber: 15
-                                    }, this),
+                                    activeFeature.icon,
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                         className: "text-foreground text-4xl font-bold mb-[200px]",
                                         children: activeFeature.title
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                        lineNumber: 102,
+                                        lineNumber: 98,
                                         columnNumber: 13
                                     }, this)
                                 ]
@@ -134,7 +127,7 @@ function FeatureSection16({ title, description, featureSets, image, headingId, s
                                         children: activeFeature.description
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                        lineNumber: 107,
+                                        lineNumber: 103,
                                         columnNumber: 13
                                     }, this),
                                     activeFeature.link && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -151,29 +144,29 @@ function FeatureSection16({ title, description, featureSets, image, headingId, s
                                                         className: "ml-2 h-4 w-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                                        lineNumber: 115,
+                                                        lineNumber: 111,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                                lineNumber: 113,
+                                                lineNumber: 109,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                            lineNumber: 112,
+                                            lineNumber: 108,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 107,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                                lineNumber: 106,
+                                lineNumber: 102,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -187,7 +180,7 @@ function FeatureSection16({ title, description, featureSets, image, headingId, s
                         children: imageContent
                     }, void 0, false, {
                         fileName: "[project]/src/components/blocks/feature-section-16.tsx",
-                        lineNumber: 124,
+                        lineNumber: 120,
                         columnNumber: 9
                     }, this)
                 ]
