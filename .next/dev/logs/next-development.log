@@ -1,10 +1,74 @@
-[00:00:00.693] Server  LOG     ✓ Ready in 527ms
-[00:01:04.806] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:15.749] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:18.335] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:08:43.407] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:13:47.498] Server  LOG     ✓ Compiled in 95ms
-[00:14:01.320] Server  LOG     ✓ Compiled in 37ms
-[00:14:04.049] Server  LOG     ✓ Compiled in 111ms
-[00:14:12.516] Server  LOG     ✓ Compiled in 33ms
-[00:14:23.925] Server  LOG     ✓ Compiled in 36ms
+[00:00:00.829] Server  LOG     ✓ Ready in 537ms
+[00:00:01.457] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:15.934] Server  LOG     ✓ Compiled in 274ms
+[00:00:57.771] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:58.700] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:58.338] Server  LOG     ✓ Compiled in 59ms
+[00:18:44.004] Browser ERROR   ./src/app/propel/page.tsx:8:1
+Export FeatureSection16 doesn't exist in target module
+   6 | import { FeatureSection5 } from "@/components/blocks/feature-section-5"
+   7 | import { FeatureSection9 } from "@/components/blocks/feature-section-9"
+>  8 | import { FeatureSection16 } from "@/components/blocks/feature-section-16"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { TestimonialsCarousel } from "@/components/blocks/testimonials-carousel"
+  10 | import { StatsSection } from "@/components/blocks/stats-section"
+  11 | import { BrandLogo } from "@/components/blocks/brand-logo"
+
+The export FeatureSection16 was not found in module [project]/src/components/blocks/feature-section-16.tsx [app-rsc] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+[00:18:50.900] Server  LOG     ✓ Compiled in 0ms
+[00:18:51.055] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:18:51.257] Browser ERROR   ./src/app/propel/page.tsx:8:1
+Export FeatureSection16 doesn't exist in target module
+   6 | import { FeatureSection5 } from "@/components/blocks/feature-section-5"
+   7 | import { FeatureSection9 } from "@/components/blocks/feature-section-9"
+>  8 | import { FeatureSection16 } from "@/components/blocks/feature-section-16"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { TestimonialsCarousel } from "@/components/blocks/testimonials-carousel"
+  10 | import { StatsSection } from "@/components/blocks/stats-section"
+  11 | import { BrandLogo } from "@/components/blocks/brand-logo"
+
+The export FeatureSection16 was not found in module [project]/src/components/blocks/feature-section-16.tsx [app-rsc] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+[00:18:51.257] Browser ERROR   ./src/app/propel/page.tsx:8:1
+Export FeatureSection16 doesn't exist in target module
+   6 | import { FeatureSection5 } from "@/components/blocks/feature-section-5"
+   7 | import { FeatureSection9 } from "@/components/blocks/feature-section-9"
+>  8 | import { FeatureSection16 } from "@/components/blocks/feature-section-16"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { TestimonialsCarousel } from "@/components/blocks/testimonials-carousel"
+  10 | import { StatsSection } from "@/components/blocks/stats-section"
+  11 | import { BrandLogo } from "@/components/blocks/brand-logo"
+
+The export FeatureSection16 was not found in module [project]/src/components/blocks/feature-section-16.tsx [app-rsc] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+[00:19:56.057] Server  LOG     ✓ Compiled in 26ms
+[00:24:00.822] Server  ERROR   ⨯ ReferenceError: HeroSection1 is not defined
+[00:24:00.963] Browser ERROR   uncaughtError: ReferenceError: HeroSection1 is not defined
+[00:24:02.945] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:25.864] Server  LOG     ✓ Compiled in 24ms
+[00:39:23.846] Server  LOG     ✓ Compiled in 44ms
+[00:39:29.732] Server  LOG     ✓ Compiled in 41ms
+[00:39:29.835] Browser ERROR   ./src/components/home/premium-brands.tsx:3:10
+Ecmascript file had an error
+  1 | import Link from "next/link"
+  2 | import Image from "next/image"
+> 3 | import { useState } from "react"
+    |          ^^^^^^^^
+  4 |
+  5 | import { premiumBrands } from "@/data/brands"
+  6 |
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+Import trace:
+  Server Component:
+    ./src/components/home/premium-brands.tsx
+    ./src/app/page.tsx
+[00:43:21.437] Server  LOG     ✓ Compiled in 49ms
+[00:44:49.057] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

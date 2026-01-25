@@ -590,7 +590,7 @@ _s(SiteHeader, "d7gXMF6mPDUhHBNUSEb8mLK4AII=");
 _c1 = SiteHeader;
 function SiteFooter() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
-        className: "border-t border-border/60 bg-muted/30",
+        className: "border-t border-border/60 bg-brand-midnight text-white",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8",
@@ -599,7 +599,7 @@ function SiteFooter() {
                         className: "space-y-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-lg font-semibold",
+                                className: "text-lg font-semibold text-white",
                                 children: "Rightboat"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -607,7 +607,7 @@ function SiteFooter() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm text-muted-foreground",
+                                className: "text-sm text-white/70",
                                 children: "The right place to find the right boat. Browse listings, compare models, and contact sellers directly."
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -624,7 +624,7 @@ function SiteFooter() {
                         className: "space-y-3 text-sm",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-semibold",
+                                className: "font-semibold text-white",
                                 children: "Explore"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -632,10 +632,11 @@ function SiteFooter() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2 text-muted-foreground",
+                                className: "flex flex-col gap-2 text-white/70",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Boats for sale"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -644,6 +645,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Boat brands"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -652,6 +654,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Boat types"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -660,6 +663,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Locations"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -682,7 +686,7 @@ function SiteFooter() {
                         className: "space-y-3 text-sm",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-semibold",
+                                className: "font-semibold text-white",
                                 children: "Sell"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -690,10 +694,11 @@ function SiteFooter() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2 text-muted-foreground",
+                                className: "flex flex-col gap-2 text-white/70",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "List your boat"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -702,6 +707,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Dealer solutions"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -710,6 +716,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Advertising"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -732,7 +739,7 @@ function SiteFooter() {
                         className: "space-y-3 text-sm",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-semibold",
+                                className: "font-semibold text-white",
                                 children: "Company"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -740,10 +747,11 @@ function SiteFooter() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-2 text-muted-foreground",
+                                className: "flex flex-col gap-2 text-white/70",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "About"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -752,6 +760,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Careers"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -760,6 +769,7 @@ function SiteFooter() {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/boats-for-sale",
+                                        className: "hover:text-white transition-colors",
                                         children: "Contact"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/app-shell.tsx",
@@ -785,7 +795,7 @@ function SiteFooter() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "border-t border-border/60 py-4 text-center text-xs text-muted-foreground",
+                className: "border-t border-white/10 py-4 text-center text-xs text-white/60",
                 children: "© 2026 Rightboat. All rights reserved."
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/app-shell.tsx",

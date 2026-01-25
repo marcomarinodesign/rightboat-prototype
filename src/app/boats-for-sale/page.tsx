@@ -25,7 +25,7 @@ export default function BoatsForSalePage() {
         <div className="text-sm text-muted-foreground">
           <Link href="/">Home</Link> / Boats for sale
         </div>
-        <h1 className="mb-8 text-3xl font-bold">Boats for sale</h1>
+        <h1 className="mb-6 text-3xl font-bold">Boats for sale</h1>
       </div>
 
       <div className="space-y-6">

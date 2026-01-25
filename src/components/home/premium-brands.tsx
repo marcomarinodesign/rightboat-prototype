@@ -1,5 +1,8 @@
-import Image from "next/image"
+"use client"
+
 import Link from "next/link"
+import Image from "next/image"
+import { useState } from "react"
 
 import { premiumBrands } from "@/data/brands"
 
@@ -16,23 +19,37 @@ export function PremiumBrands() {
       </div>
       <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {premiumBrands.map((brand) => (
-          <Link
-            key={brand.id}
-            href={`/boats-for-sale?brand=${brand.slug}`}
-            className="group flex items-center justify-center rounded-lg border border-border/60 bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md"
-          >
-            <div className="relative h-12 w-full">
-              <Image
-                src={brand.logo}
-                alt={brand.name}
-                fill
-                className="object-contain grayscale transition-all group-hover:grayscale-0"
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
-              />
-            </div>
-          </Link>
+          <BrandLogoLink key={brand.id} brand={brand} />
         ))}
       </div>
     </section>
+  )
+}
+
+function BrandLogoLink({ brand }: { brand: (typeof premiumBrands)[0] }) {
+  const [imageError, setImageError] = useState(false)
+
+  return (
+    <Link
+      href={`/boats-for-sale?brand=${brand.slug}`}
+      className="group flex items-center justify-center rounded-lg border border-border/60 bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md"
+    >
+      {imageError ? (
+        <span className="text-sm font-semibold text-muted-foreground transition-colors group-hover:text-foreground">
+          {brand.name}
+        </span>
+      ) : (
+        <div className="relative h-12 w-full">
+          <Image
+            src={brand.logo}
+            alt={brand.name}
+            fill
+            className="object-contain object-center transition-opacity group-hover:opacity-80"
+            onError={() => setImageError(true)}
+            unoptimized
+          />
+        </div>
+      )}
+    </Link>
   )
 }

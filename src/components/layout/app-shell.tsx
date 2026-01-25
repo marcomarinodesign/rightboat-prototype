@@ -155,42 +155,42 @@ function SiteHeader() {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-border/60 bg-muted/30">
+    <footer className="border-t border-border/60 bg-brand-midnight text-white">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Rightboat</h3>
-          <p className="text-sm text-muted-foreground">
+          <h3 className="text-lg font-semibold text-white">Rightboat</h3>
+          <p className="text-sm text-white/70">
             The right place to find the right boat. Browse listings, compare
             models, and contact sellers directly.
           </p>
         </div>
         <div className="space-y-3 text-sm">
-          <p className="font-semibold">Explore</p>
-          <div className="flex flex-col gap-2 text-muted-foreground">
-            <Link href="/boats-for-sale">Boats for sale</Link>
-            <Link href="/boats-for-sale">Boat brands</Link>
-            <Link href="/boats-for-sale">Boat types</Link>
-            <Link href="/boats-for-sale">Locations</Link>
+          <p className="font-semibold text-white">Explore</p>
+          <div className="flex flex-col gap-2 text-white/70">
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Boats for sale</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Boat brands</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Boat types</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Locations</Link>
           </div>
         </div>
         <div className="space-y-3 text-sm">
-          <p className="font-semibold">Sell</p>
-          <div className="flex flex-col gap-2 text-muted-foreground">
-            <Link href="/boats-for-sale">List your boat</Link>
-            <Link href="/boats-for-sale">Dealer solutions</Link>
-            <Link href="/boats-for-sale">Advertising</Link>
+          <p className="font-semibold text-white">Sell</p>
+          <div className="flex flex-col gap-2 text-white/70">
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">List your boat</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Dealer solutions</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Advertising</Link>
           </div>
         </div>
         <div className="space-y-3 text-sm">
-          <p className="font-semibold">Company</p>
-          <div className="flex flex-col gap-2 text-muted-foreground">
-            <Link href="/boats-for-sale">About</Link>
-            <Link href="/boats-for-sale">Careers</Link>
-            <Link href="/boats-for-sale">Contact</Link>
+          <p className="font-semibold text-white">Company</p>
+          <div className="flex flex-col gap-2 text-white/70">
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">About</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Careers</Link>
+            <Link href="/boats-for-sale" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
       </div>
-      <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">
+      <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
         © 2026 Rightboat. All rights reserved.
       </div>
     </footer>

@@ -926,73 +926,73 @@ const premiumBrands = [
         id: "princess",
         name: "Princess",
         slug: "princess",
-        logo: "https://img.logo.dev/princessyachts.com"
+        logo: "https://www.princessyachts.com/media/logo.svg"
     },
     {
         id: "sunseeker",
         name: "Sunseeker",
         slug: "sunseeker",
-        logo: "https://img.logo.dev/sunseeker.com"
+        logo: "https://www.sunseeker.com/images/SunseekerLogo.svg"
     },
     {
         id: "azimut",
         name: "Azimut",
         slug: "azimut",
-        logo: "https://img.logo.dev/azimutyachts.com"
+        logo: "https://www.azimutyachts.com/wp-content/themes/azimut/assets/images/logo.svg"
     },
     {
         id: "fairline",
         name: "Fairline",
         slug: "fairline",
-        logo: "https://img.logo.dev/fairline.com"
+        logo: "https://www.fairline.com/wp-content/themes/fairline/assets/images/logo.svg"
     },
     {
         id: "beneteau",
         name: "Beneteau",
         slug: "beneteau",
-        logo: "https://img.logo.dev/beneteau.com"
+        logo: "https://www.beneteau.com/sites/default/files/logo-beneteau.svg"
     },
     {
         id: "jeanneau",
         name: "Jeanneau",
         slug: "jeanneau",
-        logo: "https://img.logo.dev/jeanneau.com"
+        logo: "https://www.jeanneau.com/sites/default/files/logo-jeanneau.svg"
     },
     {
         id: "lagoon",
         name: "Lagoon",
         slug: "lagoon",
-        logo: "https://img.logo.dev/cata-lagoon.com"
+        logo: "https://www.cata-lagoon.com/sites/default/files/logo-lagoon.svg"
     },
     {
         id: "mastercraft",
         name: "Mastercraft",
         slug: "mastercraft",
-        logo: "https://img.logo.dev/mastercraft.com"
+        logo: "https://www.mastercraft.com/images/logo.svg"
     },
     {
         id: "boston-whaler",
         name: "Boston Whaler",
         slug: "boston-whaler",
-        logo: "https://img.logo.dev/bostonwhaler.com"
+        logo: "https://www.bostonwhaler.com/images/logo.svg"
     },
     {
         id: "grady-white",
         name: "Grady-White",
         slug: "grady-white",
-        logo: "https://img.logo.dev/gradywhite.com"
+        logo: "https://www.gradywhite.com/images/logo.svg"
     },
     {
         id: "cobalt",
         name: "Cobalt",
         slug: "cobalt",
-        logo: "https://img.logo.dev/cobaltboats.com"
+        logo: "https://www.cobaltboats.com/images/logo.svg"
     },
     {
         id: "tiara",
         name: "Tiara",
         slug: "tiara",
-        logo: "https://img.logo.dev/tiarayachts.com"
+        logo: "https://www.tiarayachts.com/images/logo.svg"
     }
 ];
 }),
@@ -1004,10 +1004,8 @@ __turbopack_context__.s([
     ()=>PremiumBrands
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.react-server.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$brands$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/data/brands.ts [app-rsc] (ecmascript)");
-;
 ;
 ;
 ;
@@ -1024,7 +1022,7 @@ function PremiumBrands() {
                         children: "Our Premium Brands"
                     }, void 0, false, {
                         fileName: "[project]/src/components/home/premium-brands.tsx",
-                        lineNumber: 10,
+                        lineNumber: 9,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1032,13 +1030,13 @@ function PremiumBrands() {
                         children: "Trusted brands from leading manufacturers worldwide"
                     }, void 0, false, {
                         fileName: "[project]/src/components/home/premium-brands.tsx",
-                        lineNumber: 13,
+                        lineNumber: 12,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/home/premium-brands.tsx",
-                lineNumber: 9,
+                lineNumber: 8,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1046,38 +1044,28 @@ function PremiumBrands() {
                 children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$brands$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["premiumBrands"].map((brand)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                         href: `/boats-for-sale?brand=${brand.slug}`,
                         className: "group flex items-center justify-center rounded-lg border border-border/60 bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "relative h-12 w-full",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
-                                src: brand.logo,
-                                alt: brand.name,
-                                fill: true,
-                                className: "object-contain grayscale transition-all group-hover:grayscale-0",
-                                sizes: "(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/home/premium-brands.tsx",
-                                lineNumber: 25,
-                                columnNumber: 15
-                            }, this)
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-sm font-semibold text-muted-foreground transition-colors group-hover:text-foreground",
+                            children: brand.name
                         }, void 0, false, {
                             fileName: "[project]/src/components/home/premium-brands.tsx",
-                            lineNumber: 24,
+                            lineNumber: 23,
                             columnNumber: 13
                         }, this)
                     }, brand.id, false, {
                         fileName: "[project]/src/components/home/premium-brands.tsx",
-                        lineNumber: 19,
+                        lineNumber: 18,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/home/premium-brands.tsx",
-                lineNumber: 17,
+                lineNumber: 16,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/home/premium-brands.tsx",
-        lineNumber: 8,
+        lineNumber: 7,
         columnNumber: 5
     }, this);
 }
@@ -2015,8 +2003,20 @@ function Home() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                 className: "mt-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl",
-                                children: "The right place to find the right boat."
-                            }, void 0, false, {
+                                children: [
+                                    "The right place to find the",
+                                    " ",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-primary",
+                                        children: "Right Boat"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/page.tsx",
+                                        lineNumber: 21,
+                                        columnNumber: 13
+                                    }, this),
+                                    "."
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/app/page.tsx",
                                 lineNumber: 19,
                                 columnNumber: 11
@@ -2026,7 +2026,7 @@ function Home() {
                                 children: "Discover thousands of new and used listings worldwide. Compare models, filter by type and location, and contact brokers directly."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 22,
+                                lineNumber: 23,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -2037,7 +2037,7 @@ function Home() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$search$2f$hero$2d$search$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["HeroSearch"], {}, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 27,
+                        lineNumber: 28,
                         columnNumber: 9
                     }, this)
                 ]
@@ -2059,7 +2059,7 @@ function Home() {
                                 children: "Featured boats"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 32,
+                                lineNumber: 33,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -2068,13 +2068,13 @@ function Home() {
                                 children: "View more details"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 35,
+                                lineNumber: 36,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 31,
+                        lineNumber: 32,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2083,43 +2083,43 @@ function Home() {
                                 boat: boat
                             }, boat.id, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 41,
+                                lineNumber: 42,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 39,
+                        lineNumber: 40,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 30,
+                lineNumber: 31,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$home$2f$home$2d$categories$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["HomeCategories"], {}, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 46,
+                lineNumber: 47,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$home$2f$popular$2d$models$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["PopularModels"], {}, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 48,
+                lineNumber: 49,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$home$2f$premium$2d$brands$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["PremiumBrands"], {}, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 50,
+                lineNumber: 51,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$home$2f$why$2d$rightboat$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["WhyRightboat"], {}, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 52,
+                lineNumber: 53,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$home$2f$testimonials$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Testimonials"], {}, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 54,
+                lineNumber: 55,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2135,7 +2135,7 @@ function Home() {
                                 children: "Latest articles and boat reviews"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 58,
+                                lineNumber: 59,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -2144,13 +2144,13 @@ function Home() {
                                 children: "See more articles"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 61,
+                                lineNumber: 62,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 57,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2159,18 +2159,18 @@ function Home() {
                                 article: article
                             }, article.id, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 70,
+                                lineNumber: 71,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 68,
+                        lineNumber: 69,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 56,
+                lineNumber: 57,
                 columnNumber: 7
             }, this)
         ]
