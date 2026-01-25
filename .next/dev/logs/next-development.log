@@ -72,3 +72,7 @@ Import trace:
     ./src/app/page.tsx
 [00:43:21.437] Server  LOG     ✓ Compiled in 49ms
 [00:44:49.057] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:04:31.433] Server  LOG     ✓ Compiled in 66ms
+[02:04:37.604] Server  ERROR   ⨯ ReferenceError: Button is not defined
+[02:04:37.750] Browser ERROR   uncaughtError: ReferenceError: Button is not defined
+[02:04:41.165] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

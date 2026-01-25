@@ -35,7 +35,7 @@ export function HeroSection10({
   return (
     <section
       className={cn(
-        "flex flex-col items-center justify-center space-y-6 px-4 py-12 text-center sm:px-6 lg:px-8",
+        "flex flex-col items-center justify-center space-y-6 px-4 pt-12 pb-0 text-center sm:px-6 lg:px-8",
         className
       )}
       aria-labelledby={headingId}
@@ -55,7 +55,7 @@ export function HeroSection10({
         {description}
       </p>
       {(primaryButton || secondaryButton) && (
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <div className="mb-0 flex flex-wrap items-center justify-center gap-4">
           {primaryButton && (
             <Button asChild size="lg">
               <Link href={primaryButton.href}>{primaryButton.text}</Link>

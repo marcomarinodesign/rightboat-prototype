@@ -9,7 +9,7 @@ import { FeatureSection16 } from "@/components/blocks/feature-section-16"
 import { TestimonialsCarousel } from "@/components/blocks/testimonials-carousel"
 import { StatsSection } from "@/components/blocks/stats-section"
 import { BrandLogo } from "@/components/blocks/brand-logo"
-import { Button } from "@/components/ui/button"
+import { CtaSection5 } from "@/components/blocks/cta-section-5"
 import { premiumBrands } from "@/data/brands"
 
 export default function PropelPage() {
@@ -217,29 +217,13 @@ export default function PropelPage() {
       />
 
       {/* 9. Final CTA */}
-      <section
-        className="mx-auto max-w-2xl space-y-6 text-center"
-        aria-labelledby="propel-cta-heading"
-      >
-        <h2
-          id="propel-cta-heading"
-          className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
-        >
-          See if Propel is right for your business
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          If you list boats on Rightboat and want better visibility, Propel may
-          be a fit. Talk to the Rightboat team to explore your options.
-        </p>
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button asChild variant="default" size="lg">
-            <Link href="/">Talk to the Rightboat team</Link>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <Link href="#how-propel-works">Explore Propel in more detail</Link>
-          </Button>
-        </div>
-      </section>
+      <CtaSection5
+        title="See if Propel is right for your business"
+        description="If you list boats on Rightboat and want better visibility, Propel may be a fit. Talk to the Rightboat team to explore your options."
+        primaryButton={{ text: "Talk to the Rightboat team", href: "/" }}
+        secondaryButton={{ text: "Explore Propel in more detail", href: "#how-propel-works" }}
+        headingId="propel-cta-heading"
+      />
     </div>
   )
 }
