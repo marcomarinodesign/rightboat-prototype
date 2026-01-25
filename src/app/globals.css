@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* @import "material-symbols"; */ /* Descomentar después de ejecutar: npm install material-symbols */
 
 @custom-variant dark (&:is(.dark *));
 

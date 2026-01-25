@@ -74,6 +74,7 @@ export function CtaSection5({
         ) : (
           <div
             className="flex h-full w-full items-center justify-center rounded-lg text-sm text-primary-foreground/60"
+            style={{ backgroundColor: "rgba(219, 219, 219, 1)" }}
             aria-hidden
           >
             CTA section image

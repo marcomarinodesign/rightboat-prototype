@@ -13,17 +13,6 @@ import {
 export function HeroSearch() {
   return (
     <div className="rounded-2xl border border-border/60 bg-card/80 p-6 shadow-sm backdrop-blur">
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <Button size="sm" variant="secondary">
-          Buy a boat
-        </Button>
-        <Button size="sm" variant="outline">
-          Sell a boat
-        </Button>
-        <span className="text-xs text-muted-foreground">
-          Search across new and used listings.
-        </span>
-      </div>
       <div className="grid gap-4 md:grid-cols-4">
         <Input placeholder="Search by make or model" />
         <Select>

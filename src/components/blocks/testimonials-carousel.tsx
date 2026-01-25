@@ -1,9 +1,5 @@
-"use client"
+import { Star } from "lucide-react"
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
@@ -25,90 +21,69 @@ export function TestimonialsCarousel({
   headingId,
   className,
 }: TestimonialsCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))
-  }
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))
-  }
-
-  const currentTestimonial = testimonials[currentIndex]
+  // Take only the first 3 testimonials for the 3-column layout
+  const displayedTestimonials = testimonials.slice(0, 3)
 
   return (
     <section
       className={cn("space-y-8", className)}
       aria-labelledby={headingId}
     >
-      <div className="flex items-center justify-between">
-        <h2
-          id={headingId}
-          className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
-        >
-          What professionals say
-        </h2>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={goToPrevious}
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={goToNext}
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-      <Card className="border-border/60 bg-muted/20">
-        <CardHeader className="space-y-4">
-          <blockquote className="text-lg leading-relaxed">
-            <span className="text-2xl leading-none text-muted-foreground">
-              &ldquo;
-            </span>
-            <span className="relative">{currentTestimonial.quote}</span>
-            <span className="text-2xl leading-none text-muted-foreground">
-              &rdquo;
-            </span>
-          </blockquote>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-1">
-            <div className="font-semibold">{currentTestimonial.name}</div>
-            {currentTestimonial.role && (
-              <div className="text-sm text-muted-foreground">
-                {currentTestimonial.role}
-              </div>
-            )}
-            {currentTestimonial.location && (
-              <div className="text-sm text-muted-foreground">
-                {currentTestimonial.location}
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-      <div className="flex justify-center gap-2">
-        {testimonials.map((_, index) => (
-          <button
+      <h2
+        id={headingId}
+        className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
+      >
+        What professionals say
+      </h2>
+      <div className="grid gap-6 md:grid-cols-3">
+        {displayedTestimonials.map((testimonial, index) => (
+          <Card
             key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={cn(
-              "h-2 rounded-full transition-all",
-              index === currentIndex
-                ? "w-8 bg-primary"
-                : "w-2 bg-muted-foreground/30"
-            )}
-            aria-label={`Go to testimonial ${index + 1}`}
-          />
+            className="bg-white shadow-md border-border/60 rounded-lg"
+          >
+            <CardHeader className="space-y-4">
+              {/* 5 blue stars */}
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-5 w-5 fill-primary text-primary"
+                    aria-hidden="true"
+                  />
+                ))}
+              </div>
+              {/* Quote */}
+              <blockquote className="text-lg font-medium leading-relaxed text-foreground">
+                <span className="text-2xl leading-none text-muted-foreground">
+                  &ldquo;
+                </span>
+                <span className="relative">{testimonial.quote}</span>
+                <span className="text-2xl leading-none text-muted-foreground">
+                  &rdquo;
+                </span>
+              </blockquote>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-1">
+                {/* Name - bold */}
+                <div className="font-semibold text-foreground">
+                  {testimonial.name}
+                </div>
+                {/* Role - smaller grey */}
+                {testimonial.role && (
+                  <div className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                  </div>
+                )}
+                {/* Location - smaller grey */}
+                {testimonial.location && (
+                  <div className="text-sm text-muted-foreground">
+                    {testimonial.location}
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </section>

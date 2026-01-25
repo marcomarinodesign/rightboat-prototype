@@ -18,7 +18,12 @@ export default function PropelPage() {
       {/* 1. Hero */}
       <HeroSection10
         badge="For brokers & dealers"
-        heading="Visibility and reach for marine professionals"
+        heading={
+          <>
+            Visibility and reach for{" "}
+            <span style={{ color: "#0257fc" }}>marine professionals</span>
+          </>
+        }
         description="Propel helps brokers, dealers, and sellers get their listings in front of more buyers on Rightboat—with clearer positioning and less friction."
         primaryButton={{ text: "Learn how Propel works", href: "#how-propel-works" }}
         headingId="propel-hero-heading"
