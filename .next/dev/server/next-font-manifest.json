@@ -1,18 +1,10 @@
 {
   "app": {
-    "[project]/src/app/_not-found/page": [
+    "[project]/rightboat-prototype/src/app/_not-found/page": [
       "static/media/fa0520225c6f3d07-s.p.d28ba1c8.woff2",
       "static/media/797e433ab948586e-s.p.dbea232f.woff2"
     ],
-    "[project]/src/app/boats-for-sale/page": [
-      "static/media/fa0520225c6f3d07-s.p.d28ba1c8.woff2",
-      "static/media/797e433ab948586e-s.p.dbea232f.woff2"
-    ],
-    "[project]/src/app/page": [
-      "static/media/fa0520225c6f3d07-s.p.d28ba1c8.woff2",
-      "static/media/797e433ab948586e-s.p.dbea232f.woff2"
-    ],
-    "[project]/src/app/propel/page": [
+    "[project]/rightboat-prototype/src/app/page": [
       "static/media/fa0520225c6f3d07-s.p.d28ba1c8.woff2",
       "static/media/797e433ab948586e-s.p.dbea232f.woff2"
     ]

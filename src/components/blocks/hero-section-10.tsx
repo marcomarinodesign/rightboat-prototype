@@ -14,8 +14,8 @@ export interface HeroSection10Props {
   badge?: string
   heading: string | ReactNode
   description: string
-  primaryButton?: { text: string; href: string }
-  secondaryButton?: { text: string; href: string }
+  primaryButton?: { text: string; href?: string; onClick?: () => void }
+  secondaryButton?: { text: string; href?: string; onClick?: () => void }
   image?: { src: string; alt: string }
   /** Section ID for aria-labelledby */
   headingId?: string
@@ -57,14 +57,30 @@ export function HeroSection10({
       {(primaryButton || secondaryButton) && (
         <div className="mb-0 flex flex-wrap items-center justify-center gap-4">
           {primaryButton && (
-            <Button asChild size="lg">
-              <Link href={primaryButton.href}>{primaryButton.text}</Link>
-            </Button>
+            primaryButton.onClick ? (
+              <Button size="lg" onClick={primaryButton.onClick}>
+                {primaryButton.text}
+              </Button>
+            ) : (
+              primaryButton.href && (
+                <Button asChild size="lg">
+                  <Link href={primaryButton.href}>{primaryButton.text}</Link>
+                </Button>
+              )
+            )
           )}
           {secondaryButton && (
-            <Button asChild variant="outline" size="lg">
-              <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
-            </Button>
+            secondaryButton.onClick ? (
+              <Button variant="outline" size="lg" onClick={secondaryButton.onClick}>
+                {secondaryButton.text}
+              </Button>
+            ) : (
+              secondaryButton.href && (
+                <Button asChild variant="outline" size="lg">
+                  <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
+                </Button>
+              )
+            )
           )}
         </div>
       )}

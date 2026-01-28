@@ -1,6 +1,7 @@
-import Image from "next/image"
-import Link from "next/link"
-import { List, CheckCircle2, Eye, Users, TrendingUp, Target, Shield, Zap, Briefcase, Store, User } from "lucide-react"
+"use client"
+
+import { useState } from "react"
+import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from "lucide-react"
 
 import { HeroSection10 } from "@/components/blocks/hero-section-10"
 import { FeatureSection5 } from "@/components/blocks/feature-section-5"
@@ -10,23 +11,30 @@ import { TestimonialsCarousel } from "@/components/blocks/testimonials-carousel"
 import { StatsSection } from "@/components/blocks/stats-section"
 import { BrandLogo } from "@/components/blocks/brand-logo"
 import { CtaSection5 } from "@/components/blocks/cta-section-5"
+import { PropelExpertDialog } from "@/components/propel/propel-expert-dialog"
 import { IconContainer } from "@/components/ui/icon-container"
-import { premiumBrands } from "@/data/brands"
+import { propelBrands } from "@/data/brands"
 
 export default function PropelPage() {
+  const [expertOpen, setExpertOpen] = useState(false)
+  const openExpert = () => setExpertOpen(true)
+
   return (
     <div className="space-y-20 sm:space-y-24">
+      <PropelExpertDialog open={expertOpen} onOpenChange={setExpertOpen} />
+
       {/* 1. Hero */}
       <HeroSection10
-        badge="For brokers & dealers"
+        badge="For partners"
         heading={
           <>
             Visibility and reach for{" "}
             <span style={{ color: "#0257fc" }}>marine professionals</span>
           </>
         }
-        description="Propel helps brokers, dealers, and sellers get their listings in front of more buyers on Rightboat—with clearer positioning and less friction."
-        primaryButton={{ text: "Learn how Propel works", href: "#how-propel-works" }}
+        description="Propel is the B2B solution for expanding your reach to a global audience through smart insights, exclusive ad placements and more in one place."
+        primaryButton={{ text: "Talk to a Propel expert", onClick: openExpert }}
+        image={{ src: "/propel/hero-sailboat.png", alt: "Sailboat in turquoise waters" }}
         headingId="propel-hero-heading"
       />
 
@@ -36,24 +44,24 @@ export default function PropelPage() {
           id="trust-heading"
           className="text-center text-sm font-medium text-muted-foreground"
         >
-          Trusted by the best companies
+          Used by leading marine brands
         </p>
         <div className="grid grid-cols-2 place-items-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {premiumBrands.slice(0, 6).map((brand) => (
+          {propelBrands.map((brand) => (
             <BrandLogo key={brand.id} brand={brand} />
           ))}
         </div>
       </section>
 
-      {/* 3. What is Propel - Feature section 5 */}
+      {/* 3. Precision Meets Propulsion - Feature section 5 */}
       <FeatureSection5
-        title="What is Rightboat Propel?"
-        description="Propel is a program for marine professionals who list boats on Rightboat. It gives you better visibility, helps you reach more relevant buyers, and makes it easier for them to find and contact you."
+        title="Precision Meets Propulsion"
+        description="Find your next and final boat sales solution for your dealership. Propel offers a full suite of cutting-edge tools to streamline your sales and marketing efforts."
         features={[
           {
-            title: "Enhanced visibility",
+            title: "Increased Visibility",
             description:
-              "Your listings stand out more to buyers browsing on Rightboat.",
+              "Your listings are seen by more qualified buyers, boosting your sales pipeline.",
             icon: (
               <IconContainer className="size-10 mb-0">
                 <Eye />
@@ -61,9 +69,9 @@ export default function PropelPage() {
             ),
           },
           {
-            title: "Targeted audience",
+            title: "Targeted Audience",
             description:
-              "Reach people actively looking for boats in your segment.",
+              "Reach buyers specifically interested in your boat types and locations.",
             icon: (
               <IconContainer className="size-10 mb-0">
                 <Target />
@@ -71,9 +79,9 @@ export default function PropelPage() {
             ),
           },
           {
-            title: "Rightboat integration",
+            title: "Rightboat Integration",
             description:
-              "Propel works within the Rightboat marketplace—no separate platform.",
+              "Seamlessly connect with Rightboat's platform for efficient management.",
             icon: (
               <IconContainer className="size-10 mb-0">
                 <CheckCircle2 />
@@ -81,114 +89,119 @@ export default function PropelPage() {
             ),
           },
         ]}
-        headingId="what-is-propel-heading"
+        image={{ src: "/propel/motorboat.png", alt: "Motorboat on the water" }}
+        headingId="precision-meets-propulsion-heading"
       />
 
       {/* 4. Who is Propel for - Feature section 16 */}
       <FeatureSection16
         title="Who is Propel for?"
-        description="Propel is designed for anyone who lists boats on Rightboat and wants more visibility and better connections with buyers."
+        description="Propel is designed for all professionals in the marine industry, from dealerships to brokers and service providers."
         featureSets={[
           {
             label: "Brokers",
             title: "Brokers",
             description:
-              "Independent or boutique brokers listing client boats. Benefit: your inventory reaches more serious buyers without extra legwork.",
+              "Connect with a wider network of buyers and sellers. Showcase your listings and grow your client base with Propel's integrated tools.",
             icon: (
               <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
                 <Briefcase />
               </IconContainer>
             ),
-            link: { text: "Learn more", href: "#" },
+            link: { text: "Talk to a Propel expert", onClick: openExpert },
+            image: { src: "/propel/who-broker.png", alt: "Brokerage and yacht details" },
           },
           {
             label: "Dealers",
             title: "Dealers",
             description:
-              "Dealerships and multi-listing businesses. Benefit: clearer presence on Rightboat and more qualified leads.",
+              "Strengthen your dealership's presence on Rightboat. Get more qualified leads and showcase your inventory to a global audience with Propel's tools.",
             icon: (
               <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
                 <Store />
               </IconContainer>
             ),
-            link: { text: "Learn more", href: "#" },
+            link: { text: "Talk to a Propel expert", onClick: openExpert },
+            image: { src: "/propel/who-dealer.png", alt: "Dealership motor yacht" },
           },
           {
-            label: "Private sellers",
-            title: "Private sellers",
+            label: "Manufacturers",
+            title: "Manufacturers",
             description:
-              "Individuals selling their own boat. Benefit: your listing gets in front of more buyers than a standard listing.",
+              "Reach dealers and buyers at scale. Propel gives OEMs data-driven insights and premium placement to grow market share.",
             icon: (
               <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
-                <User />
+                <Factory />
               </IconContainer>
             ),
-            link: { text: "Learn more", href: "#" },
+            link: { text: "Talk to a Propel expert", onClick: openExpert },
+            image: { src: "/propel/who-manufacturer.png", alt: "Luxury motor yacht" },
           },
         ]}
         headingId="who-is-propel-for-heading"
       />
 
-      {/* 5. How Propel works - Feature section 5 */}
+      {/* 5. Propel Program Offers - Feature section 5 */}
       <FeatureSection5
-        title="How Propel works"
-        description="Propel is straightforward: you list on Rightboat, qualify for the program, and your listings get improved visibility and positioning."
+        title="Propel Program Offers"
+        description="Propel offers a suite of comprehensive features designed to enhance your business operations and drive growth."
         features={[
           {
-            title: "List on Rightboat",
+            title: "Lead Generation",
             description:
-              "Add your boats to the Rightboat marketplace as you normally would.",
+              "Attract high-quality leads directly to your listings and services.",
             icon: (
               <IconContainer className="size-10 mb-0">
-                <List />
+                <Zap />
               </IconContainer>
             ),
           },
           {
-            title: "Qualify for Propel",
+            title: "Brand Marketing",
             description:
-              "Meet the program criteria—listing quality and completeness matter.",
+              "Elevate your brand's presence with premium ad placements and promotional tools.",
             icon: (
               <IconContainer className="size-10 mb-0">
-                <CheckCircle2 />
+                <Megaphone />
               </IconContainer>
             ),
           },
           {
-            title: "Get enhanced visibility",
+            title: "Smart Search Tools",
             description:
-              "Your listings receive improved placement and clearer positioning.",
+              "Utilize advanced search functionalities to help buyers find your inventory faster.",
             icon: (
               <IconContainer className="size-10 mb-0">
-                <Eye />
+                <Search />
               </IconContainer>
             ),
           },
           {
-            title: "Connect with more buyers",
+            title: "Sales Support",
             description:
-              "Buyers find you more easily and can reach out with less friction.",
+              "Access resources and tools to help close deals more efficiently and effectively.",
             icon: (
               <IconContainer className="size-10 mb-0">
-                <Users />
+                <HandHelping />
               </IconContainer>
             ),
           },
         ]}
-        headingId="how-propel-works-heading"
-        sectionId="how-propel-works"
+        image={{ src: "/propel/program-offers.png", alt: "Propel dashboard preview" }}
+        headingId="propel-program-offers-heading"
+        sectionId="propel-program-offers"
         className="scroll-mt-20"
       />
 
       {/* 6. Why use Propel - Feature section 9 */}
       <FeatureSection9
         title="Why use Propel?"
-        description="Propel focuses on outcomes: more visibility, better traffic, and smoother connections between you and buyers."
+        description="Propel empowers marine professionals to streamline their operations, enhance visibility, and drive sales growth."
         features={[
           {
-            title: "Increased visibility",
+            title: "Increased Engagement",
             description:
-              "Your listings appear more prominently to buyers browsing Rightboat.",
+              "Connect with buyers and sellers on a deeper level through interactive features.",
             icon: (
               <IconContainer className="size-12 mb-0">
                 <TrendingUp />
@@ -196,32 +209,32 @@ export default function PropelPage() {
             ),
           },
           {
-            title: "More relevant traffic",
+            title: "Lead Retention & Growth",
             description:
-              "Reach people who are actively searching for boats like yours.",
+              "Cultivate lasting relationships with clients and expand your market reach.",
             icon: (
               <IconContainer className="size-12 mb-0">
-                <Target />
+                <Users />
               </IconContainer>
             ),
           },
           {
-            title: "Clearer positioning",
+            title: "Efficiency & Performance",
             description:
-              "Buyers can better understand who you are and what you offer.",
+              "Optimize your workflow and achieve better results with powerful analytics.",
             icon: (
               <IconContainer className="size-12 mb-0">
-                <Shield />
+                <Settings />
               </IconContainer>
             ),
           },
           {
-            title: "Less friction",
+            title: "Reporting",
             description:
-              "Makes it easier for buyers to find you and start a conversation.",
+              "Gain valuable insights into market trends and performance metrics.",
             icon: (
               <IconContainer className="size-12 mb-0">
-                <Zap />
+                <BarChart2 />
               </IconContainer>
             ),
           },
@@ -229,61 +242,58 @@ export default function PropelPage() {
         headingId="why-use-propel-heading"
       />
 
-      {/* 7. Testimonials carousel */}
+      {/* 7. Testimonials - What professionals say */}
       <TestimonialsCarousel
         testimonials={[
           {
             quote:
-              "Propel helped us reach more serious buyers. Our listings got better visibility and we saw a significant increase in qualified inquiries.",
-            name: "Sarah Mitchell",
-            role: "Broker at Coastal Yachts",
-            location: "Miami, FL",
+              "Propel has transformed the way we connect with clients. Our listings get noticed, and the leads are consistently high quality. Highly recommended!",
+            name: "John Smith",
+            role: "Marine Broker",
           },
           {
             quote:
-              "As a dealer, Propel made it easier for buyers to find us. The clearer positioning on Rightboat has been a game-changer.",
-            name: "James Thompson",
+              "We've seen our Propel leads convert at a much higher rate. The platform is intuitive, and the support team is excellent.",
+            name: "Sarah Jones",
             role: "Dealership Owner",
-            location: "San Diego, CA",
           },
           {
             quote:
-              "Selling our boat through Propel was straightforward. We received multiple serious inquiries within the first week.",
-            name: "Michael Chen",
-            role: "Private Seller",
-            location: "Seattle, WA",
+              "Propel has given us an edge in a competitive market. Our visibility has increased significantly, leading to more sales.",
+            name: "David Lee",
+            role: "Manufacturer Rep.",
           },
         ]}
         headingId="testimonials-heading"
       />
 
-      {/* 8. Stats section */}
+      {/* 8. OEM Advantages */}
       <StatsSection
-        title="Proof in the numbers"
-        description="Keep a close eye on the visibility, reach, and connections. Monitor these metrics to see how Propel helps marine professionals."
+        title="OEM Advantages"
+        description="Propel provides exclusive benefits for Original Equipment Manufacturers (OEMs), offering unparalleled reach and data-driven insights to boost sales and market share."
         stats={[
           {
-            value: "10K+",
-            label: "Listings enhanced with Propel",
+            value: "1 in 3",
+            label: "Increased market share",
           },
           {
-            value: "2.5x",
-            label: "Average increase in visibility",
+            value: "120.000",
+            label: "Qualified leads generated",
           },
           {
-            value: "85%",
-            label: "More qualified leads reported",
+            value: "4500+",
+            label: "Successful partnerships",
           },
         ]}
-        headingId="stats-heading"
+        headingId="oem-advantages-heading"
       />
 
       {/* 9. Final CTA */}
       <CtaSection5
-        title="See if Propel is right for your business"
-        description="If you list boats on Rightboat and want better visibility, Propel may be a fit. Talk to the Rightboat team to explore your options."
-        primaryButton={{ text: "Talk to the Rightboat team", href: "/" }}
-        secondaryButton={{ text: "Explore Propel in more detail", href: "#how-propel-works" }}
+        title="See If Propel is right for your business"
+        description="We work with top players in the marine industry to help them grow and reach their business goals through technology."
+        primaryButton={{ text: "Talk to a Propel expert", onClick: openExpert }}
+        image={{ src: "/propel/cta-sailboat.png", alt: "Professionals on a sailboat" }}
         headingId="propel-cta-heading"
       />
     </div>

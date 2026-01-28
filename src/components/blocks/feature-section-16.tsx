@@ -13,7 +13,9 @@ export interface FeatureSet {
   title: string
   description: string
   icon?: React.ReactNode
-  link?: { text: string; href: string }
+  link?: { text: string; href?: string; onClick?: () => void }
+  /** Optional image per tab (overrides section image when set) */
+  image?: { src: string; alt: string }
 }
 
 export interface FeatureSection16Props {
@@ -37,11 +39,12 @@ export function FeatureSection16({
 }: FeatureSection16Props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const activeFeature = featureSets[activeIndex]
+  const activeImage = activeFeature.image ?? image
 
-  const imageContent = image ? (
+  const imageContent = activeImage ? (
     <Image
-      src={image.src}
-      alt={image.alt}
+      src={activeImage.src}
+      alt={activeImage.alt}
       width={1200}
       height={600}
       className="max-h-[560px] w-full rounded-lg object-cover"
@@ -105,12 +108,21 @@ export function FeatureSection16({
             </p>
             {activeFeature.link && (
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild variant="default" size="sm">
-                  <Link href={activeFeature.link.href}>
+                {activeFeature.link.onClick ? (
+                  <Button variant="default" size="sm" onClick={activeFeature.link.onClick}>
                     {activeFeature.link.text}
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                  </Button>
+                ) : (
+                  activeFeature.link.href && (
+                    <Button asChild variant="default" size="sm">
+                      <Link href={activeFeature.link.href}>
+                        {activeFeature.link.text}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  )
+                )}
               </div>
             )}
           </div>

@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils"
 export interface CtaSection5Props {
   title: string | ReactNode
   description: string
-  primaryButton?: { text: string; href: string }
-  secondaryButton?: { text: string; href: string }
+  primaryButton?: { text: string; href?: string; onClick?: () => void }
+  secondaryButton?: { text: string; href?: string; onClick?: () => void }
   image?: { src: string; alt: string }
   /** Section ID for aria-labelledby */
   headingId?: string
@@ -50,14 +50,39 @@ export function CtaSection5({
         {(primaryButton || secondaryButton) && (
           <div className="flex flex-wrap gap-4">
             {primaryButton && (
-              <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90">
-                <Link href={primaryButton.href}>{primaryButton.text}</Link>
-              </Button>
+              primaryButton.onClick ? (
+                <Button
+                  size="lg"
+                  className="bg-background text-primary hover:bg-background/90"
+                  onClick={primaryButton.onClick}
+                >
+                  {primaryButton.text}
+                </Button>
+              ) : (
+                primaryButton.href && (
+                  <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90">
+                    <Link href={primaryButton.href}>{primaryButton.text}</Link>
+                  </Button>
+                )
+              )
             )}
             {secondaryButton && (
-              <Button asChild variant="outline" size="lg" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50">
-                <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
-              </Button>
+              secondaryButton.onClick ? (
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50"
+                  onClick={secondaryButton.onClick}
+                >
+                  {secondaryButton.text}
+                </Button>
+              ) : (
+                secondaryButton.href && (
+                  <Button asChild variant="outline" size="lg" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50">
+                    <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
+                  </Button>
+                )
+              )
             )}
           </div>
         )}

@@ -78,4 +78,26 @@ export const premiumBrands: PremiumBrand[] = [
     slug: "tiara",
     logo: "/brands/tiara.png", // Add image to /public/brands/tiara.png
   },
+  {
+    id: "sea-ray",
+    name: "Sea Ray",
+    slug: "sea-ray",
+    logo: "/brands/sea-ray.png",
+  },
+  {
+    id: "aquila",
+    name: "Aquila",
+    slug: "aquila",
+    logo: "/brands/aquila.png",
+  },
 ]
+
+/** Brands shown on Propel landing (design order: Sea Ray, Beneteau, Fairline, Sunseeker, Aquila, Jeanneau) */
+export const propelBrands = [
+  premiumBrands.find((b) => b.slug === "sea-ray"),
+  premiumBrands.find((b) => b.slug === "beneteau"),
+  premiumBrands.find((b) => b.slug === "fairline"),
+  premiumBrands.find((b) => b.slug === "sunseeker"),
+  premiumBrands.find((b) => b.slug === "aquila"),
+  premiumBrands.find((b) => b.slug === "jeanneau"),
+].filter(Boolean) as PremiumBrand[]

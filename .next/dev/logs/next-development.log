@@ -1,406 +1,145 @@
-[00:00:00.981] Server  LOG     ✓ Ready in 740ms
-[00:00:01.552] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:51.073] Server  LOG     ✓ Compiled in 381ms
-[00:02:31.909] Server  LOG     ✓ Compiled in 53ms
-[00:02:32.013] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+[00:00:01.041] Server  LOG     ✓ Ready in 799ms
+[00:00:03.116] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:48.156] Server  ERROR   ⨯ ReferenceError: User is not defined
+[00:02:48.284] Browser ERROR   uncaughtError: ReferenceError: User is not defined
+[00:02:57.649] Server  ERROR   ⨯ ReferenceError: User is not defined
+[00:02:57.804] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:57.939] Browser ERROR   uncaughtError: ReferenceError: User is not defined
+[00:03:10.147] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:03:10.227] Server  ERROR   ⨯ ReferenceError: List is not defined
+[00:03:10.279] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__8a3d434e._.css
+[00:03:10.477] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:10.628] Browser ERROR   uncaughtError: ReferenceError: List is not defined
+[00:03:19.656] Server  ERROR   ⨯ ReferenceError: Shield is not defined
+[00:03:19.761] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:19.884] Browser ERROR   uncaughtError: ReferenceError: Shield is not defined
+[00:03:27.385] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:21.489] Server  ERROR   ⨯ ReferenceError: premiumBrands is not defined
+[00:11:21.618] Browser ERROR   uncaughtError: ReferenceError: premiumBrands is not defined
+[00:11:26.232] Server  ERROR   ⨯ ReferenceError: premiumBrands is not defined
+[00:11:26.342] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:26.463] Browser ERROR   uncaughtError: ReferenceError: premiumBrands is not defined
+[00:11:33.344] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:33.472] Browser WARN    Image with src "http://localhost:3000/brands/sea-ray.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:11:33.472] Browser WARN    Image with src "http://localhost:3000/brands/beneteau.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:11:33.472] Browser WARN    Image with src "http://localhost:3000/brands/fairline.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:11:33.472] Browser WARN    Image with src "http://localhost:3000/brands/sunseeker.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:11:33.472] Browser WARN    Image with src "http://localhost:3000/brands/aquila.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:11:33.472] Browser WARN    Image with src "http://localhost:3000/brands/jeanneau.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:15:40.779] Server  LOG     ✓ Compiled in 93ms
+[00:15:45.023] Server  LOG     ✓ Compiled in 30ms
+[00:22:48.986] Server  LOG     ✓ Compiled in 118ms
+[00:23:19.870] Server  LOG     ✓ Compiled in 50ms
+[00:26:35.840] Server  LOG     ✓ Compiled in 74ms
+[00:27:13.133] Browser ERROR   ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:05:08.415] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+Unterminated string constant
+[00:28:00.044] Server  ERROR   ⨯ ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:05:17.321] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:05:18.046] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:14.013] Server  ERROR   ⨯ ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
+Unterminated string constant
 
 
-[00:06:14.143] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+[00:28:00.169] Browser ERROR   ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:14.601] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+Unterminated string constant
+[00:28:00.615] Browser ERROR   ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:14.601] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+Unterminated string constant
+[00:28:00.926] Browser ERROR   uncaughtError: Error: ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:14.863] Browser ERROR   uncaughtError: Error: ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
+Unterminated string constant
 
 
-[00:06:15.009] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+[00:28:01.083] Browser ERROR   ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.009] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
+Unterminated string constant
+[00:28:01.186] Browser ERROR   ./rightboat-prototype/src/app/propel/page.tsx:1:2
+Parsing ecmascript source code failed
+> 1 | \"use client\"
+    |  ^^^^^^^^^^^^^
+  2 |
+  3 | import { useState } from \"react\"
+  4 | import { CheckCircle2, Eye, Users, TrendingUp, Target, Zap, Briefcase, Store, Factory, BarChart2, Settings, Megaphone, Search, HandHelping } from \"lucide-react\"
 
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.009] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.009] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.568] Server  ERROR   ⨯ ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-
-
-[00:06:15.660] Browser ERROR   uncaughtError: Error: ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-
-
-[00:06:15.805] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.805] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.805] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:06:15.805] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:07:06.700] Server  ERROR   ⨯ ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-
-
-[00:07:06.798] Browser ERROR   uncaughtError: Error: ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-
-
-[00:07:06.938] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:07:06.938] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:07:06.938] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:07:06.938] Browser ERROR   ./src/app/globals.css
-Error evaluating Node.js code
-CssSyntaxError: tailwindcss: /Users/marcomarino/Projects/rightboat-prototype/src/app/globals.css:1:1: Can't resolve 'material-symbols' in '/Users/marcomarino/Projects/rightboat-prototype/src/app'
-    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
-    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
-    [at Object.Once (/Users/marcomarino/Projects/rightboat-prototype/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
-    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
-    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
-    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
-    [at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23)]
-
-Import trace:
-  Client Component Browser:
-    ./src/app/globals.css [Client Component Browser]
-    ./src/app/layout.tsx [Server Component]
-[00:10:04.729] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:14:16.179] Server  LOG     ✓ Compiled in 69ms
-[02:15:18.157] Server  LOG     ✓ Compiled in 17ms
-[02:15:20.509] Server  LOG     ✓ Compiled in 46ms
-[02:15:55.304] Server  LOG     ✓ Compiled in 20ms
-[02:15:55.815] Server  LOG     ✓ Compiled in 18ms
-[02:18:09.442] Server  LOG     ✓ Compiled in 48ms
-[02:19:29.279] Server  LOG     ✓ Compiled in 41ms
-[02:19:29.389] Browser WARN    Select is changing from uncontrolled to controlled. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.
-[02:19:37.937] Server  LOG     ✓ Compiled in 23ms
-[02:19:39.128] Server  LOG     ✓ Compiled in 12ms
-[02:19:40.399] Server  LOG     ✓ Compiled in 14ms
-[02:22:01.610] Server  LOG     ✓ Compiled in 38ms
-[02:22:44.640] Server  LOG     ✓ Compiled in 38ms
-[02:22:59.110] Server  LOG     ✓ Compiled in 22ms
+Unterminated string constant
+[00:29:20.123] Server  LOG     ✓ Compiled in 113ms
+[00:29:20.393] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:21.490] Browser WARN    Image with src "http://localhost:3000/brands/sea-ray.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:29:21.490] Browser WARN    Image with src "http://localhost:3000/brands/beneteau.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:29:21.490] Browser WARN    Image with src "http://localhost:3000/brands/fairline.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:29:21.490] Browser WARN    Image with src "http://localhost:3000/brands/sunseeker.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:29:21.490] Browser WARN    Image with src "http://localhost:3000/brands/aquila.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:29:21.490] Browser WARN    Image with src "http://localhost:3000/brands/jeanneau.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:31.426] Server  LOG     ✓ Compiled in 0ms
+[00:30:31.487] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:30:32.486] Browser WARN    Image with src "http://localhost:3000/brands/sea-ray.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:32.486] Browser WARN    Image with src "http://localhost:3000/brands/beneteau.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:32.486] Browser WARN    Image with src "http://localhost:3000/brands/fairline.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:32.486] Browser WARN    Image with src "http://localhost:3000/brands/sunseeker.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:32.486] Browser WARN    Image with src "http://localhost:3000/brands/aquila.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:32.486] Browser WARN    Image with src "http://localhost:3000/brands/jeanneau.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:30:57.182] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:30:57.182] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:31:06.268] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.268] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.268] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.269] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.269] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.269] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.269] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:31:06.269] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:00.732] Server  LOG     ✓ Compiled in 24ms
+[00:32:46.387] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:46.387] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:50.719] Server  LOG     ✓ Compiled in 24ms
+[00:32:52.237] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   params are being enumerated. `params` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:32:52.237] Browser ERROR   The keys of `searchParams` were accessed directly. `searchParams` is a Promise and must be unwrapped with `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[00:33:20.148] Server  LOG     ✓ Compiled in 26ms
