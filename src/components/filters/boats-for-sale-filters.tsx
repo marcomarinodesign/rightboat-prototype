@@ -6,6 +6,7 @@ import { ActiveFiltersChips, type ActiveFilter } from "@/components/filters/acti
 import { FiltersBar } from "@/components/filters/filters-bar"
 import { MoreFiltersSheet } from "@/components/filters/more-filters-sheet"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
+import { popularModels } from "@/data/models"
 
 const formatCurrency = (value: string) => {
   const number = Number(value)
@@ -167,6 +168,21 @@ export function BoatsForSaleFilters() {
           setFilters((prev) => ({
             ...prev,
             manufacturer: "",
+          })),
+      })
+    }
+
+    if (filters.model) {
+      const modelLabel =
+        popularModels.find((m) => m.slug === filters.model)?.name ??
+        filters.model
+      items.push({
+        key: "model",
+        label: `Model: ${modelLabel}`,
+        onRemove: () =>
+          setFilters((prev) => ({
+            ...prev,
+            model: "",
           })),
       })
     }

@@ -54,7 +54,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.75rem; /* 12px */
   --brand-midnight: #13022c;
   --brand-blue-200: #208cff;
   --brand-blue-300: #086bff;
@@ -141,6 +141,55 @@
     @apply font-bold;
     font-weight: 700;
   }
+  button {
+    cursor: pointer;
+  }
+  .heading-xl {
+    font-family: var(--font-sans);
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .heading-lg {
+    font-family: var(--font-sans);
+    font-size: 2.25rem;
+    line-height: 1.111;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .heading-md {
+    font-family: var(--font-sans);
+    font-size: 1.875rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .heading-sm {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    line-height: 1.333;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .container-padding-x {
+    padding-inline: 1.5rem;
+  }
+  .section-padding-y {
+    padding-block: 6rem;
+  }
+  .section-title-gap-xl {
+    gap: 1.5rem;
+  }
+  .section-title-gap-lg {
+    gap: 1.25rem;
+  }
+  .section-title-gap-md {
+    gap: 1.25rem;
+  }
+  .section-title-gap-sm {
+    gap: 1rem;
+  }
 }
 
 @layer utilities {
@@ -150,5 +199,92 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* shadcndesign/pattern-1 (local CSS backing class) */
+  .pattern-1 {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--pattern-color, rgba(255, 255, 255, 0.45)) 1px,
+      transparent 1px
+    );
+    background-size: 18px 18px;
+  }
+
+  /*
+    Generic rule:
+    Whenever a surface uses the "light blue" brand background (`bg-primary`),
+    automatically apply pattern-1.
+
+    Note: we scope to section/div to avoid applying the pattern to buttons.
+  */
+  section.bg-primary,
+  div.bg-primary {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--pattern-color, rgba(255, 255, 255, 0.45)) 1px,
+      transparent 1px
+    );
+    background-size: 18px 18px;
+  }
+
+  /* Logo marquee (logos7-style) */
+  .logo-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .logo-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: logo-marquee-scroll 24s linear infinite;
+  }
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes logo-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 64rem) {
+  .heading-xl {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+  .heading-lg {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+  .heading-md {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .heading-sm {
+    font-size: 1.5rem;
+    line-height: 1.333;
+  }
+  .container-padding-x {
+    padding-inline: 1.5rem;
+  }
+  .section-padding-y {
+    padding-block: 4rem;
+  }
+  .section-title-gap-xl {
+    gap: 1rem;
+  }
+  .section-title-gap-lg {
+    gap: 1rem;
+  }
+  .section-title-gap-md {
+    gap: 1rem;
+  }
+  .section-title-gap-sm {
+    gap: 1rem;
   }
 }

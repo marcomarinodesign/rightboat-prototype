@@ -17,6 +17,7 @@ export interface HeroSection10Props {
   primaryButton?: { text: string; href?: string; onClick?: () => void }
   secondaryButton?: { text: string; href?: string; onClick?: () => void }
   image?: { src: string; alt: string }
+  video?: { src: string; poster?: string; ariaLabel?: string }
   /** Section ID for aria-labelledby */
   headingId?: string
   className?: string
@@ -29,6 +30,7 @@ export function HeroSection10({
   primaryButton,
   secondaryButton,
   image,
+  video,
   headingId = "hero-heading",
   className,
 }: HeroSection10Props) {
@@ -84,9 +86,22 @@ export function HeroSection10({
           )}
         </div>
       )}
-      <div className="relative mt-8 w-full max-w-4xl overflow-hidden rounded-lg border border-border/60 bg-muted">
+      <div className="relative mt-6 w-full max-w-4xl overflow-hidden rounded-[12px] border border-border/60 bg-muted">
         <div className="relative aspect-video w-full">
-          {image ? (
+          {video ? (
+            <video
+              className="h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls={false}
+              poster={video.poster}
+              aria-label={video.ariaLabel ?? "Hero video"}
+            >
+              <source src={video.src} />
+            </video>
+          ) : image ? (
             <Image
               src={image.src}
               alt={image.alt}
@@ -96,12 +111,14 @@ export function HeroSection10({
               priority
             />
           ) : (
-            <div
-              className="flex h-full w-full items-center justify-center text-sm text-muted-foreground"
-              aria-hidden
-            >
-              Image placeholder
-            </div>
+            <Image
+              src="https://ui.shadcn.com/placeholder.svg"
+              alt="Hero section visual"
+              fill
+              className="object-cover"
+              unoptimized
+              priority
+            />
           )}
         </div>
       </div>

@@ -3,8 +3,10 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -18,10 +20,21 @@ type AppShellProps = {
 }
 
 export function AppShell({ children }: AppShellProps) {
+  const pathname = usePathname()
+  const isBoatDetailPage =
+    typeof pathname === "string" &&
+    pathname.startsWith("/boats-for-sale/") &&
+    pathname.split("/").filter(Boolean).length >= 4
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <main className="mx-auto w-full max-w-7xl px-4 pb-24 pt-4 sm:px-6 lg:px-8">
+      <main
+        className={cn(
+          "mx-auto w-full pb-24 pt-4",
+          isBoatDetailPage ? "max-w-none px-0" : "max-w-7xl px-4 sm:px-6 lg:px-8"
+        )}
+      >
         {children}
       </main>
       <SiteFooter />
@@ -32,7 +45,7 @@ export function AppShell({ children }: AppShellProps) {
 const navigation = [
   { name: "Boat for sale", href: "/boats-for-sale" },
   { name: "Research & Advice", href: "/research-advice" },
-  { name: "Broker/Dealer?", href: "/broker-dealer" },
+  { name: "Membership", href: "/broker-dealer" },
   { name: "Propel", href: "/propel" },
 ]
 

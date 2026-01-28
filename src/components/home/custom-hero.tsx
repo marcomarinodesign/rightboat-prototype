@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import { Button } from "@/components/ui/button"
 import { HeroSearch } from "@/components/search/hero-search"
 
@@ -30,8 +32,14 @@ export function CustomHero() {
 
       {/* Image placeholder */}
       <div className="relative w-full overflow-hidden rounded-lg border border-border bg-muted">
-        <div className="aspect-video flex w-full items-center justify-center">
-          <span className="text-sm text-muted-foreground">Image placeholder</span>
+        <div className="relative aspect-video w-full">
+          <Image
+            alt="Hero section visual"
+            src="https://ui.shadcn.com/placeholder.svg"
+            fill
+            className="h-full w-full object-cover"
+            unoptimized
+          />
         </div>
       </div>
     </section>

@@ -22,7 +22,12 @@ import {
   SheetClose,
 } from "@/components/ui/sheet"
 import { SearchableSelect } from "@/components/filters/searchable-select"
-import { popularBrands } from "@/data/categories"
+import {
+  popularBrands,
+  popularLocations,
+  popularTypes,
+} from "@/data/categories"
+import { popularModels } from "@/data/models"
 import type { FiltersState } from "@/components/filters/types"
 
 type MoreFiltersSheetProps = {
@@ -36,6 +41,21 @@ type MoreFiltersSheetProps = {
 const manufacturerOptions = popularBrands.map((brand) => ({
   label: brand,
   value: brand,
+}))
+
+const countryOptions = popularLocations.map((location) => ({
+  label: location,
+  value: location,
+}))
+
+const boatTypeOptions = popularTypes.map((type) => ({
+  label: type,
+  value: type,
+}))
+
+const modelOptions = popularModels.map((m) => ({
+  label: `${m.brand} ${m.name}`,
+  value: m.slug,
 }))
 
 const hullMaterials = ["Fiberglass", "Aluminum", "Steel", "Wood", "Composite"]
@@ -104,6 +124,66 @@ export function MoreFiltersSheet({
 
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Country
+            </p>
+            <SearchableSelect
+              value={filters.location}
+              onValueChange={(value) => updateField("location", value)}
+              options={countryOptions}
+              placeholder="Select country"
+              searchPlaceholder="Search countries"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Boat type
+            </p>
+            <Select
+              value={filters.boatType || undefined}
+              onValueChange={(value) => updateField("boatType", value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select type" />
+              </SelectTrigger>
+              <SelectContent>
+                {boatTypeOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Price
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              <Input
+                type="number"
+                inputMode="numeric"
+                placeholder="Min"
+                value={filters.priceMin}
+                onChange={(event) =>
+                  updateField("priceMin", event.target.value)
+                }
+              />
+              <Input
+                type="number"
+                inputMode="numeric"
+                placeholder="Max"
+                value={filters.priceMax}
+                onChange={(event) =>
+                  updateField("priceMax", event.target.value)
+                }
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Length (m)
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -152,15 +232,24 @@ export function MoreFiltersSheet({
 
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Manufacturer
+              Manufacturer & model
             </p>
-            <SearchableSelect
-              value={filters.manufacturer}
-              onValueChange={(value) => updateField("manufacturer", value)}
-              options={manufacturerOptions}
-              placeholder="Select manufacturer"
-              searchPlaceholder="Search brands"
-            />
+            <div className="space-y-3">
+              <SearchableSelect
+                value={filters.manufacturer}
+                onValueChange={(value) => updateField("manufacturer", value)}
+                options={manufacturerOptions}
+                placeholder="Select manufacturer"
+                searchPlaceholder="Search brands"
+              />
+              <SearchableSelect
+                value={filters.model}
+                onValueChange={(value) => updateField("model", value)}
+                options={modelOptions}
+                placeholder="Select model"
+                searchPlaceholder="Search models"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">

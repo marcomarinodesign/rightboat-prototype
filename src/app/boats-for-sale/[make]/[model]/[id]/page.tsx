@@ -3,8 +3,20 @@ import Link from "next/link"
 
 import { BoatCard } from "@/components/boats/boat-card"
 import { BoatMeta } from "@/components/boats/boat-meta"
-import { Button } from "@/components/ui/button"
+import { BdpDetails, getBdpDetailsForBoat, getDefaultBdpDetails } from "@/components/boats/bdp/bdp-details"
+import { BdpContactSeller } from "@/components/boats/bdp/bdp-contact-seller"
+import { BdpPriceHistory } from "@/components/boats/bdp/bdp-price-history"
+import { BdpAiExplorer } from "@/components/boats/bdp/bdp-ai-explorer"
+import { BdpRightPanel } from "@/components/boats/bdp/bdp-right-panel"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselDots,
+} from "@/components/ui/carousel"
 import {
   detailGallery,
   featuredBoats,
@@ -26,7 +38,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
     allBoats.find((item) => item.id === params.id) ?? allBoats[0]
 
   return (
-    <div className="space-y-10">
+    <div className="mx-auto w-full max-w-7xl space-y-10 px-4 pb-6 pt-4 sm:px-6 lg:px-8">
       <div className="space-y-2 text-sm text-muted-foreground">
         <div>
           <Link href="/">Home</Link> /{" "}
@@ -35,8 +47,29 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
         </div>
       </div>
 
-      <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+      <section className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
         <div className="space-y-6">
+          <Carousel className="w-full">
+            <CarouselContent>
+              {[boat.image, ...detailGallery].map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-muted">
+                    <Image
+                      src="https://ui.shadcn.com/placeholder.svg"
+                      alt="Gallery placeholder"
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+            <CarouselDots />
+          </Carousel>
+
           <div className="space-y-3">
             <p className="text-sm uppercase tracking-wide text-muted-foreground">
               {boat.condition} • {boat.length}
@@ -45,19 +78,6 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
               {boat.year} {boat.make} {boat.model}
             </h1>
             <p className="text-lg text-muted-foreground">{boat.location}</p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            {detailGallery.map((image) => (
-              <Image
-                key={image}
-                src={image}
-                alt={`${boat.make} ${boat.model}`}
-                width={640}
-                height={420}
-                className="h-64 w-full rounded-2xl object-cover"
-              />
-            ))}
           </div>
 
           <Card>
@@ -73,27 +93,58 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
               <BoatMeta label="Listing ID" value={boat.id} />
             </CardContent>
           </Card>
+
+          <BdpDetails
+            sections={
+              boat.id === "rb656595"
+                ? getBdpDetailsForBoat({
+                    boatType: boat.boatType,
+                    make: boat.make,
+                    model: boat.model,
+                    loa: boat.loa,
+                    beam: boat.beam,
+                  })
+                : getDefaultBdpDetails()
+            }
+          />
+
+          <BdpPriceHistory
+            summary="Boat published on Sept. 2024, $150,000 price drop from the publication."
+            items={[
+              { label: "Original price", value: "$1,800,000" },
+              { label: "October 2024", value: "$1,780,000" },
+              { label: "November 2024", value: "$1,750,000" },
+              { label: "Current price", value: "$1,650,000", emphasis: true },
+            ]}
+            chartSrc="/propel/program-offers.png"
+          />
+
+          <BdpAiExplorer
+            boatTitle={`${boat.year} ${boat.make} ${boat.model}`}
+          />
+
+          <div className="space-y-3">
+            <BdpRightPanel title="Features" />
+            <BdpRightPanel title="Propulsion" />
+            <BdpRightPanel
+              title="Specifications"
+            />
+            <BdpRightPanel
+              title="Description"
+              summary={`${boat.year} ${boat.make} ${boat.model}`}
+            />
+          </div>
         </div>
 
         <aside className="space-y-6">
-          <Card>
-            <CardHeader className="space-y-2">
-              <p className="text-sm uppercase tracking-wide text-muted-foreground">
-                Price
-              </p>
-              <h2 className="text-3xl font-bold">{boat.price}</h2>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <p className="text-sm text-muted-foreground">Offered by</p>
-                <p className="font-medium">{boat.broker}</p>
-              </div>
-              <Button className="w-full">Contact seller</Button>
-              <Button variant="outline" className="w-full">
-                Request details
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="lg:sticky lg:top-6">
+            <BdpContactSeller
+              price={boat.price}
+              boatName={`${boat.year} ${boat.make} ${boat.model}`}
+              sellerName={boat.broker}
+              sellerLocation={boat.location}
+            />
+          </div>
 
           <Card>
             <CardHeader className="text-lg font-bold">Video tour</CardHeader>

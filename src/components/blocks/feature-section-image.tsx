@@ -35,12 +35,13 @@ export function FeatureSectionImage({
       sizes="(max-width: 768px) 100vw, 50vw"
     />
   ) : (
-    <div
-      className="flex h-full w-full items-center justify-center bg-muted text-sm text-muted-foreground"
-      aria-hidden
-    >
-      Image placeholder
-    </div>
+    <Image
+      src="https://ui.shadcn.com/placeholder.svg"
+      alt="Section visual placeholder"
+      fill
+      className="object-cover"
+      unoptimized
+    />
   )
 
   const content = (
@@ -66,7 +67,7 @@ export function FeatureSectionImage({
   )
 
   const imageSection = (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border/60 bg-muted">
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-border/60 bg-muted">
       {imageContent}
     </div>
   )

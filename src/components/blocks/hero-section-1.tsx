@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { ReactNode } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,10 +12,10 @@ import { cn } from "@/lib/utils"
  */
 export interface HeroSection1Props {
   badge?: string
-  heading: string
+  heading: string | ReactNode
   description: string
-  primaryButton?: { text: string; href: string }
-  secondaryButton?: { text: string; href: string }
+  primaryButton?: { text: string; href?: string; onClick?: () => void }
+  secondaryButton?: { text: string; href?: string; onClick?: () => void }
   image?: { src: string; alt: string }
   /** Section ID for aria-labelledby */
   headingId?: string
@@ -51,18 +52,34 @@ export function HeroSection1({
         <p className="text-lg text-muted-foreground">{description}</p>
         <div className="flex flex-wrap gap-4">
           {primaryButton && (
-            <Button asChild size="lg">
-              <Link href={primaryButton.href}>{primaryButton.text}</Link>
-            </Button>
+            primaryButton.onClick ? (
+              <Button size="lg" onClick={primaryButton.onClick}>
+                {primaryButton.text}
+              </Button>
+            ) : (
+              primaryButton.href && (
+                <Button asChild size="lg">
+                  <Link href={primaryButton.href}>{primaryButton.text}</Link>
+                </Button>
+              )
+            )
           )}
           {secondaryButton && (
-            <Button asChild variant="outline" size="lg">
-              <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
-            </Button>
+            secondaryButton.onClick ? (
+              <Button variant="outline" size="lg" onClick={secondaryButton.onClick}>
+                {secondaryButton.text}
+              </Button>
+            ) : (
+              secondaryButton.href && (
+                <Button asChild variant="outline" size="lg">
+                  <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
+                </Button>
+              )
+            )
           )}
         </div>
       </div>
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border/60 bg-muted md:aspect-square lg:aspect-[4/3]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-border/60 bg-muted md:aspect-square lg:aspect-[4/3]">
         {image ? (
           <Image
             src={image.src}
@@ -73,12 +90,14 @@ export function HeroSection1({
             priority
           />
         ) : (
-          <div
-            className="flex h-full w-full items-center justify-center text-sm text-muted-foreground"
-            aria-hidden
-          >
-            Image placeholder
-          </div>
+          <Image
+            src="https://ui.shadcn.com/placeholder.svg"
+            alt="Hero section visual"
+            fill
+            className="object-cover"
+            unoptimized
+            priority
+          />
         )}
       </div>
     </section>

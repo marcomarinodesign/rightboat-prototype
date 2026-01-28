@@ -12,6 +12,7 @@ export type FiltersState = {
   yearMin: string
   yearMax: string
   manufacturer: string
+  model: string
   hullMaterial: string
   fuelType: string
 }
@@ -30,6 +31,7 @@ export const defaultFilters: FiltersState = {
   yearMin: "",
   yearMax: "",
   manufacturer: "",
+  model: "",
   hullMaterial: "",
   fuelType: "",
 }

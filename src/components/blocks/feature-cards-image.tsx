@@ -51,12 +51,13 @@ export function FeatureCardsImage({
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               ) : (
-                <div
-                  className="flex h-full w-full items-center justify-center text-sm text-muted-foreground"
-                  aria-hidden
-                >
-                  Image placeholder
-                </div>
+                <Image
+                  src="https://ui.shadcn.com/placeholder.svg"
+                  alt="Card image placeholder"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
               )}
             </div>
             <CardHeader>

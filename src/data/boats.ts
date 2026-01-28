@@ -12,6 +12,11 @@ export type Boat = {
   image: string
   broker: string
   featured?: boolean
+  galleryImages?: string[]
+  description?: string
+  boatType?: string
+  beam?: string
+  loa?: string
 }
 
 export const featuredBoats: Boat[] = [
@@ -175,6 +180,32 @@ export const latestBoats: Boat[] = [
 ]
 
 export const listingBoats: Boat[] = [
+  {
+    id: "rb656595",
+    make: "Formula",
+    model: "500 SuperSport Crossover",
+    makeSlug: "formula",
+    modelSlug: "500-supersport-crossover",
+    year: 2026,
+    condition: "New",
+    length: "50.0 ft",
+    price: "Request price",
+    location: "United States of America",
+    broker: "Formula Boats",
+    image:
+      "https://www.formulaboats.com/wp-content/uploads/2023/01/500SSC.tmp25016_06154.jpg",
+    galleryImages: [
+      "https://www.formulaboats.com/wp-content/uploads/2023/01/500SSC.tmp25016_06154.jpg",
+      "https://www.formulaboats.com/wp-content/uploads/2023/01/500SSC.tmp25016_06542.jpg",
+      "https://www.formulaboats.com/wp-content/uploads/2025/07/500SSCfueldock.tmp25016_14958.jpg",
+      "https://www.formulaboats.com/wp-content/uploads/2023/01/500SSC.tmp25016_06346.jpg",
+    ],
+    boatType: "Power",
+    beam: "14.6 ft",
+    loa: "50.0 ft",
+    description:
+      "The 50-foot Formula 500 Super Sport Crossover (SSC) is an exemplary performance boat in the large Formula Super Sport/All Sport Crossover fleet. It combines all the best features for enthusiastic boaters looking for versatile, clever, beautiful and practical designs. A fifty-foot answer to your private escape with family and friends, combining a commanding offshore ride with unprecedented amenities and luxury.",
+  },
   {
     id: "rb590959",
     make: "Scout",

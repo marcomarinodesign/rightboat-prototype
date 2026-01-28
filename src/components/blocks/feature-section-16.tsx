@@ -47,15 +47,17 @@ export function FeatureSection16({
       alt={activeImage.alt}
       width={1200}
       height={600}
-      className="max-h-[560px] w-full rounded-lg object-cover"
+      className="max-h-[560px] w-full rounded-[12px] object-cover"
     />
   ) : (
-    <div
-      className="flex h-full w-full items-center justify-center bg-muted text-sm text-muted-foreground rounded-lg"
-      aria-hidden
-    >
-      Image placeholder
-    </div>
+    <Image
+      src="https://ui.shadcn.com/placeholder.svg"
+      alt="Section visual placeholder"
+      width={1200}
+      height={600}
+      className="max-h-[560px] w-full rounded-[12px] object-cover"
+      unoptimized
+    />
   )
 
   return (
@@ -94,7 +96,7 @@ export function FeatureSection16({
       {/* Active feature content */}
       <div className="flex flex-col items-stretch gap-6 lg:flex-row">
         {/* Left column: card with icon, title, description, and button */}
-        <div className="bg-muted/80 dark:bg-card/80 flex flex-1 flex-col gap-4 rounded-lg p-6 lg:max-w-lg lg:justify-between lg:gap-8 lg:p-8 border border-border/50">
+        <div className="bg-muted/80 dark:bg-card/80 flex flex-1 flex-col gap-3 rounded-[12px] p-6 lg:max-w-lg lg:justify-between lg:gap-6 lg:p-6 border border-border/50">
           <div className="flex flex-col items-start gap-6">
             {/* Icon container */}
             {activeFeature.icon}

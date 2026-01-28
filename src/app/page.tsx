@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 import { ArticleCard } from "@/components/blog/article-card"
 import { BoatCard } from "@/components/boats/boat-card"
@@ -26,6 +27,18 @@ export default function Home() {
           </p>
         </div>
         <HeroSearch />
+
+        {/* Placeholder block (fixed 400px height across breakpoints) */}
+        <div className="relative w-full overflow-hidden rounded-xl bg-muted h-[400px]">
+          <Image
+            alt="Homepage placeholder"
+            src="https://ui.shadcn.com/placeholder.svg"
+            fill
+            className="h-full w-full object-cover"
+            unoptimized
+            priority
+          />
+        </div>
       </section>
 
       <section className="space-y-6" aria-labelledby="featured-heading">

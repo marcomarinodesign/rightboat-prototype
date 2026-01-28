@@ -17,10 +17,14 @@ export function PremiumBrands() {
           Trusted brands from leading manufacturers worldwide
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-        {premiumBrands.map((brand) => (
-          <BrandLogoLink key={brand.id} brand={brand} />
-        ))}
+
+      {/* Logos carousel (logos7-style marquee) */}
+      <div className="logo-marquee bg-card py-8">
+        <div className="logo-marquee-track gap-14 px-8">
+          {[...premiumBrands, ...premiumBrands].map((brand, index) => (
+            <BrandLogoLink key={`${brand.id}-${index}`} brand={brand} />
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -32,14 +36,14 @@ function BrandLogoLink({ brand }: { brand: (typeof premiumBrands)[0] }) {
   return (
     <Link
       href={`/boats-for-sale?brand=${brand.slug}`}
-      className="group flex items-center justify-center rounded-lg border border-border/60 bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md"
+      className="group flex h-24 w-40 items-center justify-center transition-opacity hover:opacity-70"
     >
       {imageError ? (
         <span className="text-sm font-semibold text-muted-foreground transition-colors group-hover:text-foreground">
           {brand.name}
         </span>
       ) : (
-        <div className="relative h-12 w-full">
+        <div className="relative h-24 w-40">
           <Image
             src={brand.logo}
             alt={brand.name}

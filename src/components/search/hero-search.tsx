@@ -12,8 +12,8 @@ import {
 
 export function HeroSearch() {
   return (
-    <div className="rounded-2xl border border-border/60 bg-card/80 p-6 shadow-sm backdrop-blur">
-      <div className="grid gap-4 md:grid-cols-4">
+    <div className="rounded-[12px] border border-border/60 bg-card/80 p-6 shadow-sm backdrop-blur">
+      <div className="grid gap-3 md:grid-cols-4">
         <Input placeholder="Search by make or model" />
         <Select>
           <SelectTrigger>

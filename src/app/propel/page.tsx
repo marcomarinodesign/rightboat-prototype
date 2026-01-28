@@ -46,10 +46,12 @@ export default function PropelPage() {
         >
           Used by leading marine brands
         </p>
-        <div className="grid grid-cols-2 place-items-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {propelBrands.map((brand) => (
-            <BrandLogo key={brand.id} brand={brand} />
-          ))}
+        <div className="logo-marquee bg-card py-8">
+          <div className="logo-marquee-track gap-14 px-8">
+            {[...propelBrands, ...propelBrands].map((brand, index) => (
+              <BrandLogo key={`${brand.id}-${index}`} brand={brand} />
+            ))}
+          </div>
         </div>
       </section>
 

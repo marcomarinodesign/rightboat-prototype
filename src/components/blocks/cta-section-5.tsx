@@ -32,12 +32,12 @@ export function CtaSection5({
   return (
     <section
       className={cn(
-        "grid gap-8 rounded-lg bg-primary px-4 py-16 text-primary-foreground md:grid-cols-2 md:items-center sm:px-6 lg:px-8",
+        "grid gap-6 overflow-hidden rounded-[12px] bg-primary px-3 py-12 text-primary-foreground md:grid-cols-2 md:items-center sm:px-6 lg:px-6",
         className
       )}
       aria-labelledby={headingId}
     >
-      <div className="flex flex-col gap-6">
+      <div className="relative flex flex-col gap-6">
         <h2
           id={headingId}
           className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
@@ -87,23 +87,23 @@ export function CtaSection5({
           </div>
         )}
       </div>
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-primary-foreground/20 bg-primary/50 md:aspect-square lg:aspect-[4/3]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-primary-foreground/20 bg-primary/50 md:aspect-square lg:aspect-[4/3]">
         {image ? (
           <Image
             src={image.src}
             alt={image.alt}
             fill
-            className="object-cover rounded-lg"
+            className="object-cover rounded-[12px]"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         ) : (
-          <div
-            className="flex h-full w-full items-center justify-center rounded-lg text-sm text-primary-foreground/60"
-            style={{ backgroundColor: "rgba(219, 219, 219, 1)" }}
-            aria-hidden
-          >
-            CTA section image
-          </div>
+          <Image
+            src="https://ui.shadcn.com/placeholder.svg"
+            alt="CTA section visual"
+            fill
+            className="object-cover rounded-[12px]"
+            unoptimized
+          />
         )}
       </div>
     </section>

@@ -39,7 +39,7 @@ export function TestimonialsCarousel({
         {displayedTestimonials.map((testimonial, index) => (
           <Card
             key={index}
-            className="bg-white shadow-md border-border/60 rounded-lg"
+            className="bg-white shadow-md border-border/60 rounded-[12px]"
           >
             <CardHeader className="space-y-4">
               {/* 5 blue stars */}
