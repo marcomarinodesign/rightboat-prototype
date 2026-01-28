@@ -3,9 +3,8 @@
 import { useRef, useState, useEffect } from "react"
 
 import Image from "next/image"
-import { ImageIcon, Play, ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 type BdpGalleryProps = {
@@ -19,11 +18,9 @@ export function BdpGallery({
   images,
   alt,
   photosCount = 34,
-  videosCount = 2,
 }: BdpGalleryProps) {
   const safeImages = images.length ? images : Array(8).fill("")
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
@@ -84,25 +81,7 @@ export function BdpGallery({
     setCanScrollLeft(scrollLeft > 0)
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
 
-    // Calculate current index based on scroll position
-    const cardWidth = container.querySelector("div")?.offsetWidth || 0
-    const gap = 16
-    const newIndex = Math.round(scrollLeft / (cardWidth + gap))
-    setCurrentIndex(newIndex)
-  }
-
-  const goToSlide = (index: number) => {
-    if (!scrollContainerRef.current) return
-
-    const container = scrollContainerRef.current
-    const cardWidth = container.querySelector("div")?.offsetWidth || 0
-    const gap = 16
-    const scrollAmount = index * (cardWidth + gap)
-
-    container.scrollTo({
-      left: scrollAmount,
-      behavior: "smooth",
-    })
+    // (index tracking removed - not used)
   }
 
   function openAt(index: number) {

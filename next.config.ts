@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    // Avoid Next mis-detecting workspace root when multiple lockfiles exist.
+    root: process.cwd(),
+  },
   images: {
     remotePatterns: [
       {

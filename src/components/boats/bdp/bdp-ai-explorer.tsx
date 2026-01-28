@@ -1,6 +1,6 @@
  "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -33,18 +33,24 @@ export function BdpAiExplorer({ boatTitle }: BdpAiExplorerProps) {
   const [input, setInput] = useState("")
   const [messages, setMessages] = useState<Message[]>([])
   const [isThinking, setIsThinking] = useState(false)
+  const nextIdRef = useRef(0)
 
   const hasMessages = messages.length > 0
 
+  function nextId(prefix: MessageAuthor) {
+    nextIdRef.current += 1
+    return `${prefix}-${nextIdRef.current}`
+  }
+
   function addSimulatedAnswer(question: string) {
     const userMessage: Message = {
-      id: `user-${Date.now()}`,
+      id: nextId("user"),
       author: "user",
       content: question,
     }
 
     const assistantMessage: Message = {
-      id: `assistant-${Date.now()}`,
+      id: nextId("assistant"),
       author: "assistant",
       content:
         "This is a simulated answer. In the next version, this section will use AI to search the web and expert sources to give you detailed, up-to-date information about this boat.",

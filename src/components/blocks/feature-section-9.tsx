@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import { IconContainer } from "@/components/ui/icon-container"
 
 export interface FeatureSection9Props {
   title: string

@@ -6,7 +6,6 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { boatCategories } from "@/data/categories-extended"
-import { Button } from "@/components/ui/button"
 
 export function HomeCategories() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)

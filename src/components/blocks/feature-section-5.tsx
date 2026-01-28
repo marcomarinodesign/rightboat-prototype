@@ -1,7 +1,6 @@
 import Image from "next/image"
 
 import { cn } from "@/lib/utils"
-import { IconContainer } from "@/components/ui/icon-container"
 
 export interface FeatureSection5Props {
   title: string

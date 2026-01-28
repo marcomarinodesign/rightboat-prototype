@@ -29,7 +29,25 @@ export function BdpPriceHistory({
 
         <div className="grid gap-3 lg:grid-cols-[1fr_360px] lg:items-stretch">
           <div className="relative overflow-hidden rounded-[12px] bg-muted px-3 py-3">
-            <div className="relative h-[150px] w-full rounded-[12px] bg-background/50" />
+            <div className="relative h-[150px] w-full overflow-hidden rounded-[12px] bg-background/50">
+              {chartSrc ? (
+                <Image
+                  src={chartSrc}
+                  alt="Price history chart"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <Image
+                  src="https://ui.shadcn.com/placeholder.svg"
+                  alt="Price history chart placeholder"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              )}
+            </div>
           </div>
 
           <div className="rounded-[12px] border border-border/60 bg-background p-3">
