@@ -1,4 +1,4 @@
- "use client"
+"use client"
 
 import { useRef, useState, useEffect } from "react"
 
@@ -80,8 +80,6 @@ export function BdpGallery({
 
     setCanScrollLeft(scrollLeft > 0)
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-
-    // (index tracking removed - not used)
   }
 
   function openAt(index: number) {

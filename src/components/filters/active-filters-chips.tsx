@@ -26,12 +26,12 @@ export function ActiveFiltersChips({
     <div className="flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-border/60 bg-muted/20 px-3 py-3">
       <div className="flex flex-wrap items-center gap-2">
         {activeFilters.map((filter) => (
-          <Badge key={filter.key} className="gap-2 pr-1 bg-white text-[#0357fc] border border-[#0357fc] hover:bg-[#0357fc]/5">
+          <Badge key={filter.key} className="gap-2 pr-1 bg-white text-primary border border-primary hover:bg-primary/5">
             <span>{filter.label}</span>
             <button
               type="button"
               onClick={filter.onRemove}
-              className="rounded-full p-1 text-[#0357fc]/80 transition hover:bg-[#0357fc]/10 hover:text-[#0357fc]"
+              className="rounded-full p-1 text-primary/80 transition hover:bg-primary/10 hover:text-primary"
               aria-label={`Remove ${filter.label}`}
             >
               <X className="h-3 w-3" />

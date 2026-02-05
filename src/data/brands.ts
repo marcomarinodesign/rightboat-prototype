@@ -92,12 +92,9 @@ export const premiumBrands: PremiumBrand[] = [
   },
 ]
 
+const PROPEL_SLUGS = ["sea-ray", "beneteau", "fairline", "sunseeker", "aquila", "jeanneau"] as const
+
 /** Brands shown on Propel landing (design order: Sea Ray, Beneteau, Fairline, Sunseeker, Aquila, Jeanneau) */
-export const propelBrands = [
-  premiumBrands.find((b) => b.slug === "sea-ray"),
-  premiumBrands.find((b) => b.slug === "beneteau"),
-  premiumBrands.find((b) => b.slug === "fairline"),
-  premiumBrands.find((b) => b.slug === "sunseeker"),
-  premiumBrands.find((b) => b.slug === "aquila"),
-  premiumBrands.find((b) => b.slug === "jeanneau"),
-].filter(Boolean) as PremiumBrand[]
+export const propelBrands: PremiumBrand[] = PROPEL_SLUGS.map(
+  (slug) => premiumBrands.find((b) => b.slug === slug)
+).filter((b): b is PremiumBrand => b != null)

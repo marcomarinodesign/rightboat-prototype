@@ -14,9 +14,9 @@ export function HeroSearch() {
   return (
     <div className="rounded-[12px] border border-border/60 bg-card/80 p-6 shadow-sm backdrop-blur">
       <div className="grid gap-3 md:grid-cols-4">
-        <Input placeholder="Search by make or model" />
+        <Input placeholder="Search by make or model" aria-label="Search by make or model" />
         <Select>
-          <SelectTrigger>
+          <SelectTrigger aria-label="Boat type">
             <SelectValue placeholder="Boat type" />
           </SelectTrigger>
           <SelectContent>
@@ -27,7 +27,7 @@ export function HeroSearch() {
           </SelectContent>
         </Select>
         <Select>
-          <SelectTrigger>
+          <SelectTrigger aria-label="Location">
             <SelectValue placeholder="Location" />
           </SelectTrigger>
           <SelectContent>
@@ -38,7 +38,7 @@ export function HeroSearch() {
           </SelectContent>
         </Select>
         <Select>
-          <SelectTrigger>
+          <SelectTrigger aria-label="Price range">
             <SelectValue placeholder="Price range" />
           </SelectTrigger>
           <SelectContent>

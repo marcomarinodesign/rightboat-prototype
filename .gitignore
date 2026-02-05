@@ -1,7 +1,11 @@
 node_modules
-
-# Next.js build output
 .next
 
-# OS / editor noise
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS / editor
 .DS_Store
+*.log

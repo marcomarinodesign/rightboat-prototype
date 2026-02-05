@@ -87,6 +87,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.tiarayachts.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.formulaboats.com",
+      },
     ],
     unoptimized: true,
   },

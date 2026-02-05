@@ -22,9 +22,6 @@ export function BrokerContactDialog({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log({ email, name, company, consent })
-    // Close dialog after submission
     onOpenChange(false)
   }
 
