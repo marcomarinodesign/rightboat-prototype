@@ -24,7 +24,7 @@ export function BdpRightPanel({ title, summary, children }: BdpRightPanelProps) 
     <Sheet open={open} onOpenChange={setOpen}>
       <div
         onClick={() => setOpen(true)}
-        className="flex w-full items-center justify-between rounded-[12px] bg-background px-3 py-3 text-left shadow-sm ring-1 ring-border/60 transition hover:bg-muted/50"
+        className="flex w-full items-center justify-between rounded-lg bg-background px-3 py-3 text-left shadow-sm ring-1 ring-border/60 transition hover:bg-muted/50"
       >
         <div className="space-y-1">
           <p className="text-sm font-semibold text-foreground">{title}</p>

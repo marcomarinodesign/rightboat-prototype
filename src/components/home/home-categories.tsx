@@ -83,7 +83,6 @@ export function HomeCategories() {
           ref={scrollContainerRef}
           onScroll={handleScroll}
           className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {boatCategories.map((category) => (
             <Link

@@ -1,9 +1,10 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { popularModels } from "@/data/models"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { ImageSlider } from "@/components/ui/image-slider"
 import { Button } from "@/components/ui/button"
+import { InteractiveCard } from "@/components/patterns/interactive-card"
 
 export function PopularModels() {
   return (
@@ -20,17 +21,12 @@ export function PopularModels() {
         {popularModels.map((model) => {
           const href = `/boats-for-sale/${model.brandSlug}/${model.slug}`
           return (
-            <Card
-              key={model.id}
-              className="group overflow-hidden border-border/60 transition-all hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <Link href={href} className="relative block overflow-hidden">
-                <Image
-                  src={model.image}
+            <InteractiveCard key={model.id} className="group overflow-hidden" lift>
+              <Link href={href} className="relative block overflow-hidden rounded-t-lg">
+                <ImageSlider
+                  images={[model.image]}
                   alt={`${model.brand} ${model.name}`}
-                  width={640}
-                  height={420}
-                  className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  showDots={false}
                 />
               </Link>
               <CardHeader className="space-y-2">
@@ -70,7 +66,7 @@ export function PopularModels() {
                   <Link href={href}>View model</Link>
                 </Button>
               </CardFooter>
-            </Card>
+            </InteractiveCard>
           )
         })}
       </div>

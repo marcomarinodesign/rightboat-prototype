@@ -81,7 +81,7 @@ export function BdpAiExplorer({ boatTitle }: BdpAiExplorerProps) {
   }
 
   return (
-    <Card className="rounded-[12px] border-border/80 bg-background/80">
+    <Card className="rounded-lg border-border/80 bg-background/80">
       <CardHeader className="pb-2">
         <CardTitle className="text-xl sm:text-2xl">
           Ask or choose any question <span className="text-muted-foreground">{boatTitle}</span>
@@ -93,7 +93,7 @@ export function BdpAiExplorer({ boatTitle }: BdpAiExplorerProps) {
       </CardHeader>
       <CardContent className="space-y-5">
         {hasMessages ? (
-          <div className="space-y-3 rounded-[12px] border border-border/60 bg-muted/40 p-3 text-sm">
+          <div className="space-y-3 rounded-lg border border-border/60 bg-muted/40 p-3 text-sm">
             {messages.map((message) => (
               <div key={message.id} className="space-y-1">
                 <p className="text-xs font-semibold text-muted-foreground">
@@ -110,7 +110,7 @@ export function BdpAiExplorer({ boatTitle }: BdpAiExplorerProps) {
 
         <form
           onSubmit={handleSubmit}
-          className="flex items-center gap-3 rounded-[12px] border border-border/60 bg-background px-3 py-3"
+          className="flex items-center gap-3 rounded-lg border border-border/60 bg-background px-3 py-3"
         >
           <Input
             value={input}

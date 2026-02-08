@@ -30,7 +30,7 @@ export default function BrokerDealerPage() {
         heading={
           <>
             Calling All{" "}
-            <span style={{ color: "#0257fc" }}>Yacht Brokers and Dealers</span>
+            <span className="text-primary">Yacht Brokers and Dealers</span>
           </>
         }
         description="Ask Us How to Switch and Save"
@@ -90,7 +90,7 @@ export default function BrokerDealerPage() {
       {/* Benefits Section */}
       <section className="space-y-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-border/60 bg-muted">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border/60 bg-muted">
             <Image
               alt="Section visual placeholder"
               src="https://ui.shadcn.com/placeholder.svg"

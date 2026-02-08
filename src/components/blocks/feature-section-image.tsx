@@ -67,7 +67,7 @@ export function FeatureSectionImage({
   )
 
   const imageSection = (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-border/60 bg-muted">
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border/60 bg-muted">
       {imageContent}
     </div>
   )

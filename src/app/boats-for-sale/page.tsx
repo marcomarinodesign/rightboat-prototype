@@ -1,7 +1,6 @@
 import Link from "next/link"
 
-import { BoatCard } from "@/components/boats/boat-card"
-import { BoatsForSaleFilters } from "@/components/filters/boats-for-sale-filters"
+import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"
 import { listingBoats } from "@/data/boats"
 import {
   popularBrands,
@@ -10,52 +9,18 @@ import {
 } from "@/data/categories"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 export default function BoatsForSalePage() {
   return (
     <div className="space-y-10">
-      <div>
+      <div className="mb-2.5">
         <div className="text-sm text-muted-foreground">
           <Link href="/">Home</Link> / Boats for sale
         </div>
         <h1 className="mb-6 text-3xl font-bold">Boats for sale</h1>
       </div>
 
-      <div className="space-y-6">
-        <BoatsForSaleFilters />
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-border/60 bg-card px-5 py-4">
-          <div>
-            <p className="text-sm text-muted-foreground">Results</p>
-            <p className="text-lg font-semibold">
-              {listingBoats.length} boats near you
-            </p>
-          </div>
-          <Select>
-            <SelectTrigger className="w-44">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="featured">Featured</SelectItem>
-              <SelectItem value="price-low">Price (low to high)</SelectItem>
-              <SelectItem value="price-high">Price (high to low)</SelectItem>
-              <SelectItem value="newest">Newest listings</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-          {listingBoats.map((boat) => (
-            <BoatCard key={boat.id} boat={boat} />
-          ))}
-        </div>
-      </div>
+      <BoatsForSaleListing boats={listingBoats} />
 
       <section className="grid gap-6 rounded-2xl border border-border/60 bg-muted/20 p-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-3">

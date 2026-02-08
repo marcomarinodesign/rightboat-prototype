@@ -97,7 +97,7 @@ export function BdpGallery({
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-stretch">
         {/* Left: main image (360°) */}
         <div
-          className="relative overflow-hidden rounded-[12px] bg-muted lg:h-[360px] cursor-pointer"
+          className="relative overflow-hidden rounded-lg bg-muted lg:h-[360px] cursor-pointer"
           onClick={() => displayImages[0] && openAt(0)}
         >
           {displayImages[0] ? (
@@ -127,7 +127,6 @@ export function BdpGallery({
             ref={scrollContainerRef}
             onScroll={handleScroll}
             className="flex h-full gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {displayImages.map((image, index) => {
               if (index === 0) {
@@ -138,7 +137,7 @@ export function BdpGallery({
                 <div
                   key={index}
                   className={cn(
-                    "relative min-w-[200px] flex-shrink-0 overflow-hidden rounded-[12px] bg-muted",
+                    "relative min-w-[200px] flex-shrink-0 overflow-hidden rounded-lg bg-muted",
                     "h-[260px] lg:h-full cursor-pointer"
                   )}
                   onClick={() => image && openAt(index)}
@@ -192,7 +191,7 @@ export function BdpGallery({
             >
               ←
             </button>
-            <div className="relative flex-1 overflow-hidden rounded-[12px] bg-muted">
+            <div className="relative flex-1 overflow-hidden rounded-lg bg-muted">
               {displayImages[activeIndex] ? (
                 <Image
                   src={displayImages[activeIndex]}
@@ -213,7 +212,7 @@ export function BdpGallery({
               </div>
 
               {/* Counter bottom-right */}
-              <div className="absolute bottom-3 right-3 rounded-[12px] bg-black/70 px-3 py-1 text-xs font-medium text-white">
+              <div className="absolute bottom-3 right-3 rounded-lg bg-black/70 px-3 py-1 text-xs font-medium text-white">
                 {activeIndex + 1} / {totalPhotos || images.length || 0}
               </div>
             </div>

@@ -29,7 +29,7 @@ export default function PropelPage() {
         heading={
           <>
             Visibility and reach for{" "}
-            <span style={{ color: "#0257fc" }}>marine professionals</span>
+            <span className="text-primary">marine professionals</span>
           </>
         }
         description="Propel is the B2B solution for expanding your reach to a global audience through smart insights, exclusive ad placements and more in one place."

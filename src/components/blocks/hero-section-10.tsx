@@ -86,7 +86,7 @@ export function HeroSection10({
           )}
         </div>
       )}
-      <div className="relative mt-6 w-full max-w-4xl overflow-hidden rounded-[12px] border border-border/60 bg-muted">
+      <div className="relative mt-6 w-full max-w-4xl overflow-hidden rounded-lg border border-border/60 bg-muted">
         <div className="relative aspect-video w-full">
           {video ? (
             <video

@@ -97,7 +97,7 @@ export function HeroSection9({
           )}
 
           {image && (
-            <div className="relative mt-12 w-full max-w-5xl overflow-hidden rounded-[12px] border border-border/60 bg-muted shadow-2xl">
+            <div className="relative mt-12 w-full max-w-5xl overflow-hidden rounded-lg border border-border/60 bg-muted shadow-2xl">
               <div className="relative aspect-video w-full">
                 <Image
                   src={image.src}

@@ -18,7 +18,7 @@ export function BdpContactSeller({
   sellerLocation,
 }: BdpContactSellerProps) {
   return (
-    <Card className="rounded-[12px]">
+    <Card className="rounded-lg">
       <CardHeader className="pb-2">
         <h2 className="text-2xl font-bold leading-7 text-foreground">
           Contact Manufacturer
@@ -56,16 +56,16 @@ export function BdpContactSeller({
           <label className="block">
             <span className="sr-only">Message</span>
             <textarea
-              className="min-h-24 w-full resize-y rounded-[12px] border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="min-h-24 w-full resize-y rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               placeholder={`I'm interested in getting more information about your ${boatName}`}
             />
           </label>
 
           <div className="space-y-2 pt-1">
-            <Button className="w-full rounded-[12px]">Contact Manufacturer</Button>
+            <Button className="w-full rounded-lg">Contact Manufacturer</Button>
             <Button
               variant="outline"
-              className="w-full rounded-[12px] border-primary text-primary"
+              className="w-full rounded-lg border-primary text-primary"
             >
               <Phone className="h-4 w-4" />
               View Phone
@@ -74,8 +74,8 @@ export function BdpContactSeller({
         </form>
 
         <div className="border-t border-border/60 pt-4">
-          <div className="flex items-center gap-3 rounded-[12px] bg-[#F4F9FF] p-3">
-            <div className="h-[60px] w-[90px] shrink-0 rounded-[12px] bg-muted" />
+          <div className="flex items-center gap-3 rounded-lg bg-tag-bg p-3">
+            <div className="h-[60px] w-[90px] shrink-0 rounded-lg bg-muted" />
             <div className="min-w-0">
               <p className="text-[11px] leading-4 text-muted-foreground">
                 OFFERED BY

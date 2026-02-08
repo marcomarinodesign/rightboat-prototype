@@ -28,7 +28,7 @@ type BdpDetailsProps = {
 
 export function BdpDetails({ sections }: BdpDetailsProps) {
   return (
-    <Card className="rounded-[12px]">
+    <Card className="rounded-lg">
       <CardHeader className="pb-2">
         <h2 className="text-lg font-bold leading-6">Highlights</h2>
       </CardHeader>

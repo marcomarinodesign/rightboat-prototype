@@ -40,7 +40,7 @@ export function StatsSection4({
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="relative aspect-square overflow-hidden rounded-[12px] bg-primary p-6 text-center text-primary-foreground shadow-sm flex flex-col items-center justify-center"
+            className="relative aspect-square overflow-hidden rounded-lg bg-primary p-6 text-center text-primary-foreground shadow-sm flex flex-col items-center justify-center"
           >
             <div className="relative text-4xl font-bold">{stat.value}</div>
             <div className="relative mt-2 text-sm text-primary-foreground/80">

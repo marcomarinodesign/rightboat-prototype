@@ -1,6 +1,7 @@
 import Image from "next/image"
 
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { ImageSlider } from "@/components/ui/image-slider"
 import { cn } from "@/lib/utils"
 
 export interface FeatureCardImage {
@@ -41,16 +42,14 @@ export function FeatureCardsImage({
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
           <Card key={index} className="border-border/60 overflow-hidden">
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-              {feature.image ? (
-                <Image
-                  src={feature.image.src}
-                  alt={feature.image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              ) : (
+            {feature.image ? (
+              <ImageSlider
+                images={[feature.image.src]}
+                alt={feature.image.alt}
+                showDots={false}
+              />
+            ) : (
+              <div className="relative aspect-[3/2] w-full overflow-hidden bg-muted">
                 <Image
                   src="https://ui.shadcn.com/placeholder.svg"
                   alt="Card image placeholder"
@@ -58,8 +57,8 @@ export function FeatureCardsImage({
                   className="object-cover"
                   unoptimized
                 />
-              )}
-            </div>
+              </div>
+            )}
             <CardHeader>
               <CardTitle className="text-lg">{feature.title}</CardTitle>
               <CardDescription>{feature.description}</CardDescription>

@@ -1,11 +1,11 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { Heart, Info } from "lucide-react"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
+import { ImageSlider } from "@/components/ui/image-slider"
 
 type BoatCardProps = {
   boat: Boat
@@ -14,20 +14,17 @@ type BoatCardProps = {
 
 export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
   const href = `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
+  const images = boat.galleryImages?.length
+    ? boat.galleryImages
+    : [boat.image]
 
   const imageSection = (
-    <div className="relative h-[250px] w-full overflow-hidden rounded-lg">
-      {/* Main image */}
-      <div className="absolute inset-x-0 top-0 h-[180px]">
-        <Image
-          src={boat.image}
-          alt={`${boat.make} ${boat.model}`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
-      </div>
-      {/* Heart / favourite */}
+    <div className="relative w-full overflow-hidden rounded-lg">
+      <ImageSlider
+        images={images}
+        alt={`${boat.make} ${boat.model}`}
+        showDots={images.length > 1}
+      />
       <button
         type="button"
         className="absolute right-2 top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90"
@@ -39,27 +36,6 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
       >
         <Heart className="h-5 w-5" strokeWidth={2} />
       </button>
-      {/* Thumbnails row */}
-      <div className="absolute inset-x-0 bottom-0 flex gap-1">
-        <div className="relative h-[66px] flex-1 overflow-hidden rounded-bl-lg">
-          <Image
-            src={boat.image}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="50vw"
-          />
-        </div>
-        <div className="relative h-[66px] flex-1 overflow-hidden rounded-br-lg">
-          <Image
-            src={boat.image}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="50vw"
-          />
-        </div>
-      </div>
     </div>
   )
 
@@ -69,10 +45,10 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     <div className="flex flex-col gap-2 p-2">
       {/* Year + Condition tags */}
       <div className="flex flex-wrap gap-2">
-        <span className="rounded-md bg-[#F4F9FF] px-2 py-1 text-[11px] leading-4 text-foreground">
+        <span className="rounded-md bg-tag-bg px-2 py-1 text-xs leading-4 text-foreground">
           {boat.year}
         </span>
-        <span className="rounded-md bg-[#F4F9FF] px-2 py-1 text-[11px] leading-4 text-foreground">
+        <span className="rounded-md bg-tag-bg px-2 py-1 text-xs leading-4 text-foreground">
           {boat.condition}
         </span>
       </div>
@@ -94,15 +70,15 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
         </span>
       )}
       {/* Location | Broker */}
-      <div className="flex items-center gap-1 text-[11px] leading-4 text-muted-foreground">
+      <div className="flex items-center gap-1 text-xs leading-4 text-muted-foreground">
         <span>{boat.location}</span>
         <span className="h-3.5 w-px shrink-0 bg-muted-foreground/60" aria-hidden />
         <span>{boat.broker}</span>
       </div>
       {/* Seller logo + Price row */}
       <div className="flex items-center justify-between gap-2 pt-1">
-        <div className="flex h-9 w-[63px] shrink-0 items-center justify-center overflow-hidden rounded-md border border-[#CACCD0] bg-card">
-          <span className="truncate px-1 text-[10px] font-medium text-muted-foreground">
+        <div className="flex h-9 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-card">
+          <span className="truncate px-1 text-xs font-medium text-muted-foreground">
             {boat.broker}
           </span>
         </div>
@@ -130,7 +106,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     return (
       <article
         className={cn(
-          "overflow-hidden rounded-2xl border border-[#E4E5E9] bg-card p-2",
+          "overflow-hidden rounded-2xl border border-border-card bg-card p-2",
           "transition-all hover:shadow-lg",
           "md:flex"
         )}
@@ -149,7 +125,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     <Link
       href={href}
       className={cn(
-        "flex w-full flex-col overflow-hidden rounded-2xl border border-[#E4E5E9] bg-card p-2",
+        "flex w-full flex-col overflow-hidden rounded-2xl border border-border-card bg-card p-2",
         "transition-all hover:shadow-lg"
       )}
     >

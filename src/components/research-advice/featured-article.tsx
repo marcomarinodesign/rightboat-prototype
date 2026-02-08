@@ -1,10 +1,11 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { Article } from "@/data/articles"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ImageSlider } from "@/components/ui/image-slider"
+import { InteractiveCard } from "@/components/patterns/interactive-card"
 
 type FeaturedArticleProps = {
   article: Article
@@ -12,15 +13,14 @@ type FeaturedArticleProps = {
 
 export function FeaturedArticle({ article }: FeaturedArticleProps) {
   return (
-    <Card className="group overflow-hidden border-border/60 transition-all hover:shadow-lg">
+    <InteractiveCard className="group overflow-hidden" lift={false}>
       <div className="grid gap-0 lg:grid-cols-2">
-        <Link href={article.href} className="relative block overflow-hidden">
-          <Image
-            src={article.image}
+        <Link href={article.href} className="relative block overflow-hidden rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none">
+          <ImageSlider
+            images={[article.image]}
             alt={article.title}
-            width={800}
-            height={600}
-            className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 lg:h-full lg:min-h-[400px]"
+            showDots={false}
+            className="lg:min-h-[25rem]"
           />
         </Link>
         <div className="flex flex-col">
@@ -60,6 +60,6 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
           </CardContent>
         </div>
       </div>
-    </Card>
+    </InteractiveCard>
   )
 }

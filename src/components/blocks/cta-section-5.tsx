@@ -32,7 +32,7 @@ export function CtaSection5({
   return (
     <section
       className={cn(
-        "grid gap-6 overflow-hidden rounded-[12px] bg-primary px-3 py-12 text-primary-foreground md:grid-cols-2 md:items-center sm:px-6 lg:px-6",
+        "grid gap-6 overflow-hidden rounded-lg bg-primary px-3 py-12 text-primary-foreground md:grid-cols-2 md:items-center sm:px-6 lg:px-6",
         className
       )}
       aria-labelledby={headingId}
@@ -87,13 +87,13 @@ export function CtaSection5({
           </div>
         )}
       </div>
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] border border-primary-foreground/20 bg-primary/50 md:aspect-square lg:aspect-[4/3]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-primary-foreground/20 bg-primary/50 md:aspect-square lg:aspect-[4/3]">
         {image ? (
           <Image
             src={image.src}
             alt={image.alt}
             fill
-            className="object-cover rounded-[12px]"
+            className="object-cover rounded-lg"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         ) : (
@@ -101,7 +101,7 @@ export function CtaSection5({
             src="https://ui.shadcn.com/placeholder.svg"
             alt="CTA section visual"
             fill
-            className="object-cover rounded-[12px]"
+            className="object-cover rounded-lg"
             unoptimized
           />
         )}

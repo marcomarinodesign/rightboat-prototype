@@ -20,7 +20,7 @@ export function BdpPriceHistory({
   chartSrc,
 }: BdpPriceHistoryProps) {
   return (
-    <Card className="rounded-[12px]">
+    <Card className="rounded-lg">
       <CardHeader className="pb-2">
         <h2 className="text-lg font-bold leading-6">Price History</h2>
       </CardHeader>
@@ -28,8 +28,8 @@ export function BdpPriceHistory({
         <p className="text-sm text-muted-foreground">{summary}</p>
 
         <div className="grid gap-3 lg:grid-cols-[1fr_360px] lg:items-stretch">
-          <div className="relative overflow-hidden rounded-[12px] bg-muted px-3 py-3">
-            <div className="relative h-[150px] w-full overflow-hidden rounded-[12px] bg-background/50">
+          <div className="relative overflow-hidden rounded-lg bg-muted px-3 py-3">
+            <div className="relative h-[150px] w-full overflow-hidden rounded-lg bg-background/50">
               {chartSrc ? (
                 <Image
                   src={chartSrc}
@@ -50,7 +50,7 @@ export function BdpPriceHistory({
             </div>
           </div>
 
-          <div className="rounded-[12px] border border-border/60 bg-background p-3">
+          <div className="rounded-lg border border-border/60 bg-background p-3">
             <div className="space-y-3 text-sm">
               {items.map((item, idx) => (
                 <div key={item.label}>

@@ -1,9 +1,10 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { Article } from "@/data/articles"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { ImageSlider } from "@/components/ui/image-slider"
+import { InteractiveCard } from "@/components/patterns/interactive-card"
 
 type ArticleCardProps = {
   article: Article
@@ -11,14 +12,12 @@ type ArticleCardProps = {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Card className="group overflow-hidden border-border/60 transition-all hover:-translate-y-0.5 hover:shadow-lg">
-      <Link href={article.href} className="relative block overflow-hidden">
-        <Image
-          src={article.image}
+    <InteractiveCard className="group overflow-hidden" lift>
+      <Link href={article.href} className="relative block overflow-hidden rounded-t-lg">
+        <ImageSlider
+          images={[article.image]}
           alt={article.title}
-          width={640}
-          height={420}
-          className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          showDots={false}
         />
       </Link>
       <CardHeader className="space-y-2">
@@ -42,6 +41,6 @@ export function ArticleCard({ article }: ArticleCardProps) {
       <CardContent>
         <p className="text-sm text-muted-foreground">{article.excerpt}</p>
       </CardContent>
-    </Card>
+    </InteractiveCard>
   )
 }

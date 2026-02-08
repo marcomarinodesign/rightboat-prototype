@@ -35,7 +35,7 @@ export function WhyRightboat() {
           return (
             <div
               key={benefit.id}
-              className="space-y-3 rounded-[12px] border border-border/60 bg-card p-6"
+              className="space-y-3 rounded-lg border border-border/60 bg-card p-6"
             >
               <IconContainer className="size-12 mb-0">
                 <Icon aria-hidden="true" />

@@ -64,7 +64,7 @@ export function PropelExpertDialog({
             </p>
 
             <div className="pt-4 text-center">
-              <Button className="h-12 w-full rounded-[12px] bg-[#0257fc] hover:bg-[#0257fc]/90 sm:w-[220px]">
+              <Button className="h-12 w-full rounded-lg sm:w-[220px]">
                 Talk to a Propel expert
               </Button>
             </div>

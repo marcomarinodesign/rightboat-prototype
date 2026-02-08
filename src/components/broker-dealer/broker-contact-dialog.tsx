@@ -98,7 +98,7 @@ export function BrokerContactDialog({
             <div className="pt-4 text-center">
               <Button
                 type="submit"
-                className="h-12 w-full rounded-[12px] sm:w-[220px]"
+                className="h-12 w-full rounded-lg sm:w-[220px]"
               >
                 Submit
               </Button>

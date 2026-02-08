@@ -8,6 +8,12 @@ export type Article = {
   category?: string
   author?: string
   readingTime?: string
+  /** Used for blog routes: /blog/[slug] */
+  slug?: string
+  /** When article is summary-only, link to full article externally */
+  externalUrl?: string
+  authorUrl?: string
+  authorBio?: string
 }
 
 export const latestArticles: Article[] = [
