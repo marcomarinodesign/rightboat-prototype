@@ -218,8 +218,7 @@
     display: none;
   }
 
-  section.bg-primary,
-  div.bg-primary {
+  section.bg-primary {
     background-image: radial-gradient(
       circle at 1px 1px,
       var(--pattern-color, rgba(255, 255, 255, 0.45)) 1px,

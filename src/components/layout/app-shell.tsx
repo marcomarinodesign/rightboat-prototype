@@ -21,10 +21,15 @@ type AppShellProps = {
 
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
+  const isDesignSystem = pathname === "/design-system"
   const isBoatDetailPage =
     typeof pathname === "string" &&
     pathname.startsWith("/boats-for-sale/") &&
     pathname.split("/").filter(Boolean).length >= 4
+
+  if (isDesignSystem) {
+    return <>{children}</>
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -204,7 +209,13 @@ function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
-        © 2026 Rightboat. All rights reserved.
+        <div className="flex items-center justify-center gap-3">
+          <span>© 2026 Rightboat. All rights reserved.</span>
+          <span className="h-3 w-px bg-white/20" aria-hidden />
+          <Link href="/design-system" className="transition-colors hover:text-white/90">
+            Design System
+          </Link>
+        </div>
       </div>
     </footer>
   )
