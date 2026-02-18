@@ -91,6 +91,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.formulaboats.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
     unoptimized: true,
   },

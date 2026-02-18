@@ -12,6 +12,7 @@ import {
   Mail,
   Search,
   Settings,
+  ShieldCheck,
   Star,
   User,
   Zap,
@@ -110,11 +111,13 @@ function Section({
   id,
   title,
   description,
+  a11y,
   children,
 }: {
   id: string
   title: string
   description?: string
+  a11y?: string[]
   children: React.ReactNode
 }) {
   return (
@@ -126,6 +129,19 @@ function Section({
         <h2 className="text-2xl font-bold">{title}</h2>
         {description && (
           <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
+        )}
+        {a11y && a11y.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {a11y.map((note) => (
+              <span
+                key={note}
+                className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-200"
+              >
+                <ShieldCheck className="h-3 w-3" />
+                {note}
+              </span>
+            ))}
+          </div>
         )}
       </div>
       <div className="space-y-8">{children}</div>
@@ -248,7 +264,7 @@ export default function DesignSystemPage() {
           </div>
           <div>
             <p className="text-sm font-semibold leading-tight">Design System</p>
-            <p className="text-[10px] text-white/40">Rightboat · v1.0</p>
+            <p className="text-[10px] text-white/40">Rightboat · v1.1</p>
           </div>
         </div>
 
@@ -297,7 +313,11 @@ export default function DesignSystemPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <h1 className="text-lg font-bold">Rightboat Design System</h1>
-              <Badge variant="secondary">v1.0</Badge>
+              <Badge variant="secondary">v1.1</Badge>
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-200">
+                <ShieldCheck className="h-3 w-3" />
+                Accessibility refactor applied
+              </span>
             </div>
             <p className="text-xs text-muted-foreground">
               All components are live and interactive
@@ -476,6 +496,10 @@ export default function DesignSystemPage() {
             id="button"
             title="Button"
             description="Interactive action trigger. Supports variants, sizes, and icons."
+            a11y={[
+              "WCAG 2.5.5 — 44px touch target (h-11 default · h-11 icon)",
+              "sm h-10 · default h-11 · lg h-11 · icon h-11",
+            ]}
           >
             <Group label="Variants">
               <div className="flex flex-wrap items-center gap-3">
@@ -488,7 +512,7 @@ export default function DesignSystemPage() {
               </div>
             </Group>
 
-            <Group label="Sizes">
+            <Group label="Sizes — h-10 sm · h-11 default · h-11 lg · h-11 icon">
               <div className="flex flex-wrap items-end gap-3">
                 <Button size="sm">Small</Button>
                 <Button>Default</Button>
@@ -526,6 +550,7 @@ export default function DesignSystemPage() {
             id="badge"
             title="Badge"
             description="Small status indicators and categorical labels."
+            a11y={["Increased vertical padding — py-1.5 for readability"]}
           >
             <Group label="Variants">
               <div className="flex flex-wrap items-center gap-3">
@@ -559,6 +584,10 @@ export default function DesignSystemPage() {
             id="input"
             title="Input"
             description="Text input field for forms and search."
+            a11y={[
+              "WCAG 2.5.5 — h-11 (44px touch target)",
+              "iOS zoom fix — text-base md:text-sm (≥ 16px on mobile)",
+            ]}
           >
             <Group label="Types">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -620,6 +649,10 @@ export default function DesignSystemPage() {
             id="checkbox"
             title="Checkbox"
             description="Boolean selection control. Click to toggle."
+            a11y={[
+              "WCAG 2.5.5 — 44px invisible touch area via after: pseudo-element",
+              "Visual size h-5 w-5 (20px)",
+            ]}
           >
             <Group label="States">
               <div className="flex flex-wrap items-center gap-8 text-sm">
@@ -653,6 +686,11 @@ export default function DesignSystemPage() {
             id="select"
             title="Select"
             description="Dropdown selection for categorical and enumerated options."
+            a11y={[
+              "WCAG 2.5.5 — h-11 trigger (44px touch target)",
+              "iOS zoom fix — text-base md:text-sm (≥ 16px on mobile)",
+              "SelectItem py-2.5 for dropdown touch targets",
+            ]}
           >
             <Group label="Examples">
               <div className="grid gap-4 sm:grid-cols-3">
@@ -715,6 +753,10 @@ export default function DesignSystemPage() {
             id="progress"
             title="Progress"
             description="Visual indicator of completion or loading state."
+            a11y={[
+              "WCAG 2.3.3 — transition-transform only (no layout shift)",
+              "motion-reduce:transition-none respects prefers-reduced-motion",
+            ]}
           >
             <Group label="Values">
               <div className="space-y-4">
@@ -757,6 +799,7 @@ export default function DesignSystemPage() {
             id="icon-container"
             title="Icon Container"
             description="Consistent wrapper for icons with muted background and primary tint."
+            a11y={["transition-colors for smooth interactive state changes"]}
           >
             <Group label="Icons">
               <div className="flex flex-wrap items-start gap-6">
@@ -823,6 +866,10 @@ export default function DesignSystemPage() {
             id="dialog"
             title="Dialog"
             description="Modal dialog for focused interactions and confirmations."
+            a11y={[
+              "WCAG 2.5.5 — 44px close button (h-11 w-11)",
+              "WCAG 2.3.3 — motion-reduce:animate-none on overlay & content",
+            ]}
           >
             <Group label="Interactive">
               <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
@@ -851,6 +898,10 @@ export default function DesignSystemPage() {
             id="sheet"
             title="Sheet"
             description="Side drawer for filters, navigation, and secondary content. Supports all four sides."
+            a11y={[
+              "WCAG 2.5.5 — 44px close button (h-11 w-11)",
+              "WCAG 2.3.3 — motion-reduce:animate-none on overlay & content",
+            ]}
           >
             <Group label="Interactive — all sides">
               <div className="flex flex-wrap gap-3">
@@ -904,6 +955,10 @@ export default function DesignSystemPage() {
             id="card"
             title="Card"
             description="Container component with CardHeader, CardTitle, CardDescription, CardContent, and CardFooter."
+            a11y={[
+              "WCAG 1.4.12 — CardTitle leading-tight (line height ≥ 1.5)",
+              "transition-shadow for hover elevation feedback",
+            ]}
           >
             <Group label="Full card">
               <div className="grid gap-6 sm:grid-cols-2">

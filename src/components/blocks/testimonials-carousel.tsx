@@ -12,12 +12,15 @@ export interface Testimonial {
 
 export interface TestimonialsCarouselProps {
   testimonials: Testimonial[]
+  /** Optional section heading. Default: "What professionals say" */
+  title?: string
   headingId?: string
   className?: string
 }
 
 export function TestimonialsCarousel({
   testimonials,
+  title = "What professionals say",
   headingId,
   className,
 }: TestimonialsCarouselProps) {
@@ -33,7 +36,7 @@ export function TestimonialsCarousel({
         id={headingId}
         className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
       >
-        What professionals say
+        {title}
       </h2>
       <div className="grid gap-6 md:grid-cols-3">
         {displayedTestimonials.map((testimonial, index) => (
