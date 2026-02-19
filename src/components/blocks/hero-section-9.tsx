@@ -1,9 +1,9 @@
-import Image from "next/image"
 import Link from "next/link"
 import { ReactNode } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { RBImage } from "@/components/ui/RBImage"
 import { cn } from "@/lib/utils"
 
 /**
@@ -98,16 +98,12 @@ export function HeroSection9({
 
           {image && (
             <div className="relative mt-12 w-full max-w-5xl overflow-hidden rounded-lg border border-border/60 bg-muted shadow-2xl">
-              <div className="relative aspect-video w-full">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                  priority
-                />
-              </div>
+              <RBImage
+                src={image.src}
+                alt={image.alt}
+                variant="hero"
+                priority
+              />
             </div>
           )}
         </div>

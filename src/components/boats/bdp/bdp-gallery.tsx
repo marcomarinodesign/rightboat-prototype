@@ -6,6 +6,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { RBImage } from "@/components/ui/RBImage"
 
 type BdpGalleryProps = {
   images: string[]
@@ -143,12 +144,11 @@ export function BdpGallery({
                   onClick={() => image && openAt(index)}
                 >
                   {image ? (
-                    <Image
+                    <RBImage
                       src={image}
                       alt=""
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 240px, 240px"
+                      variant="thumbnail"
+                      className="h-full"
                     />
                   ) : (
                     <div className="h-full w-full bg-muted" />

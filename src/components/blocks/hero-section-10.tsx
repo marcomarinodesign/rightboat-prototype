@@ -4,6 +4,7 @@ import { ReactNode } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { RBImage } from "@/components/ui/RBImage"
 import { cn } from "@/lib/utils"
 
 /**
@@ -87,8 +88,8 @@ export function HeroSection10({
         </div>
       )}
       <div className="relative mt-6 w-full max-w-4xl overflow-hidden rounded-lg border border-border/60 bg-muted">
-        <div className="relative aspect-video w-full">
-          {video ? (
+        {video ? (
+          <div className="relative aspect-video w-full">
             <video
               className="h-full w-full object-cover"
               autoPlay
@@ -101,26 +102,25 @@ export function HeroSection10({
             >
               <source src={video.src} />
             </video>
-          ) : image ? (
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-              priority
-            />
-          ) : (
-            <Image
-              src="https://ui.shadcn.com/placeholder.svg"
-              alt="Hero section visual"
-              fill
-              className="object-cover"
-              unoptimized
-              priority
-            />
-          )}
-        </div>
+          </div>
+        ) : image ? (
+          <RBImage
+            src={image.src}
+            alt={image.alt}
+            variant="hero"
+            priority
+          />
+        ) : (
+          <Image
+            src="https://ui.shadcn.com/placeholder.svg"
+            alt="Hero section visual"
+            width={1600}
+            height={900}
+            className="w-full h-auto object-cover"
+            unoptimized
+            priority
+          />
+        )}
       </div>
     </section>
   )
