@@ -1105,83 +1105,136 @@ export default function DesignSystemPage() {
           </Section>
           <Section
             id="images"
-            title="Image System — RBImage"
-            description="Centralized image component built on next/image. Standardizes intrinsic dimensions, responsive sizes, and loading strategy per context."
+            title="Image System"
+            description="Standardized image dimensions across all use cases. Breakpoints: sm (mobile-first), md (tablet), xl (desktop). Source: image spec v1 — Feb 2026."
           >
-            {/* ── Variant reference table ── */}
-            <Group label="Variant reference">
+            {/* ── Full spec table ── */}
+            <Group label="Full image spec">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border/60 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                      <th className="pb-3 pr-6">Variant</th>
-                      <th className="pb-3 pr-6">Aspect</th>
-                      <th className="pb-3 pr-6">Intrinsic</th>
-                      <th className="pb-3 pr-6">sizes</th>
-                      <th className="pb-3">Loading</th>
+                      <th className="pb-3 pr-4 w-5">·</th>
+                      <th className="pb-3 pr-6">Use Case</th>
+                      <th className="pb-3 pr-5">Ratio</th>
+                      <th className="pb-3 pr-5">sm</th>
+                      <th className="pb-3 pr-5">md</th>
+                      <th className="pb-3 pr-5">xl</th>
+                      <th className="pb-3">Controller</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border/40">
+                  <tbody>
                     {[
                       {
-                        variant: "hero",
-                        aspect: "16:9",
-                        intrinsic: "1600 × 900",
-                        sizes: "100vw",
-                        loading: "priority",
-                        loadingColor: "bg-primary/10 text-primary",
+                        group: "articles",
+                        color: "bg-violet-500",
+                        rows: [
+                          { useCase: "Article Author Photo", ratio: "1:1",  aspect: "aspect-square",  sm: "48×48",    md: "72×72",    xl: "96×96",     route: "articles#show" },
+                          { useCase: "Article Card",         ratio: "2:1",  aspect: "aspect-[2/1]",   sm: "432×216",  md: "640×320",  xl: "960×480",   route: "articles#index" },
+                          { useCase: "Article Hero",         ratio: "4:1",  aspect: "aspect-[4/1]",   sm: "640×160",  md: "960×240",  xl: "1280×320",  route: "articles#show" },
+                        ],
                       },
                       {
-                        variant: "card",
-                        aspect: "4:3",
-                        intrinsic: "800 × 600",
-                        sizes: "(max-width: 768px) 100vw, 50vw",
-                        loading: "lazy",
-                        loadingColor: "bg-muted text-muted-foreground",
+                        group: "boats",
+                        color: "bg-blue-500",
+                        rows: [
+                          { useCase: "Similar Boats Card",  ratio: "1:1",  aspect: "aspect-square",  sm: "150×150",  md: "200×200",  xl: "250×250",   route: "boats#show" },
+                          { useCase: "Broker Logo",         ratio: "2:1",  aspect: "aspect-[2/1]",   sm: "200×100",  md: "300×150",  xl: "400×200",   route: "boats#show" },
+                          { useCase: "Boat Gallery Main",   ratio: "2:1",  aspect: "aspect-[2/1]",   sm: "640×320",  md: "960×480",  xl: "raw",        route: "boats#show" },
+                          { useCase: "Manufacturer Logo",   ratio: "3:2",  aspect: "aspect-[3/2]",   sm: "150×100",  md: "225×150",  xl: "300×200",   route: "boats#show" },
+                        ],
                       },
                       {
-                        variant: "thumbnail",
-                        aspect: "4:3",
-                        intrinsic: "400 × 300",
-                        sizes: "(max-width: 768px) 50vw, 200px",
-                        loading: "lazy",
-                        loadingColor: "bg-muted text-muted-foreground",
+                        group: "home",
+                        color: "bg-emerald-500",
+                        rows: [
+                          { useCase: "Popular Category Card", ratio: "3:4", aspect: "aspect-[3/4]",  sm: "225×300",  md: "270×360",  xl: "313×417",   route: "home#index" },
+                          { useCase: "Home Hero Carousel",  ratio: "3:1",  aspect: "aspect-[3/1]",   sm: "640×213",  md: "960×320",  xl: "1920×640",  route: "home#index" },
+                          { useCase: "Boat Card",           ratio: "4:3",  aspect: "aspect-[4/3]",   sm: "400×300",  md: "533×400",  xl: "667×500",   route: "home#index" },
+                          { useCase: "Popular model card",  ratio: "4:3",  aspect: "aspect-[4/3]",   sm: "267×200",  md: "333×250",  xl: "400×300",   route: "home#index" },
+                        ],
                       },
-                    ].map((row) => (
-                      <tr key={row.variant}>
-                        <td className="py-3 pr-6">
-                          <code className="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs text-foreground">
-                            {row.variant}
-                          </code>
-                        </td>
-                        <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
-                          {row.aspect}
-                        </td>
-                        <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
-                          {row.intrinsic}
-                        </td>
-                        <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
-                          {row.sizes}
-                        </td>
-                        <td className="py-3">
-                          <span
-                            className={cn(
-                              "inline-flex items-center rounded-full px-2 py-0.5 font-mono text-[10px] font-medium",
-                              row.loadingColor
-                            )}
-                          >
-                            {row.loading}
-                          </span>
-                        </td>
-                      </tr>
+                      {
+                        group: "categories",
+                        color: "bg-amber-500",
+                        rows: [
+                          { useCase: "Category Hero",       ratio: "6:1",  aspect: "aspect-[6/1]",   sm: "768×128",  md: "1020×170", xl: "1680×280",  route: "categories#show" },
+                        ],
+                      },
+                      {
+                        group: "manufacturer",
+                        color: "bg-rose-500",
+                        rows: [
+                          { useCase: "Manufacturer hero",   ratio: "6:1",  aspect: "aspect-[6/1]",   sm: "640×107",  md: "960×160",  xl: "1920×320",  route: "manufacturer#show" },
+                        ],
+                      },
+                      {
+                        group: "feeds",
+                        color: "bg-neutral-400",
+                        rows: [
+                          { useCase: "Google Merchant Feed", ratio: "1:1", aspect: "aspect-square",  sm: "300×300",  md: "—",        xl: "—",          route: "feeds/*" },
+                        ],
+                      },
+                    ].map(({ group, color, rows }) => (
+                      <React.Fragment key={group}>
+                        <tr>
+                          <td colSpan={7} className="pt-5 pb-1.5">
+                            <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white", color)}>
+                              {group}
+                            </span>
+                          </td>
+                        </tr>
+                        {rows.map((row) => (
+                          <tr key={row.useCase} className="border-b border-border/30 last:border-0">
+                            <td className="py-2.5 pr-4">
+                              <div className={cn("w-5 rounded-[3px] bg-primary/15", row.aspect)} />
+                            </td>
+                            <td className="py-2.5 pr-6 text-sm font-medium text-foreground">{row.useCase}</td>
+                            <td className="py-2.5 pr-5 font-mono text-xs text-muted-foreground">{row.ratio}</td>
+                            <td className="py-2.5 pr-5 font-mono text-xs text-muted-foreground">{row.sm}</td>
+                            <td className="py-2.5 pr-5 font-mono text-xs text-muted-foreground">{row.md}</td>
+                            <td className="py-2.5 pr-5 font-mono text-xs text-muted-foreground">{row.xl}</td>
+                            <td className="py-2.5">
+                              <code className="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                                {row.route}
+                              </code>
+                            </td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
                     ))}
                   </tbody>
                 </table>
               </div>
             </Group>
 
-            {/* ── Props ── */}
-            <Group label="Props">
+            {/* ── Aspect ratio visualizer ── */}
+            <Group label="Aspect ratio reference">
+              <div className="flex flex-wrap items-end gap-6">
+                {[
+                  { ratio: "1:1",  aspect: "aspect-square",  label: "Square",    usedBy: "Author photo, Similar boats, Merchant" },
+                  { ratio: "4:3",  aspect: "aspect-[4/3]",   label: "Standard",  usedBy: "Boat card, Popular model card" },
+                  { ratio: "3:2",  aspect: "aspect-[3/2]",   label: "Classic",   usedBy: "Manufacturer logo" },
+                  { ratio: "2:1",  aspect: "aspect-[2/1]",   label: "Wide",      usedBy: "Article card, Broker logo, Gallery main" },
+                  { ratio: "3:1",  aspect: "aspect-[3/1]",   label: "Panoramic", usedBy: "Home hero carousel" },
+                  { ratio: "4:1",  aspect: "aspect-[4/1]",   label: "Cinematic", usedBy: "Article hero" },
+                  { ratio: "6:1",  aspect: "aspect-[6/1]",   label: "Banner",    usedBy: "Category hero, Manufacturer hero" },
+                  { ratio: "3:4",  aspect: "aspect-[3/4]",   label: "Portrait",  usedBy: "Popular category card" },
+                ].map(({ ratio, aspect, label, usedBy }) => (
+                  <div key={ratio} className="flex flex-col items-center gap-2">
+                    <div className={cn("w-20 rounded-md bg-primary/15 border border-primary/20", aspect)} />
+                    <div className="text-center">
+                      <p className="font-mono text-xs font-semibold text-foreground">{ratio}</p>
+                      <p className="text-[10px] text-muted-foreground">{label}</p>
+                      <p className="mt-0.5 max-w-[80px] text-[9px] leading-tight text-muted-foreground/70">{usedBy}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Group>
+
+            {/* ── RBImage component ── */}
+            <Group label="RBImage component — props">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
@@ -1193,16 +1246,16 @@ export default function DesignSystemPage() {
                   </thead>
                   <tbody className="divide-y divide-border/40 font-mono text-xs">
                     {[
-                      { prop: "src", type: "string", notes: "Required. Remote URL or local path." },
-                      { prop: "alt", type: "string", notes: "Required. Descriptive alt text." },
-                      { prop: "variant", type: '"hero" | "card" | "thumbnail"', notes: "Required. Drives dimensions, sizes and loading." },
-                      { prop: "priority", type: "boolean", notes: 'Optional. Default false. Pass true for above-the-fold images.' },
-                      { prop: "className", type: "string", notes: "Optional. Merged via twMerge — h-full overrides default h-auto." },
+                      { prop: "src",      type: "string",                              notes: "Required. Remote URL or local path." },
+                      { prop: "alt",      type: "string",                              notes: "Required. Descriptive alt text." },
+                      { prop: "variant",  type: '"hero" | "card" | "thumbnail"',       notes: "Required. Drives dimensions, sizes and loading." },
+                      { prop: "priority", type: "boolean",                             notes: "Default false. Pass true for above-the-fold images." },
+                      { prop: "className",type: "string",                              notes: "Optional. Merged via twMerge — h-full overrides default h-auto." },
                     ].map((row) => (
                       <tr key={row.prop}>
-                        <td className="py-3 pr-6 text-foreground">{row.prop}</td>
-                        <td className="py-3 pr-6 text-muted-foreground">{row.type}</td>
-                        <td className="py-3 text-muted-foreground">{row.notes}</td>
+                        <td className="py-2.5 pr-6 text-foreground">{row.prop}</td>
+                        <td className="py-2.5 pr-6 text-muted-foreground">{row.type}</td>
+                        <td className="py-2.5 text-muted-foreground">{row.notes}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1210,8 +1263,8 @@ export default function DesignSystemPage() {
               </div>
             </Group>
 
-            {/* ── Live: hero ── */}
-            <Group label='variant="hero" — priority · 1600×900 · 16:9'>
+            {/* ── Live examples ── */}
+            <Group label="Live — hero (priority · 1600×900)">
               <div className="overflow-hidden rounded-lg">
                 <RBImage
                   src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1600&q=80"
@@ -1225,9 +1278,8 @@ export default function DesignSystemPage() {
               </p>
             </Group>
 
-            {/* ── Live: card ── */}
-            <Group label='variant="card" — lazy · 800×600 · 4:3'>
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <Group label="Live — card (lazy · 800×600)">
+              <div className="grid grid-cols-3 gap-4">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="overflow-hidden rounded-lg">
                     <RBImage
@@ -1243,29 +1295,8 @@ export default function DesignSystemPage() {
               </p>
             </Group>
 
-            {/* ── Live: thumbnail ── */}
-            <Group label='variant="thumbnail" — lazy · 400×300 · 4:3'>
-              <div className="flex flex-wrap gap-3">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div
-                    key={i}
-                    className="w-[120px] overflow-hidden rounded-md"
-                  >
-                    <RBImage
-                      src={`https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=400&q=70&sig=${i}`}
-                      alt={`Thumbnail demo ${i}`}
-                      variant="thumbnail"
-                    />
-                  </div>
-                ))}
-              </div>
-              <p className="mt-3 font-mono text-[11px] text-muted-foreground">
-                {`<RBImage src="..." alt="..." variant="thumbnail" />`}
-              </p>
-            </Group>
-
             {/* ── Config ── */}
-            <Group label="next.config.ts — image optimization">
+            <Group label="next.config.ts — optimization">
               <div className="rounded-lg bg-neutral-950 p-4">
                 <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-neutral-300">
 {`images: {
@@ -1276,7 +1307,9 @@ export default function DesignSystemPage() {
                 </pre>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                AVIF/WebP auto-negotiated by Vercel CDN. <code className="rounded bg-neutral-100 px-1 font-mono">unoptimized: true</code> removed — all images now go through Next.js optimization pipeline.
+                AVIF/WebP auto-negotiated by Vercel CDN.{" "}
+                <code className="rounded bg-neutral-100 px-1 font-mono">unoptimized: true</code>{" "}
+                removed — all images now pass through Next.js optimization pipeline.
               </p>
             </Group>
           </Section>
