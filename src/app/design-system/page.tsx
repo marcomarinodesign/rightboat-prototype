@@ -59,6 +59,7 @@ import {
 import { ActiveFiltersChips } from "@/components/filters/active-filters-chips"
 import { SearchableSelect } from "@/components/filters/searchable-select"
 import { BoatCard } from "@/components/boats/boat-card"
+import { RBImage } from "@/components/ui/RBImage"
 import { latestBoats } from "@/data/boats"
 
 // ─── Navigation structure ──────────────────────────────────────────────────
@@ -101,6 +102,7 @@ const NAV = [
       { id: "boat-card", label: "Boat Card" },
       { id: "active-filters", label: "Active Filters" },
       { id: "searchable-select", label: "Searchable Select" },
+      { id: "images", label: "Image System" },
     ],
   },
 ]
@@ -1099,6 +1101,183 @@ export default function DesignSystemPage() {
                   />
                 </div>
               </div>
+            </Group>
+          </Section>
+          <Section
+            id="images"
+            title="Image System — RBImage"
+            description="Centralized image component built on next/image. Standardizes intrinsic dimensions, responsive sizes, and loading strategy per context."
+          >
+            {/* ── Variant reference table ── */}
+            <Group label="Variant reference">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border/60 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      <th className="pb-3 pr-6">Variant</th>
+                      <th className="pb-3 pr-6">Aspect</th>
+                      <th className="pb-3 pr-6">Intrinsic</th>
+                      <th className="pb-3 pr-6">sizes</th>
+                      <th className="pb-3">Loading</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/40">
+                    {[
+                      {
+                        variant: "hero",
+                        aspect: "16:9",
+                        intrinsic: "1600 × 900",
+                        sizes: "100vw",
+                        loading: "priority",
+                        loadingColor: "bg-primary/10 text-primary",
+                      },
+                      {
+                        variant: "card",
+                        aspect: "4:3",
+                        intrinsic: "800 × 600",
+                        sizes: "(max-width: 768px) 100vw, 50vw",
+                        loading: "lazy",
+                        loadingColor: "bg-muted text-muted-foreground",
+                      },
+                      {
+                        variant: "thumbnail",
+                        aspect: "4:3",
+                        intrinsic: "400 × 300",
+                        sizes: "(max-width: 768px) 50vw, 200px",
+                        loading: "lazy",
+                        loadingColor: "bg-muted text-muted-foreground",
+                      },
+                    ].map((row) => (
+                      <tr key={row.variant}>
+                        <td className="py-3 pr-6">
+                          <code className="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs text-foreground">
+                            {row.variant}
+                          </code>
+                        </td>
+                        <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
+                          {row.aspect}
+                        </td>
+                        <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
+                          {row.intrinsic}
+                        </td>
+                        <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
+                          {row.sizes}
+                        </td>
+                        <td className="py-3">
+                          <span
+                            className={cn(
+                              "inline-flex items-center rounded-full px-2 py-0.5 font-mono text-[10px] font-medium",
+                              row.loadingColor
+                            )}
+                          >
+                            {row.loading}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Group>
+
+            {/* ── Props ── */}
+            <Group label="Props">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border/60 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      <th className="pb-3 pr-6">Prop</th>
+                      <th className="pb-3 pr-6">Type</th>
+                      <th className="pb-3">Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/40 font-mono text-xs">
+                    {[
+                      { prop: "src", type: "string", notes: "Required. Remote URL or local path." },
+                      { prop: "alt", type: "string", notes: "Required. Descriptive alt text." },
+                      { prop: "variant", type: '"hero" | "card" | "thumbnail"', notes: "Required. Drives dimensions, sizes and loading." },
+                      { prop: "priority", type: "boolean", notes: 'Optional. Default false. Pass true for above-the-fold images.' },
+                      { prop: "className", type: "string", notes: "Optional. Merged via twMerge — h-full overrides default h-auto." },
+                    ].map((row) => (
+                      <tr key={row.prop}>
+                        <td className="py-3 pr-6 text-foreground">{row.prop}</td>
+                        <td className="py-3 pr-6 text-muted-foreground">{row.type}</td>
+                        <td className="py-3 text-muted-foreground">{row.notes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Group>
+
+            {/* ── Live: hero ── */}
+            <Group label='variant="hero" — priority · 1600×900 · 16:9'>
+              <div className="overflow-hidden rounded-lg">
+                <RBImage
+                  src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1600&q=80"
+                  alt="Motor yacht at sea — hero variant"
+                  variant="hero"
+                  priority
+                />
+              </div>
+              <p className="mt-3 font-mono text-[11px] text-muted-foreground">
+                {`<RBImage src="..." alt="..." variant="hero" priority />`}
+              </p>
+            </Group>
+
+            {/* ── Live: card ── */}
+            <Group label='variant="card" — lazy · 800×600 · 4:3'>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="overflow-hidden rounded-lg">
+                    <RBImage
+                      src={`https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80&sig=${i}`}
+                      alt={`Boat card demo ${i}`}
+                      variant="card"
+                    />
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 font-mono text-[11px] text-muted-foreground">
+                {`<RBImage src="..." alt="..." variant="card" />`}
+              </p>
+            </Group>
+
+            {/* ── Live: thumbnail ── */}
+            <Group label='variant="thumbnail" — lazy · 400×300 · 4:3'>
+              <div className="flex flex-wrap gap-3">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className="w-[120px] overflow-hidden rounded-md"
+                  >
+                    <RBImage
+                      src={`https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=400&q=70&sig=${i}`}
+                      alt={`Thumbnail demo ${i}`}
+                      variant="thumbnail"
+                    />
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 font-mono text-[11px] text-muted-foreground">
+                {`<RBImage src="..." alt="..." variant="thumbnail" />`}
+              </p>
+            </Group>
+
+            {/* ── Config ── */}
+            <Group label="next.config.ts — image optimization">
+              <div className="rounded-lg bg-neutral-950 p-4">
+                <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-neutral-300">
+{`images: {
+  remotePatterns: [ /* rightboat.com, unsplash, ... */ ],
+  formats: ["image/avif", "image/webp"],
+  deviceSizes: [640, 768, 1024, 1280, 1600],
+}`}
+                </pre>
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                AVIF/WebP auto-negotiated by Vercel CDN. <code className="rounded bg-neutral-100 px-1 font-mono">unoptimized: true</code> removed — all images now go through Next.js optimization pipeline.
+              </p>
             </Group>
           </Section>
         </main>
