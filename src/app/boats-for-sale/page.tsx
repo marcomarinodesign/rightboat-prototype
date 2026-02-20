@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 
 import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"
@@ -10,16 +11,15 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
+export const metadata: Metadata = {
+  title: "Boats for Sale | Rightboat",
+  description:
+    "Browse thousands of boats for sale. Filter by type, price, location and more.",
+}
+
 export default function BoatsForSalePage() {
   return (
     <div className="space-y-10">
-      <div className="mb-2.5">
-        <div className="text-sm text-muted-foreground">
-          <Link href="/">Home</Link> / Boats for sale
-        </div>
-        <h1 className="mb-6 text-3xl font-bold">Boats for sale</h1>
-      </div>
-
       <BoatsForSaleListing boats={listingBoats} />
 
       <section className="grid gap-6 rounded-2xl border border-border/60 bg-muted/20 p-6 lg:grid-cols-[1.1fr_0.9fr]">

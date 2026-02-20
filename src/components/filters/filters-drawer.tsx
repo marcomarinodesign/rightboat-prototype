@@ -6,13 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -33,7 +26,6 @@ const manufacturerOptions = popularBrands.map((brand) => ({
   value: brand,
 }))
 const countryOptions = popularLocations.map((l) => ({ label: l, value: l }))
-const boatTypeOptions = popularTypes.map((t) => ({ label: t, value: t }))
 const modelOptions = popularModels.map((m) => ({
   label: `${m.brand} ${m.name}`,
   value: m.slug,
@@ -113,19 +105,52 @@ function RangeInputs({
   )
 }
 
+function ChipToggleGroup({
+  options,
+  value,
+  onChange,
+}: {
+  options: string[]
+  value: string
+  onChange: (v: string) => void
+}) {
+  return (
+    <div role="group" className="flex flex-wrap gap-2">
+      {options.map((opt) => {
+        const active = value === opt
+        return (
+          <button
+            key={opt}
+            type="button"
+            aria-pressed={active}
+            onClick={() => onChange(active ? "" : opt)}
+            className={`min-h-[44px] rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+              active
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-background text-foreground hover:border-primary/50 hover:bg-muted"
+            }`}
+          >
+            {opt}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 function FiltersFormBody({ draft, updateDraft, updateCondition }: FormBodyProps) {
   return (
     <div className="min-h-0 flex-1 overflow-y-auto px-6">
       <FilterSection title="Condition">
-        <div className="flex items-center gap-6 text-sm">
-          <label className="flex cursor-pointer items-center gap-2.5">
+        <div className="flex items-center gap-4 text-sm">
+          <label className="flex min-h-[44px] cursor-pointer items-center gap-2.5">
             <Checkbox
               checked={draft.condition.new}
               onCheckedChange={(c) => updateCondition("new", Boolean(c))}
             />
             <span>New</span>
           </label>
-          <label className="flex cursor-pointer items-center gap-2.5">
+          <label className="flex min-h-[44px] cursor-pointer items-center gap-2.5">
             <Checkbox
               checked={draft.condition.used}
               onCheckedChange={(c) => updateCondition("used", Boolean(c))}
@@ -135,32 +160,22 @@ function FiltersFormBody({ draft, updateDraft, updateCondition }: FormBodyProps)
         </div>
       </FilterSection>
 
-      <FilterSection title="Country">
+      <FilterSection title="Boat type">
+        <ChipToggleGroup
+          options={popularTypes}
+          value={draft.boatType}
+          onChange={(v) => updateDraft("boatType", v)}
+        />
+      </FilterSection>
+
+      <FilterSection title="Location">
         <SearchableSelect
           value={draft.location}
           onValueChange={(v) => updateDraft("location", v)}
           options={countryOptions}
-          placeholder="Select country"
-          searchPlaceholder="Search countries"
+          placeholder="Select location"
+          searchPlaceholder="Search locations"
         />
-      </FilterSection>
-
-      <FilterSection title="Boat type">
-        <Select
-          value={draft.boatType || undefined}
-          onValueChange={(v) => updateDraft("boatType", v)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select type" />
-          </SelectTrigger>
-          <SelectContent>
-            {boatTypeOptions.map((opt) => (
-              <SelectItem key={opt.value} value={opt.value}>
-                {opt.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
       </FilterSection>
 
       <FilterSection title="Price (€)">
@@ -217,39 +232,19 @@ function FiltersFormBody({ draft, updateDraft, updateCondition }: FormBodyProps)
       </FilterSection>
 
       <FilterSection title="Hull material">
-        <Select
-          value={draft.hullMaterial || undefined}
-          onValueChange={(v) => updateDraft("hullMaterial", v)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select material" />
-          </SelectTrigger>
-          <SelectContent>
-            {hullMaterials.map((m) => (
-              <SelectItem key={m} value={m}>
-                {m}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <ChipToggleGroup
+          options={hullMaterials}
+          value={draft.hullMaterial}
+          onChange={(v) => updateDraft("hullMaterial", v)}
+        />
       </FilterSection>
 
       <FilterSection title="Fuel type">
-        <Select
-          value={draft.fuelType || undefined}
-          onValueChange={(v) => updateDraft("fuelType", v)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select fuel" />
-          </SelectTrigger>
-          <SelectContent>
-            {fuelTypes.map((f) => (
-              <SelectItem key={f} value={f}>
-                {f}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <ChipToggleGroup
+          options={fuelTypes}
+          value={draft.fuelType}
+          onChange={(v) => updateDraft("fuelType", v)}
+        />
       </FilterSection>
     </div>
   )
@@ -309,7 +304,7 @@ export function FiltersDrawer({
             <SheetTitle className="text-lg font-semibold">Filters</SheetTitle>
             <button
               onClick={handleClearAll}
-              className="text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+              className="flex min-h-[44px] items-center px-2 text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
             >
               Clear all
             </button>
@@ -323,8 +318,11 @@ export function FiltersDrawer({
           updateCondition={updateCondition}
         />
 
-        {/* Footer */}
-        <div className="shrink-0 border-t border-border/60 px-6 py-4">
+        {/* Footer — padding-bottom respects iPhone home indicator */}
+        <div
+          className="shrink-0 border-t border-border/60 px-6 pt-4"
+          style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
+        >
           <Button className="w-full" size="lg" onClick={handleApply}>
             Show {resultCount} results
           </Button>

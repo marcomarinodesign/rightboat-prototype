@@ -59,6 +59,15 @@ export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
     if (filters.manufacturer && boat.make.toLowerCase() !== filters.manufacturer.toLowerCase()) {
       return false
     }
+    if (filters.model && boat.modelSlug !== filters.model) {
+      return false
+    }
+    if (filters.hullMaterial && boat.hullMaterial && boat.hullMaterial !== filters.hullMaterial) {
+      return false
+    }
+    if (filters.fuelType && boat.fuelType && boat.fuelType !== filters.fuelType) {
+      return false
+    }
     return true
   })
 }

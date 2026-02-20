@@ -26,7 +26,7 @@ export function ActiveFiltersChips({
     <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/20 px-3 py-3">
       <div className="flex flex-wrap items-center gap-2">
         {activeFilters.map((filter) => (
-          <Badge key={filter.key} className="gap-2 pr-1 bg-white text-primary border border-primary hover:bg-primary/5">
+          <Badge key={filter.key} className="gap-2 pr-1 bg-background text-primary border border-primary hover:bg-primary/5">
             <span>{filter.label}</span>
             <button
               type="button"

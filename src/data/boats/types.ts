@@ -17,4 +17,6 @@ export type Boat = {
   boatType?: string
   beam?: string
   loa?: string
+  hullMaterial?: string
+  fuelType?: string
 }

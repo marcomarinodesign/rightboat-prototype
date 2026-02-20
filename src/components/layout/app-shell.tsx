@@ -134,8 +134,9 @@ function SiteHeader() {
                     <Button
                       className="w-full"
                       onClick={() => setMobileMenuOpen(false)}
+                      asChild
                     >
-                      Sell your boat
+                      <Link href="/sell">Sell your boat</Link>
                     </Button>
                   </div>
                 </div>
@@ -163,7 +164,9 @@ function SiteHeader() {
             <Button variant="outline" size="sm">
               Signup
             </Button>
-            <Button size="sm">Sell your boat</Button>
+            <Button size="sm" asChild>
+              <Link href="/sell">Sell your boat</Link>
+            </Button>
           </div>
         </div>
       </nav>

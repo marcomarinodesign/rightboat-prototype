@@ -11,14 +11,17 @@ export const latestBoats: Boat[] = [
     condition: "Used",
     length: "35 ft",
     price: "$175,000",
-    location: "United States of America",
+    location: "Fort Lauderdale, Florida",
     broker: "Denison Yacht Sales",
     image:
       "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp",
+    boatType: "Sports cruiser",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb564696",
-    make: "Parker Boats",
+    make: "Parker",
     model: "28'",
     makeSlug: "parker",
     modelSlug: "28-614d9f87-d0a5-49a8-89c9-369f31556888",
@@ -26,10 +29,13 @@ export const latestBoats: Boat[] = [
     condition: "New",
     length: "28 ft",
     price: "$230,000",
-    location: "United States of America",
+    location: "Fort Lauderdale, Florida",
     broker: "Denison Yacht Sales",
     image:
       "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp",
+    boatType: "Fishing boats",
+    hullMaterial: "Aluminum",
+    fuelType: "Diesel",
   },
   {
     id: "rb564695",
@@ -41,10 +47,13 @@ export const latestBoats: Boat[] = [
     condition: "Used",
     length: "144 ft",
     price: "$4,499,999",
-    location: "United States of America",
+    location: "Fort Lauderdale, Florida",
     broker: "Denison Yacht Sales",
     image:
       "https://www.rightboat.com/boat_images/image_26952275/9cf7a9d25233460d95f14f6e1cf506b3b99fe89a7b304c4898be4e64cd876e10.webp",
+    boatType: "Yachts",
+    hullMaterial: "Steel",
+    fuelType: "Diesel",
   },
   {
     id: "rb564694",
@@ -56,10 +65,13 @@ export const latestBoats: Boat[] = [
     condition: "Used",
     length: "32 ft",
     price: "$55,000",
-    location: "United States of America",
+    location: "Seattle, Washington",
     broker: "Delta Marine",
     image:
       "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp",
+    boatType: "Cabin cruisers",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb564693",
@@ -71,10 +83,13 @@ export const latestBoats: Boat[] = [
     condition: "Used",
     length: "27 ft",
     price: "$119,900",
-    location: "United States of America",
+    location: "Seattle, Washington",
     broker: "Delta Marine",
     image:
       "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp",
+    boatType: "Trawlers",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb564692",
@@ -86,10 +101,13 @@ export const latestBoats: Boat[] = [
     condition: "Used",
     length: "34 ft",
     price: "$79,000",
-    location: "United States of America",
+    location: "Seattle, Washington",
     broker: "Delta Marine",
     image:
       "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp",
+    boatType: "Cabin cruisers",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
 ]
 
@@ -104,7 +122,7 @@ export const listingBoats: Boat[] = [
     condition: "New",
     length: "50.0 ft",
     price: "Request price",
-    location: "United States of America",
+    location: "Fort Lauderdale, Florida",
     broker: "Formula Boats",
     image:
       "https://www.formulaboats.com/wp-content/uploads/2023/01/500SSC.tmp25016_06154.jpg",
@@ -114,9 +132,11 @@ export const listingBoats: Boat[] = [
       "https://www.formulaboats.com/wp-content/uploads/2025/07/500SSCfueldock.tmp25016_14958.jpg",
       "https://www.formulaboats.com/wp-content/uploads/2023/01/500SSC.tmp25016_06346.jpg",
     ],
-    boatType: "Power",
+    boatType: "Powerboats",
     beam: "14.6 ft",
     loa: "50.0 ft",
+    hullMaterial: "Composite",
+    fuelType: "Gas",
     description:
       "The 50-foot Formula 500 Super Sport Crossover (SSC) is an exemplary performance boat in the large Formula Super Sport/All Sport Crossover fleet. It combines all the best features for enthusiastic boaters looking for versatile, clever, beautiful and practical designs. A fifty-foot answer to your private escape with family and friends, combining a commanding offshore ride with unprecedented amenities and luxury.",
   },
@@ -130,10 +150,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "29.99 ft",
     price: "$284,900",
-    location: "Ft Lauderdale, FL",
+    location: "Fort Lauderdale, Florida",
     broker: "Featured Broker",
     image:
       "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp",
+    boatType: "Center console",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb596537",
@@ -145,10 +168,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "33.5 ft",
     price: "$97,000",
-    location: "Moore Haven, FL",
+    location: "Moore Haven, Florida",
     broker: "The Catamaran Company",
     image:
       "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp",
+    boatType: "Catamaran",
+    hullMaterial: "Composite",
+    fuelType: "Diesel",
   },
   {
     id: "rb609094",
@@ -160,10 +186,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "32.51 ft",
     price: "$319,000",
-    location: "Osterville, MA",
+    location: "Osterville, Massachusetts",
     broker: "Oyster Harbors Marine",
     image:
       "https://www.rightboat.com/boat_images/image_26952275/9cf7a9d25233460d95f14f6e1cf506b3b99fe89a7b304c4898be4e64cd876e10.webp",
+    boatType: "Center console",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb591164",
@@ -175,10 +204,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "40.49 ft",
     price: "$329,000",
-    location: "Noank, CT",
+    location: "Noank, Connecticut",
     broker: "Featured Broker",
     image:
       "https://www.rightboat.com/boat_images/image_24409432/097f028a7bc24851a5ef0cdda048d6bd7afffa9733b74d0d91b14d2265880802.webp",
+    boatType: "Sailboats",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb597871",
@@ -190,10 +222,13 @@ export const listingBoats: Boat[] = [
     condition: "New",
     length: "22 ft",
     price: "$64,569",
-    location: "Old Salt Marine, FL",
+    location: "Fort Lauderdale, Florida",
     broker: "Suzuki Marine",
     image:
       "https://www.rightboat.com/boat_images/image_25862466/fbf1a2c2e9134e67b7b26a684a31824c18eaba91bb0f43feb2dc09f1ec23ac8f.webp",
+    boatType: "Center console",
+    hullMaterial: "Aluminum",
+    fuelType: "Gas",
   },
   {
     id: "rb599427",
@@ -205,10 +240,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "31 ft",
     price: "$99,800",
-    location: "Stockton, CA",
+    location: "Stockton, California",
     broker: "Delta Marine",
     image:
       "https://www.rightboat.com/boat_images/image_25295516/8df73503854541399d20db81bbb9cc21b20b9ea45237491dbc57d2e78b8de765.webp",
+    boatType: "Sports cruiser",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb600123",
@@ -220,10 +258,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "28 ft",
     price: "$285,000",
-    location: "Miami, FL",
+    location: "Miami, Florida",
     broker: "United Yacht Sales",
     image:
       "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp",
+    boatType: "Center console",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb600456",
@@ -235,10 +276,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "33.5 ft",
     price: "$425,000",
-    location: "Charleston, SC",
+    location: "Charleston, South Carolina",
     broker: "Yacht Sales International",
     image:
       "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp",
+    boatType: "Walkaround",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb600789",
@@ -250,10 +294,13 @@ export const listingBoats: Boat[] = [
     condition: "New",
     length: "26 ft",
     price: "$189,500",
-    location: "Lake of the Ozarks, MO",
+    location: "Lake of the Ozarks, Missouri",
     broker: "Cobalt Boats",
     image:
       "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp",
+    boatType: "Bowrider",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb601012",
@@ -265,10 +312,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "38 ft",
     price: "$245,000",
-    location: "Annapolis, MD",
+    location: "Annapolis, Maryland",
     broker: "Annapolis Yacht Sales",
     image:
       "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp",
+    boatType: "Sailboats",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb601345",
@@ -280,10 +330,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "23 ft",
     price: "$125,000",
-    location: "Austin, TX",
+    location: "Austin, Texas",
     broker: "Austin Marine",
     image:
       "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp",
+    boatType: "Powerboats",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb601678",
@@ -299,6 +352,9 @@ export const listingBoats: Boat[] = [
     broker: "Sunseeker Monaco",
     image:
       "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp",
+    boatType: "Yachts",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb602011",
@@ -314,6 +370,9 @@ export const listingBoats: Boat[] = [
     broker: "Multihull Company",
     image:
       "https://www.rightboat.com/boat_images/image_26952275/9cf7a9d25233460d95f14f6e1cf506b3b99fe89a7b304c4898be4e64cd876e10.webp",
+    boatType: "Catamaran",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb602344",
@@ -325,10 +384,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "23 ft",
     price: "$89,500",
-    location: "Morehead City, NC",
+    location: "Morehead City, North Carolina",
     broker: "Carolina Yacht Sales",
     image:
       "https://www.rightboat.com/boat_images/image_24409432/097f028a7bc24851a5ef0cdda048d6bd7afffa9733b74d0d91b14d2265880802.webp",
+    boatType: "Fishing boats",
+    hullMaterial: "Aluminum",
+    fuelType: "Diesel",
   },
   {
     id: "rb602677",
@@ -344,6 +406,9 @@ export const listingBoats: Boat[] = [
     broker: "Azimut Yachts",
     image:
       "https://www.rightboat.com/boat_images/image_25862466/fbf1a2c2e9134e67b7b26a684a31824c18eaba91bb0f43feb2dc09f1ec23ac8f.webp",
+    boatType: "Flybridge",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb603010",
@@ -355,10 +420,13 @@ export const listingBoats: Boat[] = [
     condition: "New",
     length: "30 ft",
     price: "$295,000",
-    location: "Sarasota, FL",
+    location: "Sarasota, Florida",
     broker: "Chris-Craft Dealers",
     image:
       "https://www.rightboat.com/boat_images/image_25295516/8df73503854541399d20db81bbb9cc21b20b9ea45237491dbc57d2e78b8de765.webp",
+    boatType: "Cabin cruisers",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb603343",
@@ -370,10 +438,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "43 ft",
     price: "$675,000",
-    location: "Grand Rapids, MI",
+    location: "Grand Rapids, Michigan",
     broker: "Tiara Yachts",
     image:
       "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp",
+    boatType: "Sports cruiser",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb603676",
@@ -385,10 +456,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "45 ft",
     price: "$850,000",
-    location: "Southampton, UK",
+    location: "Southampton, United Kingdom",
     broker: "Fairline Yachts",
     image:
       "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp",
+    boatType: "Sports cruiser",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
   {
     id: "rb604009",
@@ -400,10 +474,13 @@ export const listingBoats: Boat[] = [
     condition: "New",
     length: "26 ft",
     price: "$149,900",
-    location: "Orlando, FL",
+    location: "Orlando, Florida",
     broker: "Mastercraft Dealers",
     image:
       "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp",
+    boatType: "Powerboats",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb604342",
@@ -415,10 +492,13 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "35 ft",
     price: "$195,000",
-    location: "San Diego, CA",
+    location: "San Diego, California",
     broker: "Sea Ray West",
     image:
       "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp",
+    boatType: "Cabin cruisers",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb604675",
@@ -430,10 +510,13 @@ export const listingBoats: Boat[] = [
     condition: "New",
     length: "18 ft",
     price: "$32,500",
-    location: "Seattle, WA",
+    location: "Seattle, Washington",
     broker: "Bayliner Northwest",
     image:
       "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp",
+    boatType: "Powerboats",
+    hullMaterial: "Fiberglass",
+    fuelType: "Gas",
   },
   {
     id: "rb605008",
@@ -445,9 +528,12 @@ export const listingBoats: Boat[] = [
     condition: "Used",
     length: "58 ft",
     price: "$1,850,000",
-    location: "Portsmouth, UK",
+    location: "Portsmouth, United Kingdom",
     broker: "Princess Yachts",
     image:
       "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp",
+    boatType: "Yachts",
+    hullMaterial: "Fiberglass",
+    fuelType: "Diesel",
   },
 ]
