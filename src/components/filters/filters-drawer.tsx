@@ -4,7 +4,6 @@ import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
 import { X } from "lucide-react"
 import {
   Sheet,
@@ -14,6 +13,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { SearchableSelect } from "@/components/filters/searchable-select"
+import { PriceHistogram } from "@/components/filters/price-histogram"
+import { filterBoats } from "@/components/filters/filter-boats"
 import {
   popularBrands,
   popularLocations,
@@ -22,6 +23,7 @@ import {
 import { popularModels } from "@/data/models"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
 import { useIsMobile } from "@/lib/use-media-query"
+import type { Boat } from "@/data/boats"
 
 const manufacturerOptions = popularBrands.map((brand) => ({
   label: brand,
@@ -42,10 +44,12 @@ type FiltersDrawerProps = {
   onFiltersChange: React.Dispatch<React.SetStateAction<FiltersState>>
   onClearAll: () => void
   resultCount: number
+  boats: Boat[]
 }
 
 type FormBodyProps = {
   draft: FiltersState
+  boats: Boat[]
   updateDraft: (field: keyof FiltersState, value: string) => void
   updateCondition: (key: "new" | "used", checked: boolean) => void
 }
@@ -84,23 +88,25 @@ function RangeInputs({
     <div className="grid grid-cols-[1fr_16px_1fr] items-center gap-1">
       <div className="space-y-1">
         <p className="text-xs text-muted-foreground">Min</p>
-        <Input
+        <input
           type="number"
           inputMode="numeric"
           placeholder={minPlaceholder ?? "Min"}
           value={minValue}
           onChange={(e) => onMinChange(e.target.value)}
+          className="h-11 w-full rounded-lg border border-input bg-background px-3.5 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 md:text-sm"
         />
       </div>
       <span className="mt-5 text-center text-muted-foreground">—</span>
       <div className="space-y-1">
         <p className="text-xs text-muted-foreground">Max</p>
-        <Input
+        <input
           type="number"
           inputMode="numeric"
           placeholder={maxPlaceholder ?? "Max"}
           value={maxValue}
           onChange={(e) => onMaxChange(e.target.value)}
+          className="h-11 w-full rounded-lg border border-input bg-background px-3.5 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 md:text-sm"
         />
       </div>
     </div>
@@ -140,9 +146,30 @@ function ChipToggleGroup({
   )
 }
 
-function FiltersFormBody({ draft, updateDraft, updateCondition }: FormBodyProps) {
+function FiltersFormBody({ draft, boats, updateDraft, updateCondition }: FormBodyProps) {
+  // Compute boats filtered by everything EXCEPT price, so histogram always shows
+  // the full price distribution for the current non-price filters.
+  const boatsForHistogram = React.useMemo(
+    () => filterBoats(boats, { ...draft, priceMin: "", priceMax: "" }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [boats, draft.location, draft.boatType, draft.condition, draft.lengthMin,
+     draft.lengthMax, draft.yearMin, draft.yearMax, draft.manufacturer,
+     draft.model, draft.hullMaterial, draft.fuelType]
+  )
+
   return (
     <div className="min-h-0 flex-1 overflow-y-auto px-6">
+      {/* ── Price (first, with histogram) ───────────────────── */}
+      <FilterSection title="Price ($)">
+        <PriceHistogram
+          boats={boatsForHistogram}
+          priceMin={draft.priceMin}
+          priceMax={draft.priceMax}
+          onPriceMinChange={(v) => updateDraft("priceMin", v)}
+          onPriceMaxChange={(v) => updateDraft("priceMax", v)}
+        />
+      </FilterSection>
+
       <FilterSection title="Condition">
         <div className="flex items-center gap-4 text-sm">
           <label className="flex min-h-[44px] cursor-pointer items-center gap-2.5">
@@ -177,17 +204,6 @@ function FiltersFormBody({ draft, updateDraft, updateCondition }: FormBodyProps)
           options={countryOptions}
           placeholder="Select location"
           searchPlaceholder="Search locations"
-        />
-      </FilterSection>
-
-      <FilterSection title="Price (€)">
-        <RangeInputs
-          minValue={draft.priceMin}
-          maxValue={draft.priceMax}
-          onMinChange={(v) => updateDraft("priceMin", v)}
-          onMaxChange={(v) => updateDraft("priceMax", v)}
-          minPlaceholder="e.g. 10 000"
-          maxPlaceholder="e.g. 500 000"
         />
       </FilterSection>
 
@@ -259,6 +275,7 @@ export function FiltersDrawer({
   onFiltersChange,
   onClearAll,
   resultCount,
+  boats,
 }: FiltersDrawerProps) {
   const isMobile = useIsMobile()
   const [draft, setDraft] = React.useState<FiltersState>(filters)
@@ -323,6 +340,7 @@ export function FiltersDrawer({
         {/* Scrollable filter body */}
         <FiltersFormBody
           draft={draft}
+          boats={boats}
           updateDraft={updateDraft}
           updateCondition={updateCondition}
         />

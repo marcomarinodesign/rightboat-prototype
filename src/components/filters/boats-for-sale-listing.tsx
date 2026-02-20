@@ -132,6 +132,7 @@ export function BoatsForSaleListing({ boats }: BoatsForSaleListingProps) {
         onFiltersChange={setFilters}
         onClearAll={clearAll}
         resultCount={resultCount}
+        boats={boats}
       />
     </div>
   )

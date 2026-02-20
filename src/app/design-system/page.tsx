@@ -58,6 +58,7 @@ import {
 } from "@/components/ui/sheet"
 import { ActiveFiltersChips } from "@/components/filters/active-filters-chips"
 import { SearchableSelect } from "@/components/filters/searchable-select"
+import { PriceHistogram } from "@/components/filters/price-histogram"
 import { BoatCard } from "@/components/boats/boat-card"
 import { RBImage } from "@/components/ui/RBImage"
 import { latestBoats } from "@/data/boats"
@@ -102,6 +103,7 @@ const NAV = [
       { id: "boat-card", label: "Boat Card" },
       { id: "active-filters", label: "Active Filters" },
       { id: "searchable-select", label: "Searchable Select" },
+      { id: "charts", label: "Charts" },
       { id: "images", label: "Image System" },
     ],
   },
@@ -1103,6 +1105,68 @@ export default function DesignSystemPage() {
               </div>
             </Group>
           </Section>
+          <Section
+            id="charts"
+            title="Charts"
+            description="Data visualisation powered by Recharts. Used in the filters drawer to show price distribution."
+            a11y={["aria-hidden on chart canvas — screen readers skip decorative SVG", "All data accessible via labelled inputs above the chart"]}
+          >
+            <Group label="Price Histogram — default (no range selected)">
+              <div className="max-w-sm">
+                <PriceHistogram
+                  boats={latestBoats}
+                  priceMin=""
+                  priceMax=""
+                  onPriceMinChange={() => {}}
+                  onPriceMaxChange={() => {}}
+                />
+              </div>
+            </Group>
+
+            <Group label="Price Histogram — with active range ($100k – $500k)">
+              <div className="max-w-sm">
+                <PriceHistogram
+                  boats={latestBoats}
+                  priceMin="100000"
+                  priceMax="500000"
+                  onPriceMinChange={() => {}}
+                  onPriceMaxChange={() => {}}
+                />
+              </div>
+            </Group>
+
+            <Group label="Library">
+              <div className="space-y-2 text-sm">
+                <div className="flex gap-3">
+                  <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Package</span>
+                  <span>recharts</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Components used</span>
+                  <span>BarChart, Bar, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Rendering</span>
+                  <span>Client-side only — must be inside a "use client" component</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Active colour</span>
+                  <span className="flex items-center gap-2">
+                    <span className="inline-block h-3 w-6 rounded-sm" style={{ background: "#0257fc" }} />
+                    <code className="font-mono text-xs">#0257fc (--brand-blue-400)</code>
+                  </span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Inactive colour</span>
+                  <span className="flex items-center gap-2">
+                    <span className="inline-block h-3 w-6 rounded-sm border" style={{ background: "#e2e8f0" }} />
+                    <code className="font-mono text-xs">#e2e8f0</code>
+                  </span>
+                </div>
+              </div>
+            </Group>
+          </Section>
+
           <Section
             id="images"
             title="Image System"
