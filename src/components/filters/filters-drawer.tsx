@@ -5,8 +5,10 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { X } from "lucide-react"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -292,19 +294,26 @@ export function FiltersDrawer({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side={isMobile ? "bottom" : "right"}
+        hideClose
         className={
           isMobile
             ? "flex h-[100dvh] max-h-[100dvh] flex-col rounded-none p-0"
             : "flex w-full flex-col p-0 sm:max-w-[440px]"
         }
       >
-        {/* Header */}
-        <SheetHeader className="shrink-0 border-b border-border/60 px-6 py-5">
-          <div className="flex items-center justify-between">
-            <SheetTitle className="text-lg font-semibold">Filters</SheetTitle>
+        {/* Header — 3-column grid: [close] [title] [clear all] */}
+        <SheetHeader className="shrink-0 border-b border-border/60 px-2 py-1">
+          <div className="grid grid-cols-[44px_1fr_auto] items-center">
+            <SheetClose className="flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+              <X className="h-4 w-4" aria-hidden />
+              <span className="sr-only">Close</span>
+            </SheetClose>
+            <SheetTitle className="text-center text-base font-semibold">
+              Filters
+            </SheetTitle>
             <button
               onClick={handleClearAll}
-              className="flex min-h-[44px] items-center px-2 text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+              className="flex h-11 items-center px-3 text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
             >
               Clear all
             </button>
