@@ -149,7 +149,7 @@ export const listingBoats: Boat[] = [
     year: 2021,
     condition: "Used",
     length: "29.99 ft",
-    price: "$284,900",
+    price: "$1,050,000",
     location: "Fort Lauderdale, Florida",
     broker: "Featured Broker",
     image:
@@ -167,7 +167,7 @@ export const listingBoats: Boat[] = [
     year: 2006,
     condition: "Used",
     length: "33.5 ft",
-    price: "$97,000",
+    price: "$700,000",
     location: "Moore Haven, Florida",
     broker: "The Catamaran Company",
     image:
@@ -185,7 +185,7 @@ export const listingBoats: Boat[] = [
     year: 2023,
     condition: "Used",
     length: "32.51 ft",
-    price: "$319,000",
+    price: "$1,100,000",
     location: "Osterville, Massachusetts",
     broker: "Oyster Harbors Marine",
     image:
@@ -203,7 +203,7 @@ export const listingBoats: Boat[] = [
     year: 2021,
     condition: "Used",
     length: "40.49 ft",
-    price: "$329,000",
+    price: "$1,380,000",
     location: "Noank, Connecticut",
     broker: "Featured Broker",
     image:
@@ -221,7 +221,7 @@ export const listingBoats: Boat[] = [
     year: 2024,
     condition: "New",
     length: "22 ft",
-    price: "$64,569",
+    price: "$550,000",
     location: "Fort Lauderdale, Florida",
     broker: "Suzuki Marine",
     image:
@@ -239,7 +239,7 @@ export const listingBoats: Boat[] = [
     year: 2008,
     condition: "Used",
     length: "31 ft",
-    price: "$99,800",
+    price: "$770,000",
     location: "Stockton, California",
     broker: "Delta Marine",
     image:
@@ -257,7 +257,7 @@ export const listingBoats: Boat[] = [
     year: 2019,
     condition: "Used",
     length: "28 ft",
-    price: "$285,000",
+    price: "$1,000,000",
     location: "Miami, Florida",
     broker: "United Yacht Sales",
     image:
@@ -275,7 +275,7 @@ export const listingBoats: Boat[] = [
     year: 2022,
     condition: "Used",
     length: "33.5 ft",
-    price: "$425,000",
+    price: "$1,450,000",
     location: "Charleston, South Carolina",
     broker: "Yacht Sales International",
     image:
@@ -293,7 +293,7 @@ export const listingBoats: Boat[] = [
     year: 2023,
     condition: "New",
     length: "26 ft",
-    price: "$189,500",
+    price: "$1,150,000",
     location: "Lake of the Ozarks, Missouri",
     broker: "Cobalt Boats",
     image:
@@ -311,7 +311,7 @@ export const listingBoats: Boat[] = [
     year: 2020,
     condition: "Used",
     length: "38 ft",
-    price: "$245,000",
+    price: "$1,300,000",
     location: "Annapolis, Maryland",
     broker: "Annapolis Yacht Sales",
     image:
@@ -329,7 +329,7 @@ export const listingBoats: Boat[] = [
     year: 2021,
     condition: "Used",
     length: "23 ft",
-    price: "$125,000",
+    price: "$930,000",
     location: "Austin, Texas",
     broker: "Austin Marine",
     image:
@@ -347,7 +347,7 @@ export const listingBoats: Boat[] = [
     year: 2018,
     condition: "Used",
     length: "68 ft",
-    price: "$2,450,000",
+    price: "$2,500,000",
     location: "Monaco",
     broker: "Sunseeker Monaco",
     image:
@@ -365,7 +365,7 @@ export const listingBoats: Boat[] = [
     year: 2019,
     condition: "Used",
     length: "42 ft",
-    price: "$485,000",
+    price: "$1,800,000",
     location: "St. Martin",
     broker: "Multihull Company",
     image:
@@ -383,7 +383,7 @@ export const listingBoats: Boat[] = [
     year: 2020,
     condition: "Used",
     length: "23 ft",
-    price: "$89,500",
+    price: "$400,000",
     location: "Morehead City, North Carolina",
     broker: "Carolina Yacht Sales",
     image:
@@ -401,7 +401,7 @@ export const listingBoats: Boat[] = [
     year: 2017,
     condition: "Used",
     length: "55 ft",
-    price: "$1,250,000",
+    price: "$1,950,000",
     location: "Cannes, France",
     broker: "Azimut Yachts",
     image:
@@ -419,7 +419,7 @@ export const listingBoats: Boat[] = [
     year: 2022,
     condition: "New",
     length: "30 ft",
-    price: "$295,000",
+    price: "$1,250,000",
     location: "Sarasota, Florida",
     broker: "Chris-Craft Dealers",
     image:
@@ -437,7 +437,7 @@ export const listingBoats: Boat[] = [
     year: 2016,
     condition: "Used",
     length: "43 ft",
-    price: "$675,000",
+    price: "$1,550,000",
     location: "Grand Rapids, Michigan",
     broker: "Tiara Yachts",
     image:
@@ -455,7 +455,7 @@ export const listingBoats: Boat[] = [
     year: 2019,
     condition: "Used",
     length: "45 ft",
-    price: "$850,000",
+    price: "$1,620,000",
     location: "Southampton, United Kingdom",
     broker: "Fairline Yachts",
     image:
@@ -473,7 +473,7 @@ export const listingBoats: Boat[] = [
     year: 2023,
     condition: "New",
     length: "26 ft",
-    price: "$149,900",
+    price: "$850,000",
     location: "Orlando, Florida",
     broker: "Mastercraft Dealers",
     image:
@@ -491,7 +491,7 @@ export const listingBoats: Boat[] = [
     year: 2015,
     condition: "Used",
     length: "35 ft",
-    price: "$195,000",
+    price: "$1,200,000",
     location: "San Diego, California",
     broker: "Sea Ray West",
     image:
@@ -509,7 +509,7 @@ export const listingBoats: Boat[] = [
     year: 2024,
     condition: "New",
     length: "18 ft",
-    price: "$32,500",
+    price: "$50,000",
     location: "Seattle, Washington",
     broker: "Bayliner Northwest",
     image:
@@ -527,7 +527,7 @@ export const listingBoats: Boat[] = [
     year: 2020,
     condition: "Used",
     length: "58 ft",
-    price: "$1,850,000",
+    price: "$2,100,000",
     location: "Portsmouth, United Kingdom",
     broker: "Princess Yachts",
     image:

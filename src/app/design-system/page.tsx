@@ -61,7 +61,7 @@ import { SearchableSelect } from "@/components/filters/searchable-select"
 import { PriceHistogram } from "@/components/filters/price-histogram"
 import { BoatCard } from "@/components/boats/boat-card"
 import { RBImage } from "@/components/ui/RBImage"
-import { latestBoats } from "@/data/boats"
+import { latestBoats, listingBoats } from "@/data/boats"
 
 // ─── Navigation structure ──────────────────────────────────────────────────
 
@@ -1114,7 +1114,7 @@ export default function DesignSystemPage() {
             <Group label="Price Histogram — default (no range selected)">
               <div className="max-w-sm">
                 <PriceHistogram
-                  boats={latestBoats}
+                  boats={listingBoats}
                   priceMin=""
                   priceMax=""
                   onPriceMinChange={() => {}}
@@ -1123,12 +1123,12 @@ export default function DesignSystemPage() {
               </div>
             </Group>
 
-            <Group label="Price Histogram — with active range ($100k – $500k)">
+            <Group label="Price Histogram — with active range ($1M – $1.5M)">
               <div className="max-w-sm">
                 <PriceHistogram
-                  boats={latestBoats}
-                  priceMin="100000"
-                  priceMax="500000"
+                  boats={listingBoats}
+                  priceMin="1000000"
+                  priceMax="1500000"
                   onPriceMinChange={() => {}}
                   onPriceMaxChange={() => {}}
                 />
