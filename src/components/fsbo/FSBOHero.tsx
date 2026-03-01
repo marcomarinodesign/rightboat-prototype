@@ -15,7 +15,7 @@ export function FSBOHero({ children, className }: FSBOHeroProps) {
   return (
     <section
       className={cn(
-        "w-full bg-background px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20",
+        "w-full bg-background px-4 py-12 sm:px-6 sm:py-16 lg:px-0 lg:py-10",
         className
       )}
       aria-labelledby="fsbo-hero-heading"

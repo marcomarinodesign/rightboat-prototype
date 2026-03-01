@@ -15,11 +15,24 @@ import { getSupabase } from "../lib/supabase"
 import { toast } from "sonner"
 import { Loader2, ArrowLeft } from "lucide-react"
 
-const BoatForm = () => {
+export interface BoatFormProps {
+  /** Layout variant: default = card wrapper, fullWidth = no card (for use inside SellBWizardLayout) */
+  variant?: "default" | "fullWidth"
+  /** When true, StepOne does not render its title/anchor/subtitle (page provides them) */
+  hideStepTitle?: boolean
+  /** Optional callback when the current step changes (e.g. for external progress display) */
+  onStepChange?: (step: number) => void
+}
+
+const BoatForm = ({ variant = "default", hideStepTitle = false, onStepChange }: BoatFormProps) => {
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [images, setImages] = useState<File[]>([])
+
+  useEffect(() => {
+    onStepChange?.(step)
+  }, [step, onStepChange])
 
   const form = useForm<BoatFormData>({
     resolver: zodResolver(boatFormSchema),
@@ -122,10 +135,14 @@ const BoatForm = () => {
 
   const ctaLabels = ["Continue", "Review & Continue", "Publish My Boat"]
   const isLastStep = step === 3
+  const isFullWidth = variant === "fullWidth"
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="relative">
-      <ProgressBar currentStep={step} totalSteps={3} />
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className={isFullWidth ? "relative flex flex-col min-h-0" : "relative"}
+    >
+      {!isFullWidth && <ProgressBar currentStep={step} totalSteps={3} />}
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -135,13 +152,24 @@ const BoatForm = () => {
           exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.25 }}
         >
-          {step === 1 && <StepOne form={form} />}
+          {step === 1 && <StepOne form={form} hideTitle={hideStepTitle} />}
           {step === 2 && <StepTwo form={form} images={images} setImages={setImages} />}
           {step === 3 && <StepThree form={form} />}
         </motion.div>
       </AnimatePresence>
 
-      <div className="sticky bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border pt-4 pb-6 mt-6 -mx-6 px-6">
+      <div
+        className={
+          isFullWidth
+            ? "sticky bottom-0 left-0 right-0 border-t border-border bg-white pt-4 mt-6"
+            : "sticky bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border pt-4 pb-6 mt-6 -mx-6 px-6"
+        }
+        style={
+          isFullWidth
+            ? { paddingBottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))" }
+            : undefined
+        }
+      >
         <div className="flex gap-3">
           {step > 1 && (
             <Button type="button" variant="outline" onClick={prevStep}>

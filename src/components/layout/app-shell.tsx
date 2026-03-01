@@ -26,10 +26,18 @@ export function AppShell({ children }: AppShellProps) {
     typeof pathname === "string" &&
     pathname.startsWith("/boats-for-sale/") &&
     pathname.split("/").filter(Boolean).length >= 4
+  const isSellBWizard =
+    typeof pathname === "string" && pathname === "/sell-b/wizard"
 
   if (isDesignSystem) {
     return <>{children}</>
   }
+
+  if (isSellBWizard) {
+    return <>{children}</>
+  }
+
+  const mainFullWidth = isBoatDetailPage
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -37,7 +45,7 @@ export function AppShell({ children }: AppShellProps) {
       <main
         className={cn(
           "mx-auto w-full pb-24 pt-4",
-          isBoatDetailPage ? "max-w-none px-0" : "max-w-7xl px-4 sm:px-6 lg:px-8"
+          mainFullWidth ? "max-w-none px-0" : "max-w-7xl px-4 sm:px-6 lg:px-0"
         )}
       >
         {children}
@@ -57,7 +65,8 @@ const mainNav = [
 const moreNav = [
   { name: "Membership", href: "/broker-dealer" },
   { name: "Propel", href: "/propel" },
-  { name: "Sell", href: "/sell" },
+  { name: "sellV1", href: "/sell" },
+  { name: "sellV2", href: "/sell-b" },
 ] as const
 
 function SiteHeader() {

@@ -116,7 +116,6 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
               { label: "November 2024", value: "$1,750,000" },
               { label: "Current price", value: "$1,650,000", emphasis: true },
             ]}
-            chartSrc="/propel/program-offers.png"
           />
 
           <BdpAiExplorer
@@ -137,14 +136,12 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
         </div>
 
         <aside className="space-y-6">
-          <div className="lg:sticky lg:top-6">
-            <BdpContactSeller
-              price={boat.price}
-              boatName={`${boat.year} ${boat.make} ${boat.model}`}
-              sellerName={boat.broker}
-              sellerLocation={boat.location}
-            />
-          </div>
+          <BdpContactSeller
+            price={boat.price}
+            boatName={`${boat.year} ${boat.make} ${boat.model}`}
+            sellerName={boat.broker}
+            sellerLocation={boat.location}
+          />
 
           <Card>
             <CardHeader className="text-lg font-bold">Video tour</CardHeader>

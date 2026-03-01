@@ -10,22 +10,26 @@ import { Anchor } from "lucide-react"
 
 interface StepOneProps {
   form: UseFormReturn<BoatFormData>
+  /** When true, hide the anchor icon, title and subtitle (e.g. when used in full-width wizard with external header) */
+  hideTitle?: boolean
 }
 
-const StepOne = ({ form }: StepOneProps) => {
+const StepOne = ({ form, hideTitle = false }: StepOneProps) => {
   const { register, formState: { errors }, setValue, watch } = form
   const boatType = watch("boatType")
   const listedElsewhere = watch("listedElsewhere")
 
   return (
     <div className="space-y-5">
-      <div className="text-center mb-6">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-3">
-          <Anchor className="w-6 h-6 text-primary" />
+      {!hideTitle && (
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-3">
+            <Anchor className="w-6 h-6 text-primary" />
+          </div>
+          <h2 className="text-2xl font-bold text-foreground">Sell Your Boat</h2>
+          <p className="text-muted-foreground mt-1">Takes less than 2 minutes.</p>
         </div>
-        <h2 className="text-2xl font-bold text-foreground">Sell Your Boat</h2>
-        <p className="text-muted-foreground mt-1">Takes less than 2 minutes.</p>
-      </div>
+      )}
 
       <div className="space-y-1.5">
         <Label htmlFor="boatType">Boat Type</Label>
@@ -42,7 +46,7 @@ const StepOne = ({ form }: StepOneProps) => {
         {errors.boatType && <p className="text-sm text-destructive">{errors.boatType.message}</p>}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label htmlFor="brand">Brand</Label>
           <Input id="brand" placeholder="e.g. Beneteau" {...register("brand")} />
@@ -55,7 +59,7 @@ const StepOne = ({ form }: StepOneProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label htmlFor="year">Year</Label>
           <Input id="year" type="number" placeholder="2020" {...register("year")} />

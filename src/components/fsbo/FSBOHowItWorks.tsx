@@ -37,7 +37,7 @@ export function FSBOHowItWorks({ className }: { className?: string }) {
   return (
     <section
       className={cn(
-        "w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-10",
+        "w-full py-10 lg:py-10",
         className
       )}
       aria-labelledby="how-it-works-heading"
