@@ -1,6 +1,10 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import { FSBOHero } from "@/components/fsbo/FSBOHero"
+import { FSBOHowItWorks } from "@/components/fsbo/FSBOHowItWorks"
+import { FSBOTestimonialSection } from "@/components/fsbo/FSBOTestimonialSection"
+import { FSBOMetricsSection } from "@/components/fsbo/FSBOMetricsSection"
 
 // BoatForm initialises the Supabase client at module load time.
 // Using ssr:false here (inside a Client Component) prevents that from
@@ -11,5 +15,14 @@ const BoatForm = dynamic(
 )
 
 export function SellPageClient() {
-  return <BoatForm />
+  return (
+    <>
+      <FSBOHero>
+        <BoatForm />
+      </FSBOHero>
+      <FSBOHowItWorks />
+      <FSBOTestimonialSection />
+      <FSBOMetricsSection />
+    </>
+  )
 }

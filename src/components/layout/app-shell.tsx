@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu } from "lucide-react"
+import { Menu, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -47,31 +47,52 @@ export function AppShell({ children }: AppShellProps) {
   )
 }
 
-const navigation = [
-  { name: "Boat for sale", href: "/boats-for-sale" },
-  { name: "Research & Advice", href: "/research-advice" },
+const mainNav = [
+  { name: "Boats for sale", href: "/boats-for-sale" },
+  { name: "Power for sale", href: "/boats-for-sale?type=power" },
+  { name: "Sail boats", href: "/boats-for-sale?type=sail" },
+  { name: "Research & advice", href: "/research-advice" },
+] as const
+
+const moreNav = [
   { name: "Membership", href: "/broker-dealer" },
   { name: "Propel", href: "/propel" },
-]
+  { name: "Sell", href: "/sell" },
+] as const
 
 function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+        setMoreOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
+
+  const navLinkClass =
+    "text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-[4px]">
       <nav
         aria-label="Global"
-        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
+        className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
       >
         {/* Logo */}
-        <div className="flex lg:flex-1">
+        <div className="flex shrink-0">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Rightboat</span>
             <Image
               src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
               alt="Rightboat"
-              width={120}
-              height={40}
+              width={152}
+              height={26}
               className="h-[26px] w-auto"
               priority
             />
@@ -92,10 +113,7 @@ function SiteHeader() {
             </SheetTrigger>
             <SheetContent side="right" className="w-full sm:max-w-sm">
               <SheetHeader>
-                <Link
-                  href="/"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
                   <Image
                     src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
                     alt="Rightboat"
@@ -107,9 +125,8 @@ function SiteHeader() {
               </SheetHeader>
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-border">
-                  {/* Mobile Navigation Links */}
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
+                  <div className="space-y-1 py-6">
+                    {mainNav.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
@@ -119,24 +136,35 @@ function SiteHeader() {
                         {item.name}
                       </Link>
                     ))}
-                  </div>
-                  {/* Mobile Actions */}
-                  <div className="py-6">
-                    <div className="mb-4 space-y-3">
-                      <Button
-                        variant="outline"
-                        className="w-full"
+                    <p className="-mx-3 px-3 py-2 text-sm font-medium text-muted-foreground">
+                      More
+                    </p>
+                    {moreNav.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="-mx-3 ml-2 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Signup
-                      </Button>
-                    </div>
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="space-y-3 py-6">
                     <Button
-                      className="w-full"
+                      variant="outline"
+                      className="w-full rounded-xl"
                       onClick={() => setMobileMenuOpen(false)}
-                      asChild
                     >
-                      <Link href="/sell">Sell your boat</Link>
+                      Signup
+                    </Button>
+                    <Button className="w-full rounded-xl" asChild>
+                      <Link
+                        href="/sell"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Sell your boat
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -145,29 +173,64 @@ function SiteHeader() {
           </Sheet>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:gap-x-8">
-          {navigation.map((item) => (
+        {/* Desktop: main nav + More dropdown */}
+        <div className="hidden lg:flex lg:items-center lg:gap-8">
+          {mainNav.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-foreground hover:text-primary"
+              className={navLinkClass}
             >
               {item.name}
             </Link>
           ))}
+          <div className="relative" ref={moreRef}>
+            <button
+              type="button"
+              className={cn("flex items-center gap-0.5", navLinkClass)}
+              onClick={() => setMoreOpen(!moreOpen)}
+              aria-expanded={moreOpen}
+              aria-haspopup="true"
+            >
+              More
+              <ChevronDown
+                className={cn("h-4 w-4 transition-transform", moreOpen && "rotate-180")}
+                aria-hidden
+              />
+            </button>
+            {moreOpen && (
+              <div
+                className="absolute left-0 top-full z-50 mt-1 min-w-[160px] rounded-lg border border-border bg-background py-1 shadow-lg"
+                role="menu"
+              >
+                {moreNav.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary"
+                    role="menuitem"
+                    onClick={() => setMoreOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Desktop Actions */}
-        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              Signup
-            </Button>
-            <Button size="sm" asChild>
-              <Link href="/sell">Sell your boat</Link>
-            </Button>
-          </div>
+        {/* Desktop CTA */}
+        <div className="hidden lg:flex lg:items-center lg:gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-10 rounded-xl border-border px-4 font-medium"
+          >
+            Signup
+          </Button>
+          <Button size="sm" className="h-10 rounded-xl px-4 font-medium" asChild>
+            <Link href="/sell">Sell your boat</Link>
+          </Button>
         </div>
       </nav>
     </header>

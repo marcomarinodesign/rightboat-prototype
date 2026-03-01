@@ -218,15 +218,6 @@
     display: none;
   }
 
-  section.bg-primary {
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      var(--pattern-color, rgba(255, 255, 255, 0.45)) 1px,
-      transparent 1px
-    );
-    background-size: 18px 18px;
-  }
-
   .logo-marquee {
     overflow: hidden;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);

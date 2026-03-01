@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function SellPage() {
-  return (
-    <div className="mx-auto max-w-lg py-10">
-      <SellPageClient />
-    </div>
-  )
+  return <SellPageClient />
 }
