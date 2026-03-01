@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 
 import { ArticleCard } from "@/components/blog/article-card"
 import { BoatCard } from "@/components/boats/boat-card"
@@ -28,16 +27,21 @@ export default function Home() {
         </div>
         <HeroSearch />
 
-        {/* Placeholder block (fixed 400px height across breakpoints) */}
-        <div className="relative w-full overflow-hidden rounded-xl bg-muted h-[400px]">
-          <Image
-            alt="Homepage placeholder"
-            src="https://ui.shadcn.com/placeholder.svg"
-            fill
-            className="h-full w-full object-cover"
-            unoptimized
-            priority
-          />
+        {/* Video: Sailing in the middle of the ocean — Lars H Knudsen / Pexels */}
+        <div className="relative w-full h-[400px] overflow-hidden rounded-xl bg-muted">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+            aria-label="Sailing in the middle of the ocean"
+          >
+            <source
+              src="https://videos.pexels.com/video-files/3083871/3083871-hd_1920_1080_25fps.mp4"
+              type="video/mp4"
+            />
+          </video>
         </div>
       </section>
 
