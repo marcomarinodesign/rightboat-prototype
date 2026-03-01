@@ -42,11 +42,11 @@ export function FSBOTestimonialSection({ className }: { className?: string }) {
             <div className="space-y-2">
               <h2
                 id="testimonial-section-heading"
-                className="text-3xl font-bold leading-tight tracking-tight text-[#fafafa] sm:text-4xl"
+                className="text-3xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-4xl"
               >
                 See How Easy It Is
               </h2>
-              <p className="whitespace-nowrap text-base leading-7 text-[#fafafa] sm:text-lg">
+              <p className="text-base leading-7 text-primary-foreground/95 sm:text-lg">
                 Your listing goes from draft to live in minutes.
               </p>
             </div>
@@ -55,7 +55,7 @@ export function FSBOTestimonialSection({ className }: { className?: string }) {
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={i}
-                  className="flex flex-1 flex-col gap-6 rounded-lg border border-border bg-muted p-4 shadow-md"
+                  className="flex flex-1 flex-col gap-6 rounded-lg border border-border bg-muted p-4 shadow-sm"
                 >
                   <div className="flex gap-1">
                     {Array.from({ length: t.rating }).map((_, j) => (

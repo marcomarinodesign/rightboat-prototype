@@ -22,23 +22,27 @@ export function FSBOHero({ children, className }: FSBOHeroProps) {
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 lg:items-center">
-          {/* Mobile: form first (order-1), then text (order-2) */}
-          {/* Desktop: text left, form right — use order only on mobile */}
-          <div className="order-2 flex flex-col justify-center lg:order-1">
+          {/* Mobile/tablet: title + description above wizard, center-aligned. Desktop: text left, form right */}
+          <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:text-left">
+            <div className="mb-4 inline-flex w-fit items-center justify-center rounded-full bg-primary/10 px-3.5 py-1.5 lg:mb-6">
+              <span className="text-xs font-normal leading-none text-muted-foreground">
+                For brokers & dealers
+              </span>
+            </div>
             <h1
               id="fsbo-hero-heading"
-              className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-foreground"
+              className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
               Sell your boat{" "}
               <span className="text-primary">privately</span>
             </h1>
-            <p className="mt-4 text-base text-muted-foreground sm:text-lg max-w-xl">
+            <p className="mt-4 text-base text-muted-foreground sm:text-lg max-w-xl lg:max-w-xl mx-auto lg:mx-0">
               {HERO_SUBTEXT}
             </p>
           </div>
 
-          <div className="order-1 lg:order-2">
-            <div className="rounded-xl bg-white p-6 shadow-md">
+          <div className="order-2 lg:order-2">
+            <div className="rounded-xl bg-card border border-border p-6 shadow-md">
               {children}
             </div>
           </div>
