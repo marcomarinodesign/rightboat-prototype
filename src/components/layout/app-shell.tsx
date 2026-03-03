@@ -26,18 +26,21 @@ export function AppShell({ children }: AppShellProps) {
     typeof pathname === "string" &&
     pathname.startsWith("/boats-for-sale/") &&
     pathname.split("/").filter(Boolean).length >= 4
+  const isSellBv3 = pathname === "/sell-b-v3"
   const isSellBWizard =
     typeof pathname === "string" && pathname === "/sell-b/wizard"
+  const isSellBv3Wizard =
+    typeof pathname === "string" && pathname === "/sell-b-v3/wizard"
 
   if (isDesignSystem) {
     return <>{children}</>
   }
 
-  if (isSellBWizard) {
+  if (isSellBWizard || isSellBv3Wizard) {
     return <>{children}</>
   }
 
-  const mainFullWidth = isBoatDetailPage
+  const mainFullWidth = isBoatDetailPage || isSellBv3
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -67,6 +70,7 @@ const moreNav = [
   { name: "Propel", href: "/propel" },
   { name: "sellV1", href: "/sell" },
   { name: "sellV2", href: "/sell-b" },
+  { name: "sellV3", href: "/sell-b-v3" },
 ] as const
 
 function SiteHeader() {

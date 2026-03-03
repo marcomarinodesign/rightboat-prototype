@@ -5,23 +5,29 @@ import { Anchor } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const WIZARD_IMAGE = {
-  src: "/sell-b-wizard-hero.png",
-  alt: "White motor yacht on teal water, aerial view",
+  src: "https://images.unsplash.com/photo-1543140313-318677635120?w=1920&q=80",
+  alt: "Aerial photography of motorboat on sea",
 }
 
 interface SellBWizardLayoutProps {
-  /** Current step (1–3) for progress display */
+  /** Current step for progress display */
   currentStep: number
+  /** Total steps (default 3) */
+  totalSteps?: number
+  /** When true, hide the step 1 header (anchor + title + subtitle) */
+  hideStepHeader?: boolean
   children: React.ReactNode
   className?: string
 }
 
 export function SellBWizardLayout({
   currentStep,
+  totalSteps = 3,
+  hideStepHeader = false,
   children,
   className,
 }: SellBWizardLayoutProps) {
-  const progressPercent = Math.round((currentStep / 3) * 100)
+  const progressPercent = Math.round((currentStep / totalSteps) * 100)
 
   return (
     <div
@@ -49,7 +55,7 @@ export function SellBWizardLayout({
           <div className="mb-6 sm:mb-8">
             <div className="mb-2 flex items-center justify-between">
               <span className="text-sm font-medium text-foreground">
-                Step {currentStep} of 3
+                Step {currentStep} of {totalSteps}
               </span>
               <span className="text-sm font-medium text-foreground">
                 {progressPercent}%
@@ -64,7 +70,7 @@ export function SellBWizardLayout({
           </div>
 
           {/* Step 1 header: anchor + title + subtitle (only show on step 1 for Figma match) */}
-          {currentStep === 1 && (
+          {!hideStepHeader && currentStep === 1 && (
             <div className="mb-6 text-center sm:mb-8">
               <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted sm:mb-3 sm:h-12 sm:w-12">
                 <Anchor className="h-5 w-5 text-primary sm:h-6 sm:w-6" aria-hidden />

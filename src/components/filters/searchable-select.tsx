@@ -16,6 +16,8 @@ type SearchableSelectProps = {
   options: SelectOption[]
   placeholder: string
   searchPlaceholder?: string
+  /** When true, shows error state (red border) */
+  invalid?: boolean
   /** @deprecated no longer applied; kept for API compatibility */
   triggerClassName?: string
 }
@@ -31,6 +33,7 @@ export function SearchableSelect({
   options,
   placeholder,
   searchPlaceholder = "Search",
+  invalid = false,
 }: SearchableSelectProps) {
   const [open, setOpen] = React.useState(false)
   const [query, setQuery] = React.useState("")
@@ -96,11 +99,13 @@ export function SearchableSelect({
         onClick={() => (open ? handleClose() : handleOpen())}
         aria-expanded={open}
         aria-haspopup="listbox"
+        aria-invalid={invalid}
         className={cn(
           "flex h-11 w-full items-center justify-between rounded-lg border bg-background px-3.5 text-sm transition-colors",
+          invalid && !open && "border-destructive",
           open
             ? "border-ring ring-2 ring-ring ring-offset-2"
-            : "border-input hover:border-ring/60",
+            : !invalid && "border-input hover:border-ring/60",
           selectedOption ? "text-foreground" : "text-muted-foreground"
         )}
       >
@@ -134,12 +139,12 @@ export function SearchableSelect({
         </span>
       </button>
 
-      {/* ── Inline dropdown (no portal) ─────────────────────────────── */}
+      {/* ── Dropdown (absolute, no layout shift) ─────────────────────── */}
       {open && (
         <div
           role="listbox"
           aria-label={placeholder}
-          className="mt-1 overflow-hidden rounded-lg border border-border bg-background shadow-md"
+          className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-lg border border-border bg-background shadow-md"
         >
           {/* Search input */}
           <div className="border-b border-border/50 p-2">
