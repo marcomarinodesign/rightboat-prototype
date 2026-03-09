@@ -106,7 +106,7 @@ export default function PropelPage() {
             description:
               "Connect with a wider network of buyers and sellers. Showcase your listings and grow your client base with Propel's integrated tools.",
             icon: (
-              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
+              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-2xl">
                 <Briefcase />
               </IconContainer>
             ),
@@ -119,7 +119,7 @@ export default function PropelPage() {
             description:
               "Strengthen your dealership's presence on Rightboat. Get more qualified leads and showcase your inventory to a global audience with Propel's tools.",
             icon: (
-              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
+              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-2xl">
                 <Store />
               </IconContainer>
             ),
@@ -132,7 +132,7 @@ export default function PropelPage() {
             description:
               "Reach dealers and buyers at scale. Propel gives OEMs data-driven insights and premium placement to grow market share.",
             icon: (
-              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-[20px]">
+              <IconContainer className="size-10 mb-0 bg-card border shadow-xs rounded-2xl">
                 <Factory />
               </IconContainer>
             ),

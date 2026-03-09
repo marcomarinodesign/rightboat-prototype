@@ -56,14 +56,14 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
       {options?.linkName ? (
         <Link
           href={href}
-          className="truncate text-lg font-bold leading-[26px] text-foreground transition-colors hover:text-primary"
+          className="truncate text-lg font-bold leading-snug text-foreground transition-colors hover:text-primary"
           title={boatName}
         >
           {boatName}
         </Link>
       ) : (
         <span
-          className="truncate text-lg font-bold leading-[26px] text-foreground"
+          className="truncate text-lg font-bold leading-snug text-foreground"
           title={boatName}
         >
           {boatName}

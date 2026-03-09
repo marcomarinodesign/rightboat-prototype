@@ -162,7 +162,7 @@ export function BdpGallery({
           {canScrollLeft && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-opacity hover:opacity-90"
+              className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-card p-2 shadow-lg transition-opacity hover:opacity-90"
               aria-label="Previous image"
             >
               <ChevronLeft className="h-5 w-5 text-foreground" />

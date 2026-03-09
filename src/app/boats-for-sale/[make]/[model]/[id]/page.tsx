@@ -7,6 +7,7 @@ import { BdpDetails, getBdpDetailsForBoat, getDefaultBdpDetails } from "@/compon
 import { BdpContactSeller } from "@/components/boats/bdp/bdp-contact-seller"
 import { BdpPriceHistory } from "@/components/boats/bdp/bdp-price-history"
 import { BdpAiExplorer } from "@/components/boats/bdp/bdp-ai-explorer"
+import { BdpBreadcrumb } from "@/components/boats/bdp/bdp-breadcrumb"
 import { BdpRightPanel } from "@/components/boats/bdp/bdp-right-panel"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import {
@@ -39,13 +40,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
 
   return (
     <div className="mx-auto w-full max-w-7xl space-y-10 px-4 pb-6 pt-4 sm:px-6 lg:px-8">
-      <div className="space-y-2 text-sm text-muted-foreground">
-        <div>
-          <Link href="/">Home</Link> /{" "}
-          <Link href="/boats-for-sale">Boats for sale</Link> / {boat.make}{" "}
-          {boat.model}
-        </div>
-      </div>
+      <BdpBreadcrumb make={boat.make} model={boat.model} />
 
       <section className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
         <div className="space-y-6">
@@ -148,7 +143,7 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <Link
                 href="https://www.youtube.com/watch?v=vpQNSZkrLag"
-                className="block overflow-hidden rounded-xl border border-border/60"
+                className="block overflow-hidden rounded-lg border border-border/60"
               >
                 <Image
                   src="https://img.youtube.com/vi/vpQNSZkrLag/sddefault.jpg"

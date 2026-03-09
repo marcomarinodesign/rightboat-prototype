@@ -61,10 +61,6 @@ const HERO_IMAGE = {
   alt: "Close-up of sailboat deck and sail on open water",
 }
 
-const HOW_IT_WORKS_IMAGE = {
-  src: "/how-it-works-boat.png",
-  alt: "Modern motorboat on turquoise water",
-}
 
 export function SellBv3LandingClient() {
   const [signupModalOpen, setSignupModalOpen] = useState(false)
@@ -93,7 +89,7 @@ export function SellBv3LandingClient() {
   }
 
   return (
-    <div className="flex flex-col gap-10 lg:gap-[56px]">
+    <div className="flex flex-col gap-10 lg:gap-14">
       {/* Hero — matches Figma FSBO hero layout */}
       <section
         className="px-4 pt-10 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-0 lg:pt-10 lg:pb-0"
@@ -102,23 +98,23 @@ export function SellBv3LandingClient() {
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <div className="mb-4 inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-[14px] py-[6px] lg:mb-6">
-              <span className="text-[11.4px] font-normal leading-4 text-white sm:text-xs">
+              <span className="text-xs font-normal leading-4 text-white">
                 For brokers & dealers
               </span>
             </div>
             <h1
               id="sell-b-v3-hero-heading"
-              className="text-4xl font-bold leading-tight tracking-[-0.03em] text-foreground sm:text-5xl sm:tracking-[-1.2px] lg:text-[48px] lg:leading-[60px]"
+              className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl sm:tracking-tight lg:text-5xl lg:leading-tight"
             >
               Sell your boat{" "}
               <span className="text-primary">privately</span>
             </h1>
-            <p className="mt-4 max-w-[672px] text-base leading-7 text-muted-foreground sm:text-[18.9px] sm:leading-[28px]">
+            <p className="mt-4 max-w-[672px] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-7">
               {HERO_DESCRIPTION}
             </p>
           </div>
-          <div className="relative z-10 w-full max-w-md rounded-[12px] border border-border bg-background px-[33px] py-[24px] shadow-sm backdrop-blur">
-            <div className="mb-5 text-center text-[18px] font-bold leading-[26px] text-foreground">
+          <div className="relative z-10 w-full max-w-md rounded-lg border border-border bg-background px-8 py-6 shadow-sm backdrop-blur">
+            <div className="mb-5 text-center text-lg font-bold leading-7 text-foreground">
               Takes less than 2 minutes.
             </div>
             <StepOneLP
@@ -148,7 +144,7 @@ export function SellBv3LandingClient() {
         className="px-4 sm:px-6 lg:px-0"
         aria-labelledby="how-it-works-heading"
       >
-        <div className="mx-auto w-full max-w-7xl rounded-[20px] bg-[#0B6CFF] px-4 py-12 sm:px-6 lg:px-10 lg:py-[60px]">
+        <div className="mx-auto w-full max-w-7xl rounded-2xl bg-[#0B6CFF] px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
           <div className="mx-auto max-w-[720px] text-center">
             <h2
               id="how-it-works-heading"
@@ -156,7 +152,7 @@ export function SellBv3LandingClient() {
             >
               How It Works
             </h2>
-            <p className="mt-3 text-[17px] leading-7 text-white/90">
+            <p className="mt-3 text-base leading-7 text-white/90">
               From listing to sale, you stay in control. Follow these simple
               steps to sell your boat privately.
             </p>
@@ -167,7 +163,7 @@ export function SellBv3LandingClient() {
               return (
                 <div
                   key={step.title}
-                  className="flex flex-col items-center rounded-[20px] bg-white px-6 py-8 text-center shadow-sm"
+                  className="flex flex-col items-center rounded-2xl bg-white px-6 py-8 text-center shadow-sm"
                 >
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#0B6CFF] text-white">
                     <Icon className="h-5 w-5" aria-hidden />
@@ -203,15 +199,15 @@ export function SellBv3LandingClient() {
         className="px-4 py-12 sm:px-6 lg:px-0 lg:py-16"
         aria-labelledby="why-list-heading"
       >
-        <div className="mx-auto w-full max-w-7xl rounded-[20px] bg-[#050530] px-4 py-10 sm:px-6 lg:px-10 lg:py-[60px]">
+        <div className="mx-auto w-full max-w-7xl rounded-2xl bg-[#050530] px-4 py-10 sm:px-6 lg:px-10 lg:py-16">
           <div className="mx-auto max-w-[672px] space-y-3 text-center">
             <h2
               id="why-list-heading"
-              className="text-3xl font-bold leading-[45px] tracking-[-0.9px] text-white lg:text-[36px]"
+              className="text-3xl font-bold leading-tight tracking-tight text-white lg:text-4xl"
             >
               Why List With Us
             </h2>
-            <p className="text-[17.3px] leading-7 text-white/80">
+            <p className="text-base leading-7 text-white/80">
               Get more visibility and longer listing life with an optional Boost
               package.
             </p>
@@ -222,12 +218,12 @@ export function SellBv3LandingClient() {
                 key={i}
                 className="flex flex-col items-center gap-2 text-center"
               >
-                <h4 className="text-lg font-bold leading-10 text-[#33C1FD] lg:text-[23px] lg:leading-[30px]">
+                <h4 className="text-lg font-bold leading-tight text-[#33C1FD] lg:text-xl">
                   {item.title[0]}
                   <br aria-hidden />
                   {item.title[1]}
                 </h4>
-                <p className="text-[15.1px] leading-6 text-white/80">
+                <p className="text-sm leading-6 text-white/80">
                   {item.description}
                 </p>
               </div>
@@ -236,7 +232,7 @@ export function SellBv3LandingClient() {
           <div className="mt-10 flex justify-center">
             <Button
               size="lg"
-              className="h-10 rounded-xl px-6 font-medium"
+              className="font-medium"
               asChild
             >
               <Link href="/sell-b-v3">Sell your boat</Link>

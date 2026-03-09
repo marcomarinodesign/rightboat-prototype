@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { boatCategories } from "@/data/categories-extended"
+import { Button } from "@/components/ui/button"
 
 export function HomeCategories() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -103,9 +104,9 @@ export function HomeCategories() {
                     {category.name}
                   </h3>
                   <div className="flex w-full flex-col items-center gap-4">
-                    <span className="inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground">
+                    <Button size="sm" className="pointer-events-none">
                       Discover
-                    </span>
+                    </Button>
                     <p className="text-sm text-white/90">
                       {category.description}
                     </p>
@@ -120,7 +121,7 @@ export function HomeCategories() {
         {canScrollLeft && (
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-opacity hover:opacity-90"
+            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-card p-2 shadow-lg transition-opacity hover:opacity-90"
             aria-label="Previous categories"
           >
             <ChevronLeft className="h-5 w-5 text-primary" />
@@ -129,7 +130,7 @@ export function HomeCategories() {
         {canScrollRight && (
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-opacity hover:opacity-90"
+            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-card p-2 shadow-lg transition-opacity hover:opacity-90"
             aria-label="Next categories"
           >
             <ChevronRight className="h-5 w-5 text-primary" />
@@ -138,7 +139,7 @@ export function HomeCategories() {
 
         {/* Pagination Dots */}
         <div className="mt-4 flex items-center justify-start gap-2">
-          <div className="flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5">
+          <div className="flex items-center gap-1.5 rounded-lg bg-card px-3 py-1.5">
             {boatCategories.map((_, index) => (
               <button
                 key={index}

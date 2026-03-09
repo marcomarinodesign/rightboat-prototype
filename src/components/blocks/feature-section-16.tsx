@@ -105,7 +105,7 @@ export function FeatureSection16({
             </h3>
           </div>
           <div className="flex flex-col gap-6">
-            <p className="text-muted-foreground text-base leading-[1.75] text-pretty">
+            <p className="text-muted-foreground text-base leading-relaxed text-pretty">
               {activeFeature.description}
             </p>
             {activeFeature.link && (

@@ -219,7 +219,7 @@ export function BoatFormV3({
       <div
         className={
           isFullWidth
-            ? "sticky bottom-0 left-0 right-0 -mx-4 border-t border-border bg-white px-4 pt-4 mt-6 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 lg:-mx-[68px] lg:px-[68px]"
+            ? "sticky bottom-0 left-0 right-0 -mx-4 border-t border-border bg-background px-4 pt-4 mt-6 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 lg:-mx-[68px] lg:px-[68px]"
             : "sticky bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border pt-4 pb-6 mt-6 -mx-6 px-6"
         }
         style={

@@ -165,7 +165,7 @@ export function ComparisonSection3({
 
   if (isMuted) {
     return (
-      <div className="w-full bg-muted py-[60px]">
+      <div className="w-full bg-muted py-16">
         {content}
       </div>
     )
