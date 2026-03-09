@@ -2,15 +2,37 @@ import { Star } from "lucide-react"
 
 import { testimonials } from "@/data/testimonials"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
-export function Testimonials() {
+interface TestimonialsProps {
+  align?: "left" | "center"
+}
+
+export function Testimonials({ align = "left" }: TestimonialsProps) {
   return (
     <section className="space-y-6" aria-labelledby="testimonials-heading">
-      <div>
-        <h2 id="testimonials-heading" className="text-2xl font-bold">
+      <div
+        className={cn(
+          align === "center" && "mx-auto max-w-[672px] space-y-3 text-center"
+        )}
+      >
+        <h2
+          id="testimonials-heading"
+          className={cn(
+            "font-bold",
+            align === "center"
+              ? "text-3xl leading-[45px] tracking-[-0.9px] text-foreground lg:text-[36px]"
+              : "text-2xl"
+          )}
+        >
           Our Testimonials
         </h2>
-        <p className="mt-2 text-muted-foreground">
+        <p
+          className={cn(
+            "mt-2 text-muted-foreground",
+            align === "center" && "text-[17.3px] leading-7"
+          )}
+        >
           See what our customers say about their Rightboat experience
         </p>
       </div>

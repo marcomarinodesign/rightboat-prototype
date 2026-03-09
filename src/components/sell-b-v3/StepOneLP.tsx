@@ -55,10 +55,7 @@ export function StepOneLP({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1fr_1fr_1fr_auto] md:items-start"
-        style={{ columnGap: "20px", rowGap: "20px" }}
-      >
+      <div className="flex flex-col gap-4">
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
             name="brand"
@@ -74,13 +71,11 @@ export function StepOneLP({
               />
             )}
           />
-          <div className="min-h-5">
-            {errors.brand && (
-              <p className="text-sm text-destructive" role="alert">
-                {errors.brand.message}
-              </p>
-            )}
-          </div>
+          {errors.brand && (
+            <p className="text-sm text-destructive" role="alert">
+              {errors.brand.message}
+            </p>
+          )}
         </div>
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
@@ -97,13 +92,11 @@ export function StepOneLP({
               />
             )}
           />
-          <div className="min-h-5">
-            {errors.model && (
-              <p className="text-sm text-destructive" role="alert">
-                {errors.model.message}
-              </p>
-            )}
-          </div>
+          {errors.model && (
+            <p className="text-sm text-destructive" role="alert">
+              {errors.model.message}
+            </p>
+          )}
         </div>
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
@@ -120,22 +113,20 @@ export function StepOneLP({
               />
             )}
           />
-          <div className="min-h-5">
-            {errors.year && (
-              <p className="text-sm text-destructive" role="alert">
-                {errors.year.message}
-              </p>
-            )}
-          </div>
+          {errors.year && (
+            <p className="text-sm text-destructive" role="alert">
+              {errors.year.message}
+            </p>
+          )}
         </div>
         <div className="flex flex-col gap-1">
           <Button
             type="submit"
             size="lg"
-            className="h-11 w-full shrink-0 rounded-lg px-6 font-medium md:w-auto"
+            className="h-11 w-full shrink-0 rounded-[12px] px-6 font-medium"
             disabled={isSubmitting}
           >
-            Sell
+            Sell your boat
           </Button>
           <div className="min-h-5" aria-hidden="true" />
         </div>

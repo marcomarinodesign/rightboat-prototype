@@ -27,8 +27,6 @@ export function AppShell({ children }: AppShellProps) {
     pathname.startsWith("/boats-for-sale/") &&
     pathname.split("/").filter(Boolean).length >= 4
   const isSellBv3 = pathname === "/sell-b-v3"
-  const isSellBWizard =
-    typeof pathname === "string" && pathname === "/sell-b/wizard"
   const isSellBv3Wizard =
     typeof pathname === "string" && pathname === "/sell-b-v3/wizard"
 
@@ -36,7 +34,7 @@ export function AppShell({ children }: AppShellProps) {
     return <>{children}</>
   }
 
-  if (isSellBWizard || isSellBv3Wizard) {
+  if (isSellBv3Wizard) {
     return <>{children}</>
   }
 
@@ -68,9 +66,7 @@ const mainNav = [
 const moreNav = [
   { name: "Membership", href: "/broker-dealer" },
   { name: "Propel", href: "/propel" },
-  { name: "sellV1", href: "/sell" },
-  { name: "sellV2", href: "/sell-b" },
-  { name: "sellV3", href: "/sell-b-v3" },
+  { name: "Sell your boat", href: "/sell-b-v3" },
 ] as const
 
 function SiteHeader() {
@@ -172,10 +168,7 @@ function SiteHeader() {
                       Signup
                     </Button>
                     <Button className="w-full rounded-xl" asChild>
-                      <Link
-                        href="/sell"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
+                      <Link href="/sell-b-v3" onClick={() => setMobileMenuOpen(false)}>
                         Sell your boat
                       </Link>
                     </Button>
@@ -242,7 +235,7 @@ function SiteHeader() {
             Signup
           </Button>
           <Button size="sm" className="h-10 rounded-xl px-4 font-medium" asChild>
-            <Link href="/sell">Sell your boat</Link>
+            <Link href="/sell-b-v3">Sell your boat</Link>
           </Button>
         </div>
       </nav>
