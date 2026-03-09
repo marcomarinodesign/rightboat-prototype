@@ -5,9 +5,19 @@ import Link from "next/link"
 import Image from "next/image"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ClipboardList, ImagePlus, Send } from "lucide-react"
+import {
+  ClipboardList,
+  ImagePlus,
+  Send,
+  TrendingUp,
+  CircleDollarSign,
+  Zap,
+  Users,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Testimonials } from "@/components/home/testimonials"
+import { FeatureSection9 } from "@/components/blocks/feature-section-9"
+import { IconContainer } from "@/components/ui/icon-container"
 import { step1LPSchema, type Step1LPData, type Step1LPFormInput } from "@/features/sell-boat/types-v3"
 import { StepOneLP } from "@/components/sell-b-v3/StepOneLP"
 import { SignupModal } from "@/components/sell-b-v3/SignupModal"
@@ -194,47 +204,58 @@ export function SellBv3LandingClient() {
         </div>
       </section>
 
-      {/* Why List With Us */}
-      <section
-        className="px-4 py-12 sm:px-6 lg:px-0 lg:py-16"
-        aria-labelledby="why-list-heading"
-      >
-        <div className="mx-auto w-full max-w-7xl rounded-2xl bg-[#050530] px-4 py-10 sm:px-6 lg:px-10 lg:py-16">
-          <div className="mx-auto max-w-[672px] space-y-3 text-center">
-            <h2
-              id="why-list-heading"
-              className="text-3xl font-bold leading-tight tracking-tight text-white lg:text-4xl"
-            >
-              Why List With Us
-            </h2>
-            <p className="text-base leading-7 text-white/80">
-              Get more visibility and longer listing life with an optional Boost
-              package.
-            </p>
-          </div>
-          <div className="mt-10 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {BENEFITS.map((item, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center gap-2 text-center"
-              >
-                <h4 className="text-lg font-bold leading-tight text-[#33C1FD] lg:text-xl">
-                  {item.title[0]}
-                  <br aria-hidden />
-                  {item.title[1]}
-                </h4>
-                <p className="text-sm leading-6 text-white/80">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Button
-              size="lg"
-              className="font-medium"
-              asChild
-            >
+      {/* Why List With Us – matches Propel layout */}
+      <section className="px-4 py-12 sm:px-6 lg:px-0 lg:py-16">
+        <div className="mx-auto w-full max-w-7xl">
+          <FeatureSection9
+            title="Why List With Us"
+            description="Get more visibility and longer listing life with an optional Boost package."
+            features={[
+              {
+                title: "Thousands of buyers",
+                description:
+                  "Showcase your boat with extra media so buyers get a full picture.",
+                icon: (
+                  <IconContainer className="size-12 mb-0">
+                    <TrendingUp />
+                  </IconContainer>
+                ),
+              },
+              {
+                title: "No broker fees",
+                description:
+                  "Sell without paying broker commission. You set the price and keep 100% of the sale.",
+                icon: (
+                  <IconContainer className="size-12 mb-0">
+                    <CircleDollarSign />
+                  </IconContainer>
+                ),
+              },
+              {
+                title: "Fast and simple",
+                description:
+                  "Create your listing in minutes and keep it live until you sell.",
+                icon: (
+                  <IconContainer className="size-12 mb-0">
+                    <Zap />
+                  </IconContainer>
+                ),
+              },
+              {
+                title: "Full control",
+                description:
+                  "Receive and manage buyer enquiries directly in your inbox.",
+                icon: (
+                  <IconContainer className="size-12 mb-0">
+                    <Users />
+                  </IconContainer>
+                ),
+              },
+            ]}
+            headingId="why-list-heading"
+          />
+          <div className="mt-8 flex justify-center">
+            <Button size="lg" className="font-medium" asChild>
               <Link href="/sell-b-v3">Sell your boat</Link>
             </Button>
           </div>
