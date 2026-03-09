@@ -19,10 +19,8 @@ export default function BrokerDealerPage() {
   const openContact = () => setContactOpen(true)
 
   return (
-    <div className="min-h-screen">
+    <div className="space-y-20 sm:space-y-24">
       <BrokerContactDialog open={contactOpen} onOpenChange={setContactOpen} />
-      
-      <div className="space-y-20 sm:space-y-24">
 
       {/* Hero Section */}
       <HeroSection10
@@ -330,7 +328,6 @@ export default function BrokerDealerPage() {
           primaryButton={{ text: "Get In Touch", onClick: openContact }}
         />
       </section>
-      </div>
     </div>
   )
 }

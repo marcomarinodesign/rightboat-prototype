@@ -50,7 +50,7 @@ export function HeroSection10({
       )}
       <h1
         id={headingId}
-        className="text-[48px] font-bold leading-tight tracking-tight"
+        className="text-5xl font-bold leading-tight tracking-tight"
       >
         {heading}
       </h1>

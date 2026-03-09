@@ -166,12 +166,12 @@ function SiteHeader() {
                   <div className="space-y-3 py-6">
                     <Button
                       variant="outline"
-                      className="w-full rounded-xl"
+                      className="w-full"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Signup
                     </Button>
-                    <Button className="w-full rounded-xl" asChild>
+                    <Button className="w-full" asChild>
                       <Link
                         href="/sell"
                         onClick={() => setMobileMenuOpen(false)}
@@ -237,11 +237,11 @@ function SiteHeader() {
           <Button
             variant="outline"
             size="sm"
-            className="h-10 rounded-xl border-border px-4 font-medium"
+            className="border-border font-medium"
           >
             Signup
           </Button>
-          <Button size="sm" className="h-10 rounded-xl px-4 font-medium" asChild>
+          <Button size="sm" className="font-medium" asChild>
             <Link href="/sell">Sell your boat</Link>
           </Button>
         </div>

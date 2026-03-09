@@ -86,7 +86,7 @@ export function FSBOHeroWizard({ onStepChange, compact = false }: FSBOHeroWizard
     <div className={cn("mx-auto max-w-md", compact && "max-w-none")}>
       <div
         className={cn(
-          "rounded-2xl bg-white p-6 shadow-lg flex flex-col",
+          "rounded-2xl bg-card p-6 shadow-lg flex flex-col",
           !compact && "min-h-[280px] h-[440px] max-h-[440px]"
         )}
       >

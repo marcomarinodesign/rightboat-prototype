@@ -161,7 +161,7 @@ const BoatForm = ({ variant = "default", hideStepTitle = false, onStepChange }: 
       <div
         className={
           isFullWidth
-            ? "sticky bottom-0 left-0 right-0 border-t border-border bg-white pt-4 mt-6"
+            ? "sticky bottom-0 left-0 right-0 border-t border-border bg-background pt-4 mt-6"
             : "sticky bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border pt-4 pb-6 mt-6 -mx-6 px-6"
         }
         style={

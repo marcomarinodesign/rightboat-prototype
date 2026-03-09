@@ -32,7 +32,7 @@ export function SellBWizardLayout({
   return (
     <div
       className={cn(
-        "grid h-screen w-screen max-w-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden bg-white lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:grid-rows-1",
+        "grid h-screen w-screen max-w-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden bg-background lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:grid-rows-1",
         className
       )}
     >
@@ -49,7 +49,7 @@ export function SellBWizardLayout({
       </div>
 
       {/* Right column: scrollable form area — full width responsive */}
-      <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-auto bg-white">
+      <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-auto bg-background">
         <div className="mx-auto w-full max-w-[730px] flex-1 px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-[68px] lg:py-10">
           {/* Progress */}
           <div className="mb-6 sm:mb-8">

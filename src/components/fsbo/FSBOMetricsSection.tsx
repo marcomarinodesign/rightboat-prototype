@@ -37,11 +37,11 @@ export function FSBOMetricsSection({ className }: { className?: string }) {
       <div className="mx-auto w-full max-w-[672px] space-y-3 text-center">
         <h2
           id="metrics-heading"
-          className="text-3xl font-bold leading-[45px] tracking-[-0.9px] text-foreground sm:text-4xl"
+          className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl"
         >
           Why List With Us
         </h2>
-        <p className="text-[17.3px] leading-7 text-muted-foreground">
+        <p className="text-base leading-7 text-muted-foreground">
           Get more visibility and longer listing life with an optional Boost
           package.
         </p>
@@ -55,7 +55,7 @@ export function FSBOMetricsSection({ className }: { className?: string }) {
               <br aria-hidden />
               {item.title[1]}
             </h4>
-            <p className="text-[15.1px] leading-6 text-muted-foreground">
+            <p className="text-sm leading-6 text-muted-foreground">
               {item.description}
             </p>
           </div>

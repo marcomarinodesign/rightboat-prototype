@@ -13,7 +13,7 @@ import { latestArticles } from "@/data/articles"
 
 export default function Home() {
   return (
-    <div className="space-y-[60px]">
+    <div className="space-y-16 md:space-y-20">
       <section className="space-y-6 text-center">
         <div className="space-y-6">
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
@@ -28,7 +28,7 @@ export default function Home() {
         <HeroSearch />
 
         {/* Video: Sailing in the middle of the ocean — Lars H Knudsen / Pexels */}
-        <div className="relative w-full h-[400px] overflow-hidden rounded-xl bg-muted">
+        <div className="relative w-full h-[400px] overflow-hidden rounded-2xl bg-muted">
           <video
             autoPlay
             muted

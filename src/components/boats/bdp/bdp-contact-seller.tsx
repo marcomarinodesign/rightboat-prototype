@@ -77,7 +77,7 @@ export function BdpContactSeller({
           <div className="flex items-center gap-3 rounded-lg bg-tag-bg p-3">
             <div className="h-[60px] w-[90px] shrink-0 rounded-lg bg-muted" />
             <div className="min-w-0">
-              <p className="text-[11px] leading-4 text-muted-foreground">
+              <p className="text-xs leading-4 text-muted-foreground">
                 OFFERED BY
               </p>
               <p className="truncate text-lg font-bold leading-6">

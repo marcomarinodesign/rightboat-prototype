@@ -66,7 +66,7 @@ export function FSBOTestimonialSection({ className }: { className?: string }) {
                       />
                     ))}
                   </div>
-                  <blockquote className="text-base leading-relaxed text-foreground sm:text-[17px]">
+                  <blockquote className="text-base leading-relaxed text-foreground sm:text-lg">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
                   <p className="text-sm font-bold leading-6 text-foreground sm:text-base">
