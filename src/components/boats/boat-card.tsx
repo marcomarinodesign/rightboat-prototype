@@ -1,11 +1,13 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Heart, Info } from "lucide-react"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
 import { ImageSlider } from "@/components/ui/image-slider"
+import { premiumBrands } from "@/data/brands"
 
 type BoatCardProps = {
   boat: Boat
@@ -16,14 +18,16 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
   const href = `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
   const images = boat.galleryImages?.length
     ? boat.galleryImages
-    : [boat.image]
+    : // When we only have a single image, repeat it so the
+      // carousel layout (including dots) is consistent across cards.
+      [boat.image, boat.image, boat.image, boat.image]
 
   const imageSection = (
     <div className="relative w-full overflow-hidden rounded-lg">
       <ImageSlider
         images={images}
         alt={`${boat.make} ${boat.model}`}
-        showDots={images.length > 1}
+        showDots
       />
       <button
         type="button"
@@ -41,7 +45,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
 
   const boatName = `${boat.make} ${boat.model}`
 
-  const detailsSection = (options?: { linkName?: boolean }) => (
+  const detailsSection = (options?: { linkName?: boolean; showContactCta?: boolean }) => (
     <div className="flex flex-col gap-2 p-2">
       {/* Year + Condition tags */}
       <div className="flex flex-wrap gap-2">
@@ -69,35 +73,56 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
           {boatName}
         </span>
       )}
+      {/* Price row */}
+      <div className="flex items-center justify-between gap-2 pt-1">
+        <span className="text-xl font-bold leading-7 text-primary">
+          {boat.price}
+        </span>
+        <button
+          type="button"
+          className="flex h-5 w-5 shrink-0 items-center justify-center text-primary"
+          aria-label="Price information"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
+        >
+          <Info className="h-4 w-4" strokeWidth={2} />
+        </button>
+      </div>
       {/* Location | Broker */}
       <div className="flex items-center gap-1 text-xs leading-4 text-muted-foreground">
         <span>{boat.location}</span>
         <span className="h-3.5 w-px shrink-0 bg-muted-foreground/60" aria-hidden />
         <span>{boat.broker}</span>
       </div>
-      {/* Seller logo + Price row */}
-      <div className="flex items-center justify-between gap-2 pt-1">
-        <div className="flex h-9 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-card">
-          <span className="truncate px-1 text-xs font-medium text-muted-foreground">
-            {boat.broker}
-          </span>
+      {/* Seller logo + CTA */}
+      <div className="flex items-center gap-3 pt-2">
+        {/* Fixed-width logo placeholder so all cards align */}
+        <div className="flex h-9 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-card px-2">
+          <Image
+            src={
+              premiumBrands[Math.abs(boat.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)) % premiumBrands.length]?.logo ??
+              "/brands/placeholder-logo.png"
+            }
+            alt={boat.broker || "Broker logo"}
+            width={96}
+            height={36}
+            className="h-full w-full object-contain"
+          />
         </div>
-        <div className="flex items-center gap-0.5">
-          <span className="text-xl font-bold leading-7 text-primary">
-            {boat.price}
-          </span>
+        {options?.showContactCta && (
           <button
             type="button"
-            className="flex h-5 w-5 shrink-0 items-center justify-center text-primary"
-            aria-label="Price information"
+            className="flex h-9 flex-1 items-center justify-center rounded-md bg-primary px-3 text-sm font-semibold text-primary-foreground"
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
             }}
           >
-            <Info className="h-4 w-4" strokeWidth={2} />
+            Contact Seller
           </button>
-        </div>
+        )}
       </div>
     </div>
   )
@@ -130,7 +155,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
       )}
     >
       {imageSection}
-      {detailsSection({ linkName: false })}
+      {detailsSection({ linkName: false, showContactCta: true })}
     </Link>
   )
 }
