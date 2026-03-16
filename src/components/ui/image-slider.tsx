@@ -113,7 +113,7 @@ export function ImageSlider({
 
   return (
     <div
-      className={cn("w-full", className)}
+      className={cn("relative w-full", className)}
       onKeyDown={handleKeyDown}
     >
       <div
@@ -122,18 +122,18 @@ export function ImageSlider({
         aria-roledescription="carousel"
         aria-label={alt}
         tabIndex={hasMultiple ? 0 : undefined}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={() => setIsDragging(false)}
         className={cn(
-          "relative flex w-full overflow-hidden rounded-xl",
+          "flex w-full overflow-hidden rounded-xl",
           "aspect-[3/2] touch-pan-x flex-row",
           "snap-x snap-mandatory overflow-x-auto overscroll-x-contain",
           "scroll-smooth scrollbar-hide [-webkit-overflow-scrolling:touch]",
           "[&::-webkit-scrollbar]:hidden",
           hasMultiple && "cursor-grab active:cursor-grabbing"
         )}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={() => setIsDragging(false)}
       >
         {images.map((src, i) => (
           <div
@@ -158,6 +158,35 @@ export function ImageSlider({
           </div>
         ))}
       </div>
+
+      {hasMultiple && (
+        <>
+          <button
+            type="button"
+            aria-label="Previous image"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              scrollTo(index - 1)
+            }}
+            className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            aria-label="Next image"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              scrollTo(index + 1)
+            }}
+            className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm"
+          >
+            ›
+          </button>
+        </>
+      )}
       {showDots && hasMultiple && count > 1 && (
         <div
           className="mt-2 flex justify-center gap-1.5"
@@ -171,7 +200,10 @@ export function ImageSlider({
               role="tab"
               aria-selected={index === i}
               aria-label={`Go to image ${i + 1}`}
-              onClick={() => scrollTo(i)}
+              onClick={(e) => {
+                e.stopPropagation()
+                scrollTo(i)
+              }}
               className={cn(
                 "h-1.5 w-1.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                 index === i ? "bg-foreground" : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
