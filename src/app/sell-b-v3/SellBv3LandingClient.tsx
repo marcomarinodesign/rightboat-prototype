@@ -123,8 +123,8 @@ export function SellBv3LandingClient() {
               {HERO_DESCRIPTION}
             </p>
           </div>
-          <div className="relative z-10 w-full max-w-md rounded-lg border border-border bg-background px-8 py-6 shadow-sm backdrop-blur">
-            <div className="mb-5 text-center text-lg font-bold leading-7 text-foreground">
+          <div className="relative z-10 w-full max-w-md rounded-[12px] border-4 border-[#13022c] bg-background p-[36px] shadow-[10px_10px_0px_0px_#0257fc,0px_1px_2px_0px_rgba(0,0,0,0.05)] backdrop-blur-[4px]">
+            <div className="mb-0 text-center text-[18px] font-bold leading-[26px] text-[#13022c]">
               Takes less than 2 minutes.
             </div>
             <StepOneLP

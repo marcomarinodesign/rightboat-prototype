@@ -18,7 +18,9 @@ type SearchableSelectProps = {
   searchPlaceholder?: string
   /** When true, shows error state (red border) */
   invalid?: boolean
-  /** @deprecated no longer applied; kept for API compatibility */
+  /** Optional className for the outer container */
+  className?: string
+  /** Optional className override for the trigger button */
   triggerClassName?: string
 }
 
@@ -34,6 +36,8 @@ export function SearchableSelect({
   placeholder,
   searchPlaceholder = "Search",
   invalid = false,
+  className,
+  triggerClassName,
 }: SearchableSelectProps) {
   const [open, setOpen] = React.useState(false)
   const [query, setQuery] = React.useState("")
@@ -92,7 +96,7 @@ export function SearchableSelect({
   }, [open]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className={cn("relative", className)}>
       {/* ── Trigger ────────────────────────────────────────────────── */}
       <button
         type="button"
@@ -106,7 +110,8 @@ export function SearchableSelect({
           open
             ? "border-ring ring-2 ring-ring ring-offset-2"
             : !invalid && "border-input hover:border-ring/60",
-          selectedOption ? "text-foreground" : "text-muted-foreground"
+          selectedOption ? "text-foreground" : "text-muted-foreground",
+          triggerClassName
         )}
       >
         <span className="truncate">{selectedOption?.label ?? placeholder}</span>

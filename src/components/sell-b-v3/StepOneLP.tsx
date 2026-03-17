@@ -55,7 +55,7 @@ export function StepOneLP({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
             name="brand"
@@ -68,6 +68,7 @@ export function StepOneLP({
                 placeholder="Brand"
                 searchPlaceholder="Search brands"
                 invalid={!!errors.brand}
+                triggerClassName="rounded-[12px] border-[#e4e5e9] px-[15px] py-px"
               />
             )}
           />
@@ -76,6 +77,7 @@ export function StepOneLP({
               {errors.brand.message}
             </p>
           )}
+          <div className="min-h-5" aria-hidden="true" />
         </div>
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
@@ -89,6 +91,7 @@ export function StepOneLP({
                 placeholder="Model"
                 searchPlaceholder="Search models"
                 invalid={!!errors.model}
+                triggerClassName="rounded-[12px] border-[#e4e5e9] px-[15px] py-px"
               />
             )}
           />
@@ -97,6 +100,7 @@ export function StepOneLP({
               {errors.model.message}
             </p>
           )}
+          <div className="min-h-5" aria-hidden="true" />
         </div>
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
@@ -110,6 +114,7 @@ export function StepOneLP({
                 placeholder="Year"
                 searchPlaceholder="Search year"
                 invalid={!!errors.year}
+                triggerClassName="rounded-[12px] border-[#e4e5e9] px-[15px] py-px"
               />
             )}
           />
@@ -118,6 +123,7 @@ export function StepOneLP({
               {errors.year.message}
             </p>
           )}
+          <div className="min-h-5" aria-hidden="true" />
         </div>
         <div className="flex flex-col gap-1">
           <Button
@@ -128,7 +134,6 @@ export function StepOneLP({
           >
             Sell your boat
           </Button>
-          <div className="min-h-5" aria-hidden="true" />
         </div>
       </div>
     </form>
