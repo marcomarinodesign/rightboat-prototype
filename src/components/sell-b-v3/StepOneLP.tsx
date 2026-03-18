@@ -68,7 +68,8 @@ export function StepOneLP({
                 placeholder="Brand"
                 searchPlaceholder="Search brands"
                 invalid={!!errors.brand}
-                triggerClassName="rounded-[12px] border-[#e4e5e9] px-[15px] py-px"
+                clearable={false}
+                triggerClassName="h-12 rounded-[14px] border-white bg-white px-4 text-left text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white"
               />
             )}
           />
@@ -91,7 +92,8 @@ export function StepOneLP({
                 placeholder="Model"
                 searchPlaceholder="Search models"
                 invalid={!!errors.model}
-                triggerClassName="rounded-[12px] border-[#e4e5e9] px-[15px] py-px"
+                clearable={false}
+                triggerClassName="h-12 rounded-[14px] border-white bg-white px-4 text-left text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white"
               />
             )}
           />
@@ -114,7 +116,8 @@ export function StepOneLP({
                 placeholder="Year"
                 searchPlaceholder="Search year"
                 invalid={!!errors.year}
-                triggerClassName="rounded-[12px] border-[#e4e5e9] px-[15px] py-px"
+                clearable={false}
+                triggerClassName="h-12 rounded-[14px] border-white bg-white px-4 text-left text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white"
               />
             )}
           />
@@ -129,7 +132,7 @@ export function StepOneLP({
           <Button
             type="submit"
             size="lg"
-            className="h-11 w-full shrink-0 rounded-[12px] px-6 font-medium"
+            className="h-12 w-full shrink-0 rounded-[12px] bg-[#0257fc] px-6 text-[18px] font-semibold text-white hover:bg-[#024ae0]"
             disabled={isSubmitting}
           >
             Sell your boat

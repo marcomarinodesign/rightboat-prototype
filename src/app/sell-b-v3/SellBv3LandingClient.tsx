@@ -43,29 +43,6 @@ const HOW_IT_WORKS_STEPS = [
   },
 ] as const
 
-const BENEFITS = [
-  {
-    title: ["Reach thousands", "of buyers"],
-    description:
-      "Showcase your boat with extra media so buyers get a full picture.",
-  },
-  {
-    title: ["No broker", "fees"],
-    description:
-      "Your listing appears in prominent positions so more buyers see it.",
-  },
-  {
-    title: ["Fast and simple", "listing process"],
-    description:
-      "No expiry worries. Keep your listing live until you sell.",
-  },
-  {
-    title: ["Full control", "over your listing"],
-    description:
-      "Receive and manage buyer enquiries directly to your inbox.",
-  },
-] as const
-
 const HERO_IMAGE = {
   src: "/ian-keefe-nGOK_EqQpY4-unsplash.png",
   alt: "Close-up of sailboat deck and sail on open water",
@@ -102,29 +79,29 @@ export function SellBv3LandingClient() {
     <div className="flex flex-col gap-10 lg:gap-14">
       {/* Hero — matches Figma FSBO hero layout */}
       <section
-        className="px-4 pt-10 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-0 lg:pt-10 lg:pb-0"
+        className="px-4 pt-10 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-0 lg:pt-12 lg:pb-0"
         aria-labelledby="sell-b-v3-hero-heading"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="mb-4 inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-[14px] py-[6px] lg:mb-6">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+          <div className="flex max-w-[760px] flex-col items-center pt-2 text-center lg:items-start lg:pt-16 lg:text-left">
+            <div className="mb-5 inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-[14px] py-[6px] lg:mb-8">
               <span className="text-xs font-normal leading-4 text-white">
                 For brokers & dealers
               </span>
             </div>
             <h1
               id="sell-b-v3-hero-heading"
-              className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl sm:tracking-tight lg:text-5xl lg:leading-tight"
+              className="max-w-[760px] text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[#13022c] sm:text-5xl lg:text-[48px]"
             >
               Sell your boat{" "}
-              <span className="text-primary">privately</span>
+              <span className="text-[#0257fc]">privately</span>
             </h1>
-            <p className="mt-4 max-w-[672px] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-7">
+            <p className="mt-5 max-w-[720px] text-lg leading-[1.45] text-[#2b2140] sm:text-[1.05rem] lg:mt-6 lg:text-[1.05rem]">
               {HERO_DESCRIPTION}
             </p>
           </div>
-          <div className="relative z-10 w-full max-w-md rounded-[12px] border-4 border-[#13022c] bg-background p-[36px] shadow-[10px_10px_0px_0px_#0257fc,0px_1px_2px_0px_rgba(0,0,0,0.05)] backdrop-blur-[4px]">
-            <div className="mb-0 text-center text-[18px] font-bold leading-[26px] text-[#13022c]">
+          <div className="relative z-10 w-full max-w-[414px] rounded-[12px] bg-[#b8e7ff]/95 p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] backdrop-blur-[4px] sm:p-9">
+            <div className="mb-6 text-center text-[20px] font-bold leading-[1.2] text-[#13022c] sm:text-[22px]">
               Takes less than 2 minutes.
             </div>
             <StepOneLP

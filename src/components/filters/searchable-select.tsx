@@ -18,6 +18,8 @@ type SearchableSelectProps = {
   searchPlaceholder?: string
   /** When true, shows error state (red border) */
   invalid?: boolean
+  /** When false, hides the clear button from the trigger */
+  clearable?: boolean
   /** Optional className for the outer container */
   className?: string
   /** Optional className override for the trigger button */
@@ -36,6 +38,7 @@ export function SearchableSelect({
   placeholder,
   searchPlaceholder = "Search",
   invalid = false,
+  clearable = true,
   className,
   triggerClassName,
 }: SearchableSelectProps) {
@@ -93,7 +96,7 @@ export function SearchableSelect({
     }
     document.addEventListener("mousedown", handler)
     return () => document.removeEventListener("mousedown", handler)
-  }, [open]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [open])
 
   return (
     <div ref={containerRef} className={cn("relative", className)}>
@@ -103,7 +106,6 @@ export function SearchableSelect({
         onClick={() => (open ? handleClose() : handleOpen())}
         aria-expanded={open}
         aria-haspopup="listbox"
-        aria-invalid={invalid}
         className={cn(
           "flex h-11 w-full items-center justify-between rounded-lg border bg-background px-3.5 text-sm transition-colors",
           invalid && !open && "border-destructive",
@@ -117,7 +119,7 @@ export function SearchableSelect({
         <span className="truncate">{selectedOption?.label ?? placeholder}</span>
 
         <span className="ml-2 flex shrink-0 items-center gap-1">
-          {selectedOption && (
+          {selectedOption && clearable && (
             <span
               role="button"
               tabIndex={0}
