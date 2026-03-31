@@ -12,11 +12,18 @@ import {
 
 export function HeroSearch() {
   return (
-    <div className="rounded-lg border border-border/60 bg-card/80 p-6 shadow-sm backdrop-blur">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-card/80 p-[25px] shadow-sm backdrop-blur">
       <div className="grid gap-3 md:grid-cols-4">
-        <Input placeholder="Search by make or model" aria-label="Search by make or model" />
+        <Input
+          placeholder="Search by make or model"
+          aria-label="Search by make or model"
+          className="h-11 rounded-lg border-border bg-background text-sm"
+        />
         <Select>
-          <SelectTrigger aria-label="Boat type">
+          <SelectTrigger
+            aria-label="Boat type"
+            className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+          >
             <SelectValue placeholder="Boat type" />
           </SelectTrigger>
           <SelectContent>
@@ -27,7 +34,10 @@ export function HeroSearch() {
           </SelectContent>
         </Select>
         <Select>
-          <SelectTrigger aria-label="Location">
+          <SelectTrigger
+            aria-label="Location"
+            className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+          >
             <SelectValue placeholder="Location" />
           </SelectTrigger>
           <SelectContent>
@@ -38,7 +48,10 @@ export function HeroSearch() {
           </SelectContent>
         </Select>
         <Select>
-          <SelectTrigger aria-label="Price range">
+          <SelectTrigger
+            aria-label="Price range"
+            className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+          >
             <SelectValue placeholder="Price range" />
           </SelectTrigger>
           <SelectContent>
@@ -49,8 +62,8 @@ export function HeroSearch() {
           </SelectContent>
         </Select>
       </div>
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-foreground">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm leading-5 text-foreground">
           30,000+ listings across new and used boats.
         </p>
         <Button>Search boats</Button>

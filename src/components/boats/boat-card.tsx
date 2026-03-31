@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Heart, Info } from "lucide-react"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
@@ -14,116 +13,90 @@ type BoatCardProps = {
   variant?: "grid" | "list"
 }
 
+function specsSummary(boat: Boat) {
+  const len = boat.length.replace(/\s*ft\s*$/i, "ft").replace(/\s+/g, "")
+  const type = boat.boatType ?? "Boat"
+  return `${boat.year} · ${len} · ${type} · ${boat.condition}`
+}
+
 export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
   const href = `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
   const images = boat.galleryImages?.length
     ? boat.galleryImages
-    : // When we only have a single image, repeat it so the
-      // carousel layout (including dots) is consistent across cards.
-      [boat.image, boat.image, boat.image, boat.image]
+    : [boat.image, boat.image, boat.image, boat.image]
+
+  const boatName = `${boat.make} ${boat.model}`
+  const brokerLogo =
+    premiumBrands[
+      Math.abs(boat.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)) %
+        premiumBrands.length
+    ]?.logo ?? "/brands/placeholder-logo.png"
 
   const imageSection = (
     <div className="relative w-full overflow-hidden rounded-lg">
       <ImageSlider
         images={images}
-        alt={`${boat.make} ${boat.model}`}
+        alt={boatName}
         showDots
+        showNavArrows={false}
+        dotsPlacement="overlay"
+        imageRoundedClassName="rounded-lg"
       />
-      <button
-        type="button"
-        className="absolute right-2 top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90"
-        aria-label="Add to favourites"
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-        }}
-      >
-        <Heart className="h-5 w-5" strokeWidth={2} />
-      </button>
+      {boat.featured ? (
+        <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
+          <span className="text-xs font-medium leading-none text-primary-foreground">
+            Sponsored
+          </span>
+        </div>
+      ) : null}
     </div>
   )
 
-  const boatName = `${boat.make} ${boat.model}`
-
   const detailsSection = (options?: { linkName?: boolean; showContactCta?: boolean }) => (
-    <div className="flex flex-col gap-2 p-2">
-      {/* Year + Condition tags */}
-      <div className="flex flex-wrap gap-2">
-        <span className="rounded-md bg-tag-bg px-2 py-1 text-xs leading-4 text-foreground">
-          {boat.year}
-        </span>
-        <span className="rounded-md bg-tag-bg px-2 py-1 text-xs leading-4 text-foreground">
-          {boat.condition}
-        </span>
+    <div className="flex min-w-0 flex-col gap-2 pt-3">
+      <div className="text-2xl font-bold leading-8 tracking-tight text-foreground">
+        {boat.price}
       </div>
-      {/* Boat name */}
       {options?.linkName ? (
         <Link
           href={href}
-          className="truncate text-lg font-bold leading-snug text-foreground transition-colors hover:text-primary"
+          className="line-clamp-2 text-base font-bold leading-6 text-foreground transition-colors hover:text-primary"
           title={boatName}
         >
           {boatName}
         </Link>
       ) : (
-        <span
-          className="truncate text-lg font-bold leading-snug text-foreground"
-          title={boatName}
-        >
+        <span className="line-clamp-2 text-base font-bold leading-6 text-foreground" title={boatName}>
           {boatName}
         </span>
       )}
-      {/* Price row */}
-      <div className="flex items-center justify-between gap-2 pt-1">
-        <span className="text-xl font-bold leading-7 text-primary">
-          {boat.price}
-        </span>
+      <p className="line-clamp-2 text-sm leading-5 text-muted-foreground">{specsSummary(boat)}</p>
+      <p className="line-clamp-2 text-sm leading-5 text-muted-foreground">{boat.location}</p>
+      <div className="h-px w-full bg-border-card" />
+      <div className="flex items-center gap-2">
+        <div className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-card p-0.5">
+          <Image
+            src={brokerLogo}
+            alt={boat.broker || "Broker logo"}
+            width={28}
+            height={28}
+            className="size-full object-contain"
+          />
+        </div>
+        <span className="truncate text-xs leading-4 text-muted-foreground">{boat.broker}</span>
+      </div>
+      {options?.showContactCta ? (
         <button
           type="button"
-          className="flex h-5 w-5 shrink-0 items-center justify-center text-primary"
-          aria-label="Price information"
+          className="flex h-11 w-full items-center justify-center rounded-lg bg-primary px-8 text-sm font-medium text-primary-foreground"
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
           }}
         >
-          <Info className="h-4 w-4" strokeWidth={2} />
+          Contact Seller
         </button>
-      </div>
-      {/* Location | Broker */}
-      <div className="flex items-center gap-1 text-xs leading-4 text-muted-foreground">
-        <span>{boat.location}</span>
-        <span className="h-3.5 w-px shrink-0 bg-muted-foreground/60" aria-hidden />
-        <span>{boat.broker}</span>
-      </div>
-      {/* Seller logo + CTA */}
-      <div className="flex items-center gap-3 pt-2">
-        {/* Fixed-width logo placeholder so all cards align */}
-        <div className="flex h-9 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-card px-2">
-          <Image
-            src={
-              premiumBrands[Math.abs(boat.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)) % premiumBrands.length]?.logo ??
-              "/brands/placeholder-logo.png"
-            }
-            alt={boat.broker || "Broker logo"}
-            width={96}
-            height={36}
-            className="h-full w-full object-contain"
-          />
-        </div>
-        {options?.showContactCta && (
-          <button
-            type="button"
-            className="flex h-9 flex-1 items-center justify-center rounded-md bg-primary px-3 text-sm font-semibold text-primary-foreground"
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-            }}
-          >
-            Contact Seller
-          </button>
-        )}
-      </div>
+      ) : null}
     </div>
   )
 
@@ -131,7 +104,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     return (
       <article
         className={cn(
-          "overflow-hidden rounded-2xl border border-border-card bg-card p-2",
+          "overflow-hidden rounded-2xl border border-border-card bg-card p-3",
           "transition-all hover:shadow-lg",
           "md:flex"
         )}
@@ -139,8 +112,8 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
         <Link href={href} className="relative block md:w-2/5 md:shrink-0">
           {imageSection}
         </Link>
-        <div className="flex flex-1 flex-col md:w-3/5">
-          {detailsSection({ linkName: true })}
+        <div className="flex min-w-0 flex-1 flex-col md:w-3/5 md:pl-3">
+          {detailsSection({ linkName: true, showContactCta: true })}
         </div>
       </article>
     )
@@ -150,7 +123,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     <Link
       href={href}
       className={cn(
-        "flex w-full flex-col overflow-hidden rounded-2xl border border-border-card bg-card p-2",
+        "flex w-full flex-col overflow-hidden rounded-2xl border border-border-card bg-card p-3",
         "transition-all hover:shadow-lg"
       )}
     >

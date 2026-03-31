@@ -21,15 +21,15 @@ export function ArticleCard({ article }: ArticleCardProps) {
         />
       </Link>
       <CardHeader className="space-y-2">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">
-            {article.date}
-          </p>
+        <div className="flex items-center gap-2">
           {article.category && (
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="default" className="text-[11px] px-2 py-0.5">
               {article.category}
             </Badge>
           )}
+          <p className="text-xs text-muted-foreground">
+            {article.date}
+          </p>
         </div>
         <Link
           href={article.href}

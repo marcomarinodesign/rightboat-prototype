@@ -85,13 +85,13 @@ function SiteHeader() {
   }, [])
 
   const navLinkClass =
-    "text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
+    "text-sm font-medium leading-6 text-muted-foreground hover:text-foreground transition-colors"
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-[4px]">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-[4px]">
       <nav
         aria-label="Global"
-        className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-0"
       >
         {/* Logo */}
         <div className="flex shrink-0">
@@ -206,14 +206,14 @@ function SiteHeader() {
             </button>
             {moreOpen && (
               <div
-                className="absolute left-0 top-full z-50 mt-1 min-w-[160px] rounded-lg border border-border bg-background py-1 shadow-lg"
+                className="absolute left-0 top-full z-50 mt-1 min-w-[160px] rounded-lg border border-border bg-popover py-1 text-popover-foreground shadow-md"
                 role="menu"
               >
                 {moreNav.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary"
+                    className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-muted hover:text-foreground"
                     role="menuitem"
                     onClick={() => setMoreOpen(false)}
                   >
@@ -230,7 +230,7 @@ function SiteHeader() {
           <Button
             variant="outline"
             size="sm"
-            className="border-border font-medium"
+            className="border-border bg-background font-medium text-foreground hover:bg-muted hover:text-foreground"
           >
             Signup
           </Button>

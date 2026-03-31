@@ -1,0 +1,72 @@
+---
+description: Figma MCP → código para Rightboat (Next.js, Tailwind, tokens, ui/patterns). Flujo obligatorio, tokens, componentes y assets.
+globs: "src/**/*.{tsx,ts,css}"
+alwaysApply: false
+---
+
+# Rightboat — reglas design system + Figma MCP
+
+Prototipo marketplace náutico: **Next.js (App Router)**, **React**, **Tailwind CSS v4** (`@import "tailwindcss"`), **Framer Motion**, **Radix** en primitivos UI, **`cn()`** desde `@/lib/utils`.
+
+## Figma MCP — flujo obligatorio
+
+1. Obtener contexto del nodo con **`get_design_context`** (o, si falla por tamaño/selección, **`get_metadata`** y luego contexto por nodo concreto).
+2. Obtener referencia visual con **`get_screenshot`** para la variante que se implementa.
+3. Si el payload incluye URLs de assets (p. ej. localhost del MCP), **usar esas fuentes** para imágenes/SVG exportados desde Figma. No sustituir por placeholders si la URL está disponible.
+4. Tratar el código que devuelve Figma como **referencia de diseño y comportamiento**, no como estilo final del repo.
+5. **Antes de cerrar**: revisar paridad visual frente al screenshot y estados (hover, focus, disabled) si aplican.
+
+**Escritura / variables en Figma:** si hace falta ejecutar Plugin API (`use_figma`), cargar primero la skill del proyecto `skills/figma-use/SKILL.md` y pasar `skillNames: "figma-use"` en la herramienta, según esa skill.
+
+## Tokens y estilos
+
+- **Fuente de verdad CSS:** `src/app/globals.css` — bloques `:root`, `.dark` y `@theme inline` (colores Tailwind mapeados a variables).
+- **Tokens TS (opcional):** `src/styles/tokens.ts` — solo para contextos sin Tailwind (`style` prop, terceros).
+- **IMPORTANT:** No hardcodear hex/RGB para marca o semántica. Usar utilidades semánticas: `bg-primary`, `text-foreground`, `border-border`, `bg-tag-bg`, `border-border-card`, `bg-overlay`, `bg-overlay-sheet`, variables `--brand-*`, etc.
+- **Radio:** escala unificada; controles y cards habituales **`rounded-lg`** (12px); paneles grandes **`rounded-2xl`** cuando el diseño lo pida.
+- **Transiciones:** `duration-[var(--transition-duration-normal)]` o equivalentes definidos en `@theme`.
+- **Sincronizar variables con Figma:** si el archivo define variables con *code syntax* WEB (`var(--...)`), alinear `:root` / `.dark` con esos valores (p. ej. vía export MCP + `use_figma`), no duplicar nombres distintos sin motivo.
+
+## Organización de componentes
+
+| Carpeta | Uso |
+|---------|-----|
+| `src/components/ui/` | Primitivos reutilizables (Button, Card, Input, Dialog, Sheet, …). Sin lógica de negocio. |
+| `src/components/patterns/` | Composición sobre `ui` (p. ej. `InteractiveCard`, `ListingCard`). |
+| `src/components/layout/` | Shell, navegación global. |
+| `src/components/blocks/` | Secciones de marketing / landing reutilizables. |
+| `src/components/{boats,blog,filters,home,...}/` | Dominio / features. |
+
+- **IMPORTANT:** Antes de crear un componente nuevo, buscar en `ui/` y `patterns/` si ya existe un primitivo o patrón equivalente.
+- Nuevos primitivos genéricos → `src/components/ui/`. Nuevas composiciones visuales compartidas → `patterns/` o `blocks/` según corresponda.
+- Convención de archivos: **kebab-case** (`boat-card.tsx`, `hero-search.tsx`). Componentes exportados en **PascalCase**.
+- Composición: **`className` + `cn()`** para extender estilos; primitivos Radix/shadcn donde ya estén establecidos.
+
+## Implementación desde Figma
+
+- Mapear colores del MCP a **tokens del tema** (clases `bg-*`, `text-*`, `border-*`), no a clases arbitrarias con hex.
+- Espaciado: escala **Tailwind** (`p-4`, `gap-4`, `space-y-4`) alineada con el sistema (base 4px en variables de spacing en Figma cuando existan).
+- Tipografía: clases utilitarias + utilidades de proyecto (p. ej. `.heading-xl` … en `globals.css`) cuando coincidan con la escala definida.
+- Animación: **Framer Motion** donde el diseño lo requiera; transiciones CSS para estados simples.
+- Imágenes: **`next/image`** cuando sea contenido estático o remoto optimizable; componente **`RBImage`** u otros del repo si ya cubren el caso.
+
+## Iconos y assets
+
+- **Iconos UI:** el proyecto usa **`lucide-react`**. Preferir iconos de Lucide con nombres cercanos al diseño antes de añadir nuevas dependencias.
+- **Logos / ilustraciones / raster desde Figma:** usar URLs del MCP o guardar en `public/` (p. ej. `public/brands/`) con nombres claros; no inventar assets si Figma los entrega.
+- **IMPORTANT:** No añadir paquetes de iconos extra solo por Figma si Lucide o el asset exportado cubre el caso.
+
+## Arquitectura Next.js
+
+- **App Router:** páginas en `src/app/`. Respetar Server vs Client Components (`"use client"` solo donde haga falta interactividad).
+- Imports: alias **`@/*`** → `src/*` (ver `tsconfig.json`).
+
+## Calidad y accesibilidad
+
+- Controles interactivos: estados **focus visible** coherentes con `ring-ring` / patrones existentes en `ui/button` y similares.
+- Diálogos / hojas: overlays **`bg-overlay`** / **`bg-overlay-sheet`** según el componente base del repo.
+- Contraste razonable con tokens semánticos; no revertir a grises sueltos sin token.
+
+## Referencia interna
+
+Documento vivo del sistema: **`DESIGN_SYSTEM.md`** (estructura, tokens, APIs de Button/Card/Dialog/patterns). Mantener coherencia con ese archivo al introducir convenciones nuevas.

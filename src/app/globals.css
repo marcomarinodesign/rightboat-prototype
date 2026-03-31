@@ -69,6 +69,11 @@
 
 :root {
   --radius: 0.75rem; /* 12px */
+  /* Heading scale — used by .heading-* and tokens.ts */
+  --heading-xl: 3rem;
+  --heading-lg: 2.25rem;
+  --heading-md: 1.875rem;
+  --heading-sm: 1.5rem;
   --brand-midnight: #13022c;
   --brand-blue-200: #208cff;
   --brand-blue-300: #086bff;
@@ -85,13 +90,13 @@
   --primary-foreground: #ffffff;
   --secondary: var(--brand-blue-200);
   --secondary-foreground: #ffffff;
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
+  --muted: #f3f5fa;
+  --muted-foreground: #7181b4;
   --accent: var(--brand-blue-300);
   --accent-foreground: #ffffff;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
+  --destructive: #e55a5a;
+  --border: #dde5f0;
+  --input: #dde5f0;
   --ring: var(--brand-blue-400);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -128,10 +133,12 @@
   --muted-foreground: #b9c4ff;
   --accent: var(--brand-blue-300);
   --accent-foreground: #ffffff;
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: #e8645a;
   --border: #2b1a52;
   --input: #2b1a52;
   --ring: var(--brand-blue-400);
+  --tag-bg: #1f123f;
+  --border-card: #2b1a52;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -163,28 +170,28 @@
   }
   .heading-xl {
     font-family: var(--font-sans);
-    font-size: 3rem;
+    font-size: var(--heading-xl);
     line-height: 1;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
   .heading-lg {
     font-family: var(--font-sans);
-    font-size: 2.25rem;
+    font-size: var(--heading-lg);
     line-height: 1.111;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
   .heading-md {
     font-family: var(--font-sans);
-    font-size: 1.875rem;
+    font-size: var(--heading-md);
     line-height: 1.2;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
   .heading-sm {
     font-family: var(--font-sans);
-    font-size: 1.5rem;
+    font-size: var(--heading-sm);
     line-height: 1.333;
     font-weight: 700;
     letter-spacing: -0.01em;

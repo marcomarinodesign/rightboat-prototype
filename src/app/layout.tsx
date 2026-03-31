@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { AppShell } from "@/components/layout/app-shell"
+import { MotionProvider } from "@/components/motion/motion-provider"
 import { Toaster } from "sonner"
 
 const geistSans = Geist({
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.className} antialiased`}
       >
-        <AppShell>{children}</AppShell>
+        <MotionProvider>
+          <AppShell>{children}</AppShell>
+        </MotionProvider>
         <Toaster richColors position="top-right" />
       </body>
     </html>

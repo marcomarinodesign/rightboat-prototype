@@ -19,6 +19,7 @@ export const tokens = {
       tagBg: "var(--tag-bg)",
       borderCard: "var(--border-card)",
       overlay: "var(--overlay)",
+      overlaySheet: "var(--overlay-sheet)",
     },
   },
   spacing: {

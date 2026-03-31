@@ -9,6 +9,12 @@ type ImageSliderProps = {
   images: string[]
   alt?: string
   showDots?: boolean
+  /** When true, prev/next chevrons are hidden (e.g. marketplace cards). */
+  showNavArrows?: boolean
+  /** Dots below the carousel (default) or overlaid at the bottom of the image. */
+  dotsPlacement?: "below" | "overlay"
+  /** Applied to the scroll frame and slide masks; defaults to rounded corners matching other carousels. */
+  imageRoundedClassName?: string
   className?: string
 }
 
@@ -16,6 +22,9 @@ export function ImageSlider({
   images,
   alt = "Gallery",
   showDots = true,
+  showNavArrows = true,
+  dotsPlacement = "below",
+  imageRoundedClassName = "rounded-xl",
   className,
 }: ImageSliderProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null)
@@ -100,7 +109,8 @@ export function ImageSlider({
     return (
       <div
         className={cn(
-          "relative w-full overflow-hidden rounded-xl bg-muted",
+          "relative w-full overflow-hidden bg-muted",
+          imageRoundedClassName,
           "aspect-[3/2]",
           className
         )}
@@ -127,7 +137,8 @@ export function ImageSlider({
         onPointerUp={handlePointerUp}
         onPointerLeave={() => setIsDragging(false)}
         className={cn(
-          "flex w-full overflow-hidden rounded-xl",
+          "flex w-full overflow-hidden",
+          imageRoundedClassName,
           "aspect-[3/2] touch-pan-x flex-row",
           "snap-x snap-mandatory overflow-x-auto overscroll-x-contain",
           "scroll-smooth scrollbar-hide [-webkit-overflow-scrolling:touch]",
@@ -143,7 +154,12 @@ export function ImageSlider({
             aria-roledescription="slide"
             aria-label={`${alt} image ${i + 1} of ${count}`}
           >
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-xl bg-muted">
+            <div
+              className={cn(
+                "relative aspect-[3/2] w-full overflow-hidden bg-muted",
+                imageRoundedClassName
+              )}
+            >
               <Image
                 src={src}
                 alt={count > 1 ? `${alt} (${i + 1}/${count})` : alt}
@@ -159,7 +175,7 @@ export function ImageSlider({
         ))}
       </div>
 
-      {hasMultiple && (
+      {hasMultiple && showNavArrows && (
         <>
           <button
             type="button"
@@ -189,7 +205,12 @@ export function ImageSlider({
       )}
       {showDots && hasMultiple && count > 1 && (
         <div
-          className="mt-2 flex justify-center gap-1.5"
+          className={cn(
+            "flex justify-center gap-1.5",
+            dotsPlacement === "below" && "mt-2",
+            dotsPlacement === "overlay" &&
+              "pointer-events-auto absolute bottom-3 left-1/2 z-20 -translate-x-1/2"
+          )}
           role="tablist"
           aria-label="Slide indicator"
         >
@@ -205,8 +226,14 @@ export function ImageSlider({
                 scrollTo(i)
               }}
               className={cn(
-                "h-1.5 w-1.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                index === i ? "bg-foreground" : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
+                "size-2 shrink-0 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                dotsPlacement === "overlay"
+                  ? index === i
+                    ? "bg-white"
+                    : "bg-white/45 hover:bg-white/70"
+                  : index === i
+                    ? "bg-foreground"
+                    : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
               )}
             />
           ))}
