@@ -3,8 +3,10 @@
 import * as React from "react"
 import Link from "next/link"
 import { SlidersHorizontal } from "lucide-react"
+import { Skeleton } from "boneyard-js/react"
 
 import { BoatCard } from "@/components/boats/boat-card"
+import { BoatCardSkeleton } from "@/components/boats/boat-card-skeleton"
 import { ActiveFiltersChips } from "@/components/filters/active-filters-chips"
 import { FiltersDrawer } from "@/components/filters/filters-drawer"
 import { filterBoats } from "@/components/filters/filter-boats"
@@ -28,6 +30,12 @@ export function BoatsForSaleListing({ boats }: BoatsForSaleListingProps) {
   const { filters, setFilters, clearAll, activeFilters } = useFiltersState()
   const [drawerOpen, setDrawerOpen] = React.useState(false)
   const [sortValue, setSortValue] = React.useState("featured")
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1800)
+    return () => clearTimeout(t)
+  }, [])
 
   const filteredBoats = React.useMemo(
     () => filterBoats(boats, filters),
@@ -108,7 +116,15 @@ export function BoatsForSaleListing({ boats }: BoatsForSaleListingProps) {
       {/* Results grid */}
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
         {sortedBoats.map((boat) => (
-          <BoatCard key={boat.id} boat={boat} />
+          <Skeleton
+            key={boat.id}
+            name="BoatCard"
+            loading={loading}
+            fallback={<BoatCardSkeleton />}
+            fixture={<BoatCard boat={boats[0]} />}
+          >
+            <BoatCard boat={boat} />
+          </Skeleton>
         ))}
       </div>
 
