@@ -1,0 +1,12 @@
+{
+  "radius": {
+    "sm":   { "$type": "dimension", "$value": "8px",   "$description": "calc(var(--radius) - 4px)" },
+    "md":   { "$type": "dimension", "$value": "10px",  "$description": "calc(var(--radius) - 2px)" },
+    "lg":   { "$type": "dimension", "$value": "12px",  "$description": "var(--radius) — default for cards & controls" },
+    "xl":   { "$type": "dimension", "$value": "16px",  "$description": "calc(var(--radius) + 4px)" },
+    "2xl":  { "$type": "dimension", "$value": "20px",  "$description": "calc(var(--radius) + 8px)" },
+    "3xl":  { "$type": "dimension", "$value": "24px",  "$description": "calc(var(--radius) + 12px)" },
+    "4xl":  { "$type": "dimension", "$value": "28px",  "$description": "calc(var(--radius) + 16px)" },
+    "full": { "$type": "dimension", "$value": "9999px", "$description": "Pill / fully rounded" }
+  }
+}
