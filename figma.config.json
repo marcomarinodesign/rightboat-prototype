@@ -1,0 +1,16 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "label": "React",
+    "language": "tsx",
+    "include": ["src/**/*.figma.tsx", "src/components/**/*.tsx"],
+    "exclude": ["**/node_modules/**", ".next/**", "out/**"],
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/",
+    "importPaths": {
+      "src/*": "@/*"
+    },
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

@@ -22,7 +22,7 @@ Prototipo marketplace náutico: **Next.js (App Router)**, **React**, **Tailwind 
 
 - **Fuente de verdad CSS:** `src/app/globals.css` — bloques `:root`, `.dark` y `@theme inline` (colores Tailwind mapeados a variables).
 - **Tokens TS (opcional):** `src/styles/tokens.ts` — solo para contextos sin Tailwind (`style` prop, terceros).
-- **IMPORTANT:** No hardcodear hex/RGB para marca o semántica. Usar utilidades semánticas: `bg-primary`, `text-foreground`, `border-border`, `bg-tag-bg`, `border-border-card`, `bg-overlay`, `bg-overlay-sheet`, variables `--brand-*`, etc.
+- **IMPORTANT:** No hardcodear hex/RGB para marca o semántica. Usar primitivos Figma en CSS/Tailwind: `bg-blue-400`, `bg-malibu-500`, `text-neutral-500`, `bg-status-success-100`, `bg-midnight`, y semántica shadcn: `bg-primary`, `text-foreground`, `border-border`, `bg-tag-bg`, `border-border-card`, `bg-overlay`, `bg-overlay-sheet`. Los alias `--brand-blue-*` / `--brand-midnight` siguen válidos pero están deprecados frente a `--blue-*` / `--midnight`.
 - **Radio:** escala unificada; controles y cards habituales **`rounded-lg`** (12px); paneles grandes **`rounded-2xl`** cuando el diseño lo pida.
 - **Transiciones:** `duration-[var(--transition-duration-normal)]` o equivalentes definidos en `@theme`.
 - **Sincronizar variables con Figma:** si el archivo define variables con *code syntax* WEB (`var(--...)`), alinear `:root` / `.dark` con esos valores (p. ej. vía export MCP + `use_figma`), no duplicar nombres distintos sin motivo.

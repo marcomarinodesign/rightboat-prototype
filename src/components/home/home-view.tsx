@@ -81,11 +81,11 @@ export function HomeView() {
           className="flex items-center justify-between"
           variants={staggerItem}
         >
-          <h2 id="featured-heading" className="text-2xl font-bold">
+          <h2 id="featured-heading" className="heading-sm">
             Featured boats
           </h2>
-          <Link href="/boats-for-sale" className="text-sm text-primary">
-            View more details
+          <Link href="/boats-for-sale" className="primary-text-link">
+            Discover more
           </Link>
         </motion.div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -129,12 +129,12 @@ export function HomeView() {
           className="flex items-center justify-between"
           variants={staggerItem}
         >
-          <h2 id="articles-heading" className="text-2xl font-bold">
+          <h2 id="articles-heading" className="heading-sm">
             Latest articles and boat reviews
           </h2>
           <Link
             href="https://www.rightboat.com/blog"
-            className="text-sm text-primary"
+            className="primary-text-link"
           >
             See more articles
           </Link>

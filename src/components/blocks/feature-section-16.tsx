@@ -96,7 +96,7 @@ export function FeatureSection16({
       {/* Active feature content */}
       <div className="flex flex-col items-stretch gap-6 lg:flex-row">
         {/* Left column: card with icon, title, description, and button */}
-        <div className="bg-muted/80 dark:bg-card/80 flex flex-1 flex-col gap-3 rounded-lg p-6 lg:max-w-lg lg:justify-between lg:gap-6 lg:p-6 border border-border/50">
+        <div className="flex flex-1 flex-col gap-3 rounded-lg border border-border bg-muted p-6 lg:max-w-lg lg:justify-between lg:gap-6 lg:p-6 dark:bg-card">
           <div className="flex flex-col items-start gap-6">
             {/* Icon container */}
             {activeFeature.icon}

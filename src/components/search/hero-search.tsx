@@ -12,7 +12,7 @@ import {
 
 export function HeroSearch() {
   return (
-    <div className="flex flex-col gap-4 rounded-lg border border-border bg-card/80 p-[25px] shadow-sm backdrop-blur">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-[25px] shadow-sm">
       <div className="grid gap-3 md:grid-cols-4">
         <Input
           placeholder="Search by make or model"

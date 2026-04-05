@@ -20,7 +20,7 @@ export function BdpContactSeller({
   return (
     <Card className="rounded-lg">
       <CardHeader className="pb-2">
-        <h2 className="text-2xl font-bold leading-7 text-foreground">
+        <h2 className="heading-sm text-foreground">
           Contact Manufacturer
         </h2>
       </CardHeader>
@@ -29,7 +29,7 @@ export function BdpContactSeller({
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Price
           </p>
-          <p className="text-2xl font-bold text-primary">{price}</p>
+          <p className="heading-sm text-primary">{price}</p>
         </div>
 
         <form className="space-y-3" aria-label="Contact seller form">

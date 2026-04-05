@@ -18,7 +18,7 @@
 
 - **Tokens**: Centralized in `src/app/globals.css` (:root + @theme) and `src/styles/tokens.ts`. Semantic tokens: `--tag-bg`, `--border-card`, `--overlay`, `--overlay-sheet`.
 - **Radius**: Single scale `rounded-lg` (12px) for controls and cards; `rounded-2xl` for large cards where needed.
-- **Colors**: All hex replaced by semantic classes: `bg-tag-bg`, `border-border-card`, `text-primary`, `bg-overlay`, `bg-overlay-sheet`.
+- **Colors**: Primitives follow Figma **Colors** (`Blue/*`, `Malibu/*`, `Neutral/*`, `Midnight`, `Status/*`). UI uses semantic classes: `bg-primary`, `bg-tag-bg`, `border-border-card`, `bg-overlay`, `bg-overlay-sheet`, plus status utilities (`bg-status-success-100`, …).
 - **Patterns**: `InteractiveCard` for shared hover/lift; `ListingCard` in `components/patterns`; Card remains a dumb primitive.
 - **Inline styles**: Removed; use `text-primary`, `scrollbar-hide`, Tailwind `snap-*` classes.
 
@@ -77,17 +77,51 @@ src/
 
 ## 3. Tokens
 
-**Defined in** `src/app/globals.css` (`:root` + `@theme inline`).
+**Defined in** `src/app/globals.css` (`:root` + `@theme inline`). Naming aligns with the Figma file **Colors** collection (library linked from [docs/DESIGN_SOURCE.md](docs/DESIGN_SOURCE.md)); variable paths map to CSS with slashes → kebab (e.g. Figma `Blue/400` → `--blue-400` → Tailwind `bg-blue-400`).
+
+### 3.1 Color primitives (Figma)
+
+| Figma group | CSS variables | Tailwind examples |
+|-------------|---------------|-------------------|
+| **Midnight** | `--midnight` | `bg-midnight`, `text-midnight` |
+| **Blue** /200 … /600 | `--blue-200` … `--blue-600` | `bg-blue-400`, `text-blue-600` |
+| **Malibu** /200 … /600 | `--malibu-200` … `--malibu-600` | `bg-malibu-500` |
+| **Neutral** /100–/600, White, Black | `--neutral-100` … `--neutral-600`, `--neutral-white`, `--neutral-black` | `bg-neutral-100`, `border-neutral-200` |
+| **Status/Success** /100, /200, /300 | `--status-success-100` … | `bg-status-success-100`, `text-status-success-300` |
+| **Status/Warning** /100–/300 | `--status-warning-*` | idem |
+| **Status/Error** /100–/300 | `--status-error-*` | idem; `--destructive` → `--status-error-200` |
+| **Status/Info** /100–/300 | `--status-info-*` | idem; `--tag-bg` → `--status-info-100` |
+
+**Legacy aliases** (same values): `--brand-midnight` → `--midnight`, `--brand-blue-*` → `--blue-*`. Prefer new names in new code.
+
+**Hex source of truth**: Dev Mode / variables in Figma. If a Malibu or Status hex drifts, update the primitive block in `globals.css` first, then semantic mappings if needed.
+
+### 3.2 Semantic colors (app / shadcn)
+
+| Role | Typical source primitive | Tailwind |
+|------|---------------------------|----------|
+| Primary CTA | `Blue/400` | `bg-primary`, `text-primary` |
+| Secondary | `Blue/200` | `bg-secondary` |
+| Accent (hover / emphasis) | `Malibu/500` (light), `Malibu/400` (dark) | `bg-accent`, `text-accent-foreground` |
+| Muted surfaces | `Neutral/100` | `bg-muted` |
+| Muted text | `Neutral/500` | `text-muted-foreground` |
+| Borders / inputs | `Neutral/200` | `border-border`, `border-input` |
+| Destructive | `Status/Error/200` | `bg-destructive` |
+| Tag / soft info surface | `Status/Info/100` | `bg-tag-bg` |
+| Card border | `Neutral/200` | `border-border-card` |
+
+### 3.3 Other tokens
 
 | Token group | Keys | Usage |
 |-------------|------|--------|
-| **Colors** | `--primary`, `--brand-*`, `--tag-bg`, `--border-card`, `--overlay`, `--overlay-sheet` | Tailwind: `bg-primary`, `bg-tag-bg`, `border-border-card`, `bg-overlay` |
 | **Radius** | `--radius`, `--radius-sm` … `--radius-4xl` | `rounded-lg`, `rounded-2xl` |
 | **Shadow** | `--shadow-sm`, `--shadow-md`, `--shadow-lg` | In @theme for future use |
 | **Transition** | `--transition-duration-fast/normal/slow` | e.g. `duration-[var(--transition-duration-normal)]` |
 | **Breakpoints** | `--breakpoint-sm` … `--breakpoint-2xl` | Reference in tokens.ts; Tailwind uses its own breakpoints |
 
-**Optional JS** `src/styles/tokens.ts`: exports `tokens` object for non-Tailwind contexts (e.g. third-party or `style` prop).
+**Optional JS** `src/styles/tokens.ts`: `tokens.colors.blue`, `malibu`, `neutral`, `status`, `midnight`, `semantic` for charts and `style` props.
+
+Live swatches: **`/design-system`** → Foundation → Colors.
 
 ---
 
@@ -127,8 +161,10 @@ src/
 ### Badge
 
 ```tsx
-<Badge variant="default" | "secondary" | "outline" />
+<Badge variant="default" | "secondary" | "outline" | "success" | "warning" | "info" | "destructive" />
 ```
+
+Status variants use **Status/**\* primitives (`success`, `warning`, `info`); `destructive` maps to **Status/Error**.
 
 ### Dialog / Sheet
 
@@ -173,8 +209,9 @@ src/
   showDots
 />
 
-// Semantic tokens (no hex)
+// Primitives + semantic (no raw hex)
 <div className="rounded-lg bg-tag-bg border border-border-card text-primary" />
+<div className="rounded-lg bg-status-success-100 text-status-success-300 ring-1 ring-status-success-200/50" />
 ```
 
 ---
@@ -187,3 +224,15 @@ src/
 - **Shadows**: `shadow-sm` (cards), `shadow-lg` (modals).
 - **Hover/focus**: `transition-colors` or `transition-all duration-200`; focus `ring-2 ring-ring ring-offset-2`.
 - **Animation**: Prefer CSS vars `--transition-duration-*` or Tailwind `duration-200`.
+
+---
+
+## 7. Figma y sincronización con el prototipo
+
+El diseño en **Figma** y este repo se tratan como fuentes coordinadas de UI. Resumen:
+
+- **Enlace al archivo**, `fileKey`, flujo Figma ↔ código (MCP, scripts, Code Connect) y convención de PRs: **[docs/DESIGN_SOURCE.md](docs/DESIGN_SOURCE.md)**.
+- **Dev Mode / snippets reales desde el repo:** **[docs/CODE_CONNECT.md](docs/CODE_CONNECT.md)** y `figma.config.json` en la raíz.
+- **Implementación asistida con Cursor:** [`.cursor/rules/figma-design-system.mdc`](.cursor/rules/figma-design-system.mdc) (obligatorio al tocar `src/**/*.tsx` bajo esas reglas).
+
+Los tokens de este documento (secciones 3–4) son la referencia al traducir diseño a clases Tailwind. Los nombres de variables Figma **Colors** (`Blue/400`, `Status/Success/100`, …) deben alinearse con `--blue-400`, `--status-success-100`, etc. en `globals.css` y con *code syntax* WEB en Figma cuando exista.

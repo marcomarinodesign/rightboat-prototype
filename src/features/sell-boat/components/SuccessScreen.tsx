@@ -24,7 +24,7 @@ const SuccessScreen = ({ onReset }: SuccessScreenProps) => {
       </motion.div>
 
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold text-foreground">Your Boat Has Been Listed!</h2>
+        <h2 className="heading-sm text-foreground">Your Boat Has Been Listed!</h2>
         <p className="text-muted-foreground max-w-sm mx-auto">
           Thank you for your submission. Our marine experts will review your listing and get back to you within 24 hours.
         </p>

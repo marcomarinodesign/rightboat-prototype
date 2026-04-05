@@ -72,7 +72,7 @@ export default function ResearchAdvicePage() {
 
       <section className="space-y-6" aria-labelledby="articles-heading">
         <div className="flex items-center justify-between">
-          <h2 id="articles-heading" className="text-2xl font-bold">
+          <h2 id="articles-heading" className="heading-sm">
             Articles
           </h2>
         </div>

@@ -1,12 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
 import { ImageSlider } from "@/components/ui/image-slider"
-import { premiumBrands } from "@/data/brands"
+import { BrokerLogo } from "@/components/boats/broker-logo"
 
 type BoatCardProps = {
   boat: Boat
@@ -26,21 +25,17 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     : [boat.image, boat.image, boat.image, boat.image]
 
   const boatName = `${boat.make} ${boat.model}`
-  const brokerLogo =
-    premiumBrands[
-      Math.abs(boat.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0)) %
-        premiumBrands.length
-    ]?.logo ?? "/brands/placeholder-logo.png"
 
   const imageSection = (
-    <div className="relative w-full overflow-hidden rounded-lg">
+    <div className="relative w-full overflow-hidden rounded-[8px]">
       <ImageSlider
         images={images}
         alt={boatName}
         showDots
         showNavArrows={false}
         dotsPlacement="overlay"
-        imageRoundedClassName="rounded-lg"
+        imageRoundedClassName="rounded-[8px]"
+        slideBackdropClassName="bg-midnight/12"
       />
       {boat.featured ? (
         <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
@@ -54,36 +49,42 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
 
   const detailsSection = (options?: { linkName?: boolean; showContactCta?: boolean }) => (
     <div className="flex min-w-0 flex-col gap-2 pt-3">
-      <div className="text-2xl font-bold leading-8 tracking-tight text-foreground">
+      <div className="text-base font-bold leading-6 text-primary">
         {boat.price}
       </div>
       {options?.linkName ? (
         <Link
           href={href}
-          className="line-clamp-2 text-base font-bold leading-6 text-foreground transition-colors hover:text-primary"
+          className="block min-w-0 truncate text-base font-bold leading-6 text-foreground transition-colors hover:text-primary"
           title={boatName}
         >
           {boatName}
         </Link>
       ) : (
-        <span className="line-clamp-2 text-base font-bold leading-6 text-foreground" title={boatName}>
+        <span
+          className="block min-w-0 truncate text-base font-bold leading-6 text-foreground"
+          title={boatName}
+        >
           {boatName}
         </span>
       )}
-      <p className="line-clamp-2 text-sm leading-5 text-muted-foreground">{specsSummary(boat)}</p>
-      <p className="line-clamp-2 text-sm leading-5 text-muted-foreground">{boat.location}</p>
+      <p className="line-clamp-2 text-sm leading-5 text-midnight">
+        {specsSummary(boat)}
+      </p>
+      <p className="line-clamp-2 text-sm leading-5 text-midnight">{boat.location}</p>
       <div className="h-px w-full bg-border-card" />
       <div className="flex items-center gap-2">
-        <div className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-card p-0.5">
-          <Image
-            src={brokerLogo}
+        <div className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 shadow-sm ring-1 ring-neutral-200">
+          <BrokerLogo
+            key={`${boat.id}-${boat.broker}`}
+            broker={boat.broker}
             alt={boat.broker || "Broker logo"}
             width={28}
             height={28}
             className="size-full object-contain"
           />
         </div>
-        <span className="truncate text-xs leading-4 text-muted-foreground">{boat.broker}</span>
+        <span className="truncate text-xs leading-4 text-midnight">{boat.broker}</span>
       </div>
       {options?.showContactCta ? (
         <button
@@ -104,7 +105,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     return (
       <article
         className={cn(
-          "overflow-hidden rounded-2xl border border-border-card bg-card p-3",
+          "overflow-hidden rounded-xl border border-border-card bg-card p-3",
           "transition-all hover:shadow-lg",
           "md:flex"
         )}
@@ -123,7 +124,7 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
     <Link
       href={href}
       className={cn(
-        "flex w-full flex-col overflow-hidden rounded-2xl border border-border-card bg-card p-3",
+        "flex w-full flex-col overflow-hidden rounded-xl border border-border-card bg-card p-3",
         "transition-all hover:shadow-lg"
       )}
     >

@@ -130,7 +130,7 @@ function Section({
       className="scroll-mt-16 border-b border-border/60 pb-14 pt-10 last:border-0"
     >
       <div className="mb-8">
-        <h2 className="text-2xl font-bold">{title}</h2>
+        <h2 className="heading-sm">{title}</h2>
         {description && (
           <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
         )}
@@ -313,7 +313,7 @@ export default function DesignSystemPage() {
       {/* ── Content ─────────────────────────────────────────── */}
       <div className="ml-56 flex flex-1 flex-col">
         {/* Sticky top bar */}
-        <div className="sticky top-0 z-30 border-b border-border/60 bg-background/95 px-10 py-4 backdrop-blur">
+        <div className="sticky top-0 z-30 border-b border-border bg-background px-10 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <h1 className="text-lg font-bold">Rightboat Design System</h1>
@@ -337,34 +337,148 @@ export default function DesignSystemPage() {
           <Section
             id="colors"
             title="Colors"
-            description="Brand and semantic color tokens used throughout the UI."
+            description="Primitives match Figma library Colors: Blue, Malibu, Neutral, Midnight, Status (Success, Warning, Error, Info). Semantic tokens map UI roles to those primitives."
           >
-            <Group label="Brand palette">
+            <Group label="Figma: Midnight">
               <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
-                <Swatch label="Midnight" color="#13022c" token="--brand-midnight" />
-                <Swatch label="Blue 200" color="#208cff" token="--brand-blue-200" />
-                <Swatch label="Blue 300" color="#086bff" token="--brand-blue-300" />
-                <Swatch
-                  label="Blue 400 (primary)"
-                  color="#0257fc"
-                  token="--brand-blue-400"
-                />
-                <Swatch label="Blue 500" color="#0944c4" token="--brand-blue-500" />
-                <Swatch label="Blue 600" color="#0e3d9a" token="--brand-blue-600" />
+                <Swatch label="Midnight" color="var(--midnight)" token="--midnight" />
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Tailwind: <code className="font-mono">bg-midnight</code> · Legacy:{" "}
+                <code className="font-mono">--brand-midnight</code> aliases{" "}
+                <code className="font-mono">--midnight</code>
+              </p>
+            </Group>
+
+            <Group label="Figma: Blue/200–600">
+              <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
+                {(
+                  [
+                    ["200", "--blue-200"],
+                    ["300", "--blue-300"],
+                    ["400 (CTA)", "--blue-400"],
+                    ["500", "--blue-500"],
+                    ["600", "--blue-600"],
+                  ] as const
+                ).map(([label, token]) => (
+                  <Swatch
+                    key={token}
+                    label={`Blue ${label}`}
+                    color={`var(${token})`}
+                    token={token}
+                  />
+                ))}
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Tailwind: <code className="font-mono">bg-blue-400</code>,{" "}
+                <code className="font-mono">text-blue-600</code> · Legacy{" "}
+                <code className="font-mono">--brand-blue-*</code> →{" "}
+                <code className="font-mono">--blue-*</code>
+              </p>
+            </Group>
+
+            <Group label="Figma: Malibu/200–600">
+              <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
+                {(
+                  [
+                    ["200", "--malibu-200"],
+                    ["300", "--malibu-300"],
+                    ["400", "--malibu-400"],
+                    ["500", "--malibu-500"],
+                    ["600", "--malibu-600"],
+                  ] as const
+                ).map(([label, token]) => (
+                  <Swatch
+                    key={token}
+                    label={`Malibu ${label}`}
+                    color={`var(${token})`}
+                    token={token}
+                  />
+                ))}
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Used for accent surfaces (e.g. light mode <code className="font-mono">--accent</code> →{" "}
+                <code className="font-mono">--malibu-500</code>). Tailwind:{" "}
+                <code className="font-mono">bg-malibu-400</code>
+              </p>
+            </Group>
+
+            <Group label="Figma: Neutral (100–600, White, Black)">
+              <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-8">
+                {(
+                  [
+                    ["White", "--neutral-white"],
+                    ["100", "--neutral-100"],
+                    ["200", "--neutral-200"],
+                    ["300", "--neutral-300"],
+                    ["400", "--neutral-400"],
+                    ["500", "--neutral-500"],
+                    ["600", "--neutral-600"],
+                    ["Black", "--neutral-black"],
+                  ] as const
+                ).map(([label, token]) => (
+                  <Swatch
+                    key={token}
+                    label={label.startsWith("Neutral") ? label : `Neutral ${label}`}
+                    color={`var(${token})`}
+                    token={token}
+                  />
+                ))}
               </div>
             </Group>
 
-            <Group label="Semantic tokens">
+            <Group label="Figma: Status — Success, Warning, Error, Info (100 / 200 / 300)">
+              <div className="space-y-6">
+                {(
+                  [
+                    ["Success", "success"],
+                    ["Warning", "warning"],
+                    ["Error", "error"],
+                    ["Info", "info"],
+                  ] as const
+                ).map(([title, slug]) => (
+                  <div key={slug}>
+                    <p className="mb-2 text-xs font-medium text-muted-foreground">{title}</p>
+                    <div className="grid grid-cols-3 gap-4 sm:grid-cols-3 max-w-md">
+                      {(["100", "200", "300"] as const).map((step) => {
+                        const token = `--status-${slug}-${step}`
+                        return (
+                          <Swatch
+                            key={token}
+                            label={`${title} ${step}`}
+                            color={`var(${token})`}
+                            token={token}
+                          />
+                        )
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Example Tailwind: <code className="font-mono">bg-status-error-200</code>,{" "}
+                <code className="font-mono">text-status-success-300</code>.{" "}
+                <code className="font-mono">--destructive</code> uses{" "}
+                <code className="font-mono">--status-error-200</code>.
+              </p>
+            </Group>
+
+            <Group label="Semantic tokens (shadcn / app)">
               <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
                 {[
                   { label: "Background", token: "--background" },
                   { label: "Foreground", token: "--foreground" },
                   { label: "Primary", token: "--primary" },
+                  { label: "Primary FG", token: "--primary-foreground" },
+                  { label: "Accent", token: "--accent" },
                   { label: "Muted", token: "--muted" },
+                  { label: "Muted FG", token: "--muted-foreground" },
                   { label: "Border", token: "--border" },
                   { label: "Card", token: "--card" },
                   { label: "Destructive", token: "--destructive" },
+                  { label: "Destructive FG", token: "--destructive-foreground" },
                   { label: "Tag BG", token: "--tag-bg" },
+                  { label: "Border card", token: "--border-card" },
                 ].map(({ label, token }) => (
                   <Swatch
                     key={token}
@@ -561,6 +675,10 @@ export default function DesignSystemPage() {
                 <Badge variant="default">Default</Badge>
                 <Badge variant="secondary">Secondary</Badge>
                 <Badge variant="outline">Outline</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="info">Info</Badge>
+                <Badge variant="destructive">Error</Badge>
               </div>
             </Group>
 
@@ -1152,15 +1270,21 @@ export default function DesignSystemPage() {
                 <div className="flex gap-3">
                   <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Active colour</span>
                   <span className="flex items-center gap-2">
-                    <span className="inline-block h-3 w-6 rounded-sm" style={{ background: "#0257fc" }} />
-                    <code className="font-mono text-xs">#0257fc (--brand-blue-400)</code>
+                    <span
+                      className="inline-block h-3 w-6 rounded-sm"
+                      style={{ background: "var(--blue-400)" }}
+                    />
+                    <code className="font-mono text-xs">var(--blue-400) · Figma Blue/400</code>
                   </span>
                 </div>
                 <div className="flex gap-3">
                   <span className="w-32 shrink-0 font-mono text-xs text-muted-foreground">Inactive colour</span>
                   <span className="flex items-center gap-2">
-                    <span className="inline-block h-3 w-6 rounded-sm border" style={{ background: "#e2e8f0" }} />
-                    <code className="font-mono text-xs">#e2e8f0</code>
+                    <span
+                      className="inline-block h-3 w-6 rounded-sm border"
+                      style={{ background: "var(--neutral-200)" }}
+                    />
+                    <code className="font-mono text-xs">var(--neutral-200)</code>
                   </span>
                 </div>
               </div>
@@ -1362,7 +1486,7 @@ export default function DesignSystemPage() {
             {/* ── Config ── */}
             <Group label="next.config.ts — optimization">
               <div className="rounded-lg bg-neutral-950 p-4">
-                <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-neutral-300">
+                <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-neutral-200">
 {`images: {
   remotePatterns: [ /* rightboat.com, unsplash, ... */ ],
   formats: ["image/avif", "image/webp"],

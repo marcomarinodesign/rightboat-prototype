@@ -22,7 +22,7 @@ export function WhyRightboat() {
   return (
     <section className="space-y-6" aria-labelledby="why-heading">
       <div>
-        <h2 id="why-heading" className="text-2xl font-bold">
+        <h2 id="why-heading" className="heading-sm">
           Why Use Rightboat?
         </h2>
         <p className="mt-2 text-muted-foreground">

@@ -12,10 +12,10 @@ import {
 } from "recharts"
 
 import type { Boat } from "@/data/boats"
+import { tokens } from "@/styles/tokens"
 
-// ─── Colors ──────────────────────────────────────────────────────────────────
-const COLOR_ACTIVE = "#0257fc"   // --brand-blue-400 / primary
-const COLOR_INACTIVE = "#e2e8f0" // light gray for out-of-range bars
+const COLOR_ACTIVE = tokens.colors.blue[400]
+const COLOR_INACTIVE = tokens.colors.neutral[200]
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

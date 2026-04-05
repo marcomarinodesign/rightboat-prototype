@@ -12,7 +12,9 @@ import {
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
-const COLOR_BAR = "#0257fc" // primary / brand-blue-400
+import { tokens } from "@/styles/tokens"
+
+const COLOR_BAR = tokens.colors.blue[400]
 
 function parsePriceValue(valueStr: string): number {
   const n = parseInt(valueStr.replace(/[^0-9]/g, ""), 10)
@@ -115,7 +117,7 @@ export function BdpPriceHistory({ summary, items }: BdpPriceHistoryProps) {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="flex h-[150px] items-center justify-center rounded-lg bg-background/50 text-xs text-muted-foreground">
+              <div className="flex h-[150px] items-center justify-center rounded-lg bg-muted text-xs text-muted-foreground">
                 No pricing data available
               </div>
             )}

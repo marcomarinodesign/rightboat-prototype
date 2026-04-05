@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "figma:connect:parse": "figma connect parse --skip-update-check",
+    "figma:connect:publish": "figma connect publish --skip-update-check"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -33,6 +35,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.4.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

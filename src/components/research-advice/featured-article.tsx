@@ -32,7 +32,7 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
             )}
             <Link
               href={article.href}
-              className="text-2xl font-bold leading-tight transition-colors hover:text-primary lg:text-3xl"
+              className="heading-sm leading-tight transition-colors hover:text-primary lg:text-3xl lg:leading-9"
             >
               {article.title}
             </Link>

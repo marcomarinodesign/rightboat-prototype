@@ -29,7 +29,7 @@ export function BrokerContactDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="p-0 max-w-md">
         <div className="p-8">
-          <DialogTitle className="text-2xl text-center">
+          <DialogTitle className="text-center">
             Ask Us How to Switch and Save
           </DialogTitle>
 

@@ -184,7 +184,7 @@ export function BlogArticleLayout({
         >
           &larr; View previous story
         </Link>
-        <h2 className="text-2xl font-bold">Related Articles and Guides</h2>
+        <h2 className="heading-sm">Related Articles and Guides</h2>
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredRelated.map((a) => (
             <li key={a.id}>

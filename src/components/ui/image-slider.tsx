@@ -15,6 +15,8 @@ type ImageSliderProps = {
   dotsPlacement?: "below" | "overlay"
   /** Applied to the scroll frame and slide masks; defaults to rounded corners matching other carousels. */
   imageRoundedClassName?: string
+  /** Backdrop behind slides (e.g. Figma Boat Card: midnight @ 12% opacity). */
+  slideBackdropClassName?: string
   className?: string
 }
 
@@ -25,6 +27,7 @@ export function ImageSlider({
   showNavArrows = true,
   dotsPlacement = "below",
   imageRoundedClassName = "rounded-xl",
+  slideBackdropClassName = "bg-muted",
   className,
 }: ImageSliderProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null)
@@ -109,14 +112,15 @@ export function ImageSlider({
     return (
       <div
         className={cn(
-          "relative w-full overflow-hidden bg-muted",
+          "relative w-full overflow-hidden",
+          slideBackdropClassName,
           imageRoundedClassName,
           "aspect-[3/2]",
           className
         )}
         aria-hidden
       >
-        <div className="absolute inset-0 animate-pulse bg-muted-foreground/10" />
+        <div className="absolute inset-0 animate-pulse bg-foreground/5" />
       </div>
     )
   }
@@ -156,7 +160,8 @@ export function ImageSlider({
           >
             <div
               className={cn(
-                "relative aspect-[3/2] w-full overflow-hidden bg-muted",
+                "relative aspect-[3/2] w-full overflow-hidden",
+                slideBackdropClassName,
                 imageRoundedClassName
               )}
             >

@@ -22,7 +22,7 @@ export function PropelExpertDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="p-0">
         <div className="p-8">
-          <DialogTitle className="text-2xl text-center">Contact Us to Switch and Save</DialogTitle>
+          <DialogTitle className="text-center">Contact Us to Switch and Save</DialogTitle>
 
           <div className="mt-6 space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">

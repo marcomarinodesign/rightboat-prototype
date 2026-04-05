@@ -6,7 +6,11 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { boatCategories } from "@/data/categories-extended"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+
+/** Light frosted strip: only bottom ~55% (title block); top of card stays clear */
+const CATEGORY_CARD_OVERLAY_BOTTOM =
+  "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 28%, rgba(255,255,255,0.2) 58%, rgba(255,255,255,0.36) 100%)"
 
 export function HomeCategories() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -67,14 +71,14 @@ export function HomeCategories() {
     <section className="space-y-6" aria-labelledby="categories-heading">
       <div className="flex items-center justify-between">
         <div>
-          <h2 id="categories-heading" className="text-2xl font-bold">
+          <h2 id="categories-heading" className="heading-sm">
             Boats by Categories
           </h2>
           <p className="mt-2 text-muted-foreground">
             Explore boats by type and find the perfect vessel for your needs
           </p>
         </div>
-        <Link href="/boats-for-sale" className="text-sm text-primary">
+        <Link href="/boats-for-sale" className="primary-text-link">
           See all
         </Link>
       </div>
@@ -89,27 +93,38 @@ export function HomeCategories() {
             <Link
               key={category.id}
               href={`/boats-for-sale?type=${category.slug}`}
-              className="group relative block min-w-[280px] flex-shrink-0 overflow-hidden rounded-lg"
+              className="group relative block h-[280px] w-[290px] min-w-[290px] shrink-0 overflow-hidden rounded-lg"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
-                <div className="absolute inset-0 flex flex-col items-center justify-between p-6 text-center">
-                  <h3 className="text-xl font-bold leading-tight text-white">
+              <Image
+                src={category.image}
+                alt={category.name}
+                fill
+                sizes="290px"
+                className="rounded-lg object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] rounded-b-lg backdrop-blur-[16px] [mask-image:linear-gradient(to_bottom,transparent_0%,black_32%,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_32%,black_100%)]"
+                style={{ backgroundImage: CATEGORY_CARD_OVERLAY_BOTTOM }}
+                aria-hidden
+              />
+              <div className="pointer-events-none absolute inset-0 flex flex-col justify-end rounded-lg p-4">
+                <div className="flex w-full flex-col gap-1">
+                  <h3 className="heading-sm text-white">
                     {category.name}
                   </h3>
-                  <div className="flex w-full flex-col items-center gap-4">
-                    <Button size="sm" className="pointer-events-none">
-                      Discover
-                    </Button>
-                    <p className="text-sm text-white/90">
-                      {category.description}
-                    </p>
+                  <p className="text-sm font-normal leading-5 text-white/90">
+                    {category.description}
+                  </p>
+                  <div className="flex w-full items-center justify-between">
+                    <Badge
+                      variant="secondary"
+                      className="pointer-events-none border-0 bg-neutral-100 px-3 py-1.5 text-xs font-normal leading-4 text-midnight"
+                    >
+                      {category.listingCount.toLocaleString()} boats
+                    </Badge>
+                    <span className="text-sm font-medium text-white">
+                      Discover more
+                    </span>
                   </div>
                 </div>
               </div>

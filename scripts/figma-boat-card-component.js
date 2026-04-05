@@ -2,6 +2,7 @@
  * Plugin API script for Figma MCP `use_figma` — regenerates the "Boat Card" component set.
  * Regenerate payload: node -e "const fs=require('fs');const c=fs.readFileSync('scripts/figma-boat-card-component.js','utf8'); fs.writeFileSync('mcp-args-boat-card.json', JSON.stringify({fileKey:'VOCH4pGubqSYza7CbL30c7',description:'Boat Card',skillNames:'figma-use,figma-generate-design',code:c}));"
  * File key: FIGMA-MCP file (update if your file differs).
+ * Context: docs/DESIGN_SOURCE.md
  */
 const V = {
   card: "VariableID:11:4",
@@ -53,9 +54,13 @@ function textNode(content, size, weight) {
   return t;
 }
 
+/** Long sample so the component shows single-line ellipsis in the file (matches app `truncate`). */
+const SAMPLE_BOAT_TITLE =
+  "Sea Ray 320 Sundancer — Twin Merc 350 · Generator · Full electronics";
+
 async function buildDetails(showCta) {
   const col = figma.createFrame();
-  col.name = "Details";
+  col.name = "info";
   col.layoutMode = "VERTICAL";
   col.itemSpacing = 8;
   col.paddingLeft = 8;
@@ -64,9 +69,14 @@ async function buildDetails(showCta) {
   col.paddingBottom = 8;
   col.fills = [];
 
-  const title = textNode("Sea Ray 320 Sundancer", 18, 700);
+  const title = textNode(SAMPLE_BOAT_TITLE, 16, 700);
   await styleTextColor(title, V.foreground);
   col.appendChild(title);
+  title.name = "Boat title";
+  title.layoutSizingHorizontal = "FILL";
+  title.textAutoResize = "HEIGHT";
+  title.textTruncation = "ENDING";
+  title.maxLines = 1;
 
   const priceRow = figma.createFrame();
   priceRow.layoutMode = "HORIZONTAL";
@@ -74,8 +84,9 @@ async function buildDetails(showCta) {
   priceRow.counterAxisAlignItems = "CENTER";
   priceRow.itemSpacing = 8;
   priceRow.fills = [];
-  const price = textNode("$175,000", 20, 700);
-  await styleTextColor(price, V.foreground);
+  const price = textNode("$175,000", 16, 700);
+  price.lineHeight = { unit: "PIXELS", value: 24 };
+  await styleTextColor(price, V.primary);
   const infoBtn = figma.createFrame();
   infoBtn.resize(20, 20);
   infoBtn.fills = [];
@@ -270,7 +281,7 @@ if (ruleG) ruleG.layoutSizingHorizontal = "FILL";
 
 const yk = compGrid.addComponentProperty("Year", "TEXT", "2021");
 const ck = compGrid.addComponentProperty("Condition", "TEXT", "Used");
-const tk = compGrid.addComponentProperty("Title", "TEXT", "Sea Ray 320 Sundancer");
+const tk = compGrid.addComponentProperty("Title", "TEXT", SAMPLE_BOAT_TITLE);
 const pk = compGrid.addComponentProperty("Price", "TEXT", "$175,000");
 const lk = compGrid.addComponentProperty("Location", "TEXT", "Miami, FL");
 const bk = compGrid.addComponentProperty("Broker", "TEXT", "MarineMax");
@@ -306,7 +317,7 @@ dl.col.layoutSizingVertical = "HUG";
 
 const yk2 = compList.addComponentProperty("Year", "TEXT", "2021");
 const ck2 = compList.addComponentProperty("Condition", "TEXT", "Used");
-const tk2 = compList.addComponentProperty("Title", "TEXT", "Sea Ray 320 Sundancer");
+const tk2 = compList.addComponentProperty("Title", "TEXT", SAMPLE_BOAT_TITLE);
 const pk2 = compList.addComponentProperty("Price", "TEXT", "$175,000");
 const lk2 = compList.addComponentProperty("Location", "TEXT", "Miami, FL");
 const bk2 = compList.addComponentProperty("Broker", "TEXT", "MarineMax");

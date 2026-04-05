@@ -31,7 +31,7 @@ const StepThree = ({ form }: StepThreeProps) => {
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-3">
           <UserCircle className="w-6 h-6 text-primary" />
         </div>
-        <h2 className="text-2xl font-bold text-foreground">Your Contact Details</h2>
+        <h2 className="heading-sm text-foreground">Your Contact Details</h2>
       </div>
 
       <div className="space-y-1.5">

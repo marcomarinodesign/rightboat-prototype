@@ -26,7 +26,7 @@ const StepOne = ({ form, hideTitle = false }: StepOneProps) => {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-3">
             <Anchor className="w-6 h-6 text-primary" />
           </div>
-          <h2 className="text-2xl font-bold text-foreground">Sell Your Boat</h2>
+          <h2 className="heading-sm text-foreground">Sell Your Boat</h2>
           <p className="text-muted-foreground mt-1">Takes less than 2 minutes.</p>
         </div>
       )}

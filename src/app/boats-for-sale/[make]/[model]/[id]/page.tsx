@@ -178,8 +178,8 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
 
       <section className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Similar boats</h2>
-          <Link href="/boats-for-sale" className="text-sm text-primary">
+          <h2 className="heading-sm">Similar boats</h2>
+          <Link href="/boats-for-sale" className="primary-text-link">
             View more details
           </Link>
         </div>

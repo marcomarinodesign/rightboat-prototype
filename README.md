@@ -1,3 +1,18 @@
+# Rightboat prototype
+
+Next.js marketplace prototype for Rightboat (App Router, Tailwind v4, Framer Motion, Radix primitives).
+
+## Design source (Figma + código)
+
+- **[docs/DESIGN_SOURCE.md](docs/DESIGN_SOURCE.md)** — archivo Figma canónico (`fileKey`), flujo bidireccional prototipo ↔ Figma, scripts MCP y trazabilidad en PRs.
+- **[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)** — tokens, carpetas `ui` / `patterns` y APIs de componentes.
+- **[docs/CODE_CONNECT.md](docs/CODE_CONNECT.md)** — Figma Code Connect (Dev Mode): configuración, publicación y archivos `*.figma.tsx`.
+- **[DESIGN_SYNC.md](DESIGN_SYNC.md)** — registro opcional de hitos grandes diseño ↔ código.
+
+Reglas para implementación con **Cursor + Figma MCP**: [`.cursor/rules/figma-design-system.mdc`](.cursor/rules/figma-design-system.mdc).
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Setup

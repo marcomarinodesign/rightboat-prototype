@@ -10,7 +10,7 @@ export function PopularModels() {
   return (
     <section className="space-y-6" aria-labelledby="models-heading">
       <div>
-        <h2 id="models-heading" className="text-2xl font-bold">
+        <h2 id="models-heading" className="heading-sm">
           Popular Models
         </h2>
         <p className="mt-2 text-muted-foreground">

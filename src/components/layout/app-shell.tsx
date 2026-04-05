@@ -85,13 +85,13 @@ function SiteHeader() {
   }, [])
 
   const navLinkClass =
-    "text-sm font-medium leading-6 text-muted-foreground hover:text-foreground transition-colors"
+    "rounded-lg px-3 py-2 text-sm font-normal leading-5 text-foreground transition-colors hover:text-foreground/80"
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-[4px]">
+    <header className="sticky top-0 z-50 border-b border-border bg-background">
       <nav
         aria-label="Global"
-        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-0"
+        className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
       >
         {/* Logo */}
         <div className="flex shrink-0">
@@ -161,13 +161,13 @@ function SiteHeader() {
                   </div>
                   <div className="space-y-3 py-6">
                     <Button
-                      variant="outline"
-                      className="w-full"
+                      variant="ghost"
+                      className="w-full text-[13px] font-medium text-primary hover:bg-muted"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Signup
+                      Sign up
                     </Button>
-                    <Button className="w-full" asChild>
+                    <Button className="w-full text-[13px] font-medium" asChild>
                       <Link href="/sell-b-v3" onClick={() => setMobileMenuOpen(false)}>
                         Sell your boat
                       </Link>
@@ -180,7 +180,7 @@ function SiteHeader() {
         </div>
 
         {/* Desktop: main nav + More dropdown */}
-        <div className="hidden lg:flex lg:items-center lg:gap-8">
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-1">
           {mainNav.map((item) => (
             <Link
               key={item.name}
@@ -226,15 +226,15 @@ function SiteHeader() {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex lg:items-center lg:gap-2">
+        <div className="hidden lg:flex lg:shrink-0 lg:items-center lg:gap-2">
           <Button
-            variant="outline"
+            variant="ghost"
             size="sm"
-            className="border-border bg-background font-medium text-foreground hover:bg-muted hover:text-foreground"
+            className="text-[13px] font-medium text-primary hover:bg-transparent hover:text-primary/90"
           >
-            Signup
+            Sign up
           </Button>
-          <Button size="sm" className="font-medium" asChild>
+          <Button size="sm" className="text-[13px] font-medium" asChild>
             <Link href="/sell-b-v3">Sell your boat</Link>
           </Button>
         </div>
@@ -245,7 +245,7 @@ function SiteHeader() {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-border/60 bg-brand-midnight text-white">
+    <footer className="border-t border-border/60 bg-midnight text-white">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="space-y-3">
           <h3 className="text-lg font-semibold text-white">Rightboat</h3>

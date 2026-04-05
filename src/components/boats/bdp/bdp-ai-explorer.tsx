@@ -81,7 +81,7 @@ export function BdpAiExplorer({ boatTitle }: BdpAiExplorerProps) {
   }
 
   return (
-    <Card className="rounded-lg border-border/80 bg-background/80">
+    <Card className="rounded-lg border-border bg-card">
       <CardHeader className="pb-2">
         <CardTitle className="text-xl sm:text-2xl">
           Ask or choose any question <span className="text-muted-foreground">{boatTitle}</span>

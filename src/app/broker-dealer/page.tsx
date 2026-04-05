@@ -165,7 +165,7 @@ export default function BrokerDealerPage() {
               <Badge variant="secondary" className="mb-4 w-fit">
                 Easy option
               </Badge>
-              <CardTitle className="text-2xl">Accelerate</CardTitle>
+              <CardTitle>Accelerate</CardTitle>
               <p className="mt-2 text-sm text-muted-foreground">
                 Get noticed with branded listings
               </p>
@@ -206,7 +206,7 @@ export default function BrokerDealerPage() {
               <Badge variant="secondary" className="mb-4 w-fit">
                 Easy option
               </Badge>
-              <CardTitle className="text-2xl">Illuminate</CardTitle>
+              <CardTitle>Illuminate</CardTitle>
               <p className="mt-2 text-sm text-muted-foreground">
                 Move full speed ahead!
               </p>
@@ -255,7 +255,7 @@ export default function BrokerDealerPage() {
               <Badge variant="secondary" className="mb-4 w-fit">
                 Easy option
               </Badge>
-              <CardTitle className="text-2xl">Enhancements</CardTitle>
+              <CardTitle>Enhancements</CardTitle>
               <p className="mt-2 text-sm text-muted-foreground">
                 Optional Features
               </p>

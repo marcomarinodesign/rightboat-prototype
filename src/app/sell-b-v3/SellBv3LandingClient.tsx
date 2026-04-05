@@ -100,7 +100,7 @@ export function SellBv3LandingClient() {
               {HERO_DESCRIPTION}
             </p>
           </div>
-          <div className="relative z-10 w-full max-w-[414px] rounded-[12px] bg-[#b8e7ff]/95 p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] backdrop-blur-[4px] sm:p-9">
+          <div className="relative z-10 w-full max-w-[414px] rounded-lg border border-border bg-malibu-300 p-6 shadow-sm sm:p-9">
             <div className="mb-6 text-center text-[20px] font-bold leading-[1.2] text-[#13022c] sm:text-[22px]">
               Takes less than 2 minutes.
             </div>

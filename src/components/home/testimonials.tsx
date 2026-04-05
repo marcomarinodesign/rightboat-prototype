@@ -19,10 +19,9 @@ export function Testimonials({ align = "left" }: TestimonialsProps) {
         <h2
           id="testimonials-heading"
           className={cn(
-            "font-bold",
             align === "center"
-              ? "text-3xl leading-[45px] tracking-[-0.9px] text-foreground lg:text-[36px]"
-              : "text-2xl"
+              ? "text-3xl font-bold leading-[45px] tracking-[-0.9px] text-foreground lg:text-[36px]"
+              : "heading-sm"
           )}
         >
           Our Testimonials

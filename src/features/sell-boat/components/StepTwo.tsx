@@ -49,7 +49,7 @@ const StepTwo = ({ form, images, setImages }: StepTwoProps) => {
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-3">
           <ClipboardList className="w-6 h-6 text-primary" />
         </div>
-        <h2 className="text-2xl font-bold text-foreground">Boat Details</h2>
+        <h2 className="heading-sm text-foreground">Boat Details</h2>
         <p className="text-muted-foreground mt-1">The more details you add, the better offers you&apos;ll receive.</p>
       </div>
 

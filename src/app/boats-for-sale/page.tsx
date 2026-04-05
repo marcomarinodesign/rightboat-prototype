@@ -24,7 +24,7 @@ export default function BoatsForSalePage() {
 
       <section className="grid gap-6 rounded-2xl border border-border/60 bg-muted/20 p-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-3">
-          <h2 className="text-2xl font-bold">Receive new listings</h2>
+          <h2 className="heading-sm">Receive new listings</h2>
           <p className="text-sm text-muted-foreground">
             Get alerts for new boats that match your preferences.
           </p>

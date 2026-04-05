@@ -75,7 +75,7 @@ export function SellBWizardLayout({
               <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted sm:mb-3 sm:h-12 sm:w-12">
                 <Anchor className="h-5 w-5 text-primary sm:h-6 sm:w-6" aria-hidden />
               </div>
-              <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+              <h2 className="text-xl font-bold leading-7 tracking-tight text-foreground sm:text-2xl sm:leading-8 sm:tracking-[-0.01em]">
                 Sell Your Boat
               </h2>
               <p className="mt-1 text-sm text-muted-foreground sm:text-base">

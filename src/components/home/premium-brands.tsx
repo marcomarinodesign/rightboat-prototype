@@ -10,7 +10,7 @@ export function PremiumBrands() {
   return (
     <section className="space-y-6" aria-labelledby="brands-heading">
       <div>
-        <h2 id="brands-heading" className="text-2xl font-bold">
+        <h2 id="brands-heading" className="heading-sm">
           Our Premium Brands
         </h2>
         <p className="mt-2 text-muted-foreground">
