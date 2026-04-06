@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -17,6 +18,17 @@ type ImageSliderProps = {
   imageRoundedClassName?: string
   /** Backdrop behind slides (e.g. Figma Boat Card: midnight @ 12% opacity). */
   slideBackdropClassName?: string
+  /**
+   * Replaces the default `aspect-[3/2]` track sizing (e.g. Popular Model card: `h-[250px] shrink-0`).
+   * When set, default slide inner wrapper becomes full-height unless `slideImageWrapperClassName` is passed.
+   */
+  carouselFrameClassName?: string
+  /** Inner wrapper around each slide image; defaults by layout (aspect vs fill-height). */
+  slideImageWrapperClassName?: string
+  /** Merged into prev/next control buttons (e.g. white circular arrows from Figma). */
+  navButtonClassName?: string
+  /** When `dotsPlacement` is `overlay`, merged into the dots container (e.g. `bottom-5`). */
+  dotsOverlayClassName?: string
   className?: string
 }
 
@@ -28,6 +40,10 @@ export function ImageSlider({
   dotsPlacement = "below",
   imageRoundedClassName = "rounded-xl",
   slideBackdropClassName = "bg-muted",
+  carouselFrameClassName,
+  slideImageWrapperClassName,
+  navButtonClassName,
+  dotsOverlayClassName,
   className,
 }: ImageSliderProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null)
@@ -108,6 +124,12 @@ export function ImageSlider({
     return () => el.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  const frameSizing = carouselFrameClassName ?? "aspect-[3/2]"
+  const slideInnerDefault = carouselFrameClassName
+    ? "relative h-full w-full min-h-0 overflow-hidden"
+    : "relative aspect-[3/2] w-full overflow-hidden"
+  const slideInner = slideImageWrapperClassName ?? slideInnerDefault
+
   if (!images.length) {
     return (
       <div
@@ -115,7 +137,7 @@ export function ImageSlider({
           "relative w-full overflow-hidden",
           slideBackdropClassName,
           imageRoundedClassName,
-          "aspect-[3/2]",
+          carouselFrameClassName ?? "aspect-[3/2]",
           className
         )}
         aria-hidden
@@ -143,7 +165,8 @@ export function ImageSlider({
         className={cn(
           "flex w-full overflow-hidden",
           imageRoundedClassName,
-          "aspect-[3/2] touch-pan-x flex-row",
+          frameSizing,
+          "touch-pan-x flex-row",
           "snap-x snap-mandatory overflow-x-auto overscroll-x-contain",
           "scroll-smooth scrollbar-hide [-webkit-overflow-scrolling:touch]",
           "[&::-webkit-scrollbar]:hidden",
@@ -160,7 +183,7 @@ export function ImageSlider({
           >
             <div
               className={cn(
-                "relative aspect-[3/2] w-full overflow-hidden",
+                slideInner,
                 slideBackdropClassName,
                 imageRoundedClassName
               )}
@@ -190,9 +213,12 @@ export function ImageSlider({
               e.stopPropagation()
               scrollTo(index - 1)
             }}
-            className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm"
+            className={cn(
+              "absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm",
+              navButtonClassName
+            )}
           >
-            ‹
+            <ChevronLeft className="size-3 shrink-0" aria-hidden strokeWidth={2.25} />
           </button>
           <button
             type="button"
@@ -202,9 +228,12 @@ export function ImageSlider({
               e.stopPropagation()
               scrollTo(index + 1)
             }}
-            className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm"
+            className={cn(
+              "absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm",
+              navButtonClassName
+            )}
           >
-            ›
+            <ChevronRight className="size-3 shrink-0" aria-hidden strokeWidth={2.25} />
           </button>
         </>
       )}
@@ -214,7 +243,10 @@ export function ImageSlider({
             "flex justify-center gap-1.5",
             dotsPlacement === "below" && "mt-2",
             dotsPlacement === "overlay" &&
-              "pointer-events-auto absolute bottom-3 left-1/2 z-20 -translate-x-1/2"
+              cn(
+                "pointer-events-auto absolute bottom-3 left-1/2 z-20 -translate-x-1/2",
+                dotsOverlayClassName
+              )
           )}
           role="tablist"
           aria-label="Slide indicator"

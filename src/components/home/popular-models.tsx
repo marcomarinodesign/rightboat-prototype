@@ -1,7 +1,6 @@
 import Link from "next/link"
 
 import { popularModels } from "@/data/models"
-import { CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { ImageSlider } from "@/components/ui/image-slider"
 import { Button } from "@/components/ui/button"
 import { InteractiveCard } from "@/components/patterns/interactive-card"
@@ -21,51 +20,53 @@ export function PopularModels() {
         {popularModels.map((model) => {
           const href = `/boats-for-sale/${model.brandSlug}/${model.slug}`
           return (
-            <InteractiveCard key={model.id} className="group overflow-hidden" lift>
-              <Link href={href} className="relative block overflow-hidden rounded-t-lg">
+            <InteractiveCard
+              key={model.id}
+              className="group flex flex-col gap-1 overflow-hidden"
+              lift
+            >
+              <div className="relative block">
                 <ImageSlider
-                  images={[model.image]}
+                  images={model.images}
                   alt={`${model.brand} ${model.name}`}
-                  showDots={false}
+                  showDots
+                  showNavArrows
+                  dotsPlacement="overlay"
+                  dotsOverlayClassName="bottom-[10px]"
+                  imageRoundedClassName="rounded-t-lg"
+                  slideBackdropClassName="bg-neutral-300"
+                  carouselFrameClassName="h-[250px] shrink-0"
+                  navButtonClassName="size-6 bg-background text-foreground shadow-sm"
                 />
-              </Link>
-              <CardHeader className="space-y-2">
-                <div className="text-xs uppercase tracking-wide text-muted-foreground">
+              </div>
+              <div className="flex flex-col gap-1 px-4 pb-2 pt-4 text-card-foreground">
+                <p className="text-xs font-normal uppercase leading-4 tracking-wide">
                   {model.brand}
-                </div>
+                </p>
                 <Link
                   href={href}
-                  className="text-lg font-bold leading-tight transition-colors group-hover:text-primary"
+                  className="text-base font-bold leading-6 transition-colors group-hover:text-primary"
                 >
                   {model.name}
                 </Link>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex flex-wrap gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Length: </span>
-                    <span className="font-medium">{model.length}</span>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Type: </span>
-                    <span className="font-medium">{model.type}</span>
-                  </div>
-                </div>
-                <div className="text-sm">
-                  <span className="text-muted-foreground">Price range: </span>
-                  <span className="font-medium">{model.priceRange}</span>
-                </div>
-              </CardContent>
-              <CardFooter>
+                <p className="text-sm font-normal leading-5">
+                  Length: {model.length} — Type: {model.type}
+                </p>
+              </div>
+              <div className="h-px w-full shrink-0 bg-border" aria-hidden />
+              <div className="flex items-center justify-between px-4 pb-4 pt-3">
+                <span className="text-base font-bold leading-6 text-primary">
+                  {model.priceRange}
+                </span>
                 <Button
                   asChild
                   variant="outline"
-                  className="w-full"
                   size="sm"
+                  className="h-10 px-4 text-[13px] font-medium"
                 >
-                  <Link href={href}>View model</Link>
+                  <Link href={href}>View Model</Link>
                 </Button>
-              </CardFooter>
+              </div>
             </InteractiveCard>
           )
         })}
