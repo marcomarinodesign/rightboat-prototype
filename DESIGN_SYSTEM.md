@@ -9,7 +9,7 @@
 | **Duplicated styles** | `rounded-[12px]` in 25+ files | Button, Card, Input, Dialog, Select, Sheet, BDP, blocks, filters |
 | **Duplicated patterns** | Same card hover: `border-border/60 transition-all hover:-translate-y-0.5 hover:shadow-lg` | ArticleCard, FeaturedArticle, PopularModels |
 | **Hardcoded colors** | `#F4F9FF`, `#E4E5E9`, `#CACCD0`, `#0357fc`, `#0257fc` | boat-card, icon-container, propel-expert-dialog, app pages |
-| **Inline styles** | `style={{ color: "#0257fc" }}`, `scrollSnapType`, `scrollbarWidth` | propel/page, broker-dealer/page, image-slider, home-categories, bdp-gallery |
+| **Inline styles** | `style={{ color: "#0257fc" }}`, `scrollSnapType`, `scrollbarWidth` | propel/page, broker-dealer/page, image-slider, home-categories, bdp-image-grid |
 | **Inconsistent naming** | Mix of `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-[12px]` | Global |
 | **Mixed responsibilities** | ListingCard (composition) inside ui/card.tsx | card.tsx |
 | **Repeated logic** | Card + ImageSlider + same layout in ArticleCard, PopularModels, ListingCard | blog, home, ui |
@@ -72,6 +72,8 @@ src/
 ```
 
 **Rules**: `ui` = no business logic. `patterns` = composition of ui. `layout` = page structure. `blocks` / `blog` / `boats` / etc. = features with business logic.
+
+**BDP gallery (listing detail)**: [`src/components/boats/bdp/bdp-image-grid.tsx`](src/components/boats/bdp/bdp-image-grid.tsx) renders the Figma **1 primary + 3 thumbnails** grid on `md+`, with **Photos (N)** / **Videos (M)** outline CTAs over the bottom-right cell; on smaller breakpoints it uses a single hero + stacked CTAs. Tapping any tile or CTA opens [`bdp-gallery-modal.tsx`](src/components/boats/bdp/bdp-gallery-modal.tsx): a fullscreen `Dialog` with a sticky header, **Photos | Videos** tabs (when videos exist), vertical photo list, and YouTube embeds on the Videos tab. Inactive listings pass `state="inactive"` for the **Sold** pill on the hero.
 
 ---
 

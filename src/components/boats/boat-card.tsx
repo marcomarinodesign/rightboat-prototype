@@ -10,6 +10,7 @@ import { BrokerLogo } from "@/components/boats/broker-logo"
 type BoatCardProps = {
   boat: Boat
   variant?: "grid" | "list"
+  className?: string
 }
 
 function specsSummary(boat: Boat) {
@@ -18,7 +19,7 @@ function specsSummary(boat: Boat) {
   return `${boat.year} · ${len} · ${type} · ${boat.condition}`
 }
 
-export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
+export function BoatCard({ boat, variant = "grid", className }: BoatCardProps) {
   const href = `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
   const images = boat.galleryImages?.length
     ? boat.galleryImages
@@ -107,7 +108,8 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
         className={cn(
           "overflow-hidden rounded-xl border border-border-card bg-card p-3",
           "transition-all hover:shadow-lg",
-          "md:flex"
+          "md:flex",
+          className
         )}
       >
         <Link href={href} className="relative block md:w-2/5 md:shrink-0">
@@ -125,7 +127,8 @@ export function BoatCard({ boat, variant = "grid" }: BoatCardProps) {
       href={href}
       className={cn(
         "flex w-full flex-col overflow-hidden rounded-xl border border-border-card bg-card p-3",
-        "transition-all hover:shadow-lg"
+        "transition-all hover:shadow-lg",
+        className
       )}
     >
       {imageSection}

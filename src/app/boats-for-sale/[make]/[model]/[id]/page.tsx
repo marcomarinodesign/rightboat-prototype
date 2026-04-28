@@ -9,15 +9,8 @@ import { BdpPriceHistory } from "@/components/boats/bdp/bdp-price-history"
 import { BdpAiExplorer } from "@/components/boats/bdp/bdp-ai-explorer"
 import { BdpBreadcrumb } from "@/components/boats/bdp/bdp-breadcrumb"
 import { BdpRightPanel } from "@/components/boats/bdp/bdp-right-panel"
+import { BdpImageGrid } from "@/components/boats/bdp/bdp-image-grid"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  CarouselDots,
-} from "@/components/ui/carousel"
 import {
   detailGallery,
   featuredBoats,
@@ -44,26 +37,13 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
 
       <section className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
         <div className="space-y-6">
-          <Carousel className="w-full">
-            <CarouselContent>
-              {[boat.image, ...detailGallery].map((image, index) => (
-                <CarouselItem key={index}>
-                  <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-muted">
-                    <Image
-                      src="https://ui.shadcn.com/placeholder.svg"
-                      alt="Gallery placeholder"
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-            <CarouselDots />
-          </Carousel>
+          <BdpImageGrid
+            images={[boat.image, ...detailGallery]}
+            videos={[{ youtubeId: "vpQNSZkrLag", title: "Walkthrough" }]}
+            alt={`${boat.year} ${boat.make} ${boat.model}`}
+            galleryTitle={`${boat.year} ${boat.make} ${boat.model}`}
+            state="active"
+          />
 
           <div className="space-y-3">
             <p className="text-sm uppercase tracking-wide text-muted-foreground">
@@ -183,8 +163,8 @@ export default function BoatDetailPage({ params }: BoatDetailPageProps) {
             View more details
           </Link>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {listingBoats.slice(0, 3).map((item) => (
+        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+          {listingBoats.slice(0, 4).map((item) => (
             <BoatCard key={item.id} boat={item} />
           ))}
         </div>

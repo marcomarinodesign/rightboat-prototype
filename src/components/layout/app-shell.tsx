@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, ChevronDown } from "lucide-react"
+import { Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -56,45 +56,41 @@ export function AppShell({ children }: AppShellProps) {
   )
 }
 
-const mainNav = [
+const leftNav = [
   { name: "Boats for sale", href: "/boats-for-sale" },
-  { name: "Power for sale", href: "/boats-for-sale?type=power" },
-  { name: "Sail boats", href: "/boats-for-sale?type=sail" },
-  { name: "Research & advice", href: "/research-advice" },
+  { name: "Power", href: "/boats-for-sale?type=power" },
+  { name: "Sail", href: "/boats-for-sale?type=sail" },
+  { name: "Research", href: "/research-advice" },
 ] as const
 
-const moreNav = [
+const rightNav = [
+  { name: "Propel Program", href: "/propel" },
   { name: "Membership", href: "/broker-dealer" },
-  { name: "Propel", href: "/propel" },
-  { name: "Sell your boat", href: "/sell-b-v3" },
 ] as const
 
 function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [moreOpen, setMoreOpen] = useState(false)
-  const moreRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
-        setMoreOpen(false)
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [])
 
   const navLinkClass =
-    "rounded-lg px-3 py-2 text-sm font-normal leading-5 text-foreground transition-colors hover:text-foreground/80"
+    "rounded-lg px-3 py-2 text-[14px] font-normal leading-5 text-foreground transition-colors hover:text-foreground/80"
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <nav
         aria-label="Global"
-        className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
+        className="relative mx-auto flex h-12 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-auto lg:px-8 lg:py-6"
       >
-        {/* Logo */}
-        <div className="flex shrink-0">
+        {/* ── Desktop left nav ── */}
+        <div className="hidden lg:flex lg:items-center lg:gap-2">
+          {leftNav.map((item) => (
+            <Link key={item.name} href={item.href} className={navLinkClass}>
+              {item.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* ── Logo — mobile: normal flow; desktop: absolute center ── */}
+        <div className="flex shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Rightboat</span>
             <Image
@@ -108,135 +104,83 @@ function SiteHeader() {
           </Link>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex lg:hidden">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <button
-                type="button"
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
-              >
-                <span className="sr-only">Open main menu</span>
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:max-w-sm">
-              <SheetHeader>
-                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-                  <Image
-                    src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
-                    alt="Rightboat"
-                    width={120}
-                    height={40}
-                    className="h-[26px] w-auto"
-                  />
-                </Link>
-              </SheetHeader>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-border">
-                  <div className="space-y-1 py-6">
-                    {mainNav.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                    <p className="-mx-3 px-3 py-2 text-sm font-medium text-muted-foreground">
-                      More
-                    </p>
-                    {moreNav.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 ml-2 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="space-y-3 py-6">
-                    <Button
-                      variant="ghost"
-                      className="w-full text-[13px] font-medium text-primary hover:bg-muted"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Sign up
-                    </Button>
-                    <Button className="w-full text-[13px] font-medium" asChild>
-                      <Link href="/sell-b-v3" onClick={() => setMobileMenuOpen(false)}>
-                        Sell your boat
-                      </Link>
-                    </Button>
+        {/* ── Right side: mobile hamburger + desktop right nav ── */}
+        <div className="flex items-center gap-2">
+          {/* Mobile hamburger */}
+          <div className="flex lg:hidden">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button
+                  type="button"
+                  className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
+                >
+                  <span className="sr-only">Open main menu</span>
+                  <Menu className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-full sm:max-w-sm">
+                <SheetHeader>
+                  <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                    <Image
+                      src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
+                      alt="Rightboat"
+                      width={120}
+                      height={40}
+                      className="h-[26px] w-auto"
+                    />
+                  </Link>
+                </SheetHeader>
+                <div className="mt-6 flow-root">
+                  <div className="-my-6 divide-y divide-border">
+                    <div className="space-y-1 py-6">
+                      {leftNav.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                      <p className="-mx-3 px-3 py-2 text-sm font-medium text-muted-foreground">
+                        More
+                      </p>
+                      {rightNav.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="-mx-3 ml-2 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="space-y-3 py-6">
+                      <Button className="w-full text-[13px] font-medium" asChild>
+                        <Link href="/sell-b-v3" onClick={() => setMobileMenuOpen(false)}>
+                          Sell your boat
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {/* Desktop: main nav + More dropdown */}
-        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-1">
-          {mainNav.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={navLinkClass}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <div className="relative" ref={moreRef}>
-            <button
-              type="button"
-              className={cn("flex items-center gap-0.5", navLinkClass)}
-              onClick={() => setMoreOpen(!moreOpen)}
-              aria-expanded={moreOpen}
-              aria-haspopup="true"
-            >
-              More
-              <ChevronDown
-                className={cn("h-4 w-4 transition-transform", moreOpen && "rotate-180")}
-                aria-hidden
-              />
-            </button>
-            {moreOpen && (
-              <div
-                className="absolute left-0 top-full z-50 mt-1 min-w-[160px] rounded-lg border border-border bg-popover py-1 text-popover-foreground shadow-md"
-                role="menu"
-              >
-                {moreNav.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-muted hover:text-foreground"
-                    role="menuitem"
-                    onClick={() => setMoreOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            )}
+              </SheetContent>
+            </Sheet>
           </div>
-        </div>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex lg:shrink-0 lg:items-center lg:gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-[13px] font-medium text-primary hover:bg-transparent hover:text-primary/90"
-          >
-            Sign up
-          </Button>
-          <Button size="sm" className="text-[13px] font-medium" asChild>
-            <Link href="/sell-b-v3">Sell your boat</Link>
-          </Button>
+          {/* Desktop right nav */}
+          <div className="hidden lg:flex lg:items-center lg:gap-2">
+            {rightNav.map((item) => (
+              <Link key={item.name} href={item.href} className={navLinkClass}>
+                {item.name}
+              </Link>
+            ))}
+            <Button size="sm" className="text-[13px] font-medium" asChild>
+              <Link href="/sell-b-v3">Sell your boat</Link>
+            </Button>
+          </div>
         </div>
       </nav>
     </header>
@@ -283,6 +227,20 @@ function SiteFooter() {
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
         <div className="flex items-center justify-center gap-3">
           <span>© 2026 Rightboat. All rights reserved.</span>
+          <span className="h-3 w-px bg-white/20" aria-hidden />
+          <Link
+            href="/boats-for-sale/seacamper/24/rb226195"
+            className="transition-colors hover:text-white/90"
+          >
+            BDP Inactive 1
+          </Link>
+          <span className="h-3 w-px bg-white/20" aria-hidden />
+          <Link
+            href="/boats-for-sale/seacamper/24/rb226195-alt"
+            className="transition-colors hover:text-white/90"
+          >
+            BDP Inactive Alt
+          </Link>
           <span className="h-3 w-px bg-white/20" aria-hidden />
           <Link href="/design-system" className="transition-colors hover:text-white/90">
             Design System

@@ -5,6 +5,7 @@
     "language": "tsx",
     "include": ["src/**/*.figma.tsx", "src/components/**/*.tsx"],
     "exclude": ["**/node_modules/**", ".next/**", "out/**"],
+    "figmaFileUrl": "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS",
     "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/",
     "importPaths": {
       "src/*": "@/*"
