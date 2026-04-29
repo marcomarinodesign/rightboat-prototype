@@ -25,18 +25,22 @@ export function HomeView() {
     <div className="space-y-16 md:space-y-20">
       <section className="space-y-6 text-center">
         <motion.div
-          className="space-y-6"
+          className="flex flex-col items-center justify-center gap-4 pt-5"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: easeOutExpo }}
         >
-          <h1 className="mt-2 text-4xl font-bold leading-10 tracking-[-0.4px] text-foreground md:text-[3rem] md:leading-[3rem] md:tracking-[-0.48px]">
-            The right place to find the{" "}
+          <p className="text-xs font-semibold leading-4 tracking-[2px] uppercase text-foreground">
+            Boats for Sale Worldwide
+          </p>
+          <h1 className="text-4xl font-bold leading-10 tracking-[-0.4px] text-foreground md:text-[3rem] md:leading-[3rem] md:tracking-[-0.48px]">
+            Buy &amp; Sell Boats on{" "}
             <span className="text-primary">Right Boat</span>.
           </h1>
           <p className="text-base font-normal leading-6 text-foreground">
-            Discover thousands of new and used listings worldwide. Compare
-            models, filter by type and location, and contact brokers directly.
+            Search over 35,000 new and used boats for sale worldwide,
+            including yachts, sailboats, motorboats, catamarans and fishing
+            boats.
           </p>
         </motion.div>
         <motion.div

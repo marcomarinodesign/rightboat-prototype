@@ -63,9 +63,17 @@ export function HeroSearch() {
         </Select>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm leading-5 text-foreground">
-          30,000+ listings across new and used boats.
-        </p>
+        <div className="flex flex-col text-left">
+          <p className="text-sm leading-5 text-muted-foreground">
+            Rightboat is a global boat marketplace connecting buyers with
+            trusted brokers and private sellers across the US, UK and
+            international markets.
+          </p>
+          <p className="text-sm leading-5 text-muted-foreground">
+            Find boats for sale by type, manufacturer, condition, price or
+            location using our advanced global boat search.
+          </p>
+        </div>
         <Button>Search boats</Button>
       </div>
     </div>
