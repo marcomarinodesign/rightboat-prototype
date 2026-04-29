@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { BdpInactiveOverlay } from "@/components/boats/bdp/bdp-inactive-overlay"
 import { BdpBreadcrumb } from "@/components/boats/bdp/bdp-breadcrumb"
 import { BdpDetails, getDefaultBdpDetails } from "@/components/boats/bdp/bdp-details"
 import { BdpPriceHistory } from "@/components/boats/bdp/bdp-price-history"
@@ -11,6 +10,7 @@ import { BdpImageGrid } from "@/components/boats/bdp/bdp-image-grid"
 import { BoatMeta } from "@/components/boats/boat-meta"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { detailGallery } from "@/data/boats"
+import { InactiveBdpAltModalController } from "./inactive-bdp-alt-modal-controller"
 
 // Demo: Inactive Alt (v2) overlay on top of inactive BDP background
 const MOCK_BOAT = {
@@ -146,7 +146,7 @@ export default function InactiveBdpAltDemoPage() {
         </section>
       </div>
 
-      <BdpInactiveOverlay boatType={MOCK_BOAT.boatType} />
+      <InactiveBdpAltModalController boatType={MOCK_BOAT.boatType} />
     </>
   )
 }

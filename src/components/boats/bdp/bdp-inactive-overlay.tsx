@@ -1,27 +1,60 @@
 "use client"
 
-import Link from "next/link"
 import * as React from "react"
-import { ChevronLeft, ChevronRight, Info } from "lucide-react"
+import { motion } from "framer-motion"
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Info } from "lucide-react"
 
 import { BoatCard } from "@/components/boats/boat-card"
 import { listingBoats } from "@/data/boats"
+import { easeOutExpo } from "@/lib/motion-variants"
 
 type BdpInactiveOverlayProps = {
   boatType?: string
   title?: string
   subtitle?: string
+  stage?: "half" | "full"
+  onPromoteToFull?: () => void
+  onBackToHalf?: () => void
 }
 
 export function BdpInactiveOverlay({
   boatType = "Powerboats",
   title = "This boat has been sold",
   subtitle = "But we've found similar options that might interest you",
+  stage = "half",
+  onPromoteToFull,
+  onBackToHalf,
 }: BdpInactiveOverlayProps) {
+  const isFull = stage === "full"
   const normalizedType = boatType.toLowerCase()
   const scrollerRef = React.useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = React.useState(false)
   const [canScrollRight, setCanScrollRight] = React.useState(false)
+
+  const sheetHeightClass = isFull
+    ? "max-h-[calc(100vh-5rem)]"
+    : "h-[25vh] max-h-[25vh]"
+
+  // When expanded, we want the page underneath to be non-scrollable.
+  // In the half state, we intentionally allow normal page scroll.
+  React.useEffect(() => {
+    if (!isFull) return
+
+    const body = document.body
+    const prevOverflow = body.style.overflow
+    const prevPaddingRight = body.style.paddingRight
+
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth
+
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`
+    body.style.overflow = "hidden"
+
+    return () => {
+      body.style.overflow = prevOverflow
+      body.style.paddingRight = prevPaddingRight
+    }
+  }, [isFull])
 
   const display = React.useMemo(() => {
     const limit = 16
@@ -57,8 +90,6 @@ export function BdpInactiveOverlay({
     return out
   }, [display])
 
-  const viewAllHref = `/boats-for-sale?type=${encodeURIComponent(normalizedType)}`
-
   const updateScrollButtons = React.useCallback(() => {
     const el = scrollerRef.current
     if (!el) return
@@ -87,12 +118,26 @@ export function BdpInactiveOverlay({
   }
 
   return (
-    <div className="fixed inset-0 z-50">
-      <div className="absolute inset-0 bg-black/35 backdrop-blur-[2px]" />
+    <div className={`fixed inset-0 z-50 ${isFull ? "" : "pointer-events-none"}`}>
+      {isFull ? (
+        <motion.div
+          className="absolute inset-0 bg-black/35 backdrop-blur-[2px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.22, ease: easeOutExpo }}
+        />
+      ) : null}
 
       <div className="relative flex h-full w-full items-end">
-        <div className="w-full max-h-[calc(100vh-5rem)] overflow-hidden rounded-t-2xl border border-border/60 bg-background shadow-2xl">
-          <div className="border-b border-border bg-tag-bg">
+        <motion.div
+          className={`pointer-events-auto flex w-full flex-col overflow-hidden rounded-t-2xl border border-border/60 bg-status-info-100 shadow-2xl ${sheetHeightClass}`}
+          key={isFull ? "bdp-modal-full" : "bdp-modal-half"}
+          layout
+          initial={isFull ? { opacity: 0, y: 12 } : { opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.28, ease: easeOutExpo }}
+        >
+          <div className="border-b border-border bg-status-info-100">
             <div className="flex items-center justify-between gap-4 px-6 py-2">
               <div className="flex items-center gap-3">
                 <Info className="h-5 w-5 shrink-0 text-primary" aria-hidden />
@@ -102,13 +147,29 @@ export function BdpInactiveOverlay({
                 </div>
               </div>
 
-              <Link href={viewAllHref} className="shrink-0 text-[13px] font-medium text-primary hover:text-primary/80">
-                View all {boatType} →
-              </Link>
+              <button
+                type="button"
+                onClick={isFull ? onBackToHalf : onPromoteToFull}
+                disabled={isFull ? !onBackToHalf : !onPromoteToFull}
+                className="shrink-0 text-[13px] font-medium text-primary hover:text-primary/80 disabled:opacity-40"
+              >
+                See similar boats{" "}
+                {isFull ? (
+                  <ChevronUp className="inline h-4 w-4" aria-hidden />
+                ) : (
+                  <ChevronDown className="inline h-4 w-4" aria-hidden />
+                )}
+              </button>
             </div>
           </div>
 
-          <div className="flex max-h-[calc(100vh-5rem-64px)] flex-col overflow-y-auto px-6 py-5">
+          <div
+            className={
+              isFull
+                ? "flex flex-col px-6 py-5 overflow-y-auto max-h-[calc(100vh-5rem-64px)]"
+                : "flex min-h-0 flex-1 flex-col px-6 py-3 overflow-hidden"
+            }
+          >
             <div className="relative">
               {/* Mobile/tablet: free scroll cards. Desktop: paged slides of 4 cards (snap). */}
               <div className="lg:hidden">
@@ -163,7 +224,7 @@ export function BdpInactiveOverlay({
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
