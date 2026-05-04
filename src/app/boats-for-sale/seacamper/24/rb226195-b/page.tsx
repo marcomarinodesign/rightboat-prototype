@@ -1,8 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { BdpInactiveBanner } from "@/components/boats/bdp/bdp-inactive-banner"
-import { BdpSimilarBoats } from "@/components/boats/bdp/bdp-similar-boats"
 import { BdpBreadcrumb } from "@/components/boats/bdp/bdp-breadcrumb"
 import {
   BdpDetails,
@@ -14,10 +12,11 @@ import { BdpRightPanel } from "@/components/boats/bdp/bdp-right-panel"
 import { BdpImageGrid } from "@/components/boats/bdp/bdp-image-grid"
 import { BoatMeta } from "@/components/boats/boat-meta"
 import { BdpInactiveListedPriceAside } from "@/components/boats/bdp/bdp-inactive-listed-price-aside"
+import { BdpInactiveVariantBTop } from "@/components/boats/bdp/bdp-inactive-variant-b-top"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { detailGallery } from "@/data/boats"
 
-// Demo: BDP Inactive Variant A — banner + similar boats (Figma 212:2007)
+/** Demo: BDP Inactive Variant B — carousel + callout above listing (Figma 212:1627). */
 const MOCK_BOAT = {
   make: "Seacamper",
   model: "24",
@@ -34,16 +33,21 @@ const MOCK_BOAT = {
 
 const GALLERY_IMAGES = [...detailGallery]
 
-export default function InactiveBdpDemoPage() {
+export default function InactiveBdpVariantBDemoPage() {
   return (
     <>
-      <BdpInactiveBanner />
-
-      <div className="mx-auto w-full max-w-7xl space-y-10 px-4 pb-6 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
         <BdpBreadcrumb make={MOCK_BOAT.make} model={MOCK_BOAT.model} />
+      </div>
 
+      <BdpInactiveVariantBTop
+        boatType={MOCK_BOAT.boatType}
+        viewAllHref={`/boats-for-sale?type=${encodeURIComponent(MOCK_BOAT.boatType.toLowerCase())}`}
+        viewAllLabel={`View all ${MOCK_BOAT.boatType} →`}
+      />
+
+      <div className="mx-auto w-full max-w-7xl space-y-10 px-4 pb-6 pt-6 sm:px-6 lg:px-8">
         <section className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
-          {/* ── Left column ── */}
           <div className="space-y-6">
             <BdpImageGrid
               images={GALLERY_IMAGES}
@@ -54,7 +58,6 @@ export default function InactiveBdpDemoPage() {
               showImages={false}
             />
 
-            {/* Title block */}
             <div className="space-y-1.5">
               <p className="text-[12px] uppercase tracking-[0.6px] text-muted-foreground">
                 {MOCK_BOAT.condition} · {MOCK_BOAT.length}
@@ -65,7 +68,6 @@ export default function InactiveBdpDemoPage() {
               <p className="text-base text-muted-foreground">{MOCK_BOAT.location}</p>
             </div>
 
-            {/* Key specifications */}
             <Card>
               <CardHeader className="text-base font-bold">Key specifications</CardHeader>
               <CardContent className="grid gap-6 md:grid-cols-3">
@@ -109,13 +111,12 @@ export default function InactiveBdpDemoPage() {
             </div>
           </div>
 
-          {/* ── Right aside — inactive: no contact form ── */}
           <aside className="space-y-6">
             <BdpInactiveListedPriceAside
               listedPrice="£24,500"
               findSimilarHref="/boats-for-sale?type=power&make=seacamper"
               findSimilarLabel="Find similar Seacamper boats"
-              ctaLayout="two-step"
+              ctaLayout="find-primary-only"
             />
 
             <Card>
@@ -138,17 +139,14 @@ export default function InactiveBdpDemoPage() {
             </Card>
 
             <Card>
-              <CardHeader className="text-lg font-bold">
-                Listing details
-              </CardHeader>
+              <CardHeader className="text-lg font-bold">Listing details</CardHeader>
               <CardContent className="space-y-3 text-sm text-muted-foreground">
                 <p>
-                  This listing is a representative example based on the
-                  Rightboat catalogue. The boat has been sold and is no longer
-                  available.
+                  This listing is a representative example based on the Rightboat catalogue. The
+                  boat has been sold and is no longer available.
                 </p>
                 <p>
-                  Browse similar listings below or use the search to find your
+                  Browse similar listings on the carousel above or use the search to find your
                   next boat.
                 </p>
               </CardContent>
@@ -156,9 +154,6 @@ export default function InactiveBdpDemoPage() {
           </aside>
         </section>
       </div>
-
-      {/* Similar boats — full-bleed muted band; id anchored for banner CTA */}
-      <BdpSimilarBoats boatType={MOCK_BOAT.boatType} />
     </>
   )
 }

@@ -10,9 +10,10 @@ import { BdpImageGrid } from "@/components/boats/bdp/bdp-image-grid"
 import { BoatMeta } from "@/components/boats/boat-meta"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { detailGallery } from "@/data/boats"
+import { InactiveBdpAltListedPriceAside } from "./inactive-bdp-alt-listed-price-aside"
 import { InactiveBdpAltModalController } from "./inactive-bdp-alt-modal-controller"
 
-// Demo: Inactive Alt (v2) overlay on top of inactive BDP background
+// Demo: BDP Inactive Variant C — bottom sheet (half / full on same page; ?overlay=full for opened)
 const MOCK_BOAT = {
   make: "Seacamper",
   model: "24",
@@ -29,9 +30,19 @@ const MOCK_BOAT = {
 
 const GALLERY_IMAGES = [...detailGallery]
 
-export default function InactiveBdpAltDemoPage() {
+type PageProps = {
+  searchParams?: Promise<{ overlay?: string }>
+}
+
+export default async function InactiveBdpAltDemoPage({ searchParams }: PageProps) {
+  const sp = searchParams ? await searchParams : {}
+  const initialStage = sp.overlay === "full" ? ("full" as const) : ("half" as const)
+
   return (
-    <>
+    <InactiveBdpAltModalController
+      boatType={MOCK_BOAT.boatType}
+      initialStage={initialStage}
+    >
       <div className="mx-auto w-full max-w-7xl space-y-10 px-4 pb-6 pt-4 sm:px-6 lg:px-8">
         <BdpBreadcrumb make={MOCK_BOAT.make} model={MOCK_BOAT.model} />
 
@@ -47,25 +58,30 @@ export default function InactiveBdpAltDemoPage() {
               showImages={false}
             />
 
-            <div className="space-y-3">
-              <p className="text-sm uppercase tracking-wide text-muted-foreground">
+            <div className="space-y-1.5">
+              <p className="text-[12px] uppercase tracking-[0.6px] text-muted-foreground">
                 {MOCK_BOAT.condition} · {MOCK_BOAT.length}
               </p>
-              <h1 className="text-3xl font-bold">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 {MOCK_BOAT.year} {MOCK_BOAT.make} {MOCK_BOAT.model}
               </h1>
-              <p className="text-lg text-muted-foreground">{MOCK_BOAT.location}</p>
+              <p className="text-base text-muted-foreground">{MOCK_BOAT.location}</p>
             </div>
 
             <Card>
-              <CardHeader className="text-lg font-bold">Key specifications</CardHeader>
+              <CardHeader className="text-base font-bold">Key specifications</CardHeader>
               <CardContent className="grid gap-6 md:grid-cols-3">
-                <BoatMeta label="Price" value="Listed at £24,500" />
-                <BoatMeta label="Length" value={MOCK_BOAT.length} />
-                <BoatMeta label="Condition" value={MOCK_BOAT.condition} />
-                <BoatMeta label="Year" value={`${MOCK_BOAT.year}`} />
-                <BoatMeta label="Broker" value={MOCK_BOAT.broker} />
-                <BoatMeta label="Listing ID" value={MOCK_BOAT.listingId} />
+                <BoatMeta
+                  variant="bdp-spec"
+                  label="Price"
+                  value="Listed at £24,500"
+                  valueClassName="text-primary"
+                />
+                <BoatMeta variant="bdp-spec" label="Length" value={MOCK_BOAT.length} />
+                <BoatMeta variant="bdp-spec" label="Condition" value={MOCK_BOAT.condition} />
+                <BoatMeta variant="bdp-spec" label="Year" value={`${MOCK_BOAT.year}`} />
+                <BoatMeta variant="bdp-spec" label="Broker" value={MOCK_BOAT.broker} />
+                <BoatMeta variant="bdp-spec" label="Listing ID" value={MOCK_BOAT.listingId} />
               </CardContent>
             </Card>
 
@@ -92,26 +108,11 @@ export default function InactiveBdpAltDemoPage() {
 
           {/* ── Right aside — inactive: no contact form ── */}
           <aside className="space-y-6">
-            <Card>
-              <CardContent className="space-y-5 pt-6">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    Listed price
-                  </p>
-                  <p className="heading-sm text-muted-foreground">£24,500</p>
-                  <p className="text-sm text-muted-foreground">This listing is no longer available.</p>
-                </div>
-
-                <div className="border-t border-border/60 pt-4">
-                  <Link
-                    href="/boats-for-sale?type=power&make=seacamper"
-                    className="flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
-                  >
-                    Find similar Seacamper boats →
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+            <InactiveBdpAltListedPriceAside
+              listedPrice="£24,500"
+              findSimilarHref="/boats-for-sale?type=power&make=seacamper"
+              findSimilarLabel="Find similar Seacamper boats"
+            />
 
             <Card>
               <CardHeader className="text-lg font-bold">Video tour</CardHeader>
@@ -145,9 +146,7 @@ export default function InactiveBdpAltDemoPage() {
           </aside>
         </section>
       </div>
-
-      <InactiveBdpAltModalController boatType={MOCK_BOAT.boatType} />
-    </>
+    </InactiveBdpAltModalController>
   )
 }
 

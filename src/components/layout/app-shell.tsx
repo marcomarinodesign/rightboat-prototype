@@ -225,25 +225,11 @@ function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <span>© 2026 Rightboat. All rights reserved.</span>
           <span className="h-3 w-px bg-white/20" aria-hidden />
-          <Link
-            href="/boats-for-sale/seacamper/24/rb226195"
-            className="transition-colors hover:text-white/90"
-          >
-            BDP Inactive 1
-          </Link>
-          <span className="h-3 w-px bg-white/20" aria-hidden />
-          <Link
-            href="/boats-for-sale/seacamper/24/rb226195-alt"
-            className="transition-colors hover:text-white/90"
-          >
-            BDP Inactive Alt
-          </Link>
-          <span className="h-3 w-px bg-white/20" aria-hidden />
-          <Link href="/design-system" className="transition-colors hover:text-white/90">
-            Design System
+          <Link href="/sitemap" className="transition-colors hover:text-white/90">
+            Sitemap
           </Link>
         </div>
       </div>

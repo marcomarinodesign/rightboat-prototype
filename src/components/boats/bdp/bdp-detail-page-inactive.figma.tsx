@@ -1,7 +1,6 @@
-// FIGMA NODE: BDP / Inactive — Boat Detail Page (inactive/sold listing) in El-Captain-DS
+// FIGMA NODE: BDP Inactive Variant A — Boat Detail Page (inactive/sold listing)
 // FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
-// STATUS: pendiente de crear en Figma (ver FIGMA_NODES_NEEDED.md)
-// LAST SYNC: 2026-04-27
+// LAST SYNC: 2026-05-04
 
 /**
  * Code Connect — BDP Inactive (sold listing)
@@ -89,7 +88,7 @@ function BoatDetailPageInactive({
 
 figma.connect(
   BoatDetailPageInactive,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=1-1",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=212-2007",
   {
     imports: [
       '// Demo page: src/app/boats-for-sale/seacamper/24/rb226195/page.tsx',
