@@ -9,6 +9,8 @@ type BdpContactSellerProps = {
   boatName: string
   sellerName: string
   sellerLocation: string
+  /** Hide the price block (used by app modal). */
+  showPrice?: boolean
 }
 
 export function BdpContactSeller({
@@ -16,6 +18,7 @@ export function BdpContactSeller({
   boatName,
   sellerName,
   sellerLocation,
+  showPrice = true,
 }: BdpContactSellerProps) {
   return (
     <Card className="rounded-lg">
@@ -25,12 +28,14 @@ export function BdpContactSeller({
         </h2>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Price
-          </p>
-          <p className="heading-sm text-primary">{price}</p>
-        </div>
+        {showPrice ? (
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Price
+            </p>
+            <p className="heading-sm text-primary">{price}</p>
+          </div>
+        ) : null}
 
         <form className="space-y-3" aria-label="Contact seller form">
           <label className="block">

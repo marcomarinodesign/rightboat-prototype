@@ -4,6 +4,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 
+import {
+  listingsHref,
+  useHomeSurface,
+} from "@/components/home/home-surface-context"
 import { premiumBrands } from "@/data/brands"
 
 export function PremiumBrands() {
@@ -31,11 +35,12 @@ export function PremiumBrands() {
 }
 
 function BrandLogoLink({ brand }: { brand: (typeof premiumBrands)[0] }) {
+  const surface = useHomeSurface()
   const [imageError, setImageError] = useState(false)
 
   return (
     <Link
-      href={`/boats-for-sale?brand=${brand.slug}`}
+      href={listingsHref(`/boats-for-sale?brand=${brand.slug}`, surface)}
       className="group flex h-24 w-40 items-center justify-center transition-opacity hover:opacity-70"
     >
       {imageError ? (

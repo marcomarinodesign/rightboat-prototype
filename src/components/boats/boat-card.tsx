@@ -11,6 +11,8 @@ type BoatCardProps = {
   boat: Boat
   variant?: "grid" | "list"
   className?: string
+  /** Detail URL (defaults to `/boats-for-sale/{makeSlug}/{modelSlug}/{id}`). */
+  href?: string
 }
 
 function specsSummary(boat: Boat) {
@@ -19,8 +21,9 @@ function specsSummary(boat: Boat) {
   return `${boat.year} · ${len} · ${type} · ${boat.condition}`
 }
 
-export function BoatCard({ boat, variant = "grid", className }: BoatCardProps) {
-  const href = `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
+export function BoatCard({ boat, variant = "grid", className, href }: BoatCardProps) {
+  const detailHref =
+    href ?? `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
   const images = boat.galleryImages?.length
     ? boat.galleryImages
     : [boat.image, boat.image, boat.image, boat.image]
@@ -55,7 +58,7 @@ export function BoatCard({ boat, variant = "grid", className }: BoatCardProps) {
       </div>
       {options?.linkName ? (
         <Link
-          href={href}
+          href={detailHref}
           className="block min-w-0 truncate text-base font-bold leading-6 text-foreground transition-colors hover:text-primary"
           title={boatName}
         >
@@ -112,7 +115,7 @@ export function BoatCard({ boat, variant = "grid", className }: BoatCardProps) {
           className
         )}
       >
-        <Link href={href} className="relative block md:w-2/5 md:shrink-0">
+        <Link href={detailHref} className="relative block md:w-2/5 md:shrink-0">
           {imageSection}
         </Link>
         <div className="flex min-w-0 flex-1 flex-col md:w-3/5 md:pl-3">
@@ -124,7 +127,7 @@ export function BoatCard({ boat, variant = "grid", className }: BoatCardProps) {
 
   return (
     <Link
-      href={href}
+      href={detailHref}
       className={cn(
         "flex w-full flex-col overflow-hidden rounded-xl border border-border-card bg-card p-3",
         "transition-all hover:shadow-lg",

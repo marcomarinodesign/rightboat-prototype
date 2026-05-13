@@ -29,6 +29,13 @@ export type BdpImageGridProps = {
   state?: "active" | "inactive"
   /** If false, render only placeholders (no remote images). */
   showImages?: boolean
+  /**
+   * `mobile` — always use the single-hero layout (for `/app` inside a wide viewport).
+   * `default` — switch at `md` like the web BDP.
+   */
+  galleryLayout?: "default" | "mobile"
+  /** Optional styling for the hero tile (mobile layout). */
+  mobileHeroClassName?: string
 }
 
 /** First four slots for the static grid (padded with empty placeholders). */
@@ -83,6 +90,8 @@ export function BdpImageGrid({
   galleryTitle,
   state = "active",
   showImages = true,
+  galleryLayout = "default",
+  mobileHeroClassName,
 }: BdpImageGridProps) {
   const [modalOpen, setModalOpen] = React.useState(false)
   const [initialIndex, setInitialIndex] = React.useState(0)
@@ -113,15 +122,25 @@ export function BdpImageGrid({
     ? realImages
     : displaySlots.filter((s) => !isEmptyOrPlaceholder(s))
 
+  const isMobileGallery = galleryLayout === "mobile"
+
   return (
     <>
       <section aria-label="Listing gallery" className="w-full">
-        {/* Mobile: single hero + Photos CTA */}
-        <div className="relative md:hidden">
+        {/* Mobile / in-app: single hero + Photos CTA */}
+        <div
+          className={cn(
+            "relative",
+            isMobileGallery ? "block" : "md:hidden"
+          )}
+        >
           <button
             type="button"
             onClick={() => openModal({ index: 0, tab: "photos" })}
-            className="relative aspect-[3/2] w-full overflow-hidden rounded-lg bg-muted text-left outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring"
+            className={cn(
+              "relative aspect-[3/2] w-full overflow-hidden rounded-lg bg-muted text-left outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring",
+              mobileHeroClassName
+            )}
             aria-label={`Open gallery, ${photoCount} photos`}
           >
             <TileImage
@@ -139,12 +158,12 @@ export function BdpImageGrid({
           </button>
         </div>
 
-        {/* Desktop: Figma 1 + 3 grid */}
+        {/* Desktop: Figma 1 + 3 grid (hidden in `mobile` layout) */}
         <div
           className={cn(
-            "relative hidden aspect-[854/437] w-full md:grid",
-            "gap-5",
-            "grid-cols-[minmax(0,1fr)_200px] grid-rows-3"
+            "relative aspect-[854/437] w-full gap-5",
+            "grid-cols-[minmax(0,1fr)_200px] grid-rows-3",
+            isMobileGallery ? "hidden" : "hidden md:grid"
           )}
         >
           <button

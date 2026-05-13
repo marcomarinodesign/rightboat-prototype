@@ -1,11 +1,18 @@
+"use client"
+
 import Link from "next/link"
 
-import { popularModels } from "@/data/models"
+import {
+  listingsHref,
+  useHomeSurface,
+} from "@/components/home/home-surface-context"
 import { ImageSlider } from "@/components/ui/image-slider"
 import { Button } from "@/components/ui/button"
 import { InteractiveCard } from "@/components/patterns/interactive-card"
+import { popularModels } from "@/data/models"
 
 export function PopularModels() {
+  const surface = useHomeSurface()
   return (
     <section className="space-y-6" aria-labelledby="models-heading">
       <div>
@@ -18,7 +25,8 @@ export function PopularModels() {
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {popularModels.map((model) => {
-          const href = `/boats-for-sale/${model.brandSlug}/${model.slug}`
+          const webHref = `/boats-for-sale/${model.brandSlug}/${model.slug}`
+          const href = listingsHref(webHref, surface)
           return (
             <InteractiveCard
               key={model.id}

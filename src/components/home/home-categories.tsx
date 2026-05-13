@@ -5,6 +5,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+import {
+  listingsHref,
+  useHomeSurface,
+} from "@/components/home/home-surface-context"
 import { boatCategories } from "@/data/categories-extended"
 import { Badge } from "@/components/ui/badge"
 
@@ -13,6 +17,7 @@ const CATEGORY_CARD_OVERLAY_BOTTOM =
   "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 28%, rgba(255,255,255,0.2) 58%, rgba(255,255,255,0.36) 100%)"
 
 export function HomeCategories() {
+  const surface = useHomeSurface()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
@@ -78,7 +83,10 @@ export function HomeCategories() {
             Explore boats by type and find the perfect vessel for your needs
           </p>
         </div>
-        <Link href="/boats-for-sale" className="primary-text-link">
+        <Link
+          href={listingsHref("/boats-for-sale", surface)}
+          className="primary-text-link"
+        >
           See all
         </Link>
       </div>
@@ -92,7 +100,7 @@ export function HomeCategories() {
           {boatCategories.map((category) => (
             <Link
               key={category.id}
-              href={`/boats-for-sale?type=${category.slug}`}
+              href={listingsHref(`/boats-for-sale?type=${category.slug}`, surface)}
               className="group relative block h-[280px] w-[290px] min-w-[290px] shrink-0 overflow-hidden rounded-lg"
             >
               <Image

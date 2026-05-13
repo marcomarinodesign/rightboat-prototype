@@ -29,8 +29,14 @@ export function AppShell({ children }: AppShellProps) {
   const isSellBv3 = pathname === "/sell-b-v3"
   const isSellBv3Wizard =
     typeof pathname === "string" && pathname === "/sell-b-v3/wizard"
+  const isMobileAppPrototype =
+    typeof pathname === "string" && pathname.startsWith("/app")
 
   if (isDesignSystem) {
+    return <>{children}</>
+  }
+
+  if (isMobileAppPrototype) {
     return <>{children}</>
   }
 
@@ -205,6 +211,7 @@ function SiteFooter() {
             <Link href="/boats-for-sale" className="hover:text-white transition-colors">Boat brands</Link>
             <Link href="/boats-for-sale" className="hover:text-white transition-colors">Boat types</Link>
             <Link href="/boats-for-sale" className="hover:text-white transition-colors">Locations</Link>
+            <Link href="/app/home" className="hover:text-white transition-colors">App prototype</Link>
           </div>
         </div>
         <div className="space-y-3 text-sm">

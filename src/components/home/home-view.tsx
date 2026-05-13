@@ -5,6 +5,13 @@ import { motion } from "framer-motion"
 
 import { ArticleCard } from "@/components/blog/article-card"
 import { BoatCard } from "@/components/boats/boat-card"
+import {
+  HomeSurfaceProvider,
+  listingsHref,
+  type HomeSurface,
+  useHomeSurface,
+} from "@/components/home/home-surface-context"
+import { MobileNativePageHeader } from "@/components/mobile-app/mobile-native-page-header"
 import { HeroSearch } from "@/components/search/hero-search"
 import { HomeCategories } from "@/components/home/home-categories"
 import { PopularModels } from "@/components/home/popular-models"
@@ -19,40 +26,71 @@ import {
   staggerContainer,
   staggerItem,
 } from "@/lib/motion-variants"
+import { cn } from "@/lib/utils"
 
-export function HomeView() {
+type HomeViewProps = {
+  /** `app`: same homepage sections as web, links into `/app/*`, horizontal padding for shell-less layout. */
+  surface?: HomeSurface
+}
+
+function HomeViewInner() {
+  const surface = useHomeSurface()
+  const discoverHref = listingsHref("/boats-for-sale", surface)
+
   return (
     <div className="space-y-16 md:space-y-20">
       <section className="space-y-6 text-center">
         <motion.div
-          className="flex flex-col items-center justify-center gap-4 pt-5"
+          className={cn(
+            "flex flex-col items-center justify-center gap-4",
+            surface === "app" ? "pt-0" : "pt-5"
+          )}
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: easeOutExpo }}
         >
-          <p className="text-xs font-semibold leading-4 tracking-[2px] uppercase text-foreground">
-            Boats for Sale Worldwide
-          </p>
-          <h1 className="text-4xl font-bold leading-10 tracking-[-0.4px] text-foreground md:text-[3rem] md:leading-[3rem] md:tracking-[-0.48px]">
-            Buy &amp; Sell Boats on{" "}
-            <span className="text-primary">Right Boat</span>.
-          </h1>
-          <p className="text-base font-normal leading-6 text-foreground">
-            Search over 35,000 new and used boats for sale worldwide,
-            including yachts, sailboats, motorboats, catamarans and fishing
-            boats.
-          </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.12 }}
-        >
-          <HeroSearch />
+          {surface !== "app" ? (
+            <p className="text-xs font-semibold leading-4 tracking-[2px] uppercase text-foreground">
+              Boats for Sale Worldwide
+            </p>
+          ) : null}
+          {surface === "app" ? (
+            <div className="w-full text-left">
+              <MobileNativePageHeader
+                className="px-0"
+                title="Explore"
+                description="Search over 35,000 new and used boats for sale worldwide, including yachts, sailboats, motorboats, catamarans and fishing boats."
+              >
+                <HeroSearch />
+              </MobileNativePageHeader>
+            </div>
+          ) : (
+            <>
+              <h1 className="text-4xl font-bold leading-10 tracking-[-0.4px] text-foreground md:text-[3rem] md:leading-[3rem] md:tracking-[-0.48px]">
+                Buy &amp; Sell Boats on{" "}
+                <span className="text-primary">Right Boat</span>.
+              </h1>
+              <p className="text-base font-normal leading-6 text-foreground">
+                Search over 35,000 new and used boats for sale worldwide,
+                including yachts, sailboats, motorboats, catamarans and fishing
+                boats.
+              </p>
+            </>
+          )}
         </motion.div>
 
+        {surface !== "app" ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.12 }}
+          >
+            <HeroSearch />
+          </motion.div>
+        ) : null}
+
         <motion.div
-          className="relative h-[400px] w-full overflow-hidden rounded-2xl bg-muted"
+          className="relative aspect-video w-full overflow-hidden rounded-2xl bg-muted"
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.65, ease: easeOutExpo, delay: 0.2 }}
@@ -88,14 +126,17 @@ export function HomeView() {
           <h2 id="featured-heading" className="heading-sm">
             Featured boats
           </h2>
-          <Link href="/boats-for-sale" className="primary-text-link">
+          <Link href={discoverHref} className="primary-text-link">
             Discover more
           </Link>
         </motion.div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {featuredBoats.map((boat) => (
             <motion.div key={boat.id} variants={staggerItem}>
-              <BoatCard boat={boat} />
+              <BoatCard
+                boat={boat}
+                {...(surface === "app" ? { href: `/app/boat/${boat.id}` } : {})}
+              />
             </motion.div>
           ))}
         </div>
@@ -137,7 +178,11 @@ export function HomeView() {
             Latest articles and boat reviews
           </h2>
           <Link
-            href="https://www.rightboat.com/blog"
+            href={
+              surface === "app"
+                ? "/app/research"
+                : "https://www.rightboat.com/blog"
+            }
             className="primary-text-link"
           >
             See more articles
@@ -152,5 +197,19 @@ export function HomeView() {
         </div>
       </motion.section>
     </div>
+  )
+}
+
+export function HomeView({ surface = "web" }: HomeViewProps) {
+  return (
+    <HomeSurfaceProvider value={surface}>
+      {surface === "app" ? (
+        <div className="mx-auto w-full max-w-7xl px-[var(--mobile-margin)]">
+          <HomeViewInner />
+        </div>
+      ) : (
+        <HomeViewInner />
+      )}
+    </HomeSurfaceProvider>
   )
 }

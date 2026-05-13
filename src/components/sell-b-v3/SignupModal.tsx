@@ -15,6 +15,8 @@ export interface SignupModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   step1Data: Step1LPData
+  /** Defaults to `/sell-b-v3/wizard` (web). Use `/app/sell/wizard` inside `/app`. */
+  wizardHref?: string
 }
 
 /** Prototype: no real auth. On submit, stores data and navigates to wizard. */
@@ -22,6 +24,7 @@ export function SignupModal({
   open,
   onOpenChange,
   step1Data,
+  wizardHref = "/sell-b-v3/wizard",
 }: SignupModalProps) {
   const router = useRouter()
   const [email, setEmail] = useState("")
@@ -45,7 +48,7 @@ export function SignupModal({
         })
       )
       onOpenChange(false)
-      router.push("/sell-b-v3/wizard")
+      router.push(wizardHref)
     } finally {
       setIsSubmitting(false)
     }

@@ -21,6 +21,8 @@ import { IconContainer } from "@/components/ui/icon-container"
 import { step1LPSchema, type Step1LPData, type Step1LPFormInput } from "@/features/sell-boat/types-v3"
 import { StepOneLP } from "@/components/sell-b-v3/StepOneLP"
 import { SignupModal } from "@/components/sell-b-v3/SignupModal"
+import { MobileNativePageHeader } from "@/components/mobile-app/mobile-native-page-header"
+import { cn } from "@/lib/utils"
 
 const HERO_DESCRIPTION =
   "Sell your used boat privately, easily, and commission-free on Rightboat. Find out how you can advertise your boat to 2.5 million buyers on Rightboat."
@@ -48,8 +50,16 @@ const HERO_IMAGE = {
   alt: "Close-up of sailboat deck and sail on open water",
 }
 
+export type SellBv3Surface = "web" | "app"
 
-export function SellBv3LandingClient() {
+type SellBv3LandingClientProps = {
+  /** `app`: links and post-signup navigation stay under `/app/sell/*` (no site chrome). */
+  surface?: SellBv3Surface
+}
+
+export function SellBv3LandingClient({
+  surface = "web",
+}: SellBv3LandingClientProps) {
   const [signupModalOpen, setSignupModalOpen] = useState(false)
   const [step1DataForModal, setStep1DataForModal] = useState<Step1LPData | null>(
     null
@@ -75,31 +85,55 @@ export function SellBv3LandingClient() {
     setSignupModalOpen(true)
   }
 
+  const wizardHref =
+    surface === "app" ? "/app/sell/wizard" : "/sell-b-v3/wizard"
+  const sellCtaHref = surface === "app" ? "/app/sell/wizard" : "/sell-b-v3"
+
   return (
-    <div className="flex flex-col gap-10 lg:gap-14">
+    <div
+      className={cn(
+        "flex flex-col lg:gap-14",
+        surface === "app" ? "gap-6" : "gap-10"
+      )}
+    >
       {/* Hero — matches Figma FSBO hero layout */}
       <section
-        className="px-4 pt-10 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-0 lg:pt-12 lg:pb-0"
+        className={cn(
+          surface === "app"
+            ? "px-[var(--mobile-margin)] pb-6"
+            : "px-4 pt-10 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-0 lg:pt-12 lg:pb-0"
+        )}
         aria-labelledby="sell-b-v3-hero-heading"
       >
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
-          <div className="flex max-w-[760px] flex-col items-center pt-2 text-center lg:items-start lg:pt-16 lg:text-left">
-            <div className="mb-5 inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-[14px] py-[6px] lg:mb-8">
-              <span className="text-xs font-normal leading-4 text-white">
-                For brokers & dealers
-              </span>
+          {surface === "app" ? (
+            <div className="w-full">
+              <MobileNativePageHeader
+                className="px-0"
+                title="Sell your boat"
+                description={HERO_DESCRIPTION}
+                titleClassName="text-[40px] font-bold leading-[1.05] tracking-[-0.8px] text-foreground"
+              />
             </div>
-            <h1
-              id="sell-b-v3-hero-heading"
-              className="max-w-[760px] text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[#13022c] sm:text-5xl lg:text-[48px]"
-            >
-              Sell your boat{" "}
-              <span className="text-[#0257fc]">privately</span>
-            </h1>
-            <p className="mt-5 max-w-[720px] text-lg leading-[1.45] text-[#2b2140] sm:text-[1.05rem] lg:mt-6 lg:text-[1.05rem]">
-              {HERO_DESCRIPTION}
-            </p>
-          </div>
+          ) : (
+            <div className="flex max-w-[760px] flex-col items-center pt-2 text-center lg:items-start lg:pt-16 lg:text-left">
+              <div className="mb-5 inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-[14px] py-[6px] lg:mb-8">
+                <span className="text-xs font-normal leading-4 text-white">
+                  For brokers & dealers
+                </span>
+              </div>
+              <h1
+                id="sell-b-v3-hero-heading"
+                className="max-w-[760px] text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[#13022c] sm:text-5xl lg:text-[48px]"
+              >
+                Sell your boat{" "}
+                <span className="text-[#0257fc]">privately</span>
+              </h1>
+              <p className="mt-5 max-w-[720px] text-lg leading-[1.45] text-[#2b2140] sm:text-[1.05rem] lg:mt-6 lg:text-[1.05rem]">
+                {HERO_DESCRIPTION}
+              </p>
+            </div>
+          )}
           <div className="relative z-10 w-full max-w-[414px] rounded-lg border border-border bg-malibu-300 p-6 shadow-sm sm:p-9">
             <div className="mb-6 text-center text-[20px] font-bold leading-[1.2] text-[#13022c] sm:text-[22px]">
               Takes less than 2 minutes.
@@ -128,7 +162,11 @@ export function SellBv3LandingClient() {
 
       {/* How It Works */}
       <section
-        className="px-4 sm:px-6 lg:px-0"
+        className={cn(
+          surface === "app"
+            ? "px-[var(--mobile-margin)]"
+            : "px-4 sm:px-6 lg:px-0"
+        )}
         aria-labelledby="how-it-works-heading"
       >
         <div className="mx-auto w-full max-w-7xl rounded-2xl bg-[#0B6CFF] px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
@@ -172,17 +210,30 @@ export function SellBv3LandingClient() {
         open={signupModalOpen}
         onOpenChange={setSignupModalOpen}
         step1Data={step1DataForModal ?? { brand: "", model: "", year: 0 }}
+        wizardHref={wizardHref}
       />
 
       {/* Testimonials (reuse homepage module) */}
-      <section className="px-4 sm:px-6 lg:px-0">
+      <section
+        className={cn(
+          surface === "app"
+            ? "px-[var(--mobile-margin)]"
+            : "px-4 sm:px-6 lg:px-0"
+        )}
+      >
         <div className="mx-auto w-full max-w-7xl">
           <Testimonials align="center" />
         </div>
       </section>
 
       {/* Why List With Us – matches Propel layout */}
-      <section className="px-4 py-12 sm:px-6 lg:px-0 lg:py-16">
+      <section
+        className={cn(
+          surface === "app"
+            ? "px-[var(--mobile-margin)] py-10"
+            : "px-4 py-12 sm:px-6 lg:px-0 lg:py-16"
+        )}
+      >
         <div className="mx-auto w-full max-w-7xl">
           <FeatureSection9
             title="Why List With Us"
@@ -233,7 +284,7 @@ export function SellBv3LandingClient() {
           />
           <div className="mt-8 flex justify-center">
             <Button size="lg" className="font-medium" asChild>
-              <Link href="/sell-b-v3">Sell your boat</Link>
+              <Link href={sellCtaHref}>Sell your boat</Link>
             </Button>
           </div>
         </div>

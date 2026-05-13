@@ -1,6 +1,12 @@
 "use client"
 
+import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
+import {
+  listingsHref,
+  useHomeSurface,
+} from "@/components/home/home-surface-context"
 import { Input } from "@/components/ui/input"
 import {
   Select,
@@ -11,6 +17,10 @@ import {
 } from "@/components/ui/select"
 
 export function HeroSearch() {
+  const surface = useHomeSurface()
+  const searchHref = listingsHref("/boats-for-sale", surface)
+  const isApp = surface === "app"
+
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-[25px] shadow-sm">
       <div className="grid gap-3 md:grid-cols-4">
@@ -62,20 +72,28 @@ export function HeroSearch() {
           </SelectContent>
         </Select>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-col text-left">
-          <p className="text-sm leading-5 text-muted-foreground">
-            Rightboat is a global boat marketplace connecting buyers with
-            trusted brokers and private sellers across the US, UK and
-            international markets.
-          </p>
-          <p className="text-sm leading-5 text-muted-foreground">
-            Find boats for sale by type, manufacturer, condition, price or
-            location using our advanced global boat search.
-          </p>
+      {isApp ? (
+        <Button asChild className="min-h-[48px] w-full rounded-xl font-semibold">
+          <Link href={searchHref}>Search boats</Link>
+        </Button>
+      ) : (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-col text-left">
+            <p className="text-sm leading-5 text-muted-foreground">
+              Rightboat is a global boat marketplace connecting buyers with
+              trusted brokers and private sellers across the US, UK and
+              international markets.
+            </p>
+            <p className="text-sm leading-5 text-muted-foreground">
+              Find boats for sale by type, manufacturer, condition, price or
+              location using our advanced global boat search.
+            </p>
+          </div>
+          <Button asChild>
+            <Link href={searchHref}>Search boats</Link>
+          </Button>
         </div>
-        <Button>Search boats</Button>
-      </div>
+      )}
     </div>
   )
 }

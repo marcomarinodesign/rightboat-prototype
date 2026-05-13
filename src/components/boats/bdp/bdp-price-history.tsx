@@ -53,9 +53,18 @@ type PriceHistoryItem = {
 type BdpPriceHistoryProps = {
   summary: string
   items: PriceHistoryItem[]
+  /**
+   * `stacked` — chart above list (for `/app` inside a wide viewport; ignores `lg:`).
+   * `default` — side-by-side from `lg` up.
+   */
+  layout?: "default" | "stacked"
 }
 
-export function BdpPriceHistory({ summary, items }: BdpPriceHistoryProps) {
+export function BdpPriceHistory({
+  summary,
+  items,
+  layout = "default",
+}: BdpPriceHistoryProps) {
   const chartData = React.useMemo(
     () =>
       items.map((item) => ({
@@ -79,7 +88,13 @@ export function BdpPriceHistory({ summary, items }: BdpPriceHistoryProps) {
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">{summary}</p>
 
-        <div className="grid gap-3 lg:grid-cols-[1fr_360px] lg:items-stretch">
+        <div
+          className={
+            layout === "stacked"
+              ? "grid grid-cols-1 gap-3"
+              : "grid gap-3 lg:grid-cols-[1fr_360px] lg:items-stretch"
+          }
+        >
           <div className="overflow-hidden rounded-lg bg-muted px-3 py-3">
             {chartData.length > 0 && chartData.some((d) => d.value > 0) ? (
               <div aria-hidden className="h-[150px] w-full">

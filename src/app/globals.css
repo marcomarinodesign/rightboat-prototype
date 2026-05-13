@@ -190,6 +190,26 @@
   --border-card: var(--neutral-200);
   --overlay: rgb(0 0 0 / 0.6);
   --overlay-sheet: rgb(0 0 0 / 0.4);
+
+  /* iOS system + mobile prototype (additive; does not replace Figma primitives) */
+  --ios-blue: #007aff;
+  --ios-bg: #f2f2f7;
+  --ios-bg-secondary: #ffffff;
+  --ios-separator: rgb(60 60 67 / 0.18);
+  --ios-label: #000000;
+  --ios-secondary-label: rgb(60 60 67 / 0.6);
+  --ios-tertiary-label: rgb(60 60 67 / 0.3);
+  --glass-blur: blur(20px) saturate(180%) brightness(1.05);
+  --glass-bg-light: rgb(255 255 255 / 0.72);
+  --glass-border-light: rgb(255 255 255 / 0.45);
+  --glass-bg-dark: rgb(30 30 40 / 0.65);
+  --glass-border-dark: rgb(255 255 255 / 0.12);
+  --mobile-margin: clamp(1rem, 3vw, 1.75rem);
+  --mobile-card-radius: 12px;
+  --mobile-safe-top: 12px;
+  --mobile-safe-bottom: 12px;
+  --tab-bar-height: 49px;
+  --nav-bar-height: 44px;
 }
 
 .dark {
