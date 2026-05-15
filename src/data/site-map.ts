@@ -29,6 +29,15 @@ function activeListingExample(): SiteMapLink {
   }
 }
 
+function appBoatExample(): SiteMapLink {
+  const boat = listingBoats[0]
+  return {
+    label: `Example: ${boat.make} ${boat.model}`,
+    href: `/app/boat/${boat.id}`,
+    description: "Template route /app/boat/[id]",
+  }
+}
+
 function blogLinks(): SiteMapLink[] {
   return researchArticles
     .filter((a) => a.slug)
@@ -47,10 +56,34 @@ export function getSiteMapSections(): SiteMapSection[] {
     },
     {
       title: "Boats for sale",
+      description:
+        "Search results page (SRP). Desktop and tablet can use the split layout with a visible filters column.",
       links: [
-        { label: "Search listings", href: "/boats-for-sale" },
+        { label: "Search listings (default)", href: "/boats-for-sale" },
+        {
+          label: "Search listings — split layout",
+          href: "/boats-for-sale?layout=split",
+          description:
+            "Filters sidebar + 3-column card grid on desktop/tablet; mobile keeps the default sheet",
+        },
         { label: "Power boats", href: "/boats-for-sale?type=power" },
         { label: "Sail boats", href: "/boats-for-sale?type=sail" },
+      ],
+    },
+    {
+      title: "Mobile app",
+      description:
+        "Native-style shell under /app (tab bar, top bar). Search redirects to boats for sale.",
+      links: [
+        { label: "App home", href: "/app/home" },
+        { label: "Boats for sale (search)", href: "/app/boats-for-sale" },
+        appBoatExample(),
+        { label: "Saved", href: "/app/saved" },
+        { label: "Messages", href: "/app/messages" },
+        { label: "Profile", href: "/app/profile" },
+        { label: "Research", href: "/app/research" },
+        { label: "Sell", href: "/app/sell" },
+        { label: "Sell wizard", href: "/app/sell/wizard" },
       ],
     },
     {
