@@ -126,31 +126,36 @@ export function BoatsForSaleListing({
   )
 
   const listingToolbar = !splitDesktop ? (
-    <div className="flex items-center justify-end gap-2">
-      <Button
-        size="lg"
-        onClick={() => setDrawerOpen(true)}
-        className="relative gap-2"
-      >
-        <SlidersHorizontal className="h-4 w-4" />
-        Filters
-        {activeFilters.length > 0 && (
-          <Badge className="flex h-5 w-5 items-center justify-center rounded-full bg-background p-0 text-xs text-primary">
-            {activeFilters.length}
-          </Badge>
-        )}
-      </Button>
-      <Select value={sortValue} onValueChange={setSortValue}>
-        <SelectTrigger className="w-44">
-          <SelectValue placeholder="Sort by" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="featured">Featured</SelectItem>
-          <SelectItem value="price-low">Price (low to high)</SelectItem>
-          <SelectItem value="price-high">Price (high to low)</SelectItem>
-          <SelectItem value="newest">Newest listings</SelectItem>
-        </SelectContent>
-      </Select>
+    <div className="flex flex-wrap items-center justify-between gap-3">
+      <p className="text-xs font-bold uppercase tracking-widest text-foreground">
+        {resultCount} {resultCount === 1 ? "listing" : "listings"}
+      </p>
+      <div className="flex items-center gap-2">
+        <Button
+          size="lg"
+          onClick={() => setDrawerOpen(true)}
+          className="relative gap-2"
+        >
+          <SlidersHorizontal className="h-4 w-4" />
+          Filters
+          {activeFilters.length > 0 && (
+            <Badge className="flex h-5 w-5 items-center justify-center rounded-full bg-background p-0 text-xs text-primary">
+              {activeFilters.length}
+            </Badge>
+          )}
+        </Button>
+        <Select value={sortValue} onValueChange={setSortValue}>
+          <SelectTrigger className="w-44">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="featured">Featured</SelectItem>
+            <SelectItem value="price-low">Price (low to high)</SelectItem>
+            <SelectItem value="price-high">Price (high to low)</SelectItem>
+            <SelectItem value="newest">Newest listings</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   ) : null
 
@@ -189,11 +194,6 @@ export function BoatsForSaleListing({
         </div>
         <div>
           <h1 className="text-3xl font-bold text-foreground">Boats for sale</h1>
-          {!splitDesktop && (
-            <p className="mt-1 text-sm text-muted-foreground">
-              {resultCount} {resultCount === 1 ? "listing" : "listings"}
-            </p>
-          )}
           <BoatsForSaleListingIntro
             className={splitDesktop ? "mt-1" : "mt-2"}
           />
