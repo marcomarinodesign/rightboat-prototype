@@ -17,10 +17,17 @@ export const metadata: Metadata = {
     "Browse thousands of boats for sale. Filter by type, price, location and more.",
 }
 
-export default function BoatsForSalePage() {
+type PageProps = {
+  searchParams?: Promise<{ layout?: string }>
+}
+
+export default async function BoatsForSalePage({ searchParams }: PageProps) {
+  const sp = searchParams ? await searchParams : {}
+  const layoutVariant = sp.layout === "split" ? "split" : "default"
+
   return (
     <div className="space-y-10">
-      <BoatsForSaleListing boats={listingBoats} />
+      <BoatsForSaleListing boats={listingBoats} layoutVariant={layoutVariant} />
 
       <section className="grid gap-6 rounded-2xl border border-border/60 bg-muted/20 p-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-3">
