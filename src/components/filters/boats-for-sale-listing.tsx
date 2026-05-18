@@ -2,21 +2,20 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { SlidersHorizontal } from "lucide-react"
+import { Bookmark, SlidersHorizontal } from "lucide-react"
+import { toast } from "sonner"
 
 import { BoatCard } from "@/components/boats/boat-card"
 import { ActiveFiltersChips } from "@/components/filters/active-filters-chips"
 import { BoatsForSaleListingIntro } from "@/components/filters/boats-for-sale-listing-intro"
 import { FiltersDrawer } from "@/components/filters/filters-drawer"
-import {
-  FilterSection,
-  FiltersFormBody,
-} from "@/components/filters/filters-form-body"
+import { FiltersFormBody } from "@/components/filters/filters-form-body"
 import { filterBoats } from "@/components/filters/filter-boats"
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
 import type { Boat } from "@/data/boats"
 import { useIsMobile } from "@/lib/use-media-query"
+import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -33,6 +32,47 @@ const SORT_OPTIONS: { value: string; label: string }[] = [
   { value: "price-high", label: "Price (high to low)" },
   { value: "newest", label: "Newest listings" },
 ]
+
+function ListingSortSelect({
+  value,
+  onValueChange,
+}: {
+  value: string
+  onValueChange: (value: string) => void
+}) {
+  return (
+    <Select value={value} onValueChange={onValueChange}>
+      <SelectTrigger className="w-44" aria-label="Sort by">
+        <SelectValue placeholder="Sort by" />
+      </SelectTrigger>
+      <SelectContent>
+        {SORT_OPTIONS.map((opt) => (
+          <SelectItem key={opt.value} value={opt.value}>
+            {opt.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  )
+}
+
+function SaveSearchButton({ className }: { className?: string }) {
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      className={cn("gap-2", className)}
+      onClick={() =>
+        toast.success(
+          "Search saved. We'll notify you when new listings match."
+        )
+      }
+    >
+      <Bookmark className="h-4 w-4" aria-hidden />
+      Save search
+    </Button>
+  )
+}
 
 type LayoutVariant = "default" | "split"
 
@@ -81,6 +121,7 @@ export function BoatsForSaleListing({
   }, [filteredBoats, sortValue])
 
   const resultCount = filteredBoats.length
+  const listingCountLabel = `${resultCount} ${resultCount === 1 ? "listing" : "listings"}`
 
   const updateDraftLive = React.useCallback(
     (field: keyof FiltersState, value: string) => {
@@ -125,12 +166,28 @@ export function BoatsForSaleListing({
     </div>
   )
 
+  const defaultResultsActions = (
+    <div className="flex flex-wrap items-center gap-2">
+      <SaveSearchButton />
+      <ListingSortSelect value={sortValue} onValueChange={setSortValue} />
+    </div>
+  )
+
+  const splitResultsToolbar = (
+    <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+      <p className="text-xs font-bold uppercase tracking-widest text-foreground">
+        {listingCountLabel}
+      </p>
+      <ListingSortSelect value={sortValue} onValueChange={setSortValue} />
+    </div>
+  )
+
   const listingToolbar = !splitDesktop ? (
     <div className="flex flex-wrap items-center justify-between gap-3">
       <p className="text-xs font-bold uppercase tracking-widest text-foreground">
-        {resultCount} {resultCount === 1 ? "listing" : "listings"}
+        {listingCountLabel}
       </p>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <Button
           size="lg"
           onClick={() => setDrawerOpen(true)}
@@ -144,43 +201,10 @@ export function BoatsForSaleListing({
             </Badge>
           )}
         </Button>
-        <Select value={sortValue} onValueChange={setSortValue}>
-          <SelectTrigger className="w-44">
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="featured">Featured</SelectItem>
-            <SelectItem value="price-low">Price (low to high)</SelectItem>
-            <SelectItem value="price-high">Price (high to low)</SelectItem>
-            <SelectItem value="newest">Newest listings</SelectItem>
-          </SelectContent>
-        </Select>
+        {defaultResultsActions}
       </div>
     </div>
   ) : null
-
-  const sortRadios = (
-    <FilterSection title="Sort by">
-      <div className="space-y-2" role="radiogroup" aria-label="Sort listings">
-        {SORT_OPTIONS.map((opt) => (
-          <label
-            key={opt.value}
-            className="flex cursor-pointer items-center gap-2.5 text-sm"
-          >
-            <input
-              type="radio"
-              name="boats-sort"
-              value={opt.value}
-              checked={sortValue === opt.value}
-              onChange={() => setSortValue(opt.value)}
-              className="h-4 w-4 accent-primary"
-            />
-            <span>{opt.label}</span>
-          </label>
-        ))}
-      </div>
-    </FilterSection>
-  )
 
   return (
     <div className="space-y-4">
@@ -210,24 +234,24 @@ export function BoatsForSaleListing({
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-4 md:min-w-0">
           <aside className="hidden min-w-0 md:block md:col-span-1">
             <div className="rounded-2xl border border-border/60 bg-card px-4 pb-4 pt-3">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                {resultCount} {resultCount === 1 ? "result" : "results"}
-              </p>
               <ActiveFiltersChips
                 activeFilters={activeFilters}
                 onClearAll={clearAll}
               />
-              {sortRadios}
               <FiltersFormBody
                 draft={filters}
                 boats={boats}
                 updateDraft={updateDraftLive}
                 updateCondition={updateConditionLive}
                 scrollClassName="px-0"
+                leadingContent={
+                  <SaveSearchButton className="h-11 w-full justify-center" />
+                }
               />
             </div>
           </aside>
           <div className="min-w-0 md:col-span-3">
+            {splitResultsToolbar}
             {cardsGrid}
             {emptyState}
           </div>

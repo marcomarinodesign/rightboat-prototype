@@ -32,6 +32,8 @@ export type FiltersFormBodyProps = {
   boats: Boat[]
   updateDraft: (field: keyof FiltersState, value: string) => void
   updateCondition: (key: "new" | "used", checked: boolean) => void
+  /** Rendered above Price ($), e.g. Save search in split sidebar. */
+  leadingContent?: React.ReactNode
   /** Extra class on the scroll wrapper (e.g. app sheet padding). */
   scrollClassName?: string
 }
@@ -134,6 +136,7 @@ export function FiltersFormBody({
   boats,
   updateDraft,
   updateCondition,
+  leadingContent,
   scrollClassName = "min-h-0 flex-1 overflow-y-auto px-6",
 }: FiltersFormBodyProps) {
   const boatsForHistogram = React.useMemo(
@@ -157,6 +160,9 @@ export function FiltersFormBody({
 
   return (
     <div className={scrollClassName}>
+      {leadingContent ? (
+        <div className="border-b border-border/50 py-4">{leadingContent}</div>
+      ) : null}
       <FilterSection title="Price ($)">
         <PriceHistogram
           boats={boatsForHistogram}
