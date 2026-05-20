@@ -24,6 +24,7 @@ type SearchableSelectProps = {
   className?: string
   /** Optional className override for the trigger button */
   triggerClassName?: string
+  disabled?: boolean
 }
 
 /**
@@ -41,6 +42,7 @@ export function SearchableSelect({
   clearable = true,
   className,
   triggerClassName,
+  disabled = false,
 }: SearchableSelectProps) {
   const [open, setOpen] = React.useState(false)
   const [query, setQuery] = React.useState("")
@@ -103,16 +105,26 @@ export function SearchableSelect({
       {/* ── Trigger ────────────────────────────────────────────────── */}
       <button
         type="button"
-        onClick={() => (open ? handleClose() : handleOpen())}
+        disabled={disabled}
+        onClick={() => {
+          if (disabled) return
+          if (open) handleClose()
+          else handleOpen()
+        }}
         aria-expanded={open}
         aria-haspopup="listbox"
+        aria-disabled={disabled}
         className={cn(
           "flex h-11 w-full items-center justify-between rounded-lg border bg-background px-3.5 text-sm transition-colors",
-          invalid && !open && "border-destructive",
-          open
-            ? "border-ring ring-2 ring-ring ring-offset-2"
-            : !invalid && "border-input hover:border-ring/60",
-          selectedOption ? "text-foreground" : "text-muted-foreground",
+          disabled &&
+            "cursor-not-allowed border-input bg-muted/40 text-muted-foreground opacity-60",
+          invalid && !open && !disabled && "border-destructive",
+          !disabled &&
+            (open
+              ? "border-ring ring-2 ring-ring ring-offset-2"
+              : !invalid && "border-input hover:border-ring/60"),
+          !disabled &&
+            (selectedOption ? "text-foreground" : "text-muted-foreground"),
           triggerClassName
         )}
       >

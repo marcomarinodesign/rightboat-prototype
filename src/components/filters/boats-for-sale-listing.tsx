@@ -225,7 +225,11 @@ export function BoatsForSaleListing({
       </div>
 
       {!splitDesktop && (
-        <ActiveFiltersChips activeFilters={activeFilters} onClearAll={clearAll} />
+        <ActiveFiltersChips
+          activeFilters={activeFilters}
+          onClearAll={clearAll}
+          compact
+        />
       )}
 
       {listingToolbar}
@@ -237,6 +241,7 @@ export function BoatsForSaleListing({
               <ActiveFiltersChips
                 activeFilters={activeFilters}
                 onClearAll={clearAll}
+                compact
               />
               <FiltersFormBody
                 draft={filters}

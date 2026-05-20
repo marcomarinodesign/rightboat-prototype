@@ -4,7 +4,7 @@ import * as React from "react"
 
 import type { ActiveFilter } from "@/components/filters/active-filters-chips"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
-import { popularModels } from "@/data/models"
+import { modelLabelFromValue } from "@/components/filters/srp-filter-data"
 
 const formatCurrency = (value: string) => {
   const number = Number(value)
@@ -165,14 +165,13 @@ export function useFiltersState() {
           setFilters((prev) => ({
             ...prev,
             manufacturer: "",
+            model: "",
           })),
       })
     }
 
     if (filters.model) {
-      const modelLabel =
-        popularModels.find((m) => m.slug === filters.model)?.name ??
-        filters.model
+      const modelLabel = modelLabelFromValue(filters.model)
       items.push({
         key: "model",
         label: `Model: ${modelLabel}`,

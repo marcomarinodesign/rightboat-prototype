@@ -108,12 +108,7 @@ export function PriceHistogram({
     : []
 
   return (
-    <div className="space-y-3">
-      {/* Subtitle */}
-      <p className="text-xs text-muted-foreground">
-        Distribution based on listing data. Updates with other filters.
-      </p>
-
+    <div className="space-y-2.5">
       {/* Min / Max inputs */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
