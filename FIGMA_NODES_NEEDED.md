@@ -16,9 +16,21 @@ npm run figma:connect:publish
 | Componente             | Archivo Code Connect                                          | Nombre sugerido en Figma   | Página / sección | Variantes necesarias              | Props Figma                                          |
 |------------------------|---------------------------------------------------------------|----------------------------|------------------|-----------------------------------|------------------------------------------------------|
 | `BdpInactiveBanner`    | `src/components/boats/bdp/bdp-inactive-banner.figma.tsx`      | Status Banner / Inactive   | BDP              | —                                 | — (sin props externas; contenido fijo)               |
-| `BoatCard`             | `src/components/boats/boat-card.figma.tsx`                    | Boat Card                  | Cards            | Variant: Grid / List              | Boat Name, Price, Year, Length, Location             |
 | BDP — Active           | `src/components/boats/bdp/bdp-detail-page.figma.tsx`          | BDP / Active               | BDP              | State: Active                     | Boat Name, Price, Year, Length, Location             |
 | BDP — Inactive         | `src/components/boats/bdp/bdp-detail-page-inactive.figma.tsx` | BDP / Inactive             | BDP              | State: Inactive (o frame separado)| Boat Name, Listed Price, Boat Type                   |
+| SRP — Split view       | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP / Split view           | Test Cursor      | — (frame de pantalla)             | Hero, Filters panel, Results 3-col                   |
+| SRP — Page Header      | `src/components/filters/boats-for-sale-page-header.figma.tsx` | SRP / Page Header          | Complex Components | breadcrumb, H1, intro           | [301-77](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=301-77) |
+| SRP — Sort Select      | `src/components/filters/listing-sort-select.figma.tsx`        | SRP / Sort Select          | Complex Components | Label: Featured / price / newest | [296-81](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=296-81) |
+| Filters — Select Field | `src/components/filters/filters-select-field.figma.tsx`       | Filters / Select Field     | Complex Components | placeholder, disabled           | [294-87](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=294-87) |
+| `FiltersFormBody`      | `src/components/filters/filters-form-body.figma.tsx`          | Filters / Form Body        | Complex Components | —                               | [289-310](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-310) |
+| `LocationFilter`       | `src/components/filters/location-filter.figma.tsx`            | Filters / Location Filter  | Complex Components | —                               | [289-102](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-102) |
+| `PriceHistogram`       | `src/components/filters/price-histogram.figma.tsx`            | Filters / Price Histogram  | Complex Components | —                               | [289-161](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-161) |
+| `BoatCard`             | `src/components/boats/boat-card.figma.tsx`                    | Boat Card                  | Components       | Simple / Sponsored / Manufacture + Alt* (SRP) | [80-65](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=80-65) — Alt* solo en SRP |
+| SRP — Default          | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP                        | Test Cursor      | 4-col grid + drawer (código)      | `SrpDefaultView` → node 83-737                       |
+
+**SRP existente (no modificar):** [SRP default](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737)
+
+**SRP split (Code Connect):** [SRP / Split view](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422)
 
 ---
 
@@ -44,9 +56,9 @@ Banner sticky que se muestra debajo del nav principal cuando un listing está ve
 
 Tarjeta de listing usada en grids de búsqueda y en la sección "Similar boats" del BDP inactivo.
 
-**Variantes en Figma:**
-- `Variant = Grid` (default) — layout vertical, imagen arriba, detalles abajo
-- `Variant = List` — layout horizontal, imagen izquierda (40%), detalles derecha
+**Variantes en Figma (Property 1):**
+- `Simple` / `Sponsored` / `Manufacture` — CTA full-width; homepage, carousels, BDP
+- `AltSimple` / `AltSponsored` / `AltManufacture` — broker + CTA en fila; **solo grids SRP** (`83-737`, `279-1422`)
 
 **Props del component set:**
 - `Boat Name` (string)

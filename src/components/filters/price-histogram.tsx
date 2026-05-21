@@ -1,84 +1,61 @@
 "use client"
 
 import * as React from "react"
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts"
 
+import { DualRangeSlider } from "@/components/mobile-app/dual-range-slider"
 import type { Boat } from "@/data/boats"
-import { tokens } from "@/styles/tokens"
+import { cn } from "@/lib/utils"
 
-const COLOR_ACTIVE = tokens.colors.blue[400]
-const COLOR_INACTIVE = tokens.colors.neutral[200]
+const PRICE_MIN = 0
+const PRICE_MAX = 500_000
+const PRICE_STEP = 1_000
+const BUCKET_COUNT = 30
+const BUCKET_WIDTH = PRICE_MAX / BUCKET_COUNT
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+/** 30 buckets from £0 to £500k (~£16,667 per bucket) — prototype mock distribution. */
+const PRICE_HISTOGRAM = [
+  2, 3, 4, 6, 8, 11, 14, 18, 22, 27, 32, 38, 44, 49, 53, 55, 52, 48, 43, 38, 33,
+  28, 23, 19, 15, 11, 8, 6, 4, 3,
+]
 
-function parsePrice(boat: Boat): number {
-  const n = parseInt(boat.price.replace(/[^0-9]/g, ""), 10)
-  return Number.isNaN(n) ? 0 : n
+const HISTOGRAM_MAX = Math.max(...PRICE_HISTOGRAM)
+const HISTOGRAM_HEIGHT_PX = 80
+
+function clamp(n: number, lo: number, hi: number) {
+  return Math.min(hi, Math.max(lo, n))
 }
 
-function formatLabel(value: number): string {
-  if (value >= 1_000_000) return `$${(value / 1_000_000).toFixed(1)}M`
-  if (value >= 1_000) return `$${Math.round(value / 1_000)}k`
-  return `$${Math.round(value)}`
+function snap(n: number) {
+  return Math.round(n / PRICE_STEP) * PRICE_STEP
 }
 
-function computeBuckets(prices: number[], numBuckets = 8) {
-  if (prices.length === 0) return []
-  const lo = Math.min(...prices)
-  const hi = Math.max(...prices)
-  if (lo === hi) return [{ start: lo, end: hi, count: prices.length, label: formatLabel(lo) }]
-  const width = (hi - lo) / numBuckets
-  return Array.from({ length: numBuckets }, (_, i) => {
-    const start = lo + i * width
-    const end = start + width
-    const count = prices.filter((p) =>
-      i === numBuckets - 1 ? p >= start && p <= end : p >= start && p < end
-    ).length
-    return { start, end, count, label: formatLabel(start) }
-  })
+function formatGbp(value: number): string {
+  return `£${value.toLocaleString("en-GB")}`
 }
 
-function bucketIsActive(
-  start: number,
-  end: number,
-  minStr: string,
-  maxStr: string
-): boolean {
-  if (!minStr && !maxStr) return true
-  const lo = minStr ? parseInt(minStr, 10) : -Infinity
-  const hi = maxStr ? parseInt(maxStr, 10) : Infinity
-  return start <= hi && end >= lo
+function parseGbpInput(raw: string): number | null {
+  const digits = raw.replace(/[^0-9]/g, "")
+  if (!digits) return null
+  const n = parseInt(digits, 10)
+  return Number.isNaN(n) ? null : n
 }
 
-// ─── Custom tooltip ──────────────────────────────────────────────────────────
-function CustomTooltip({
-  active,
-  payload,
-}: {
-  active?: boolean
-  payload?: { value: number }[]
-}) {
-  if (!active || !payload?.[0]) return null
-  const count = payload[0].value
-  return (
-    <div className="rounded-lg border border-border bg-background px-3 py-2 text-xs shadow-md">
-      <span className="font-semibold">{count}</span>{" "}
-      <span className="text-muted-foreground">{count === 1 ? "boat" : "boats"}</span>
-    </div>
-  )
+function bucketInRange(index: number, rangeMin: number, rangeMax: number): boolean {
+  const start = index * BUCKET_WIDTH
+  const end = (index + 1) * BUCKET_WIDTH
+  return start < rangeMax && end > rangeMin
 }
 
-// ─── Component ───────────────────────────────────────────────────────────────
+function rangeFromFilters(priceMin: string, priceMax: string): [number, number] {
+  const parsedMin = priceMin ? parseInt(priceMin, 10) : PRICE_MIN
+  const parsedMax = priceMax ? parseInt(priceMax, 10) : PRICE_MAX
+  const lo = clamp(Number.isNaN(parsedMin) ? PRICE_MIN : parsedMin, PRICE_MIN, PRICE_MAX)
+  const hi = clamp(Number.isNaN(parsedMax) ? PRICE_MAX : parsedMax, PRICE_MIN, PRICE_MAX)
+  return [Math.min(lo, hi), Math.max(lo, hi)]
+}
+
 interface PriceHistogramProps {
-  /** Boats to build the distribution from (should already exclude the price filter). */
+  /** Kept for panel API; histogram uses mock data for the prototype. */
   boats: Boat[]
   priceMin: string
   priceMax: string
@@ -87,107 +64,130 @@ interface PriceHistogramProps {
 }
 
 export function PriceHistogram({
-  boats,
+  boats: _boats,
   priceMin,
   priceMax,
   onPriceMinChange,
   onPriceMaxChange,
 }: PriceHistogramProps) {
-  const prices = React.useMemo(
-    () => boats.map(parsePrice).filter((p) => p > 0),
-    [boats]
-  )
+  void _boats
+  const [rangeMin, rangeMax] = rangeFromFilters(priceMin, priceMax)
 
-  const buckets = React.useMemo(() => computeBuckets(prices), [prices])
+  const [minInput, setMinInput] = React.useState(formatGbp(rangeMin))
+  const [maxInput, setMaxInput] = React.useState(formatGbp(rangeMax))
 
-  const maxCount = Math.max(...buckets.map((b) => b.count), 1)
+  React.useEffect(() => {
+    setMinInput(formatGbp(rangeMin))
+    setMaxInput(formatGbp(rangeMax))
+  }, [rangeMin, rangeMax])
 
-  // Show only first and last tick on X-axis to keep it clean
-  const xTicks = buckets.length > 0
-    ? [buckets[0].label, buckets[buckets.length - 1].label]
-    : []
+  const emitRange = (lo: number, hi: number) => {
+    const safeLo = snap(clamp(lo, PRICE_MIN, PRICE_MAX))
+    const safeHi = snap(clamp(hi, PRICE_MIN, PRICE_MAX))
+    const orderedLo = Math.min(safeLo, safeHi)
+    const orderedHi = Math.max(safeLo, safeHi)
+    onPriceMinChange(orderedLo <= PRICE_MIN ? "" : String(orderedLo))
+    onPriceMaxChange(orderedHi >= PRICE_MAX ? "" : String(orderedHi))
+  }
+
+  const handleSliderChange = ([lo, hi]: [number, number]) => {
+    emitRange(lo, hi)
+  }
+
+  const commitMinInput = () => {
+    const parsed = parseGbpInput(minInput)
+    if (parsed === null) {
+      setMinInput(formatGbp(rangeMin))
+      return
+    }
+    emitRange(parsed, rangeMax)
+  }
+
+  const commitMaxInput = () => {
+    const parsed = parseGbpInput(maxInput)
+    if (parsed === null) {
+      setMaxInput(formatGbp(rangeMax))
+      return
+    }
+    emitRange(rangeMin, parsed)
+  }
 
   return (
-    <div className="space-y-2.5">
-      {/* Min / Max inputs */}
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1">
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-            $
-          </span>
+    <div className="space-y-3">
+      {/* A. Histogram — plain divs, no chart library */}
+      <div
+        className="flex h-20 items-end gap-0.5"
+        aria-hidden
+      >
+        {PRICE_HISTOGRAM.map((count, i) => {
+          const inRange = bucketInRange(i, rangeMin, rangeMax)
+          const barHeightPx = Math.max(
+            2,
+            Math.round((count / HISTOGRAM_MAX) * HISTOGRAM_HEIGHT_PX)
+          )
+          return (
+            <div
+              key={i}
+              className={cn(
+                "min-w-0 flex-1 rounded-t-[2px]",
+                inRange ? "bg-primary" : "bg-neutral-300"
+              )}
+              style={{ height: barHeightPx }}
+            />
+          )
+        })}
+      </div>
+
+      {/* B. Dual-thumb range slider */}
+      <DualRangeSlider
+        min={PRICE_MIN}
+        max={PRICE_MAX}
+        step={PRICE_STEP}
+        value={[rangeMin, rangeMax]}
+        onChange={handleSliderChange}
+        showValueLabels={false}
+        inactiveTrackClassName="bg-neutral-300"
+        activeTrackClassName="bg-primary"
+        thumbClassName="size-6 rounded-full border-0 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.2)] ring-0"
+      />
+
+      {/* C. Min / Max inputs */}
+      <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-1">
+          <label className="text-xs text-muted-foreground">Min</label>
           <input
-            type="number"
+            type="text"
             inputMode="numeric"
-            placeholder="Min"
-            value={priceMin}
-            onChange={(e) => onPriceMinChange(e.target.value)}
-            className="h-11 w-full rounded-lg border border-input bg-background pl-7 pr-3 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 md:text-sm"
+            value={minInput}
+            onChange={(e) => setMinInput(e.target.value)}
+            onBlur={commitMinInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.currentTarget.blur()
+              }
+            }}
+            aria-label="Minimum price"
+            className="h-10 w-full rounded-lg border border-neutral-300 bg-background px-3 text-sm font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
           />
         </div>
-        <span className="shrink-0 text-sm text-muted-foreground">to</span>
-        <div className="relative flex-1">
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-            $
-          </span>
+        <div className="space-y-1">
+          <label className="text-xs text-muted-foreground">Max</label>
           <input
-            type="number"
+            type="text"
             inputMode="numeric"
-            placeholder="Max"
-            value={priceMax}
-            onChange={(e) => onPriceMaxChange(e.target.value)}
-            className="h-11 w-full rounded-lg border border-input bg-background pl-7 pr-3 text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 md:text-sm"
+            value={maxInput}
+            onChange={(e) => setMaxInput(e.target.value)}
+            onBlur={commitMaxInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.currentTarget.blur()
+              }
+            }}
+            aria-label="Maximum price"
+            className="h-10 w-full rounded-lg border border-neutral-300 bg-background px-3 text-sm font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
           />
         </div>
       </div>
-
-      {/* Histogram */}
-      {buckets.length > 0 ? (
-        <div aria-hidden>
-          <ResponsiveContainer width="100%" height={110}>
-            <BarChart
-              data={buckets}
-              barCategoryGap="15%"
-              margin={{ top: 4, right: 0, left: -28, bottom: 0 }}
-            >
-              <XAxis
-                dataKey="label"
-                ticks={xTicks}
-                tick={{ fontSize: 10, fill: "#94a3b8" }}
-                axisLine={false}
-                tickLine={false}
-                interval="preserveStartEnd"
-              />
-              <YAxis
-                domain={[0, maxCount]}
-                ticks={[0, maxCount]}
-                tick={{ fontSize: 10, fill: "#94a3b8" }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <Tooltip
-                content={<CustomTooltip />}
-                cursor={{ fill: "transparent" }}
-              />
-              <Bar dataKey="count" radius={[3, 3, 0, 0]}>
-                {buckets.map((bucket, i) => (
-                  <Cell
-                    key={i}
-                    fill={
-                      bucketIsActive(bucket.start, bucket.end, priceMin, priceMax)
-                        ? COLOR_ACTIVE
-                        : COLOR_INACTIVE
-                    }
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      ) : (
-        <p className="py-4 text-center text-xs text-muted-foreground">
-          No pricing data available
-        </p>
-      )}
     </div>
   )
 }

@@ -12,6 +12,8 @@ export type Boat = {
   image: string
   broker: string
   featured?: boolean
+  /** Manufacturer-direct listing (SRP grid badge + Alt CTA). */
+  manufacturerListing?: boolean
   galleryImages?: string[]
   description?: string
   boatType?: string

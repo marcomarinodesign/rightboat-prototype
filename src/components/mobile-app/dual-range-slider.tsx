@@ -10,6 +10,14 @@ type DualRangeSliderProps = {
   value: readonly [number, number]
   onChange: (next: [number, number]) => void
   formatValue?: (n: number) => string
+  /** When false, hides value labels above the track. */
+  showValueLabels?: boolean
+  /** Track outside the selected range (default: muted). */
+  inactiveTrackClassName?: string
+  /** Track between thumbs (default: primary). */
+  activeTrackClassName?: string
+  /** Classes for the visible thumb disc. */
+  thumbClassName?: string
   className?: string
 }
 
@@ -24,6 +32,10 @@ export function DualRangeSlider({
   value,
   onChange,
   formatValue = (n) => String(n),
+  showValueLabels = true,
+  inactiveTrackClassName = "bg-muted",
+  activeTrackClassName = "bg-primary",
+  thumbClassName = "size-7 rounded-full border-2 border-primary bg-white shadow-md ring-2 ring-white",
   className,
 }: DualRangeSliderProps) {
   const trackRef = React.useRef<HTMLDivElement>(null)
@@ -91,19 +103,29 @@ export function DualRangeSlider({
 
   return (
     <div className={cn("w-full select-none touch-none", className)}>
-      <div className="mb-2 flex justify-between text-xs text-muted-foreground">
-        <span>{formatValue(safeLow)}</span>
-        <span>{formatValue(safeHigh)}</span>
-      </div>
+      {showValueLabels ? (
+        <div className="mb-2 flex justify-between text-xs text-muted-foreground">
+          <span>{formatValue(safeLow)}</span>
+          <span>{formatValue(safeHigh)}</span>
+        </div>
+      ) : null}
       <div
         ref={trackRef}
         role="presentation"
         className="relative h-8 py-2"
         onPointerDown={onTrackPointerDown}
       >
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-muted" />
         <div
-          className="pointer-events-none absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-primary"
+          className={cn(
+            "pointer-events-none absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rounded-full",
+            inactiveTrackClassName
+          )}
+        />
+        <div
+          className={cn(
+            "pointer-events-none absolute top-1/2 h-0.5 -translate-y-1/2 rounded-full",
+            activeTrackClassName
+          )}
           style={{
             left: `${loPct}%`,
             width: `${Math.max(0, hiPct - loPct)}%`,
@@ -116,7 +138,7 @@ export function DualRangeSlider({
           style={{ left: `${loPct}%` }}
           onPointerDown={bindThumbDrag("low")}
         >
-          <span className="size-7 rounded-full border-2 border-primary bg-white shadow-md ring-2 ring-white" />
+          <span className={thumbClassName} />
         </button>
         <button
           type="button"
@@ -125,7 +147,7 @@ export function DualRangeSlider({
           style={{ left: `${hiPct}%` }}
           onPointerDown={bindThumbDrag("high")}
         >
-          <span className="size-7 rounded-full border-2 border-primary bg-white shadow-md ring-2 ring-white" />
+          <span className={thumbClassName} />
         </button>
       </div>
     </div>

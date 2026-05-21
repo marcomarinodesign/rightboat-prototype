@@ -3,6 +3,11 @@
 import * as React from "react"
 
 import type { ActiveFilter } from "@/components/filters/active-filters-chips"
+import {
+  clearLocationFields,
+  formatLocationActiveFilterLabel,
+  hasActiveLocationFilter,
+} from "@/components/filters/location-filter-helpers"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
 import { modelLabelFromValue } from "@/components/filters/srp-filter-data"
 
@@ -52,14 +57,14 @@ export function useFiltersState() {
   const activeFilters = React.useMemo<ActiveFilter[]>(() => {
     const items: ActiveFilter[] = []
 
-    if (filters.location) {
+    if (hasActiveLocationFilter(filters)) {
       items.push({
         key: "location",
-        label: `Location: ${filters.location}`,
+        label: `Location: ${formatLocationActiveFilterLabel(filters)}`,
         onRemove: () =>
           setFilters((prev) => ({
             ...prev,
-            location: "",
+            ...clearLocationFields(),
           })),
       })
     }

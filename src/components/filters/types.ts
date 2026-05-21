@@ -1,5 +1,14 @@
+export type LocationTab = "zip" | "city-state" | "radius"
+
 export type FiltersState = {
+  /** @deprecated Legacy field; effective query comes from tab-specific fields. */
   location: string
+  locationTab: LocationTab
+  locationRadius: string
+  locationZip: string
+  locationCountry: string
+  locationState: string
+  locationCity: string
   boatType: string
   priceMin: string
   priceMax: string
@@ -19,6 +28,12 @@ export type FiltersState = {
 
 export const defaultFilters: FiltersState = {
   location: "",
+  locationTab: "zip",
+  locationRadius: "25",
+  locationZip: "",
+  locationCountry: "",
+  locationState: "",
+  locationCity: "",
   boatType: "",
   priceMin: "",
   priceMax: "",

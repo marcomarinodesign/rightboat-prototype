@@ -1,15 +1,21 @@
 "use client"
 
+import type { MouseEvent } from "react"
 import Link from "next/link"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
 import { ImageSlider } from "@/components/ui/image-slider"
 import { BrokerLogo } from "@/components/boats/broker-logo"
+import type { SrpGridCardVariant } from "@/components/boats/srp-grid-card-variant"
 
 type BoatCardProps = {
   boat: Boat
   variant?: "grid" | "list"
+  /** SRP grid uses compact broker + CTA row (Figma Alt* variants). */
+  gridLayout?: "default" | "srp"
+  /** Visual variant for SRP grid (overrides featured / manufacturerListing flags). */
+  srpVariant?: SrpGridCardVariant
   className?: string
   /** Detail URL (defaults to `/boats-for-sale/{makeSlug}/{modelSlug}/{id}`). */
   href?: string
@@ -21,7 +27,14 @@ function specsSummary(boat: Boat) {
   return `${boat.year} · ${len} · ${type} · ${boat.condition}`
 }
 
-export function BoatCard({ boat, variant = "grid", className, href }: BoatCardProps) {
+export function BoatCard({
+  boat,
+  variant = "grid",
+  gridLayout = "default",
+  srpVariant,
+  className,
+  href,
+}: BoatCardProps) {
   const detailHref =
     href ?? `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
   const images = boat.galleryImages?.length
@@ -30,20 +43,47 @@ export function BoatCard({ boat, variant = "grid", className, href }: BoatCardPr
 
   const boatName = `${boat.make} ${boat.model}`
 
+  const srpGrid = variant === "grid" && gridLayout === "srp"
+  const isSponsored =
+    srpGrid && srpVariant
+      ? srpVariant === "sponsored"
+      : Boolean(boat.featured)
+  const isManufacture =
+    srpGrid && srpVariant
+      ? srpVariant === "manufacture"
+      : Boolean(boat.manufacturerListing)
+  const showMediaChrome = srpGrid && (isSponsored || isManufacture)
+
   const imageSection = (
     <div className="relative w-full overflow-hidden rounded-[8px]">
       <ImageSlider
         images={images}
         alt={boatName}
-        showDots
-        showNavArrows={false}
+        showDots={srpGrid ? showMediaChrome : true}
+        showNavArrows={showMediaChrome}
         dotsPlacement="overlay"
         imageRoundedClassName="rounded-[8px]"
         slideBackdropClassName="bg-midnight/12"
       />
-      {boat.featured ? (
+      {isManufacture ? (
         <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
-          <span className="text-xs font-medium leading-none text-primary-foreground">
+          <span className="text-xs font-normal leading-4 text-primary-foreground">
+            Manufacture Listing
+          </span>
+        </div>
+      ) : isSponsored ? (
+        <div
+          className={cn(
+            "absolute left-2 top-2 z-10 rounded-full px-3 py-1.5",
+            srpGrid ? "bg-neutral-200" : "bg-primary"
+          )}
+        >
+          <span
+            className={cn(
+              "text-xs font-normal leading-4",
+              srpGrid ? "text-midnight" : "text-primary-foreground"
+            )}
+          >
             Sponsored
           </span>
         </div>
@@ -51,7 +91,73 @@ export function BoatCard({ boat, variant = "grid", className, href }: BoatCardPr
     </div>
   )
 
-  const detailsSection = (options?: { linkName?: boolean; showContactCta?: boolean }) => (
+  const brokerRow = (
+    <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
+      <div className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 shadow-sm ring-1 ring-neutral-200">
+        <BrokerLogo
+          key={`${boat.id}-${boat.broker}`}
+          broker={boat.broker}
+          alt={boat.broker || "Broker logo"}
+          width={28}
+          height={28}
+          className="size-full object-contain"
+        />
+      </div>
+      <span className="truncate text-xs leading-4 text-midnight">{boat.broker}</span>
+    </div>
+  )
+
+  const contactCta = (layout: "default" | "srp") => {
+    const stopNav = (e: MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
+    if (layout === "srp") {
+      const prominent = isSponsored || isManufacture
+      if (prominent) {
+        return (
+          <button
+            type="button"
+            className="flex h-11 min-w-0 flex-1 items-center justify-center rounded-lg border border-input bg-background px-5 text-sm font-medium text-foreground"
+            onClick={stopNav}
+          >
+            Contact Seller
+          </button>
+        )
+      }
+      return (
+        <button
+          type="button"
+          className="shrink-0 text-sm font-medium text-primary"
+          onClick={stopNav}
+        >
+          Contact Seller
+        </button>
+      )
+    }
+
+    return (
+      <button
+        type="button"
+        className={cn(
+          "flex h-11 w-full items-center justify-center rounded-lg px-8 text-sm font-medium",
+          boat.featured || boat.manufacturerListing
+            ? "bg-primary text-primary-foreground"
+            : "border border-input bg-background text-foreground"
+        )}
+        onClick={stopNav}
+      >
+        Contact Seller
+      </button>
+    )
+  }
+
+  const detailsSection = (options?: {
+    linkName?: boolean
+    showContactCta?: boolean
+    ctaLayout?: "default" | "srp"
+  }) => (
     <div className="flex min-w-0 flex-col gap-2 pt-3">
       <div className="text-base font-bold leading-6 text-primary">
         {boat.price}
@@ -77,31 +183,17 @@ export function BoatCard({ boat, variant = "grid", className, href }: BoatCardPr
       </p>
       <p className="line-clamp-2 text-sm leading-5 text-midnight">{boat.location}</p>
       <div className="h-px w-full bg-border-card" />
-      <div className="flex items-center gap-2">
-        <div className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 shadow-sm ring-1 ring-neutral-200">
-          <BrokerLogo
-            key={`${boat.id}-${boat.broker}`}
-            broker={boat.broker}
-            alt={boat.broker || "Broker logo"}
-            width={28}
-            height={28}
-            className="size-full object-contain"
-          />
+      {options?.showContactCta && options.ctaLayout === "srp" ? (
+        <div className="flex w-full items-center gap-2">
+          {brokerRow}
+          {contactCta("srp")}
         </div>
-        <span className="truncate text-xs leading-4 text-midnight">{boat.broker}</span>
-      </div>
-      {options?.showContactCta ? (
-        <button
-          type="button"
-          className="flex h-11 w-full items-center justify-center rounded-lg bg-primary px-8 text-sm font-medium text-primary-foreground"
-          onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-          }}
-        >
-          Contact Seller
-        </button>
-      ) : null}
+      ) : (
+        <>
+          {brokerRow}
+          {options?.showContactCta ? contactCta("default") : null}
+        </>
+      )}
     </div>
   )
 
@@ -135,7 +227,11 @@ export function BoatCard({ boat, variant = "grid", className, href }: BoatCardPr
       )}
     >
       {imageSection}
-      {detailsSection({ linkName: false, showContactCta: true })}
+      {detailsSection({
+        linkName: false,
+        showContactCta: true,
+        ctaLayout: srpGrid ? "srp" : "default",
+      })}
     </Link>
   )
 }

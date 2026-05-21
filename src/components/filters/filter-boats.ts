@@ -1,3 +1,4 @@
+import { getLocationSearchQuery } from "@/components/filters/location-filter-helpers"
 import type { Boat } from "@/data/boats"
 import type { FiltersState } from "@/components/filters/types"
 
@@ -17,7 +18,11 @@ function lengthFtToM(ft: number): number {
 
 export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
   return boats.filter((boat) => {
-    if (filters.location && !boat.location.toLowerCase().includes(filters.location.toLowerCase())) {
+    const locationQuery = getLocationSearchQuery(filters)
+    if (
+      locationQuery &&
+      !boat.location.toLowerCase().includes(locationQuery.toLowerCase())
+    ) {
       return false
     }
     if (filters.boatType && boat.boatType && boat.boatType !== filters.boatType) {

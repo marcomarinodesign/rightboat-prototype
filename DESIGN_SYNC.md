@@ -10,4 +10,7 @@ Formato sugerido:
 
 ## Entradas
 
-- _Ninguna aún; añade la primera cuando cierres un hito de diseño._
+- 2026-05-21 — Boat Card Alt CTA — SRP grid prioridad: **Manufacture** (mayoría, primeras posiciones) → Sponsored → Simple; ratio base 8/4/3 por 15 (`srp-grid-card-variant.ts`). Figma SRP alineado.
+- 2026-05-21 — SRP page header (Boats for sale + intro) — [SRP / Page Header](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=301-77) en SRP default y split; Code Connect `boats-for-sale-page-header.figma.tsx`.
+- 2026-05-21 — SRP hero + sort/filter selects — componentes DS: [SRP / Sort Select](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=296-81) (variantes Featured / precio / newest), [Filters / Select Field](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=294-87). Wireframe split actualizado (hero instancia + toolbar con sort 176px).
+- 2026-05-21 — SRP split-view — panel filtros alineado a captura prototipo; componentes DS en **Complex Components**: Form Body (289-310), Location Filter (289-102), Price Histogram (289-161), Location Tabs, Filter Section, Divider, Save Search. Wireframe: [SRP / Split view](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422). Ref captura (opcional borrar): [284-1674](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=284-1674).

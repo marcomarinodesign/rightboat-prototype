@@ -1,17 +1,13 @@
 // FIGMA NODE: Boat Card — listing card component in El-Captain-DS
 // FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
-// STATUS: pendiente de crear en Figma (ver FIGMA_NODES_NEEDED.md)
-// LAST SYNC: 2026-04-27
+// COMPONENT SET: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=80-65
+// LAST SYNC: 2026-05-21
+//
+// Variants Simple / Sponsored / Manufacture — homepage, carousels, BDP (gridLayout default)
+// Variants Alt* — SRP grids only (gridLayout srp)
 
 /**
  * Code Connect — BoatCard
- *
- * Pasos para conectar:
- * 1. En El-Captain-DS, localiza o crea el componente "Boat Card" (con variantes grid / list).
- * 2. Selecciona el componente → clic derecho → "Copy link to selection".
- * 3. Reemplaza la URL de abajo y ajusta los `figma.enum` / `figma.string` a las
- *    propiedades del component set en Figma.
- * 4. Ejecuta: npm run figma:connect:publish
  */
 import figma from "@figma/code-connect/react"
 
@@ -34,19 +30,44 @@ const MOCK_BOAT = {
   boatType: "Powerboats",
 }
 
+const MOCK_SPONSORED = { ...MOCK_BOAT, featured: true as const }
+const MOCK_MANUFACTURE = {
+  ...MOCK_BOAT,
+  manufacturerListing: true as const,
+}
+
 figma.connect(
   BoatCard,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=1-1",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=80-65",
   {
     imports: [
       'import { BoatCard } from "@/components/boats/boat-card"',
     ],
     props: {
-      variant: figma.enum("Variant", {
-        Grid: "grid",
-        List: "list",
+      figmaVariant: figma.enum("Property 1", {
+        Simple: "default",
+        Sponsored: "default-sponsored",
+        Manufacture: "default-manufacture",
+        AltSimple: "srp",
+        AltSponsored: "srp-sponsored",
+        AltManufacture: "srp-manufacture",
       }),
     },
-    example: ({ variant }) => <BoatCard boat={MOCK_BOAT} variant={variant} />,
+    example: ({ figmaVariant }) => {
+      const boat =
+        figmaVariant === "srp-sponsored" || figmaVariant === "default-sponsored"
+          ? MOCK_SPONSORED
+          : figmaVariant === "srp-manufacture" ||
+              figmaVariant === "default-manufacture"
+            ? MOCK_MANUFACTURE
+            : MOCK_BOAT
+      const gridLayout =
+        figmaVariant === "srp" ||
+        figmaVariant === "srp-sponsored" ||
+        figmaVariant === "srp-manufacture"
+          ? "srp"
+          : "default"
+      return <BoatCard boat={boat} gridLayout={gridLayout} />
+    },
   }
 )

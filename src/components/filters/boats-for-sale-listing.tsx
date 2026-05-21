@@ -6,6 +6,7 @@ import { Bookmark, SlidersHorizontal } from "lucide-react"
 import { toast } from "sonner"
 
 import { BoatCard } from "@/components/boats/boat-card"
+import { srpGridCardVariantAt } from "@/components/boats/srp-grid-card-variant"
 import { ActiveFiltersChips } from "@/components/filters/active-filters-chips"
 import { BoatsForSaleListingIntro } from "@/components/filters/boats-for-sale-listing-intro"
 import { FiltersDrawer } from "@/components/filters/filters-drawer"
@@ -60,7 +61,7 @@ function SaveSearchButton({ className }: { className?: string }) {
   return (
     <Button
       type="button"
-      variant="outline"
+      variant="secondary"
       className={cn("gap-2", className)}
       onClick={() =>
         toast.success(
@@ -148,8 +149,13 @@ export function BoatsForSaleListing({
           : "grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
       }
     >
-      {sortedBoats.map((boat) => (
-        <BoatCard key={boat.id} boat={boat} />
+      {sortedBoats.map((boat, index) => (
+        <BoatCard
+          key={boat.id}
+          boat={boat}
+          gridLayout="srp"
+          srpVariant={srpGridCardVariantAt(index, sortedBoats.length)}
+        />
       ))}
     </div>
   )
@@ -249,9 +255,6 @@ export function BoatsForSaleListing({
                 updateDraft={updateDraftLive}
                 updateCondition={updateConditionLive}
                 scrollClassName="px-0"
-                leadingContent={
-                  <SaveSearchButton className="h-11 w-full justify-center" />
-                }
               />
             </div>
           </aside>
