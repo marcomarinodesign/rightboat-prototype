@@ -107,6 +107,9 @@ export function BoatCard({
     </div>
   )
 
+  const ctaHoverPrimary =
+    "transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-primary hover:text-primary-foreground"
+
   const contactCta = (layout: "default" | "srp") => {
     const stopNav = (e: MouseEvent) => {
       e.preventDefault()
@@ -119,7 +122,10 @@ export function BoatCard({
         return (
           <button
             type="button"
-            className="flex h-11 min-w-0 flex-1 items-center justify-center rounded-lg border border-input bg-background px-5 text-sm font-medium text-foreground"
+            className={cn(
+              "flex h-11 min-w-0 flex-1 items-center justify-center rounded-lg border border-input bg-background px-5 text-sm font-medium text-foreground",
+              ctaHoverPrimary
+            )}
             onClick={stopNav}
           >
             Contact Seller
@@ -129,7 +135,10 @@ export function BoatCard({
       return (
         <button
           type="button"
-          className="shrink-0 text-sm font-medium text-primary"
+          className={cn(
+            "shrink-0 rounded-lg px-3 py-2 text-sm font-medium text-foreground",
+            ctaHoverPrimary
+          )}
           onClick={stopNav}
         >
           Contact Seller
@@ -141,10 +150,13 @@ export function BoatCard({
       <button
         type="button"
         className={cn(
-          "flex h-11 w-full items-center justify-center rounded-lg px-8 text-sm font-medium",
+          "flex h-11 w-full items-center justify-center rounded-lg px-8 text-sm font-medium transition-colors duration-[var(--transition-duration-normal)]",
           boat.featured || boat.manufacturerListing
-            ? "bg-primary text-primary-foreground"
-            : "border border-input bg-background text-foreground"
+            ? "bg-primary text-primary-foreground hover:bg-primary/90"
+            : cn(
+                "border border-input bg-background text-foreground",
+                ctaHoverPrimary
+              )
         )}
         onClick={stopNav}
       >
