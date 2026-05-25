@@ -25,14 +25,19 @@ const SORT_OPTIONS = [
   { value: "newest", label: "Newest listings" },
 ] as const
 
+type SortValue = (typeof SORT_OPTIONS)[number]["value"]
+
 function ListingSortSelectPreview({
   value = "featured",
 }: {
-  value?: (typeof SORT_OPTIONS)[number]["value"]
+  value?: SortValue
 }) {
-  const [sortValue, setSortValue] = React.useState(value)
+  const [sortValue, setSortValue] = React.useState<SortValue>(value)
   return (
-    <Select value={sortValue} onValueChange={setSortValue}>
+    <Select
+      value={sortValue}
+      onValueChange={(next) => setSortValue(next as SortValue)}
+    >
       <SelectTrigger className="w-44" aria-label="Sort by">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
