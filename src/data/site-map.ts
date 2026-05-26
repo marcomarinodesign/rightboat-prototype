@@ -142,8 +142,16 @@ export function getSiteMapSections(): SiteMapSection[] {
     },
     {
       title: "Internal",
-      description: "Design system and UI tokens (prototype).",
-      links: [{ label: "Design system", href: "/design-system" }],
+      description: "Design system, email previews, and UI tokens (prototype).",
+      links: [
+        { label: "Design system", href: "/design-system" },
+        {
+          label: "Saved search email preview",
+          href: "/email-preview",
+          description:
+            "Q2 2026 monetization — 7 ad slots, 4 targeting segments, React Email render",
+        },
+      ],
     },
   ]
 }

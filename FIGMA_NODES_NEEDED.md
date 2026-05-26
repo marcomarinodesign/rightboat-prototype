@@ -27,6 +27,11 @@ npm run figma:connect:publish
 | `PriceHistogram`       | `src/components/filters/price-histogram.figma.tsx`            | Filters / Price Histogram  | Complex Components | —                               | [289-161](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-161) |
 | `BoatCard`             | `src/components/boats/boat-card.figma.tsx`                    | Boat Card                  | Components       | Simple / Sponsored / Manufacture + Alt* (SRP) | [80-65](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=80-65) — Alt* solo en SRP |
 | SRP — Default          | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP                        | Test Cursor      | 4-col grid + drawer (código)      | `SrpDefaultView` → node 83-737                       |
+| `PremiumPartnerBanner` | `src/components/email/premium-partner-banner.figma.tsx`       | Email / Ad Slots / Premium Partner | Email      | —                                 | 600×150 hero · aspect 4:1                            |
+| `ServiceSponsorCard`   | `src/components/email/service-sponsor-card.figma.tsx`         | Email / Ad Slots / Service Sponsor | Email    | slotIndex: 1, 2                   | Native card · 96×64 image                            |
+| `TrustedPartnerBanner` | `src/components/email/trusted-partner-banner.figma.tsx`       | Email / Ad Slots / Trusted Partner | Email    | —                                 | 600×200 hero · aspect 3:1                            |
+| `FooterSponsor`        | `src/components/email/footer-sponsor.figma.tsx`               | Email / Ad Slots / Footer Sponsor | Email     | slotIndex: 1, 2, 3                | Buyer Resources pill · ~16:9 image                   |
+| `SavedSearchEmail`     | `src/components/email/saved-search-email.figma.tsx`           | Email / Templates / Saved Search | Email      | boatType: center-console, sailboat, yacht, catamaran | Full template · 7 ad slots · 600px max width |
 
 **SRP existente (no modificar):** [SRP default](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737)
 
@@ -99,6 +104,48 @@ Frame o variante del BDP en estado inactivo (listing vendido/retirado).
 - Sección "Similar boats" → título dinámico + subtítulo + 4 cards + "View all →"
 
 **Demo route en el prototipo:** `/boats-for-sale/seacamper/24/rb226195`
+
+---
+
+## Email monetization (Saved Search)
+
+**Demo route:** `/email-preview` — selector de 4 segmentos (Center Console, Sailboat, Yacht, Catamaran).
+
+### 5. Email / Ad Slots / Premium Partner (`PremiumPartnerBanner`)
+
+Hero full-bleed at top of email. **600×150px** (aspect 4:1).
+
+- Frame width: 600px max
+- Image fill + "Sponsored" badge bottom-right
+- Optional dev label overlay (preview only)
+
+### 6. Email / Ad Slots / Service Sponsor (`ServiceSponsorCard`)
+
+Native card between listing rows. Variants: `slotIndex` 1 | 2.
+
+- Horizontal layout: 96×64 thumbnail + sponsor name + tagline + CTA
+- Uses `Card` + `border-border-card`
+
+### 7. Email / Ad Slots / Trusted Partner (`TrustedPartnerBanner`)
+
+Pre-footer hero banner. **600×200px** (aspect 3:1).
+
+- Optional tagline overlay with `from-midnight/40` gradient
+
+### 8. Email / Ad Slots / Footer Sponsor (`FooterSponsor`)
+
+Buyer Resources pills in footer. Variants: `slotIndex` 1 | 2 | 3.
+
+- ~16:9 image + title + tagline + Sponsored badge
+- Grid: 3 columns desktop, 1 column mobile
+
+### 9. Email / Templates / Saved Search (`SavedSearchEmail`)
+
+Full email template assembly (7 ad slots + listings).
+
+- Max width 600px, centered
+- Variants by `boatType`: center-console, sailboat, yacht, catamaran
+- Listings grid: 2 columns desktop, 1 column mobile
 
 ---
 

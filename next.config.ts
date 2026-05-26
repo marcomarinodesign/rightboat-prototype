@@ -95,6 +95,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 768, 1024, 1280, 1600],

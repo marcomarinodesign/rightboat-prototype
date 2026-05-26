@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { RIGHTBOAT_LOGO } from "@/lib/brand"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -22,6 +23,7 @@ type AppShellProps = {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const isDesignSystem = pathname === "/design-system"
+  const isEmailPreview = pathname === "/email-preview"
   const isBoatDetailPage =
     typeof pathname === "string" &&
     pathname.startsWith("/boats-for-sale/") &&
@@ -32,7 +34,7 @@ export function AppShell({ children }: AppShellProps) {
   const isMobileAppPrototype =
     typeof pathname === "string" && pathname.startsWith("/app")
 
-  if (isDesignSystem) {
+  if (isDesignSystem || isEmailPreview) {
     return <>{children}</>
   }
 
@@ -100,10 +102,10 @@ function SiteHeader() {
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Rightboat</span>
             <Image
-              src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
+              src={RIGHTBOAT_LOGO.src}
               alt="Rightboat"
-              width={152}
-              height={26}
+              width={RIGHTBOAT_LOGO.width}
+              height={RIGHTBOAT_LOGO.height}
               className="h-[26px] w-auto"
               priority
             />
@@ -128,10 +130,10 @@ function SiteHeader() {
                 <SheetHeader>
                   <Link href="/" onClick={() => setMobileMenuOpen(false)}>
                     <Image
-                      src="https://www.rightboat.com/assets/home/logo-black-fc82de4067beb3c49bb316c4fdc9336333bb7f90375ba5d3b2b3021da2ccf1a6.png"
+                      src={RIGHTBOAT_LOGO.src}
                       alt="Rightboat"
-                      width={120}
-                      height={40}
+                      width={RIGHTBOAT_LOGO.width}
+                      height={RIGHTBOAT_LOGO.height}
                       className="h-[26px] w-auto"
                     />
                   </Link>
