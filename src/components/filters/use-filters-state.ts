@@ -69,10 +69,29 @@ export function useFiltersState() {
       })
     }
 
-    if (filters.boatType) {
+    if (filters.boatClass) {
+      const classLabel =
+        filters.boatClass === "power"
+          ? "Power"
+          : filters.boatClass === "sail"
+            ? "Sail"
+            : "Unpowered"
+      items.push({
+        key: "boatClass",
+        label: filters.boatType
+          ? `${classLabel}: ${filters.boatType}`
+          : `Boat class: ${classLabel}`,
+        onRemove: () =>
+          setFilters((prev) => ({
+            ...prev,
+            boatClass: "",
+            boatType: "",
+          })),
+      })
+    } else if (filters.boatType) {
       items.push({
         key: "boatType",
-        label: `Boat type: ${filters.boatType}`,
+        label: `Category: ${filters.boatType}`,
         onRemove: () =>
           setFilters((prev) => ({
             ...prev,

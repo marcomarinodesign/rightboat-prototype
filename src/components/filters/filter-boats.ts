@@ -1,4 +1,10 @@
 import { getLocationSearchQuery } from "@/components/filters/location-filter-helpers"
+import {
+  boatClassForCategory,
+  fuelTypeMatches,
+  hullMaterialMatches,
+  srpCategoriesForClass,
+} from "@/components/filters/srp-filter-data"
 import type { Boat } from "@/data/boats"
 import type { FiltersState } from "@/components/filters/types"
 
@@ -27,6 +33,18 @@ export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
     }
     if (filters.boatType && boat.boatType && boat.boatType !== filters.boatType) {
       return false
+    }
+    if (filters.boatClass && !filters.boatType) {
+      const categories = srpCategoriesForClass(filters.boatClass)
+      if (boat.boatType && !categories.includes(boat.boatType)) {
+        return false
+      }
+    }
+    if (filters.boatClass && filters.boatType) {
+      const expectedClass = boatClassForCategory(filters.boatType)
+      if (expectedClass && expectedClass !== filters.boatClass) {
+        return false
+      }
     }
     const boatPrice = parsePrice(boat.price)
     if (filters.priceMin) {
@@ -67,10 +85,13 @@ export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
     if (filters.model && boat.modelSlug !== filters.model) {
       return false
     }
-    if (filters.hullMaterial && boat.hullMaterial && boat.hullMaterial !== filters.hullMaterial) {
+    if (
+      filters.hullMaterial &&
+      !hullMaterialMatches(filters.hullMaterial, boat.hullMaterial)
+    ) {
       return false
     }
-    if (filters.fuelType && boat.fuelType && boat.fuelType !== filters.fuelType) {
+    if (filters.fuelType && !fuelTypeMatches(filters.fuelType, boat.fuelType)) {
       return false
     }
     return true

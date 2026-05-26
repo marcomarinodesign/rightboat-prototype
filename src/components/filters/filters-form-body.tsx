@@ -11,7 +11,10 @@ import { SearchableSelect } from "@/components/filters/searchable-select"
 import { PriceHistogram } from "@/components/filters/price-histogram"
 import { filterBoats } from "@/components/filters/filter-boats"
 import {
-  srpBoatTypeOptions,
+  srpBoatClassOptions,
+  srpCategoryOptionsForClass,
+  srpFuelTypeOptions,
+  srpHullMaterialOptions,
   srpManufacturerOptions,
   srpModelOptionsForManufacturer,
 } from "@/components/filters/srp-filter-data"
@@ -128,6 +131,7 @@ export function FiltersFormBody({
       draft.locationCountry,
       draft.locationState,
       draft.locationCity,
+      draft.boatClass,
       draft.boatType,
       draft.condition,
       draft.lengthMin,
@@ -147,6 +151,22 @@ export function FiltersFormBody({
   )
 
   const modelDisabled = !draft.manufacturer
+
+  const categoryOptions = React.useMemo(
+    () => srpCategoryOptionsForClass(draft.boatClass),
+    [draft.boatClass]
+  )
+
+  const categoryDisabled = !draft.boatClass
+
+  const handleBoatClassChange = (value: string) => {
+    if (value !== draft.boatClass) {
+      updateDraft("boatClass", value)
+      updateDraft("boatType", "")
+      return
+    }
+    updateDraft("boatClass", value)
+  }
 
   const handleManufacturerChange = (value: string) => {
     if (value !== draft.manufacturer) {
@@ -199,6 +219,17 @@ export function FiltersFormBody({
         />
       </FilterSection>
 
+      <FilterSection title="Length">
+        <RangeInputs
+          minValue={draft.lengthMin}
+          maxValue={draft.lengthMax}
+          onMinChange={(v) => updateDraft("lengthMin", v)}
+          onMaxChange={(v) => updateDraft("lengthMax", v)}
+          minPlaceholder="e.g. 5"
+          maxPlaceholder="e.g. 30"
+        />
+      </FilterSection>
+
       <FilterSection title="Year">
         <RangeInputs
           minValue={draft.yearMin}
@@ -231,27 +262,30 @@ export function FiltersFormBody({
         </div>
       </FilterSection>
 
-      <FilterSection title="Length">
-        <RangeInputs
-          minValue={draft.lengthMin}
-          maxValue={draft.lengthMax}
-          onMinChange={(v) => updateDraft("lengthMin", v)}
-          onMaxChange={(v) => updateDraft("lengthMax", v)}
-          minPlaceholder="e.g. 5"
-          maxPlaceholder="e.g. 30"
-        />
-      </FilterSection>
-
       <FilterGroupDivider />
 
       <FilterSection title="Boat Type">
-        <SearchableSelect
-          value={draft.boatType}
-          onValueChange={(v) => updateDraft("boatType", v)}
-          options={srpBoatTypeOptions}
-          placeholder="Select boat type"
-          searchPlaceholder="Search boat types"
-        />
+        <div className="space-y-3">
+          <SearchableSelect
+            value={draft.boatClass}
+            onValueChange={handleBoatClassChange}
+            options={srpBoatClassOptions}
+            placeholder="Select boat type"
+            searchPlaceholder="Search boat types"
+          />
+          <SearchableSelect
+            value={draft.boatType}
+            onValueChange={(v) => updateDraft("boatType", v)}
+            options={categoryOptions}
+            placeholder={
+              categoryDisabled
+                ? "Select boat type first"
+                : "Select category"
+            }
+            searchPlaceholder="Search categories"
+            disabled={categoryDisabled}
+          />
+        </div>
       </FilterSection>
 
       <FilterSection title="Manufacturer">
@@ -272,6 +306,26 @@ export function FiltersFormBody({
           placeholder="Select model"
           searchPlaceholder="Search models"
           disabled={modelDisabled}
+        />
+      </FilterSection>
+
+      <FilterSection title="Hull Material">
+        <SearchableSelect
+          value={draft.hullMaterial}
+          onValueChange={(v) => updateDraft("hullMaterial", v)}
+          options={srpHullMaterialOptions}
+          placeholder="Select hull material"
+          searchPlaceholder="Search hull materials"
+        />
+      </FilterSection>
+
+      <FilterSection title="Fuel Type">
+        <SearchableSelect
+          value={draft.fuelType}
+          onValueChange={(v) => updateDraft("fuelType", v)}
+          options={srpFuelTypeOptions}
+          placeholder="Select fuel type"
+          searchPlaceholder="Search fuel types"
         />
       </FilterSection>
     </div>

@@ -9,6 +9,9 @@ export type FiltersState = {
   locationCountry: string
   locationState: string
   locationCity: string
+  /** power | sail | unpowered — production boat class filter */
+  boatClass: string
+  /** Category within the selected class (e.g. Center console) */
   boatType: string
   priceMin: string
   priceMax: string
@@ -34,6 +37,7 @@ export const defaultFilters: FiltersState = {
   locationCountry: "",
   locationState: "",
   locationCity: "",
+  boatClass: "",
   boatType: "",
   priceMin: "",
   priceMax: "",
