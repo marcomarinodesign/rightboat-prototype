@@ -66,6 +66,12 @@ export function getSiteMapSections(): SiteMapSection[] {
           description:
             "Filters sidebar + 3-column card grid on desktop/tablet; mobile keeps the default sheet",
         },
+        {
+          label: "SRP split — Mobile Overview (Figma)",
+          href: "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055",
+          description:
+            "402×874 frames + Code Connect for mobile SRP states (drawer, chips, empty, sort, marketing footer)",
+        },
         { label: "Power boats", href: "/boats-for-sale?type=power" },
         { label: "Sail boats", href: "/boats-for-sale?type=sail" },
       ],

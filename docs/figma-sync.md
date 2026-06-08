@@ -106,6 +106,43 @@ Genera un JSON con todos los snippets que se publicarían. Útil para revisar an
 
 ---
 
+## Mobile Overview (402×874)
+
+Frames en la página [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055) enlazan la versión mobile del SRP split (`/boats-for-sale?layout=split`).
+
+### Preview states (`figmaPreview` query param)
+
+| Valor | Uso |
+|-------|-----|
+| `default` | Listing cerrado |
+| `filters-open` | Bottom sheet filtros |
+| `active-filters` | Chips + badge en Filters |
+| `empty` | Sin resultados |
+| `sort-open` | Dropdown sort abierto |
+| `filters-scrolled` | Drawer con scroll en Location/Price |
+| `save-search-toast` | Toast Sonner al montar |
+| `marketing-footer` | Scroll a newsletter / popular links |
+
+Cuando `figmaPreview` está presente, el layout se fuerza a mobile (`previewMode="mobile"`) para capturas y Code Connect.
+
+### Captura html-to-design
+
+```bash
+npm run dev   # localhost:3000
+
+# Preset web SRP mobile (402×874, selector body)
+node scripts/figma-local-capture.cjs <captureId> srp-mobile active-filters
+
+# Batch (requiere 7 captureIds de generate_figma_design)
+node scripts/figma-srp-mobile-batch-capture.cjs <id1> ... <id7>
+```
+
+Code Connect mobile: `boats-for-sale-listing-mobile.figma.tsx`, `filters-drawer.figma.tsx`, `boats-for-sale-page-mobile.figma.tsx`.
+
+Ver tabla completa en [`FIGMA_NODES_NEEDED.md`](../FIGMA_NODES_NEEDED.md#mobile-overview--srp-split-402874).
+
+---
+
 ## Referencias
 
 - [Code Connect — React](https://developers.figma.com/docs/code-connect/react/)

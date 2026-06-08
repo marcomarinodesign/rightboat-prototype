@@ -39,6 +39,34 @@ npm run figma:connect:publish
 
 ---
 
+## Mobile Overview / SRP Split (402×874)
+
+Página Figma: [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055)
+
+Ruta prototipo: `/boats-for-sale?layout=split` (+ `figmaPreview` para estados de captura).
+
+| Frame Figma | Node ID | Code Connect | `figmaPreview` |
+|-------------|---------|--------------|------------------|
+| SRP / Mobile — Default | [333-2056](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2056) | `boats-for-sale-listing-mobile.figma.tsx` | `default` |
+| SRP / Mobile — Filters Open | [337-5](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-5) | `filters-drawer.figma.tsx` | `filters-open` |
+| SRP / Mobile — Active Filters | [337-6](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-6) | `boats-for-sale-listing-mobile.figma.tsx` | `active-filters` |
+| SRP / Mobile — Empty State | [337-7](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-7) | `boats-for-sale-listing-mobile.figma.tsx` | `empty` |
+| SRP / Mobile — Sort Open | [337-8](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-8) | `boats-for-sale-listing-mobile.figma.tsx` | `sort-open` |
+| SRP / Mobile — Filters Scrolled | [337-9](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-9) | `filters-drawer.figma.tsx` | `filters-scrolled` |
+| SRP / Mobile — Save Search Toast | [337-10](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-10) | `boats-for-sale-listing-mobile.figma.tsx` | `save-search-toast` |
+| SRP / Mobile — Marketing Footer | [337-11](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-11) | `boats-for-sale-page-mobile.figma.tsx` | `marketing-footer` |
+
+Captura desde localhost (dev server + Figma MCP):
+
+```bash
+# Un estado
+node scripts/figma-local-capture.cjs <captureId> srp-mobile filters-open
+
+# Lote (7 estados; generar captureId por frame con generate_figma_design)
+node scripts/figma-srp-mobile-batch-capture.cjs <id1> <id2> ... <id7>
+```
+
+
 ## Notas de diseño para cada nodo
 
 ### 1. Status Banner / Inactive (`BdpInactiveBanner`)

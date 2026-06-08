@@ -12,6 +12,13 @@ import { BoatsForSaleListingIntro } from "@/components/filters/boats-for-sale-li
 import { FiltersDrawer } from "@/components/filters/filters-drawer"
 import { FiltersFormBody } from "@/components/filters/filters-form-body"
 import { filterBoats } from "@/components/filters/filter-boats"
+import type { FigmaPreviewState } from "@/components/filters/figma-preview"
+import {
+  figmaPreviewInitialDrawerOpen,
+  figmaPreviewInitialFilters,
+  figmaPreviewInitialSortOpen,
+  figmaPreviewScrollDrawer,
+} from "@/components/filters/figma-preview"
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
 import type { Boat } from "@/data/boats"
@@ -37,12 +44,25 @@ const SORT_OPTIONS: { value: string; label: string }[] = [
 function ListingSortSelect({
   value,
   onValueChange,
+  defaultOpen = false,
 }: {
   value: string
   onValueChange: (value: string) => void
+  defaultOpen?: boolean
 }) {
+  const [open, setOpen] = React.useState(defaultOpen)
+
+  React.useEffect(() => {
+    if (defaultOpen) setOpen(true)
+  }, [defaultOpen])
+
   return (
-    <Select value={value} onValueChange={onValueChange}>
+    <Select
+      value={value}
+      onValueChange={onValueChange}
+      open={open}
+      onOpenChange={setOpen}
+    >
       <SelectTrigger className="w-44" aria-label="Sort by">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
@@ -80,16 +100,39 @@ type LayoutVariant = "default" | "split"
 type BoatsForSaleListingProps = {
   boats: Boat[]
   layoutVariant?: LayoutVariant
+  /** Force mobile/desktop layout (Figma Code Connect / capture). */
+  previewMode?: "mobile" | "desktop"
+  /** Dev/capture-only UI state preset. */
+  figmaPreview?: FigmaPreviewState
+  initialFilters?: FiltersState
 }
 
 export function BoatsForSaleListing({
   boats,
   layoutVariant = "default",
+  previewMode,
+  figmaPreview,
+  initialFilters: initialFiltersProp,
 }: BoatsForSaleListingProps) {
-  const isMobile = useIsMobile()
-  const { filters, setFilters, clearAll, activeFilters } = useFiltersState()
-  const [drawerOpen, setDrawerOpen] = React.useState(false)
+  const isMobileQuery = useIsMobile()
+  const isMobile =
+    previewMode === "mobile"
+      ? true
+      : previewMode === "desktop"
+        ? false
+        : isMobileQuery
+
+  const resolvedInitialFilters =
+    initialFiltersProp ?? figmaPreviewInitialFilters(figmaPreview)
+
+  const { filters, setFilters, clearAll, activeFilters } = useFiltersState(
+    resolvedInitialFilters
+  )
+  const [drawerOpen, setDrawerOpen] = React.useState(() =>
+    figmaPreviewInitialDrawerOpen(figmaPreview)
+  )
   const [sortValue, setSortValue] = React.useState("featured")
+  const sortOpen = figmaPreviewInitialSortOpen(figmaPreview)
 
   const splitDesktop = layoutVariant === "split" && !isMobile
   const showFiltersDrawer = isMobile || layoutVariant !== "split"
@@ -175,7 +218,11 @@ export function BoatsForSaleListing({
   const defaultResultsActions = (
     <div className="flex flex-wrap items-center gap-2">
       <SaveSearchButton />
-      <ListingSortSelect value={sortValue} onValueChange={setSortValue} />
+      <ListingSortSelect
+        value={sortValue}
+        onValueChange={setSortValue}
+        defaultOpen={sortOpen}
+      />
     </div>
   )
 
@@ -184,7 +231,11 @@ export function BoatsForSaleListing({
       <p className="text-xs font-bold uppercase tracking-widest text-foreground">
         {listingCountLabel}
       </p>
-      <ListingSortSelect value={sortValue} onValueChange={setSortValue} />
+      <ListingSortSelect
+        value={sortValue}
+        onValueChange={setSortValue}
+        defaultOpen={sortOpen}
+      />
     </div>
   )
 
@@ -280,6 +331,8 @@ export function BoatsForSaleListing({
           onClearAll={clearAll}
           resultCount={resultCount}
           boats={boats}
+          previewMode={previewMode}
+          scrollOnOpen={figmaPreviewScrollDrawer(figmaPreview)}
         />
       )}
     </div>

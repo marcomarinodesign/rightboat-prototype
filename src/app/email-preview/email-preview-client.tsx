@@ -28,7 +28,7 @@ export function EmailPreviewClient() {
             Saved Search Email — Monetization Preview
           </h1>
           <p className="text-sm text-muted-foreground">
-            Q2 2026 · 7 ad slots · React Email render
+            Q2 2026 · 5 ad slots · React Email render
           </p>
         </header>
 

@@ -1,44 +1,33 @@
-import type { Metadata } from "next"
-import Link from "next/link"
+// FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
+// PAGE: Mobile Overview (333-2055)
+// LAST SYNC: 2026-05-27
 
-import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"
-import { BoatsForSaleFigmaEffects } from "@/components/filters/boats-for-sale-figma-effects"
-import { parseFigmaPreviewState } from "@/components/filters/figma-preview"
+/**
+ * Code Connect — Boats for sale page (marketing footer section, mobile viewport)
+ */
+import figma from "@figma/code-connect/react"
+
+import { BoatsForSaleFigmaEffects } from "./boats-for-sale-figma-effects"
+import { BoatsForSaleListing } from "./boats-for-sale-listing"
 import { listingBoats } from "@/data/boats"
 import {
   popularBrands,
-  popularLocations,
   popularTypes,
 } from "@/data/categories"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import Link from "next/link"
 
-export const metadata: Metadata = {
-  title: "Boats for Sale | Rightboat",
-  description:
-    "Browse thousands of boats for sale. Filter by type, price, location and more.",
-}
-
-type PageProps = {
-  searchParams?: Promise<{ layout?: string; figmaPreview?: string }>
-}
-
-export default async function BoatsForSalePage({ searchParams }: PageProps) {
-  const sp = searchParams ? await searchParams : {}
-  const layoutVariant = sp.layout === "split" ? "split" : "default"
-  const figmaPreview = parseFigmaPreviewState(sp.figmaPreview)
-  const previewMode = figmaPreview ? ("mobile" as const) : undefined
-
+function BoatsForSalePageMobileMarketingFooter() {
   return (
     <div className="space-y-10">
-      <BoatsForSaleFigmaEffects figmaPreview={figmaPreview} />
+      <BoatsForSaleFigmaEffects figmaPreview="marketing-footer" />
       <BoatsForSaleListing
         boats={listingBoats}
-        layoutVariant={layoutVariant}
-        previewMode={previewMode}
-        figmaPreview={figmaPreview}
+        layoutVariant="split"
+        previewMode="mobile"
+        figmaPreview="marketing-footer"
       />
-
       <section
         id="figma-marketing-footer"
         className="grid gap-6 rounded-2xl border border-border/60 bg-muted/20 p-6 lg:grid-cols-[1.1fr_0.9fr]"
@@ -59,7 +48,7 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
               Search by manufacturer
             </h3>
             <div className="mt-3 flex flex-wrap gap-2">
-              {popularBrands.map((brand) => (
+              {popularBrands.slice(0, 4).map((brand) => (
                 <Link
                   key={brand}
                   href="/boats-for-sale"
@@ -75,7 +64,7 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
               Search by type
             </h3>
             <div className="mt-3 flex flex-wrap gap-2">
-              {popularTypes.map((type) => (
+              {popularTypes.slice(0, 4).map((type) => (
                 <Link
                   key={type}
                   href="/boats-for-sale"
@@ -86,24 +75,21 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
               ))}
             </div>
           </div>
-          <div className="md:col-span-2">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-              Search by location
-            </h3>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {popularLocations.map((location) => (
-                <Link
-                  key={location}
-                  href="/boats-for-sale"
-                  className="rounded-full border border-border/60 px-3 py-1 text-xs text-muted-foreground"
-                >
-                  {location}
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
     </div>
   )
 }
+
+figma.connect(
+  BoatsForSalePageMobileMarketingFooter,
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-11",
+  {
+    imports: [
+      "// src/app/boats-for-sale/page.tsx?layout=split&figmaPreview=marketing-footer",
+      'import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"',
+      'import { listingBoats } from "@/data/boats"',
+    ],
+    example: () => <BoatsForSalePageMobileMarketingFooter />,
+  }
+)

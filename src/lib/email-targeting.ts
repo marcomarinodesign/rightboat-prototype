@@ -3,7 +3,6 @@ import { HOUSE_AD_FALLBACK } from "@/components/email/saved-search-email"
 
 export type PickedAds = {
   premiumPartner: AdCreative
-  serviceSponsors: [AdCreative, AdCreative]
   trustedPartner: AdCreative
   footerSponsors: [AdCreative, AdCreative, AdCreative]
 }
@@ -39,13 +38,15 @@ function resolveCreative(
  * Picks the contextually relevant ad creatives for a saved search context.
  * In production this logic lives server-side (GAM targeting); this helper
  * is for prototype demo and Storybook stories only.
+ *
+ * Updated Q2 2026: removed serviceSponsors (Slots 2–3 removed per feedback).
  */
 export function pickAdsForContext(
   boatType: BoatType,
   allCreatives: Record<string, AdCreative>
 ): PickedAds {
   const categories = getSponsorCategories(boatType)
-  const [primaryCategory, secondaryCategory] = categories
+  const [primaryCategory] = categories
 
   const categorySlug = (category?: string) =>
     category?.toLowerCase().replace(/\s+/g, "-") ?? "insurance"
@@ -54,16 +55,6 @@ export function pickAdsForContext(
     `${boatType}-premium`,
     `${categorySlug(primaryCategory)}-premium`,
     "premium",
-  ]
-  const service1Keys = [
-    `${boatType}-service-1`,
-    `${categorySlug(primaryCategory)}-service`,
-    `${categorySlug(primaryCategory)}`,
-  ]
-  const service2Keys = [
-    `${boatType}-service-2`,
-    `${categorySlug(secondaryCategory)}-service`,
-    `${categorySlug(secondaryCategory)}`,
   ]
   const trustedKeys = [
     `${boatType}-trusted`,
@@ -78,10 +69,6 @@ export function pickAdsForContext(
 
   return {
     premiumPartner: resolveCreative(allCreatives, premiumKeys),
-    serviceSponsors: [
-      resolveCreative(allCreatives, service1Keys),
-      resolveCreative(allCreatives, service2Keys),
-    ],
     trustedPartner: resolveCreative(allCreatives, trustedKeys),
     footerSponsors: [
       resolveCreative(allCreatives, footerKeys(1)),

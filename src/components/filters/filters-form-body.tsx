@@ -178,7 +178,7 @@ export function FiltersFormBody({
   }
 
   return (
-    <div className={scrollClassName}>
+    <div id="filters-form-scroll" className={scrollClassName}>
       <div className="pt-3.5">
         <SaveSearchButton />
       </div>

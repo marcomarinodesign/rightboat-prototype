@@ -30,10 +30,11 @@ export const emailTokens = {
   midnight: "#13022c",
   blue400: "#0257fc",
   blue200: "#208cff",
+  malibu200: "#b8e7ff",
   neutral100: "#fafafa",
   neutral200: "#e4e5e9",
   neutral400: "#9da6c2",
-  neutral500: "#7181b4",
+  neutral500: "#51545c",
   neutralWhite: "#ffffff",
   statusInfo100: "#f4f9ff",
   borderCard: "#e4e5e9",
@@ -42,10 +43,10 @@ export const emailTokens = {
 const fontFamily =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
 
-/** Listing card image — fixed 3:2 crop so every card aligns in the 2-col grid. */
+/** Horizontal listing row image — matches Figma spec 280×160. */
 const LISTING_CARD_IMAGE = {
-  width: 260,
-  height: 173,
+  width: 280,
+  height: 160,
 } as const
 
 const LISTING_IMAGE_SPACER =
@@ -56,7 +57,6 @@ export type SavedSearchEmailTemplateProps = {
   listings: SearchListing[]
   ads: {
     premiumPartner?: AdCreative | null
-    serviceSponsors: [AdCreative | null, AdCreative | null]
     trustedPartner?: AdCreative | null
     footerSponsors: [AdCreative | null, AdCreative | null, AdCreative | null]
   }
@@ -544,17 +544,159 @@ function ListingRow({
   )
 }
 
+const BOAT_TYPE_LABEL_EMAIL: Record<string, string> = {
+  "center-console": "Center Console",
+  sailboat: "Sailboat",
+  yacht: "Yacht",
+  catamaran: "Catamaran",
+  other: "Other",
+}
+
+function HorizontalListingRowEmail({
+  listing,
+  boatType,
+  baseUrl,
+  isLast = false,
+}: {
+  listing: SearchListing
+  boatType: string
+  baseUrl?: string
+  isLast?: boolean
+}) {
+  const imageUrl = absoluteImageUrl(listing.images[0] ?? "", baseUrl)
+  const specsLine = [
+    listing.year,
+    listing.length ? `${listing.length}ft` : null,
+    BOAT_TYPE_LABEL_EMAIL[boatType] ?? boatType,
+    listing.condition ?? null,
+  ]
+    .filter(Boolean)
+    .join(" · ")
+
+  return (
+    <Section
+      style={{
+        padding: "0 24px",
+        borderBottom: isLast ? "none" : `1px solid ${emailTokens.neutral200}`,
+      }}
+    >
+      <Row style={{ paddingTop: 16, paddingBottom: 16 }}>
+        {/* Image column — div with position:relative so pill can sit absolute bottom-right */}
+        <Column style={{ width: 280, verticalAlign: "top" as const }}>
+          <div
+            style={{
+              position: "relative" as const,
+              width: 280,
+              height: 160,
+              backgroundColor: emailTokens.neutral200,
+              backgroundImage: `url('${imageUrl}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+              backgroundRepeat: "no-repeat",
+              borderRadius: 4,
+              overflow: "hidden",
+              display: "block",
+            }}
+          >
+            {listing.photoCount != null && listing.photoCount > 0 && (
+              <div
+                style={{
+                  position: "absolute" as const,
+                  bottom: 8,
+                  right: 8,
+                  backgroundColor: emailTokens.malibu200,
+                  padding: "4px 12px",
+                  borderRadius: 999,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: emailTokens.midnight,
+                  fontFamily,
+                  whiteSpace: "nowrap" as const,
+                  lineHeight: "16px",
+                }}
+              >
+                See {listing.photoCount} photos
+              </div>
+            )}
+          </div>
+        </Column>
+
+        {/* Content column */}
+        <Column style={{ paddingLeft: 16, verticalAlign: "top" as const }}>
+          <Text
+            style={{
+              margin: "0 0 4px",
+              fontSize: 16,
+              fontWeight: 700,
+              color: emailTokens.midnight,
+              fontFamily,
+              lineHeight: "24px",
+            }}
+          >
+            {listing.title}
+          </Text>
+          <Text
+            style={{
+              margin: "0 0 2px",
+              fontSize: 14,
+              color: emailTokens.neutral500,
+              fontFamily,
+            }}
+          >
+            {listing.location}
+          </Text>
+          <Text
+            style={{
+              margin: "0 0 4px",
+              fontSize: 14,
+              color: emailTokens.neutral500,
+              fontFamily,
+            }}
+          >
+            {specsLine}
+          </Text>
+          <Text
+            style={{
+              margin: "0 0 8px",
+              fontSize: 16,
+              fontWeight: 700,
+              color: emailTokens.blue400,
+              fontFamily,
+              lineHeight: "24px",
+            }}
+          >
+            {listing.price}
+          </Text>
+          <Button
+            href={listing.href}
+            style={{
+              backgroundColor: emailTokens.blue400,
+              color: emailTokens.neutralWhite,
+              fontSize: 13,
+              fontWeight: 500,
+              padding: "10px 16px",
+              borderRadius: 12,
+              textDecoration: "none",
+              fontFamily,
+              display: "inline-block",
+            }}
+          >
+            View listing →
+          </Button>
+        </Column>
+      </Row>
+    </Section>
+  )
+}
+
 export function SavedSearchEmailTemplate({
   context,
   listings,
   ads,
   baseUrl,
 }: SavedSearchEmailTemplateProps) {
-  const [listingsA, listingsB, listingsC] = [
-    listings.slice(0, 2),
-    listings.slice(2, 4),
-    listings.slice(4),
-  ]
+  // Cap at 5 listings per Figma spec + Joe's feedback (2026-06-05)
+  const visibleListings = listings.slice(0, 5)
 
   const previewText = context.userFirstName
     ? `Hi ${context.userFirstName}, new boats matching "${context.searchLabel}"`
@@ -601,34 +743,41 @@ export function SavedSearchEmailTemplate({
                   style={{
                     margin: 0,
                     fontSize: 11,
-                    color: emailTokens.neutral500,
+                    color: emailTokens.midnight,
                     fontFamily,
                   }}
                 >
-                  Saved Search:{" "}
-                  <span style={{ fontWeight: 600, color: emailTokens.midnight }}>
-                    {context.searchLabel}
-                  </span>
+                  Saved Search Alert
                 </Text>
               </Column>
             </Row>
           </Section>
 
           {/* Intro */}
-          <Section style={{ padding: "20px 24px 12px" }}>
+          <Section style={{ padding: "20px 24px 12px", textAlign: "center" as const }}>
             <Heading
               as="h1"
               style={{
                 margin: "0 0 8px",
-                fontSize: 20,
+                fontSize: 30,
                 fontWeight: 700,
+                lineHeight: "36px",
+                letterSpacing: "-0.3px",
                 color: emailTokens.midnight,
                 fontFamily,
+                textAlign: "center" as const,
               }}
             >
-              {context.userFirstName
-                ? `Hi ${context.userFirstName}, new boats for you`
-                : "New boats matching your search"}
+              {context.userFirstName ? (
+                <>
+                  <span style={{ color: emailTokens.blue400 }}>
+                    Hi {context.userFirstName},
+                  </span>
+                  {" "}new boats for you
+                </>
+              ) : (
+                "New boats matching your search"
+              )}
             </Heading>
             <Text
               style={{
@@ -637,33 +786,33 @@ export function SavedSearchEmailTemplate({
                 color: emailTokens.neutral500,
                 fontFamily,
                 lineHeight: "20px",
+                textAlign: "center" as const,
               }}
             >
-              We found new listings matching &ldquo;{context.searchLabel}&rdquo;
-              {context.location ? ` in ${context.location}` : ""}.
+              We found new listings matching &ldquo;
+              <span style={{ fontWeight: 600, color: emailTokens.midnight }}>
+                {context.searchLabel}
+              </span>
+              &rdquo;{context.location ? ` in ${context.location}` : ""}.
             </Text>
           </Section>
 
           {/* Slot 1 — Premium Partner */}
           <PremiumPartnerSlot creative={ads.premiumPartner} baseUrl={baseUrl} />
 
-          {/* Listings A */}
-          <ListingRow listings={listingsA} baseUrl={baseUrl} />
-
-          {/* Slot 2 — Service Sponsor #1 */}
-          <ServiceSponsorSlot creative={ads.serviceSponsors[0]} baseUrl={baseUrl} />
-
-          {/* Listings B */}
-          <ListingRow listings={listingsB} baseUrl={baseUrl} />
-
-          {/* Slot 3 — Service Sponsor #2 */}
-          <ServiceSponsorSlot creative={ads.serviceSponsors[1]} baseUrl={baseUrl} />
-
-          {/* Listings C */}
-          <ListingRow listings={listingsC} baseUrl={baseUrl} />
+          {/* Listings — max 5, horizontal layout */}
+          {visibleListings.map((listing, i) => (
+            <HorizontalListingRowEmail
+              key={listing.id}
+              listing={listing}
+              boatType={context.boatType}
+              baseUrl={baseUrl}
+              isLast={i === visibleListings.length - 1}
+            />
+          ))}
 
           {/* CTA */}
-          <Section style={{ padding: "0 24px 24px", textAlign: "center" as const }}>
+          <Section style={{ padding: "24px 24px", textAlign: "center" as const }}>
             <Button
               href="#"
               style={{
@@ -681,7 +830,7 @@ export function SavedSearchEmailTemplate({
             </Button>
           </Section>
 
-          {/* Slot 4 — Trusted Partner */}
+          {/* Slot 2 — Trusted Partner */}
           <TrustedPartnerSlot creative={ads.trustedPartner} baseUrl={baseUrl} />
 
           {/* Footer */}
@@ -694,50 +843,43 @@ export function SavedSearchEmailTemplate({
           >
             <Text
               style={{
-                margin: "0 0 12px",
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase" as const,
-                color: emailTokens.neutral400,
-                fontFamily,
-              }}
-            >
-              Buyer Resources
-            </Text>
-
-            {/* Slots 5–7 — Footer Sponsors */}
-            <Row style={{ marginBottom: 24 }}>{ads.footerSponsors.map((sponsor, i) => (
-                <FooterSponsorSlot key={i} creative={sponsor} baseUrl={baseUrl} />
-              ))}</Row>
-
-            <Hr
-              style={{
-                borderColor: "rgba(255,255,255,0.1)",
-                borderWidth: 1,
                 margin: "0 0 16px",
-              }}
-            />
-
-            <Text
-              style={{
-                margin: "0 0 8px",
-                fontSize: 11,
-                color: emailTokens.neutral400,
+                fontSize: 12,
+                fontWeight: 700,
+                color: emailTokens.neutralWhite,
                 fontFamily,
                 lineHeight: "16px",
               }}
             >
-              You are receiving this email because you saved a search on Rightboat.com.
+              BUYER RESOURCES
             </Text>
-            <Text style={{ margin: 0, fontFamily }}>
+
+            {/* Slots 3–5 — Footer Sponsors */}
+            <Row style={{ marginBottom: 16 }}>{ads.footerSponsors.map((sponsor, i) => (
+                <FooterSponsorSlot key={i} creative={sponsor} baseUrl={baseUrl} />
+              ))}</Row>
+
+            {/* Divider — rgba(255,255,255,0.08) per Figma, not a border */}
+            <Section
+              style={{
+                height: 1,
+                backgroundColor: "rgba(255,255,255,0.08)",
+                margin: "0 0 16px",
+                fontSize: 0,
+                lineHeight: "1px",
+              }}
+            >
+              &nbsp;
+            </Section>
+
+            <Text style={{ margin: "0 0 16px", fontFamily }}>
               <Link
                 href="#"
                 style={{
-                  fontSize: 11,
-                  color: emailTokens.neutral400,
+                  fontSize: 12,
+                  color: emailTokens.neutralWhite,
                   textDecoration: "underline",
-                  marginRight: 16,
+                  marginRight: 20,
                 }}
               >
                 Unsubscribe
@@ -745,10 +887,10 @@ export function SavedSearchEmailTemplate({
               <Link
                 href="#"
                 style={{
-                  fontSize: 11,
-                  color: emailTokens.neutral400,
+                  fontSize: 12,
+                  color: emailTokens.neutralWhite,
                   textDecoration: "underline",
-                  marginRight: 16,
+                  marginRight: 20,
                 }}
               >
                 Manage preferences
@@ -756,13 +898,24 @@ export function SavedSearchEmailTemplate({
               <Link
                 href="#"
                 style={{
-                  fontSize: 11,
-                  color: emailTokens.neutral400,
+                  fontSize: 12,
+                  color: emailTokens.neutralWhite,
                   textDecoration: "underline",
                 }}
               >
                 Privacy Policy
               </Link>
+            </Text>
+            <Text
+              style={{
+                margin: 0,
+                fontSize: 12,
+                color: emailTokens.neutralWhite,
+                fontFamily,
+                lineHeight: "16px",
+              }}
+            >
+              You are receiving this email because you saved a search on Rightboat.com.
             </Text>
           </Section>
         </Container>

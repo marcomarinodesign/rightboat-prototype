@@ -2,13 +2,15 @@
 
 /**
  * Saved Search Email Monetization — Email Template Components
- * PRD: Q2 2026  Product Roadmap / Product Requirements Document (PRD): Saved Search Email Monetization
+ * PRD: Q2 2026 Product Roadmap / Product Requirements Document (PRD): Saved Search Email Monetization
  *
- * 7 ad placements:
+ * 5 ad placements (updated per Q2 feedback — Joe Lingerfelt 2026-06-05):
  *   1. PremiumPartnerBanner   — hero full-bleed, top of email
- *   2. ServiceSponsorCard ×2  — native cards between listings
- *   4. TrustedPartnerBanner   — hero full-bleed, pre-footer
- *   5–7. FooterSponsor ×3     — value-add pills in Buyer Resources
+ *   2. TrustedPartnerBanner   — hero full-bleed, pre-footer
+ *   3–5. FooterSponsor ×3     — value-add tiles in Buyer Resources
+ *
+ * Slots 2–3 (ServiceSponsorCard) removed from main flow.
+ * Listings now render as horizontal rows (image left, content right), max 5.
  *
  * All ad creatives are static images (GAM Newsletter Ads beta limitation).
  * Targeting: matched to saved search context (boatType, priceRange, location).
@@ -26,7 +28,6 @@ import { SPONSORED_LABEL } from "@/lib/sponsored-badge"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ListingCard } from "@/components/patterns/listing-card"
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -56,6 +57,12 @@ export type SearchListing = {
   price: string
   location: string
   year: number
+  /** Boat length in feet, e.g. "27" */
+  length?: string
+  /** Condition label, e.g. "Used" | "New" | "Pre-owned" */
+  condition?: string
+  /** Number of photos available — drives "See X photos" pill */
+  photoCount?: number
   images: string[]
   href: string
 }
@@ -65,6 +72,14 @@ export const HOUSE_AD_FALLBACK: AdCreative = {
   altText: "Sponsored",
   clickUrl: "#",
   sponsorName: "Sponsor",
+}
+
+const BOAT_TYPE_LABEL: Record<BoatType, string> = {
+  "center-console": "Center Console",
+  sailboat: "Sailboat",
+  yacht: "Yacht",
+  catamaran: "Catamaran",
+  other: "Other",
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -108,8 +123,76 @@ function AdSlotLabel({ slot, units }: { slot: string; units?: string }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// HorizontalListingRow — email listing card (horizontal layout)
+//   Image left (fixed width) · Content right (fills remaining space)
+//   Matches Figma: El-Captain-DS · node 383:9
+// ─────────────────────────────────────────────────────────────────────────────
+
+type HorizontalListingRowProps = {
+  listing: SearchListing
+  boatType: BoatType
+  className?: string
+}
+
+function HorizontalListingRow({ listing, boatType, className }: HorizontalListingRowProps) {
+  const specsLine = [
+    listing.year,
+    listing.length ? `${listing.length}ft` : null,
+    BOAT_TYPE_LABEL[boatType],
+    listing.condition ?? null,
+  ]
+    .filter(Boolean)
+    .join(" · ")
+
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-4 border-b border-border py-[14px]",
+        className
+      )}
+    >
+      {/* Image — pill absolutely pinned to bottom-right inside the frame */}
+      <div className="relative h-[160px] w-[280px] shrink-0 overflow-hidden rounded-[4px] bg-neutral-200">
+        {listing.images[0] && (
+          <Image
+            src={listing.images[0]}
+            alt={listing.title}
+            fill
+            className="z-0 object-cover"
+            sizes="280px"
+          />
+        )}
+        {listing.photoCount != null && listing.photoCount > 0 && (
+          <div className="absolute bottom-2 right-2 z-10 rounded-full bg-[#b8e7ff] px-3 py-1.5">
+            <span className="whitespace-nowrap text-[11px] font-semibold text-midnight">
+              See {listing.photoCount} photos
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+        <p className="text-base font-bold leading-6 text-foreground line-clamp-2">
+          {listing.title}
+        </p>
+        <p className="text-sm text-muted-foreground">{listing.location}</p>
+        <p className="text-sm text-muted-foreground">{specsLine}</p>
+        <p className="text-base font-bold leading-6 text-primary">{listing.price}</p>
+        <a
+          href={listing.href}
+          className="inline-flex h-10 items-center justify-center rounded-[12px] bg-primary px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-primary/90 self-start"
+        >
+          View listing →
+        </a>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // 1. PremiumPartnerBanner — Slot 1
-//    Hero full-bleed, top of email, max visibility
+//    Hero full-bleed, top of email, max visibility · 552×138px
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type PremiumPartnerBannerProps = {
@@ -127,7 +210,7 @@ export function PremiumPartnerBanner({
     return (
       <div className={cn("relative", className)}>
         {showDevLabel && (
-          <AdSlotLabel slot="① Premium Partner" units="1 unit · hero" />
+          <AdSlotLabel slot="① Premium Partner" units="Slot 1 · hero · 552×138px" />
         )}
         <AdSlotPlaceholder aspectClass="aspect-[4/1] w-full bg-neutral-200" />
       </div>
@@ -147,7 +230,7 @@ export function PremiumPartnerBanner({
       aria-label={`Sponsored: ${creative.sponsorName} — ${creative.altText}`}
     >
       {showDevLabel && (
-        <AdSlotLabel slot="① Premium Partner" units="1 unit · hero" />
+        <AdSlotLabel slot="① Premium Partner" units="Slot 1 · hero · 552×138px" />
       )}
       <div className="relative flex aspect-[4/1] w-full items-center justify-center rounded-lg bg-neutral-200 px-6">
         <div className="text-center">
@@ -165,8 +248,8 @@ export function PremiumPartnerBanner({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 2 & 3. ServiceSponsorCard — Slots 2–3
-//    Native-style card inserted between listings
+// ServiceSponsorCard — kept for backward compat, NOT used in main flow
+//   (Removed per Q2 feedback — Joe Lingerfelt 2026-06-05)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type ServiceSponsorCardProps = {
@@ -189,7 +272,7 @@ export function ServiceSponsorCard({
           <div className="relative">
             <AdSlotLabel
               slot={`${slotIndex === 1 ? "②" : "③"} Service Sponsor`}
-              units="native card"
+              units="native card · deprecated"
             />
           </div>
         )}
@@ -210,7 +293,7 @@ export function ServiceSponsorCard({
         <div className="relative">
           <AdSlotLabel
             slot={`${slotIndex === 1 ? "②" : "③"} Service Sponsor`}
-            units="native card"
+            units="native card · deprecated"
           />
         </div>
       )}
@@ -256,8 +339,8 @@ export function ServiceSponsorCard({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. TrustedPartnerBanner — Slot 4
-//    Hero full-bleed, pre-footer, high visibility
+// 2. TrustedPartnerBanner — Slot 2
+//    Hero full-bleed, pre-footer, high visibility · 600×160px
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type TrustedPartnerBannerProps = {
@@ -275,7 +358,7 @@ export function TrustedPartnerBanner({
     return (
       <div className={cn("relative", className)}>
         {showDevLabel && (
-          <AdSlotLabel slot="④ Trusted Partner" units="1 unit · pre-footer hero" />
+          <AdSlotLabel slot="② Trusted Partner" units="Slot 2 · pre-footer · 600×160px" />
         )}
         <AdSlotPlaceholder aspectClass="aspect-[3/1] w-full bg-neutral-200" />
       </div>
@@ -295,7 +378,7 @@ export function TrustedPartnerBanner({
       aria-label={`Sponsored: ${creative.sponsorName} — ${creative.altText}`}
     >
       {showDevLabel && (
-        <AdSlotLabel slot="④ Trusted Partner" units="1 unit · pre-footer hero" />
+        <AdSlotLabel slot="② Trusted Partner" units="Slot 2 · pre-footer · 600×160px" />
       )}
       <div className="relative flex aspect-[3/1] w-full items-center justify-center rounded-lg bg-neutral-200 px-6">
         <div className="text-center">
@@ -313,8 +396,8 @@ export function TrustedPartnerBanner({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5–7. FooterSponsor — Slots 5, 6, 7
-//    Value-add resource in Buyer Resources section
+// 3–5. FooterSponsor — Slots 3, 4, 5
+//    Value-add resource tile in Buyer Resources section
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type FooterSponsorProps = {
@@ -330,13 +413,17 @@ export function FooterSponsor({
   showDevLabel = false,
   className,
 }: FooterSponsorProps) {
-  const slotEmoji = ["⑤", "⑥", "⑦"][slotIndex - 1]
+  const slotEmoji = ["③", "④", "⑤"][slotIndex - 1]
+  const slotNum = slotIndex + 2 // maps to Slot 3, 4, 5
 
   if (!creative) {
     return (
       <div className={cn("relative", className)}>
         {showDevLabel && (
-          <AdSlotLabel slot={`${slotEmoji} Footer Sponsor`} units="Buyer Resources" />
+          <AdSlotLabel
+            slot={`${slotEmoji} Sponsor Resource`}
+            units={`Slot ${slotNum} · Buyer Resources`}
+          />
         )}
         <AdSlotPlaceholder aspectClass="aspect-video w-full bg-neutral-200" />
       </div>
@@ -357,7 +444,10 @@ export function FooterSponsor({
       aria-label={`Sponsored resource: ${creative.sponsorName}`}
     >
       {showDevLabel && (
-        <AdSlotLabel slot={`${slotEmoji} Footer Sponsor`} units="Buyer Resources" />
+        <AdSlotLabel
+          slot={`${slotEmoji} Sponsor Resource`}
+          units={`Slot ${slotNum} · Buyer Resources`}
+        />
       )}
       <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden bg-neutral-200 px-3">
         <p className="text-center text-[11px] font-semibold text-foreground line-clamp-2">
@@ -379,7 +469,7 @@ export function FooterSponsor({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SavedSearchEmail — full email template assembly (7 slots)
+// SavedSearchEmail — full email template assembly (5 ad slots)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type SavedSearchEmailProps = {
@@ -387,7 +477,6 @@ export type SavedSearchEmailProps = {
   listings: SearchListing[]
   ads: {
     premiumPartner: AdCreative
-    serviceSponsors: [AdCreative, AdCreative]
     trustedPartner: AdCreative
     footerSponsors: [AdCreative, AdCreative, AdCreative]
   }
@@ -401,12 +490,8 @@ export function SavedSearchEmail({
   ads,
   showDevLabels = false,
 }: SavedSearchEmailProps) {
-  // Split listings: 2 before first native ad, 2 before second, rest after
-  const [listingsA, listingsB, listingsC] = [
-    listings.slice(0, 2),
-    listings.slice(2, 4),
-    listings.slice(4),
-  ]
+  // Cap at 5 listings per Figma spec + Joe's feedback (2026-06-05)
+  const visibleListings = listings.slice(0, 5)
 
   return (
     <div className="mx-auto max-w-[600px] space-y-0 bg-background font-sans text-foreground">
@@ -422,112 +507,60 @@ export function SavedSearchEmail({
             priority
           />
         </div>
-        <p className="text-xs text-muted-foreground">
-          Saved Search:{" "}
-          <span className="font-medium text-foreground">{context.searchLabel}</span>
-        </p>
+        <p className="text-xs text-foreground">Saved Search Alert</p>
       </header>
 
       {/* ── Intro ── */}
-      <div className="px-6 pt-5 pb-3">
-        <h1 className="text-xl font-bold text-foreground">
-          {context.userFirstName
-            ? `Hi ${context.userFirstName}, new boats for you`
-            : "New boats matching your search"}
+      <div className="flex flex-col gap-1 px-6 pb-3 pt-5 text-center">
+        <h1 className="text-[30px] font-bold leading-9 tracking-[-0.3px] text-foreground">
+          {context.userFirstName ? (
+            <>
+              <span className="text-primary">Hi {context.userFirstName}, </span>
+              <span>new boats for you</span>
+            </>
+          ) : (
+            "New boats matching your search"
+          )}
         </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          We found new listings matching &ldquo;{context.searchLabel}&rdquo;
-          {context.location ? ` in ${context.location}` : ""}.
+        <p className="text-sm text-muted-foreground">
+          We found new listings matching &ldquo;
+          <strong className="font-bold text-foreground">{context.searchLabel}</strong>
+          &rdquo;{context.location ? ` in ${context.location}` : ""}.
         </p>
       </div>
 
       {/* ═══════════════════════════════════════
           SLOT 1 — Premium Partner (hero banner)
       ════════════════════════════════════════ */}
-      <div className="px-6 pb-4">
+      <div className="px-6 pb-5">
         <PremiumPartnerBanner
           creative={ads.premiumPartner}
           showDevLabel={showDevLabels}
         />
       </div>
 
-      {/* ── Listings A (2) ── */}
-      <div className="px-6 grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
-        {listingsA.map((listing) => (
-          <ListingCard
+      {/* ── Listings (max 5, horizontal layout) ── */}
+      <div className="px-6 py-2">
+        {visibleListings.map((listing) => (
+          <HorizontalListingRow
             key={listing.id}
-            title={listing.title}
-            description={`${listing.year} · ${listing.location}`}
-            images={listing.images}
-            price={listing.price}
-            showDots
+            listing={listing}
+            boatType={context.boatType}
           />
         ))}
       </div>
-
-      {/* ═══════════════════════════════════════
-          SLOT 2 — Service Sponsor #1 (native card)
-      ════════════════════════════════════════ */}
-      <div className="px-6 pb-4">
-        <ServiceSponsorCard
-          creative={ads.serviceSponsors[0]}
-          slotIndex={1}
-          showDevLabel={showDevLabels}
-        />
-      </div>
-
-      {/* ── Listings B (2) ── */}
-      <div className="px-6 grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
-        {listingsB.map((listing) => (
-          <ListingCard
-            key={listing.id}
-            title={listing.title}
-            description={`${listing.year} · ${listing.location}`}
-            images={listing.images}
-            price={listing.price}
-            showDots
-          />
-        ))}
-      </div>
-
-      {/* ═══════════════════════════════════════
-          SLOT 3 — Service Sponsor #2 (native card)
-      ════════════════════════════════════════ */}
-      <div className="px-6 pb-4">
-        <ServiceSponsorCard
-          creative={ads.serviceSponsors[1]}
-          slotIndex={2}
-          showDevLabel={showDevLabels}
-        />
-      </div>
-
-      {/* ── Listings C (remaining) ── */}
-      {listingsC.length > 0 && (
-        <div className="px-6 grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
-          {listingsC.map((listing) => (
-            <ListingCard
-              key={listing.id}
-              title={listing.title}
-              description={`${listing.year} · ${listing.location}`}
-              images={listing.images}
-              price={listing.price}
-              showDots
-            />
-          ))}
-        </div>
-      )}
 
       {/* ── View all CTA ── */}
-      <div className="px-6 pb-6 text-center">
-        <Button variant="default" size="lg" className="w-full sm:w-auto">
+      <div className="px-6 pb-5 pt-1 text-center">
+        <Button variant="default" className="h-10 rounded-[12px] px-4 text-[13px] font-medium">
           View all results
         </Button>
       </div>
 
       {/* ═══════════════════════════════════════
-          SLOT 4 — Trusted Partner (pre-footer hero)
+          SLOT 2 — Trusted Partner (pre-footer hero)
       ════════════════════════════════════════ */}
-      <div className="px-6 pb-4">
+      <div className="px-6 pb-5">
         <TrustedPartnerBanner
           creative={ads.trustedPartner}
           showDevLabel={showDevLabels}
@@ -535,14 +568,14 @@ export function SavedSearchEmail({
       </div>
 
       {/* ── Footer ── */}
-      <footer className="bg-midnight px-6 py-6 rounded-b-lg">
+      <footer className="flex flex-col gap-4 bg-midnight px-6 py-6 rounded-b-lg">
         {/* ═══════════════════════════════════════
-            SLOTS 5–7 — Footer Sponsors (Buyer Resources)
+            SLOTS 3–5 — Footer Sponsors (Buyer Resources)
         ════════════════════════════════════════ */}
-        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-400">
-          Buyer Resources
+        <p className="text-xs font-bold leading-4 text-white">
+          BUYER RESOURCES
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {ads.footerSponsors.map((sponsor, i) => (
             <FooterSponsor
               key={i}
@@ -553,22 +586,17 @@ export function SavedSearchEmail({
           ))}
         </div>
 
-        <div className="border-t border-neutral-white/10 pt-4 space-y-2">
-          <p className="text-[11px] text-neutral-400">
-            You are receiving this email because you saved a search on Rightboat.com.
-          </p>
-          <div className="flex gap-4">
-            <a href="#" className="text-[11px] text-neutral-400 hover:text-neutral-white underline">
-              Unsubscribe
-            </a>
-            <a href="#" className="text-[11px] text-neutral-400 hover:text-neutral-white underline">
-              Manage preferences
-            </a>
-            <a href="#" className="text-[11px] text-neutral-400 hover:text-neutral-white underline">
-              Privacy Policy
-            </a>
-          </div>
+        {/* Divider */}
+        <div className="h-px w-full bg-white/[0.08]" />
+
+        <div className="flex gap-5">
+          <a href="#" className="text-xs text-white hover:underline">Unsubscribe</a>
+          <a href="#" className="text-xs text-white hover:underline">Manage preferences</a>
+          <a href="#" className="text-xs text-white hover:underline">Privacy Policy</a>
         </div>
+        <p className="text-xs leading-4 text-white">
+          You are receiving this email because you saved a search on Rightboat.com.
+        </p>
       </footer>
     </div>
   )

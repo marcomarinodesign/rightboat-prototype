@@ -24,6 +24,9 @@ type FiltersDrawerProps = {
   onClearAll: () => void
   resultCount: number
   boats: Boat[]
+  previewMode?: "mobile" | "desktop"
+  /** Scroll filter form to Location section when drawer opens (Figma capture). */
+  scrollOnOpen?: boolean
 }
 
 export function FiltersDrawer({
@@ -34,13 +37,32 @@ export function FiltersDrawer({
   onClearAll,
   resultCount,
   boats,
+  previewMode,
+  scrollOnOpen = false,
 }: FiltersDrawerProps) {
-  const isMobile = useIsMobile()
+  const isMobileQuery = useIsMobile()
+  const isMobile =
+    previewMode === "mobile"
+      ? true
+      : previewMode === "desktop"
+        ? false
+        : isMobileQuery
   const [draft, setDraft] = React.useState<FiltersState>(filters)
 
   React.useEffect(() => {
     if (open) setDraft(filters)
   }, [open, filters])
+
+  React.useEffect(() => {
+    if (!open || !scrollOnOpen) return
+    const id = window.setTimeout(() => {
+      const scrollEl = document.getElementById("filters-form-scroll")
+      if (scrollEl) {
+        scrollEl.scrollTop = scrollEl.scrollHeight * 0.35
+      }
+    }, 300)
+    return () => window.clearTimeout(id)
+  }, [open, scrollOnOpen])
 
   const updateDraft = (field: keyof FiltersState, value: string) => {
     setDraft((prev) => ({ ...prev, [field]: value }))

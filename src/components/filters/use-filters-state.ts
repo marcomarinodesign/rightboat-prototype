@@ -44,8 +44,10 @@ const formatRange = (
   return ""
 }
 
-export function useFiltersState() {
-  const [filters, setFilters] = React.useState<FiltersState>(defaultFilters)
+export function useFiltersState(initialFilters?: FiltersState) {
+  const [filters, setFilters] = React.useState<FiltersState>(
+    initialFilters ?? defaultFilters
+  )
 
   const clearAll = React.useCallback(() => {
     setFilters({
