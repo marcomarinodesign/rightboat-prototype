@@ -62,6 +62,8 @@ export type SavedSearchEmailTemplateProps = {
   }
   /** Base URL for relative image paths (e.g. https://www.rightboat.com) */
   baseUrl?: string
+  /** Force mobile layout — used by the preview toggle */
+  mobile?: boolean
 }
 
 function absoluteImageUrl(url: string, baseUrl?: string): string {
@@ -557,16 +559,110 @@ const BOAT_TYPE_LABEL_EMAIL: Record<string, string> = {
   other: "Other",
 }
 
+function ListingContent({
+  listing,
+  specsLine,
+}: {
+  listing: SearchListing
+  specsLine: string
+}) {
+  return (
+    <>
+      <Text style={{ margin: "0 0 4px", fontSize: 16, fontWeight: 700, color: emailTokens.midnight, fontFamily, lineHeight: "24px" }}>
+        {listing.title}
+      </Text>
+      <Text style={{ margin: "0 0 2px", fontSize: 14, color: emailTokens.neutral500, fontFamily }}>
+        {listing.location}
+      </Text>
+      <Text style={{ margin: "0 0 4px", fontSize: 14, color: emailTokens.neutral500, fontFamily }}>
+        {specsLine}
+      </Text>
+      <Text style={{ margin: "0 0 8px", fontSize: 16, fontWeight: 700, color: emailTokens.blue400, fontFamily, lineHeight: "24px" }}>
+        {listing.price}
+      </Text>
+      <Button
+        href={listing.href}
+        style={{
+          backgroundColor: emailTokens.blue400,
+          color: emailTokens.neutralWhite,
+          fontSize: 13,
+          fontWeight: 500,
+          padding: "10px 16px",
+          borderRadius: 12,
+          textDecoration: "none",
+          fontFamily,
+          display: "inline-block",
+        }}
+      >
+        View listing →
+      </Button>
+    </>
+  )
+}
+
+function ListingImage({
+  imageUrl,
+  listing,
+  width,
+  height,
+}: {
+  imageUrl: string
+  listing: SearchListing
+  width: number | string
+  height: number
+}) {
+  return (
+    <div
+      style={{
+        position: "relative" as const,
+        width,
+        height,
+        backgroundColor: emailTokens.neutral200,
+        backgroundImage: `url('${imageUrl}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        borderRadius: 4,
+        overflow: "hidden",
+        display: "block",
+      }}
+    >
+      {listing.photoCount != null && listing.photoCount > 0 && (
+        <div
+          style={{
+            position: "absolute" as const,
+            bottom: 8,
+            right: 8,
+            backgroundColor: emailTokens.malibu200,
+            padding: "4px 12px",
+            borderRadius: 999,
+            fontSize: 11,
+            fontWeight: 600,
+            color: emailTokens.midnight,
+            fontFamily,
+            whiteSpace: "nowrap" as const,
+            lineHeight: "16px",
+          }}
+        >
+          See {listing.photoCount} photos
+        </div>
+      )}
+    </div>
+  )
+}
+
 function HorizontalListingRowEmail({
   listing,
   boatType,
   baseUrl,
   isLast = false,
+  mobile = false,
 }: {
   listing: SearchListing
   boatType: string
   baseUrl?: string
   isLast?: boolean
+  mobile?: boolean
 }) {
   const imageUrl = absoluteImageUrl(listing.images[0] ?? "", baseUrl)
   const specsLine = [
@@ -578,117 +674,69 @@ function HorizontalListingRowEmail({
     .filter(Boolean)
     .join(" · ")
 
-  return (
-    <Section
-      style={{
-        padding: "0 24px",
-        borderBottom: isLast ? "none" : `1px solid ${emailTokens.neutral200}`,
-      }}
-    >
-      <Row style={{ paddingTop: 16, paddingBottom: 16 }}>
-        {/* Image column — div with position:relative so pill can sit absolute bottom-right */}
-        <Column className="mob-listing-img" style={{ width: 280, verticalAlign: "top" as const }}>
-          <div
-            className="mob-listing-img-inner"
-            style={{
-              position: "relative" as const,
-              width: 280,
-              height: 160,
-              backgroundColor: emailTokens.neutral200,
-              backgroundImage: `url('${imageUrl}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-              backgroundRepeat: "no-repeat",
-              borderRadius: 4,
-              overflow: "hidden",
-              display: "block",
-            }}
-          >
-            {listing.photoCount != null && listing.photoCount > 0 && (
-              <div
-                style={{
-                  position: "absolute" as const,
-                  bottom: 8,
-                  right: 8,
-                  backgroundColor: emailTokens.malibu200,
-                  padding: "4px 12px",
-                  borderRadius: 999,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: emailTokens.midnight,
-                  fontFamily,
-                  whiteSpace: "nowrap" as const,
-                  lineHeight: "16px",
-                }}
-              >
-                See {listing.photoCount} photos
-              </div>
-            )}
-          </div>
-        </Column>
+  const borderBottom = isLast ? "none" : `1px solid ${emailTokens.neutral200}`
 
-        {/* Content column */}
+  /* ── MOBILE: image on top, content below ── */
+  if (mobile) {
+    return (
+      <Section style={{ borderBottom }}>
+        <Row>
+          <Column style={{ padding: "14px 24px" }}>
+            {/* Image: full width of the single column */}
+            <div
+              style={{
+                position: "relative" as const,
+                width: "100%",
+                height: 200,
+                backgroundColor: emailTokens.neutral200,
+                backgroundImage: `url('${imageUrl}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                backgroundRepeat: "no-repeat",
+                borderRadius: 4,
+                overflow: "hidden",
+                display: "block",
+                marginBottom: 12,
+              }}
+            >
+              {listing.photoCount != null && listing.photoCount > 0 && (
+                <div
+                  style={{
+                    position: "absolute" as const,
+                    bottom: 8,
+                    right: 8,
+                    backgroundColor: emailTokens.malibu200,
+                    padding: "4px 12px",
+                    borderRadius: 999,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    color: emailTokens.midnight,
+                    fontFamily,
+                    whiteSpace: "nowrap" as const,
+                    lineHeight: "16px",
+                  }}
+                >
+                  See {listing.photoCount} photos
+                </div>
+              )}
+            </div>
+            {/* Content stacked below image */}
+            <ListingContent listing={listing} specsLine={specsLine} />
+          </Column>
+        </Row>
+      </Section>
+    )
+  }
+
+  /* ── DESKTOP: image left, content right ── */
+  return (
+    <Section style={{ padding: "0 24px", borderBottom }}>
+      <Row style={{ paddingTop: 16, paddingBottom: 16 }}>
+        <Column className="mob-listing-img" style={{ width: 280, verticalAlign: "top" as const }}>
+          <ListingImage imageUrl={imageUrl} listing={listing} width={280} height={160} />
+        </Column>
         <Column className="mob-listing-content" style={{ paddingLeft: 16, verticalAlign: "top" as const }}>
-          <Text
-            style={{
-              margin: "0 0 4px",
-              fontSize: 16,
-              fontWeight: 700,
-              color: emailTokens.midnight,
-              fontFamily,
-              lineHeight: "24px",
-            }}
-          >
-            {listing.title}
-          </Text>
-          <Text
-            style={{
-              margin: "0 0 2px",
-              fontSize: 14,
-              color: emailTokens.neutral500,
-              fontFamily,
-            }}
-          >
-            {listing.location}
-          </Text>
-          <Text
-            style={{
-              margin: "0 0 4px",
-              fontSize: 14,
-              color: emailTokens.neutral500,
-              fontFamily,
-            }}
-          >
-            {specsLine}
-          </Text>
-          <Text
-            style={{
-              margin: "0 0 8px",
-              fontSize: 16,
-              fontWeight: 700,
-              color: emailTokens.blue400,
-              fontFamily,
-              lineHeight: "24px",
-            }}
-          >
-            {listing.price}
-          </Text>
-          <Button
-            href={listing.href}
-            style={{
-              backgroundColor: emailTokens.blue400,
-              color: emailTokens.neutralWhite,
-              fontSize: 13,
-              fontWeight: 500,
-              padding: "10px 16px",
-              borderRadius: 12,
-              textDecoration: "none",
-              fontFamily,
-              display: "inline-block",
-            }}
-          >
-            View listing →
-          </Button>
+          <ListingContent listing={listing} specsLine={specsLine} />
         </Column>
       </Row>
     </Section>
@@ -700,6 +748,7 @@ export function SavedSearchEmailTemplate({
   listings,
   ads,
   baseUrl,
+  mobile = false,
 }: SavedSearchEmailTemplateProps) {
   // Cap at 5 listings per Figma spec + Joe's feedback (2026-06-05)
   const visibleListings = listings.slice(0, 5)
@@ -712,7 +761,7 @@ export function SavedSearchEmailTemplate({
     <Html lang="en">
       <Head>
         <style>{`
-          @media only screen and (max-width: 600px) {
+          @media only screen and (max-width: 480px) {
             /* Generic full-width override for fixed-px elements */
             .mob-w-full {
               width: 100% !important;
@@ -856,6 +905,7 @@ export function SavedSearchEmailTemplate({
               listing={listing}
               boatType={context.boatType}
               baseUrl={baseUrl}
+              mobile={mobile}
               isLast={i === visibleListings.length - 1}
             />
           ))}

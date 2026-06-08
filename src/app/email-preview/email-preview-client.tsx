@@ -94,7 +94,7 @@ export function EmailPreviewClient() {
             <iframe
               key={`${activeSegment}-${viewMode}`}
               title={`Email render — ${segment.label} (${viewMode})`}
-              src={`/api/email-preview?segment=${activeSegment}`}
+              src={`/api/email-preview?segment=${activeSegment}${viewMode === "mobile" ? "&mobile=1" : ""}`}
               style={{ width: previewWidth }}
               className="block min-h-[1600px] border-0"
             />
