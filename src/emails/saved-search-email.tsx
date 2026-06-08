@@ -133,13 +133,16 @@ function HouseAdPlaceholder({
   width,
   height,
   label = "Sponsored",
+  className,
 }: {
   width: number
   height: number
   label?: string
+  className?: string
 }) {
   return (
     <Section
+      className={className}
       style={{
         backgroundColor: emailTokens.neutral100,
         width,
@@ -178,7 +181,7 @@ function PremiumPartnerSlot({
   if (!creative) {
     return (
       <Section style={{ padding: "0 24px 16px" }}>
-        <HouseAdPlaceholder width={552} height={138} />
+        <HouseAdPlaceholder className="mob-ad-slot" width={552} height={138} />
       </Section>
     )
   }
@@ -187,6 +190,7 @@ function PremiumPartnerSlot({
     <Section style={{ padding: "0 24px 16px" }}>
       <Link href={creative.clickUrl} style={{ textDecoration: "none" }}>
         <Section
+          className="mob-ad-slot"
           style={{
             backgroundColor: emailTokens.neutral200,
             borderRadius: 8,
@@ -326,7 +330,7 @@ function TrustedPartnerSlot({
   if (!creative) {
     return (
       <Section style={{ padding: "0 24px 16px" }}>
-        <HouseAdPlaceholder width={552} height={184} />
+        <HouseAdPlaceholder className="mob-ad-slot" width={552} height={184} />
       </Section>
     )
   }
@@ -335,6 +339,7 @@ function TrustedPartnerSlot({
     <Section style={{ padding: "0 24px 16px" }}>
       <Link href={creative.clickUrl} style={{ textDecoration: "none" }}>
         <Section
+          className="mob-ad-slot"
           style={{
             backgroundColor: emailTokens.neutral200,
             borderRadius: 8,
@@ -385,14 +390,14 @@ function FooterSponsorSlot({
 }) {
   if (!creative) {
     return (
-      <Column style={{ width: "33.33%", padding: "0 4px", verticalAlign: "top" as const }}>
-        <HouseAdPlaceholder width={168} height={94} />
+      <Column className="mob-footer-col" style={{ width: "33.33%", padding: "0 4px", verticalAlign: "top" as const }}>
+        <HouseAdPlaceholder className="mob-footer-placeholder" width={168} height={94} />
       </Column>
     )
   }
 
   return (
-    <Column style={{ width: "33.33%", padding: "0 4px", verticalAlign: "top" as const }}>
+    <Column className="mob-footer-col" style={{ width: "33.33%", padding: "0 4px", verticalAlign: "top" as const }}>
       <Link
         href={creative.clickUrl}
         style={{
@@ -582,8 +587,9 @@ function HorizontalListingRowEmail({
     >
       <Row style={{ paddingTop: 16, paddingBottom: 16 }}>
         {/* Image column — div with position:relative so pill can sit absolute bottom-right */}
-        <Column style={{ width: 280, verticalAlign: "top" as const }}>
+        <Column className="mob-listing-img" style={{ width: 280, verticalAlign: "top" as const }}>
           <div
+            className="mob-listing-img-inner"
             style={{
               position: "relative" as const,
               width: 280,
@@ -622,7 +628,7 @@ function HorizontalListingRowEmail({
         </Column>
 
         {/* Content column */}
-        <Column style={{ paddingLeft: 16, verticalAlign: "top" as const }}>
+        <Column className="mob-listing-content" style={{ paddingLeft: 16, verticalAlign: "top" as const }}>
           <Text
             style={{
               margin: "0 0 4px",
@@ -704,7 +710,48 @@ export function SavedSearchEmailTemplate({
 
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <style>{`
+          @media only screen and (max-width: 600px) {
+            /* Generic full-width override for fixed-px elements */
+            .mob-w-full {
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            /* Ad slots — remove fixed 552px width */
+            .mob-ad-slot {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: auto !important;
+              min-height: 100px !important;
+            }
+            /* Listing row — stack image above content */
+            .mob-listing-img {
+              display: block !important;
+              width: 100% !important;
+              padding-bottom: 12px !important;
+            }
+            .mob-listing-img-inner {
+              width: 100% !important;
+              height: 200px !important;
+            }
+            .mob-listing-content {
+              display: block !important;
+              width: 100% !important;
+              padding-left: 0 !important;
+            }
+            /* Footer sponsors — stack single column */
+            .mob-footer-col {
+              display: block !important;
+              width: 100% !important;
+              padding: 0 0 8px 0 !important;
+            }
+            .mob-footer-placeholder {
+              width: 100% !important;
+            }
+          }
+        `}</style>
+      </Head>
       <Preview>{previewText}</Preview>
       <Body
         style={{
@@ -715,8 +762,10 @@ export function SavedSearchEmailTemplate({
         }}
       >
         <Container
+          className="mob-w-full"
           style={{
             maxWidth: 600,
+            width: "100%",
             margin: "0 auto",
             backgroundColor: emailTokens.neutralWhite,
           }}

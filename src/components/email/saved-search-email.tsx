@@ -147,19 +147,21 @@ function HorizontalListingRow({ listing, boatType, className }: HorizontalListin
   return (
     <div
       className={cn(
-        "flex items-center gap-4 border-b border-border py-[14px]",
+        // Mobile: stack vertically. Desktop (sm+): side by side
+        "flex flex-col gap-3 border-b border-border py-[14px]",
+        "sm:flex-row sm:items-center sm:gap-4",
         className
       )}
     >
       {/* Image — pill absolutely pinned to bottom-right inside the frame */}
-      <div className="relative h-[160px] w-[280px] shrink-0 overflow-hidden rounded-[4px] bg-neutral-200">
+      <div className="relative h-[200px] w-full shrink-0 overflow-hidden rounded-[4px] bg-neutral-200 sm:h-[160px] sm:w-[280px]">
         {listing.images[0] && (
           <Image
             src={listing.images[0]}
             alt={listing.title}
             fill
             className="z-0 object-cover"
-            sizes="280px"
+            sizes="(max-width: 640px) 100vw, 280px"
           />
         )}
         {listing.photoCount != null && listing.photoCount > 0 && (
@@ -181,7 +183,7 @@ function HorizontalListingRow({ listing, boatType, className }: HorizontalListin
         <p className="text-base font-bold leading-6 text-primary">{listing.price}</p>
         <a
           href={listing.href}
-          className="inline-flex h-10 items-center justify-center rounded-[12px] bg-primary px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-primary/90 self-start"
+          className="self-start inline-flex h-10 items-center justify-center rounded-[12px] bg-primary px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-primary/90"
         >
           View listing →
         </a>
