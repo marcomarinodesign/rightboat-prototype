@@ -1,5 +1,5 @@
-import { SellBv3WizardClient } from "@/app/sell-b-v3/wizard/SellBv3WizardClient"
+import { FSBOWizardClient } from "@/app/fsbo/wizard/FSBOWizardClient"
 
 export default function MobileAppSellWizardPage() {
-  return <SellBv3WizardClient />
+  return <FSBOWizardClient />
 }

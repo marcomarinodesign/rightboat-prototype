@@ -142,8 +142,8 @@ export function getSiteMapSections(): SiteMapSection[] {
     {
       title: "Sell your boat",
       links: [
-        { label: "Sell flow (v3)", href: "/sell-b-v3" },
-        { label: "Sell wizard", href: "/sell-b-v3/wizard" },
+        { label: "FSBO — Sell flow", href: "/fsbo" },
+        { label: "FSBO — Wizard", href: "/fsbo/wizard" },
       ],
     },
     {

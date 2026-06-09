@@ -5,6 +5,8 @@ import { UseFormReturn, Controller } from "react-hook-form"
 import { type Step1LPFormInput } from "@/features/sell-boat/types-v3"
 import { SearchableSelect } from "@/components/filters/searchable-select"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { popularBrands } from "@/data/categories"
 import { popularModels } from "@/data/models"
 
@@ -38,6 +40,7 @@ export function StepOneLP({
 }: StepOneLPProps) {
   const {
     control,
+    register,
     formState: { errors },
     handleSubmit,
     watch,
@@ -126,6 +129,26 @@ export function StepOneLP({
               {errors.year.message}
             </p>
           )}
+          <div className="min-h-5" aria-hidden="true" />
+        </div>
+        <div className="flex min-w-0 flex-col gap-1">
+          <div className="space-y-1.5">
+            <Label htmlFor="lp-email">Email</Label>
+            <Input
+              id="lp-email"
+              type="email"
+              placeholder="your@email.com"
+              autoComplete="email"
+              className="h-12 rounded-[14px] border-white bg-white px-4 text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="text-sm text-destructive">{errors.email.message}</p>
+            )}
+            <p className="text-xs text-muted-foreground">
+              We&apos;ll save your progress so you can pick up where you left off.
+            </p>
+          </div>
           <div className="min-h-5" aria-hidden="true" />
         </div>
         <div className="flex flex-col gap-1">

@@ -9,13 +9,13 @@ import { Button } from "@/components/ui/button"
 import { Step1LPData } from "@/features/sell-boat/types-v3"
 import { cn } from "@/lib/utils"
 
-const STORAGE_KEY = "sell-b-v3-step1"
+const STORAGE_KEY = "rightboat-fsbo-v1"
 
 export interface SignupModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   step1Data: Step1LPData
-  /** Defaults to `/sell-b-v3/wizard` (web). Use `/app/sell/wizard` inside `/app`. */
+  /** Defaults to `/fsbo/wizard` (web). Use `/app/sell/wizard` inside `/app`. */
   wizardHref?: string
 }
 
@@ -24,7 +24,7 @@ export function SignupModal({
   open,
   onOpenChange,
   step1Data,
-  wizardHref = "/sell-b-v3/wizard",
+  wizardHref = "/fsbo/wizard",
 }: SignupModalProps) {
   const router = useRouter()
   const [email, setEmail] = useState("")
@@ -39,7 +39,7 @@ export function SignupModal({
     setIsSubmitting(true)
     try {
       // Prototype: store step1 data + signup data for wizard
-      sessionStorage.setItem(
+      localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify({
           ...step1Data,

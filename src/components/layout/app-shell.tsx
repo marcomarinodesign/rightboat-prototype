@@ -28,9 +28,9 @@ export function AppShell({ children }: AppShellProps) {
     typeof pathname === "string" &&
     pathname.startsWith("/boats-for-sale/") &&
     pathname.split("/").filter(Boolean).length >= 4
-  const isSellBv3 = pathname === "/sell-b-v3"
-  const isSellBv3Wizard =
-    typeof pathname === "string" && pathname === "/sell-b-v3/wizard"
+  const isFsbo = pathname === "/fsbo"
+  const isFsboWizard =
+    typeof pathname === "string" && pathname === "/fsbo/wizard"
   const isMobileAppPrototype =
     typeof pathname === "string" && pathname.startsWith("/app")
 
@@ -42,11 +42,11 @@ export function AppShell({ children }: AppShellProps) {
     return <>{children}</>
   }
 
-  if (isSellBv3Wizard) {
+  if (isFsboWizard) {
     return <>{children}</>
   }
 
-  const mainFullWidth = isBoatDetailPage || isSellBv3
+  const mainFullWidth = isBoatDetailPage || isFsbo
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -167,7 +167,7 @@ function SiteHeader() {
                     </div>
                     <div className="space-y-3 py-6">
                       <Button className="w-full text-[13px] font-medium" asChild>
-                        <Link href="/sell-b-v3" onClick={() => setMobileMenuOpen(false)}>
+                        <Link href="/fsbo" onClick={() => setMobileMenuOpen(false)}>
                           Sell your boat
                         </Link>
                       </Button>
@@ -186,7 +186,7 @@ function SiteHeader() {
               </Link>
             ))}
             <Button size="sm" className="text-[13px] font-medium" asChild>
-              <Link href="/sell-b-v3">Sell your boat</Link>
+              <Link href="/fsbo">Sell your boat</Link>
             </Button>
           </div>
         </div>

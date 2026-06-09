@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/sell-b-v3",
+        destination: "/fsbo",
+        permanent: true,
+      },
+      {
+        source: "/sell-b-v3/wizard",
+        destination: "/fsbo/wizard",
+        permanent: true,
+      },
+    ]
+  },
   turbopack: {
     // Avoid Next mis-detecting workspace root when multiple lockfiles exist.
     root: process.cwd(),

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { SellBv3LandingClient } from "@/app/sell-b-v3/SellBv3LandingClient"
+import { FSBOLandingClient } from "@/app/fsbo/FSBOLandingClient"
 
 export const metadata: Metadata = {
   title: "Sell Your Boat Privately | Rightboat",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 }
 
 export default function MobileAppSellPage() {
-  return <SellBv3LandingClient surface="app" />
+  return <FSBOLandingClient surface="app" />
 }

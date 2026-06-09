@@ -52,22 +52,24 @@ export function SellBWizardLayout({
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-auto bg-background">
         <div className="mx-auto w-full max-w-[730px] flex-1 px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-[68px] lg:py-10">
           {/* Progress */}
-          <div className="mb-6 sm:mb-8">
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-sm font-medium text-foreground">
-                Step {currentStep} of {totalSteps}
-              </span>
-              <span className="text-sm font-medium text-foreground">
-                {progressPercent}%
-              </span>
+          {!hideStepHeader && (
+            <div className="mb-6 sm:mb-8">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-medium text-foreground">
+                  Step {currentStep} of {totalSteps}
+                </span>
+                <span className="text-sm font-medium text-foreground">
+                  {progressPercent}%
+                </span>
+              </div>
+              <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
             </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-              <div
-                className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
-          </div>
+          )}
 
           {/* Step 1 header: anchor + title + subtitle (only show on step 1 for Figma match) */}
           {!hideStepHeader && currentStep === 1 && (

@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { BOAT_TYPES, EXTRAS_OPTIONS } from "./types"
 
-/** LP Step 1: only Brand, Model, Year (per Joe's feedback) */
+/** LP Step 1: Brand, Model, Year, Email */
 export const step1LPSchema = z.object({
   brand: z.string().trim().min(1, "Brand is required").max(100),
   model: z.string().trim().min(1, "Model is required").max(100),
@@ -16,6 +16,7 @@ export const step1LPSchema = z.object({
       { message: "Invalid year" }
     )
     .transform((v) => parseInt(v, 10)),
+  email: z.string().trim().email("Please enter a valid email"),
 })
 
 export type Step1LPData = z.infer<typeof step1LPSchema>
@@ -68,7 +69,7 @@ export const wizardStep3Fields = [
   "gdprConsent",
 ] as const
 
-export const step1LPFields = ["brand", "model", "year"] as const
+export const step1LPFields = ["brand", "model", "year", "email"] as const
 
 /** Full schema for BoatFormV3 (step1 from LP + wizard steps 2 & 3) */
 export const boatFormV3Schema = step1LPSchema

@@ -11,7 +11,7 @@ import {
   wizardStep3Fields,
   type BoatFormV3Data,
 } from "../types-v3"
-import { STORAGE_KEY } from "@/components/sell-b-v3/SignupModal"
+import { STORAGE_KEY } from "@/components/fsbo/SignupModal"
 import { WizardStep2V3 } from "./WizardStep2V3"
 import { WizardStep3V3 } from "./WizardStep3V3"
 import SuccessScreen from "./SuccessScreen"
@@ -40,22 +40,23 @@ export function BoatFormV3({
     brand: string
     model: string
     year: number
+    email?: string
     signupEmail?: string
     signupFullName?: string
   } | null>(null)
   const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
-    const stored = sessionStorage.getItem(STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
       try {
         const parsed = JSON.parse(stored)
         setInitialData(parsed)
       } catch {
-        router.replace("/sell-b-v3")
+        router.replace("/fsbo")
       }
     } else {
-      router.replace("/sell-b-v3")
+      router.replace("/fsbo")
     }
     setIsHydrated(true)
   }, [router])
@@ -95,6 +96,9 @@ export function BoatFormV3({
       form.setValue("year", initialData.year)
       if (initialData.signupFullName) {
         form.setValue("fullName", initialData.signupFullName)
+      }
+      if (initialData.email) {
+        form.setValue("email", initialData.email)
       }
       if (initialData.signupEmail) {
         form.setValue("email", initialData.signupEmail)
@@ -164,7 +168,7 @@ export function BoatFormV3({
       })
 
       if (error) throw error
-      sessionStorage.removeItem(STORAGE_KEY)
+      localStorage.removeItem(STORAGE_KEY)
       setIsSuccess(true)
     } catch (err) {
       toast.error("Something went wrong. Please try again.")
@@ -179,7 +183,7 @@ export function BoatFormV3({
     setImages([])
     setStep(1)
     setIsSuccess(false)
-    router.push("/sell-b-v3")
+    router.push("/fsbo")
   }
 
   if (!isHydrated || !initialData) {
