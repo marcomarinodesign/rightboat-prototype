@@ -1,11 +1,22 @@
-import { Suspense } from "react"
-
 import { FSBOWizardClient } from "@/app/fsbo/wizard/FSBOWizardClient"
+import {
+  parseFsboFigmaPreviewStep,
+  parseFsboPreviewMode,
+} from "@/lib/fsbo/figma-preview"
 
-export default function MobileAppSellWizardPage() {
+type MobileAppSellWizardPageProps = {
+  searchParams?: Promise<{ figmaPreview?: string; previewMode?: string }>
+}
+
+export default async function MobileAppSellWizardPage({
+  searchParams,
+}: MobileAppSellWizardPageProps) {
+  const params = (await searchParams) ?? {}
+
   return (
-    <Suspense fallback={null}>
-      <FSBOWizardClient />
-    </Suspense>
+    <FSBOWizardClient
+      figmaPreview={parseFsboFigmaPreviewStep(params.figmaPreview)}
+      previewMode={parseFsboPreviewMode(params.previewMode)}
+    />
   )
 }

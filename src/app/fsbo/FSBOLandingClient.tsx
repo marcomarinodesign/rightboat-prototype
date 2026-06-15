@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -22,7 +22,6 @@ import { StepOneLP } from "@/components/fsbo/StepOneLP"
 import { STORAGE_KEY } from "@/components/fsbo/SignupModal"
 import { MobileNativePageHeader } from "@/components/mobile-app/mobile-native-page-header"
 import type { FsboPreviewMode } from "@/lib/fsbo/figma-preview"
-import { parseFsboPreviewMode } from "@/lib/fsbo/figma-preview"
 import { cn } from "@/lib/utils"
 
 const HERO_DESCRIPTION =
@@ -150,12 +149,9 @@ type FSBOLandingClientProps = {
 
 export function FSBOLandingClient({
   surface = "web",
-  figmaPreview: figmaPreviewProp,
+  figmaPreview,
 }: FSBOLandingClientProps) {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const figmaPreview =
-    figmaPreviewProp ?? parseFsboPreviewMode(searchParams.get("figmaPreview"))
 
   const form = useForm<Step1LPFormInput>({
     resolver: zodResolver(step1LPSchema),

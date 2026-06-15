@@ -1,12 +1,11 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { useSearchParams } from "next/navigation"
 import { SellBWizardLayout } from "@/components/sell-b/SellBWizardLayout"
 import {
   figmaPreviewStepNumber,
-  parseFsboFigmaPreviewStep,
-  parseFsboPreviewMode,
+  type FsboFigmaPreviewStep,
+  type FsboPreviewMode,
 } from "@/lib/fsbo/figma-preview"
 
 const BoatFormFSBO = dynamic(
@@ -17,12 +16,15 @@ const BoatFormFSBO = dynamic(
   { ssr: false }
 )
 
-export function FSBOWizardClient() {
-  const searchParams = useSearchParams()
-  const figmaPreview = parseFsboFigmaPreviewStep(
-    searchParams.get("figmaPreview")
-  )
-  const previewMode = parseFsboPreviewMode(searchParams.get("previewMode"))
+type FSBOWizardClientProps = {
+  figmaPreview?: FsboFigmaPreviewStep
+  previewMode?: FsboPreviewMode
+}
+
+export function FSBOWizardClient({
+  figmaPreview,
+  previewMode,
+}: FSBOWizardClientProps) {
   const currentStep = figmaPreview ? figmaPreviewStepNumber(figmaPreview) : 1
 
   return (

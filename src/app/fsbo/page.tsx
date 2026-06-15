@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import { Suspense } from "react"
 import { FSBOLandingClient } from "./FSBOLandingClient"
+import { parseFsboPreviewMode } from "@/lib/fsbo/figma-preview"
 
 export const metadata: Metadata = {
   title: "Sell Your Boat Online | List Your Boat for Sale | Rightboat",
@@ -47,16 +47,21 @@ const faqSchema = {
   ],
 }
 
-export default function FSBOPage() {
+type FSBOPageProps = {
+  searchParams?: Promise<{ figmaPreview?: string }>
+}
+
+export default async function FSBOPage({ searchParams }: FSBOPageProps) {
+  const params = (await searchParams) ?? {}
+  const figmaPreview = parseFsboPreviewMode(params.figmaPreview)
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <Suspense fallback={null}>
-        <FSBOLandingClient />
-      </Suspense>
+      <FSBOLandingClient figmaPreview={figmaPreview} />
     </>
   )
 }

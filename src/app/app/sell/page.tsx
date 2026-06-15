@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import { Suspense } from "react"
 
 import { FSBOLandingClient } from "@/app/fsbo/FSBOLandingClient"
+import { parseFsboPreviewMode } from "@/lib/fsbo/figma-preview"
 
 export const metadata: Metadata = {
   title: "Sell Your Boat Privately | Rightboat",
@@ -9,10 +9,19 @@ export const metadata: Metadata = {
     "Sell your used boat privately, easily, and commission-free on Rightboat. Reach 2.5 million buyers.",
 }
 
-export default function MobileAppSellPage() {
+type MobileAppSellPageProps = {
+  searchParams?: Promise<{ figmaPreview?: string }>
+}
+
+export default async function MobileAppSellPage({
+  searchParams,
+}: MobileAppSellPageProps) {
+  const params = (await searchParams) ?? {}
+
   return (
-    <Suspense fallback={null}>
-      <FSBOLandingClient surface="app" />
-    </Suspense>
+    <FSBOLandingClient
+      surface="app"
+      figmaPreview={parseFsboPreviewMode(params.figmaPreview)}
+    />
   )
 }
