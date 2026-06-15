@@ -1,5 +1,11 @@
+import { Suspense } from "react"
+
 import { FSBOWizardClient } from "@/app/fsbo/wizard/FSBOWizardClient"
 
 export default function MobileAppSellWizardPage() {
-  return <FSBOWizardClient />
+  return (
+    <Suspense fallback={null}>
+      <FSBOWizardClient />
+    </Suspense>
+  )
 }

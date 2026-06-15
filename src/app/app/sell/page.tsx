@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 
 import { FSBOLandingClient } from "@/app/fsbo/FSBOLandingClient"
 
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 }
 
 export default function MobileAppSellPage() {
-  return <FSBOLandingClient surface="app" />
+  return (
+    <Suspense fallback={null}>
+      <FSBOLandingClient surface="app" />
+    </Suspense>
+  )
 }
