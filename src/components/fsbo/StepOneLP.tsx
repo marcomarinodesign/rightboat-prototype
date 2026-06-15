@@ -27,6 +27,12 @@ const modelOptions = popularModels.map((m) => ({
   value: m.slug,
 }))
 
+const LP_SELECT_TRIGGER =
+  "h-12 w-full rounded-[14px] border-white bg-white px-4 text-left text-base font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white sm:text-lg"
+
+const LP_INPUT =
+  "h-12 w-full rounded-[14px] border-white bg-white px-4 text-base font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] sm:text-lg"
+
 const currentYear = new Date().getFullYear()
 const yearOptions = Array.from({ length: currentYear - 1900 + 2 }, (_, i) => {
   const y = currentYear + 1 - i
@@ -57,14 +63,15 @@ export function StepOneLP({
   }, [brand])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <div className="flex w-full flex-col">
         <div className="flex min-w-0 flex-col gap-1">
           <Controller
             name="brand"
             control={control}
             render={({ field }) => (
               <SearchableSelect
+                className="w-full"
                 value={field.value}
                 onValueChange={field.onChange}
                 options={manufacturerOptions}
@@ -72,7 +79,7 @@ export function StepOneLP({
                 searchPlaceholder="Search brands"
                 invalid={!!errors.brand}
                 clearable={false}
-                triggerClassName="h-12 rounded-[14px] border-white bg-white px-4 text-left text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white"
+                triggerClassName={LP_SELECT_TRIGGER}
               />
             )}
           />
@@ -89,6 +96,7 @@ export function StepOneLP({
             control={control}
             render={({ field }) => (
               <SearchableSelect
+                className="w-full"
                 value={field.value}
                 onValueChange={field.onChange}
                 options={filteredModelOptions}
@@ -96,7 +104,7 @@ export function StepOneLP({
                 searchPlaceholder="Search models"
                 invalid={!!errors.model}
                 clearable={false}
-                triggerClassName="h-12 rounded-[14px] border-white bg-white px-4 text-left text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white"
+                triggerClassName={LP_SELECT_TRIGGER}
               />
             )}
           />
@@ -113,6 +121,7 @@ export function StepOneLP({
             control={control}
             render={({ field }) => (
               <SearchableSelect
+                className="w-full"
                 value={field.value}
                 onValueChange={field.onChange}
                 options={yearOptions}
@@ -120,7 +129,7 @@ export function StepOneLP({
                 searchPlaceholder="Search year"
                 invalid={!!errors.year}
                 clearable={false}
-                triggerClassName="h-12 rounded-[14px] border-white bg-white px-4 text-left text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white"
+                triggerClassName={LP_SELECT_TRIGGER}
               />
             )}
           />
@@ -139,7 +148,7 @@ export function StepOneLP({
               type="email"
               placeholder="your@email.com"
               autoComplete="email"
-              className="h-12 rounded-[14px] border-white bg-white px-4 text-[18px] font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
+              className={LP_INPUT}
               {...register("email")}
             />
             {errors.email && (
@@ -155,7 +164,7 @@ export function StepOneLP({
           <Button
             type="submit"
             size="lg"
-            className="h-12 w-full shrink-0 rounded-[12px] bg-[#0257fc] px-6 text-[18px] font-semibold text-white hover:bg-[#024ae0]"
+            className="h-12 w-full shrink-0 rounded-[12px] bg-[#0257fc] px-6 text-base font-semibold text-white hover:bg-[#024ae0] sm:text-lg"
             disabled={isSubmitting}
           >
             Sell your boat

@@ -39,6 +39,59 @@ npm run figma:connect:publish
 
 ---
 
+## FSBO flow — Code Connect (FSBO-Page)
+
+**Figma file:** [FSBO-Page](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page) (`fileKey: 1JdEElYI3kToAhnJwXedF0`)
+
+**Página:** [Q2 Design Cursor](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=71-1508) — sección `FSBO / Code Connect`
+
+**Code Connect pantallas:** [`src/app/fsbo/fsbo-flow.figma.tsx`](src/app/fsbo/fsbo-flow.figma.tsx)
+
+**Rutas prototipo:** `/fsbo`, `/fsbo/wizard`, `/fsbo/success-preview`
+
+| Frame Figma | Node ID | Viewport | `figmaPreview` / wrapper |
+|-------------|---------|----------|--------------------------|
+| FSBO / Landing / Desktop | [74-14](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-14) | 1440×900 | `FSBOLandingClient figmaPreview="desktop"` |
+| FSBO / Landing / Mobile | [74-17](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-17) | 402×874 | `figmaPreview="mobile"` |
+| FSBO / Step 1 — Your Boat / Desktop | [74-20](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-20) | 1440×900 | `BoatFormFSBO figmaPreview="step-1"` |
+| FSBO / Step 1 — Your Boat / Mobile | [74-23](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-23) | 402×874 | `previewMode="mobile"` |
+| FSBO / Step 2 — Photos / Desktop | [74-26](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-26) | 1440×900 | `figmaPreview="step-2"` |
+| FSBO / Step 2 — Photos / Mobile | [74-29](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-29) | 402×874 | `previewMode="mobile"` |
+| FSBO / Step 3 — Your Details / Desktop | [74-32](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-32) | 1440×900 | `figmaPreview="step-3"` |
+| FSBO / Step 3 — Your Details / Mobile | [74-35](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-35) | 402×874 | `previewMode="mobile"` |
+| FSBO / Step 4 — Choose Plan / Desktop | [74-38](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-38) | 1440×900 | `figmaPreview="step-4"` |
+| FSBO / Step 4 — Choose Plan / Mobile | [74-41](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-41) | 402×874 | `previewMode="mobile"` |
+| FSBO / Step 5 — Payment / Desktop | [74-44](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-44) | 1440×900 | `figmaPreview="step-5"` |
+| FSBO / Step 5 — Payment / Mobile | [74-47](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-47) | 402×874 | `previewMode="mobile"` |
+| FSBO / Success / Desktop | [74-50](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-50) | 1440×900 | `FSBOSuccessScreen` |
+| FSBO / Success / Mobile | [74-53](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page?node-id=74-53) | 402×874 | mobile shell |
+
+### Gaps DS — componentes FSBO (crear en El-Captain-DS)
+
+| Componente código | Archivo Code Connect | Nodo provisional | Acción en Figma |
+|-------------------|----------------------|------------------|-----------------|
+| `PackageCard` | `src/components/fsbo/PackageCard.figma.tsx` | Card `32-2` | Crear **FSBO / Package Card** (Basic, Premium) |
+| `BoatTypeSelector` | `src/components/fsbo/BoatTypeSelector.figma.tsx` | Filters Select `294-87` | Crear **FSBO / Boat Type Selector** (8 tiles) |
+| `PillGroup` | `src/components/ui/pill-group.figma.tsx` | Select compact `294-93` | Crear **Pill Group** en DS |
+| `FSBOPhotoGrid` | `src/components/fsbo/FSBOPhotoGrid.figma.tsx` | Gallery Mobile `188-1282` | Crear **FSBO / Photo Grid** |
+| `MockCardForm` | `src/components/fsbo/MockCardForm.figma.tsx` | Input `28-8` | Crear **FSBO / Payment Form** |
+
+### Primitivos DS — Code Connect (`src/components/ui/*.figma.tsx`)
+
+| Componente | Node El-Captain-DS |
+|------------|-------------------|
+| Button | [24-2](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=24-2) |
+| Badge | [26-8](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=26-8) |
+| Input | [28-8](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=28-8) |
+| Select | [29-14](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=29-14) |
+| Checkbox | [30-16](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=30-16) |
+| Switch | [31-14](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=31-14) |
+| Card | [32-2](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=32-2) |
+| Label | [39-9](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=39-9) |
+| Progress | [40-8](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=40-8) |
+
+---
+
 ## Mobile Overview / SRP Split (402×874)
 
 Página Figma: [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055)

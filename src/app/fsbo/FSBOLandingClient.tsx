@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -21,6 +21,8 @@ import { step1LPSchema, type Step1LPData, type Step1LPFormInput } from "@/featur
 import { StepOneLP } from "@/components/fsbo/StepOneLP"
 import { STORAGE_KEY } from "@/components/fsbo/SignupModal"
 import { MobileNativePageHeader } from "@/components/mobile-app/mobile-native-page-header"
+import type { FsboPreviewMode } from "@/lib/fsbo/figma-preview"
+import { parseFsboPreviewMode } from "@/lib/fsbo/figma-preview"
 import { cn } from "@/lib/utils"
 
 const HERO_DESCRIPTION =
@@ -142,12 +144,18 @@ export type FSBOSurface = "web" | "app"
 type FSBOLandingClientProps = {
   /** `app`: links and post-signup navigation stay under `/app/sell/*` (no site chrome). */
   surface?: FSBOSurface
+  /** Force mobile/desktop layout for Figma Code Connect capture. */
+  figmaPreview?: FsboPreviewMode
 }
 
 export function FSBOLandingClient({
   surface = "web",
+  figmaPreview: figmaPreviewProp,
 }: FSBOLandingClientProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const figmaPreview =
+    figmaPreviewProp ?? parseFsboPreviewMode(searchParams.get("figmaPreview"))
 
   const form = useForm<Step1LPFormInput>({
     resolver: zodResolver(step1LPSchema),
@@ -177,7 +185,7 @@ export function FSBOLandingClient({
     surface === "app" ? "/app/sell/wizard" : "/fsbo/wizard"
   const sellCtaHref = surface === "app" ? "/app/sell/wizard" : "/fsbo"
 
-  return (
+  const page = (
     <div
       className={cn(
         "flex flex-col lg:gap-14",
@@ -193,7 +201,7 @@ export function FSBOLandingClient({
         )}
         aria-labelledby="fsbo-hero-heading"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           {surface === "app" ? (
             <div className="w-full">
               <MobileNativePageHeader
@@ -225,8 +233,8 @@ export function FSBOLandingClient({
               </p>
             </div>
           )}
-          <div className="relative z-10 w-full max-w-[414px] rounded-lg border border-border bg-malibu-300 p-6 shadow-sm sm:p-9">
-            <div className="mb-6 text-center text-[20px] font-bold leading-[1.2] text-[#13022c] sm:text-[22px]">
+          <div className="relative z-10 mx-auto w-full min-w-0 max-w-[414px] overflow-visible rounded-lg border border-border bg-malibu-300 p-5 shadow-sm sm:p-6 lg:mx-0 lg:p-9">
+            <div className="mb-5 text-center text-lg font-bold leading-snug text-[#13022c] sm:mb-6 sm:text-xl">
               Takes less than 2 minutes.
             </div>
             <StepOneLP
@@ -633,4 +641,18 @@ export function FSBOLandingClient({
       </section>
     </div>
   )
+
+  if (figmaPreview === "mobile") {
+    return (
+      <div className="mx-auto w-full max-w-[402px] min-h-[874px] border-x border-border bg-background">
+        {page}
+      </div>
+    )
+  }
+
+  if (figmaPreview === "desktop") {
+    return <div className="w-full min-h-[900px] bg-background">{page}</div>
+  }
+
+  return page
 }

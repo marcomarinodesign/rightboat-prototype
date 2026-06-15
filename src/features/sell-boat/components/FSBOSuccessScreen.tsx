@@ -2,7 +2,14 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { CheckCircle2 } from "lucide-react"
+import {
+  Anchor,
+  BarChart2,
+  CheckCircle2,
+  Mail,
+  Share2,
+  type LucideIcon,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { listingBoats } from "@/data/boats"
 import { cn } from "@/lib/utils"
@@ -22,6 +29,12 @@ const PLAN_LABEL = {
 /** Prototype BDP — same active listing as site-map “Boat detail — active listing” */
 const previewBoat = listingBoats[0]
 const MOCK_LISTING_URL = `/boats-for-sale/${previewBoat.makeSlug}/${previewBoat.modelSlug}/${previewBoat.id}`
+
+const NEXT_STEPS: { icon: LucideIcon; text: string }[] = [
+  { icon: Mail, text: "Check your email — listing confirmation sent" },
+  { icon: BarChart2, text: "Track enquiries and views from your dashboard" },
+  { icon: Share2, text: "Share your listing link for extra reach" },
+]
 
 export function FSBOSuccessScreen({
   plan,
@@ -80,7 +93,7 @@ export function FSBOSuccessScreen({
       <div className="flex flex-wrap items-center justify-center gap-2">
         {boatSummary && (
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm font-medium text-foreground">
-            <span aria-hidden>🚤</span>
+            <Anchor className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {boatSummary}
           </span>
         )}
@@ -99,15 +112,12 @@ export function FSBOSuccessScreen({
       <div className="w-full max-w-sm rounded-lg bg-muted p-4 text-left space-y-3">
         <p className="text-sm font-semibold text-foreground">What happens next</p>
         <ul className="space-y-2.5">
-          {[
-            { icon: "✉️", text: "Check your email — listing confirmation sent" },
-            { icon: "📊", text: "Track enquiries and views from your dashboard" },
-            { icon: "💡", text: "Share your listing link for extra reach" },
-          ].map(({ icon, text }) => (
+          {NEXT_STEPS.map(({ icon: Icon, text }) => (
             <li key={text} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-              <span className="shrink-0 mt-0.5" aria-hidden>
-                {icon}
-              </span>
+              <Icon
+                className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
+                aria-hidden="true"
+              />
               <span className="leading-snug">{text}</span>
             </li>
           ))}

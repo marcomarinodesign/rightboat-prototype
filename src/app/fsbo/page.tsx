@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { FSBOLandingClient } from "./FSBOLandingClient"
 
 export const metadata: Metadata = {
@@ -53,7 +54,9 @@ export default function FSBOPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <FSBOLandingClient />
+      <Suspense fallback={null}>
+        <FSBOLandingClient />
+      </Suspense>
     </>
   )
 }

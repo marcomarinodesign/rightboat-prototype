@@ -6,8 +6,10 @@ Este repositorio (`rightboat-prototype`) es el **prototipo Next.js** del marketp
 
 | Dato | Valor |
 |------|--------|
-| **URL del archivo** | [Abrir en Figma](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/) |
-| **`fileKey` (API / MCP / scripts)** | `VOCH4pGubqSYza7CbL30c7` |
+| **URL del archivo (design system)** | [El-Captain-DS](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/) |
+| **`fileKey` DS (API / MCP / scripts)** | `VOCH4pGubqSYza7CbL30c7` |
+| **URL del archivo (FSBO flow)** | [FSBO-Page](https://www.figma.com/design/1JdEElYI3kToAhnJwXedF0/FSBO-Page) |
+| **`fileKey` FSBO (Code Connect pantallas)** | `1JdEElYI3kToAhnJwXedF0` |
 
 Si el archivo se duplica, se mueve o se usa una **rama** de equipo, actualiza esta tabla y los scripts que incrustan el `fileKey` (por ejemplo [`scripts/figma-boat-card-component.js`](../scripts/figma-boat-card-component.js)).
 

@@ -1,17 +1,32 @@
 "use client"
 
+import {
+  Waves,
+  Sailboat,
+  FishingHook,
+  Ship,
+  ShipWheel,
+  Anchor,
+  type LucideIcon,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const BOAT_TYPE_OPTIONS = [
-  { value: "Motorboat",   label: "Motorboat",   emoji: "🚤" },
-  { value: "Sailboat",    label: "Sailboat",    emoji: "⛵" },
-  { value: "RIB",         label: "RIB",         emoji: "🛥️" },
-  { value: "Catamaran",   label: "Catamaran",   emoji: "⛵" },
-  { value: "Fishing Boat",label: "Fishing",     emoji: "🎣" },
-  { value: "Canal Boat",  label: "Canal Boat",  emoji: "🚢" },
-  { value: "Yacht",       label: "Yacht",       emoji: "⚓" },
-  { value: "Other",       label: "Other",       emoji: "🔵" },
-] as const
+interface BoatType {
+  value: string
+  label: string
+  icon: LucideIcon
+}
+
+const BOAT_TYPES: BoatType[] = [
+  { value: "Motorboat", label: "Motorboat", icon: Waves },
+  { value: "Sailboat", label: "Sailboat", icon: Sailboat },
+  { value: "RIB", label: "RIB", icon: Waves },
+  { value: "Catamaran", label: "Catamaran", icon: Sailboat },
+  { value: "Fishing Boat", label: "Fishing", icon: FishingHook },
+  { value: "Canal Boat", label: "Canal Boat", icon: Ship },
+  { value: "Yacht", label: "Yacht", icon: ShipWheel },
+  { value: "Other", label: "Other", icon: Anchor },
+]
 
 interface BoatTypeSelectorProps {
   value: string
@@ -24,8 +39,9 @@ export function BoatTypeSelector({ value, onChange, error }: BoatTypeSelectorPro
     <div className="space-y-2">
       {/* 2-column grid → 4 columns on sm+ */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        {BOAT_TYPE_OPTIONS.map((type) => {
+        {BOAT_TYPES.map((type) => {
           const isSelected = value === type.value
+          const Icon = type.icon
           return (
             <button
               key={type.value}
@@ -44,9 +60,7 @@ export function BoatTypeSelector({ value, onChange, error }: BoatTypeSelectorPro
               )}
               aria-pressed={isSelected}
             >
-              <span className="text-2xl leading-none" role="img" aria-label={type.label}>
-                {type.emoji}
-              </span>
+              <Icon className="h-6 w-6" aria-hidden="true" />
               <span className="text-xs font-semibold leading-tight text-center">
                 {type.label}
               </span>

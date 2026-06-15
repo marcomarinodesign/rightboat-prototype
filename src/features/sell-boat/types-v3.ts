@@ -26,6 +26,8 @@ export type Step1LPFormInput = z.input<typeof step1LPSchema>
 /** Wizard Step 2: boat details (boatType, length, location, listedElsewhere + StepTwo fields) */
 export const wizardStep2Schema = z.object({
   boatType: z.string().min(1, "Boat type is required"),
+  category: z.string().optional().or(z.literal("")),
+  hullMaterial: z.string().optional().or(z.literal("")),
   length: z.coerce.number().min(1, "Length is required").max(500),
   location: z.string().trim().min(1, "Location is required").max(200),
   listedElsewhere: z.boolean(),

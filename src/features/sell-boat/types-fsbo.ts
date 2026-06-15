@@ -29,7 +29,7 @@ export const fsboFormSchema = step1LPSchema
       .min(1000, "Minimum price is £1,000"),
     photoCount: z
       .number()
-      .min(1, "Please add at least one photo")
+      .min(0)
       .default(0),
     password: z
       .string()

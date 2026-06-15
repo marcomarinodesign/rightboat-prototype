@@ -1,6 +1,7 @@
 "use client"
 
 import { UseFormReturn, Controller } from "react-hook-form"
+import { Anchor } from "lucide-react"
 import { FSBOFormData } from "../../types-fsbo"
 import { FSBOAIBanner } from "@/components/fsbo/FSBOAIBanner"
 import { BoatTypeSelector } from "@/components/fsbo/BoatTypeSelector"
@@ -10,6 +11,13 @@ import { PriceInput } from "@/components/fsbo/PriceInput"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 interface FSBOStep1YourBoatProps {
   form: UseFormReturn<FSBOFormData>
@@ -23,6 +31,33 @@ const CONDITION_OPTIONS = [
   { label: "Excellent", value: "Excellent" },
   { label: "Good", value: "Good" },
   { label: "Needs Work", value: "Needs Work" },
+]
+
+const CATEGORY_OPTIONS = [
+  "Day Cruiser",
+  "Cabin Cruiser",
+  "Express Cruiser",
+  "Sportsboat",
+  "Walkaround",
+  "Narrowboat",
+  "Wide Beam",
+  "RIB",
+  "Pontoon",
+  "Sailing Cruiser",
+  "Racing Yacht",
+  "Dinghy",
+  "Catamaran",
+  "Other",
+]
+
+const HULL_MATERIAL_OPTIONS = [
+  "GRP / Fiberglass",
+  "Aluminium",
+  "Steel",
+  "Timber",
+  "Carbon Fibre",
+  "Inflatable / Hypalon",
+  "Other",
 ]
 
 function AIFilledTag() {
@@ -61,7 +96,7 @@ export function FSBOStep1YourBoat({
       {/* Pre-filled boat summary chip */}
       {(brand || model || year) && (
         <div className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-sm font-medium text-foreground">
-          <span>🚤</span>
+          <Anchor className="h-4 w-4 shrink-0" aria-hidden="true" />
           <span>{[brand, model, year].filter(Boolean).join(" · ")}</span>
         </div>
       )}
@@ -97,6 +132,64 @@ export function FSBOStep1YourBoat({
               }}
               error={errors.boatType?.message}
             />
+          )}
+        />
+      </div>
+
+      {/* ── Category (optional) ── */}
+      <div className="space-y-2">
+        <Label className="text-sm font-semibold">
+          Category{" "}
+          <span className="text-muted-foreground font-normal text-xs">(optional)</span>
+        </Label>
+        <Controller
+          name="category"
+          control={control}
+          render={({ field }) => (
+            <Select
+              value={field.value ?? ""}
+              onValueChange={field.onChange}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent>
+                {CATEGORY_OPTIONS.map((opt) => (
+                  <SelectItem key={opt} value={opt}>
+                    {opt}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </div>
+
+      {/* ── Hull Material (optional) ── */}
+      <div className="space-y-2">
+        <Label className="text-sm font-semibold">
+          Hull Material{" "}
+          <span className="text-muted-foreground font-normal text-xs">(optional)</span>
+        </Label>
+        <Controller
+          name="hullMaterial"
+          control={control}
+          render={({ field }) => (
+            <Select
+              value={field.value ?? ""}
+              onValueChange={field.onChange}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select hull material" />
+              </SelectTrigger>
+              <SelectContent>
+                {HULL_MATERIAL_OPTIONS.map((opt) => (
+                  <SelectItem key={opt} value={opt}>
+                    {opt}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           )}
         />
       </div>

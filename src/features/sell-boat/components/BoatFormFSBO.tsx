@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -8,7 +8,16 @@ import { motion, AnimatePresence } from "framer-motion"
 import { toast } from "sonner"
 
 import { runAIPreFill, type AIPreFillResult } from "@/lib/fsbo/ai-prefill"
+import {
+  figmaPreviewMockAIResult,
+  figmaPreviewMockFormValues,
+  figmaPreviewMockPhotos,
+  figmaPreviewStepNumber,
+  type FsboFigmaPreviewStep,
+  type FsboPreviewMode,
+} from "@/lib/fsbo/figma-preview"
 import { popularModels } from "@/data/models"
+import { cn } from "@/lib/utils"
 import { fsboFormSchema, FSBOFormData, FSBOPhoto, FSBOStepNumber, FSBO_STEPS } from "../types-fsbo"
 import { WizardProgress } from "@/components/fsbo/WizardProgress"
 import { WizardFooter } from "@/components/fsbo/WizardFooter"
@@ -37,17 +46,39 @@ const CTA_LABELS: Record<FSBOStepNumber, string> = {
   5: "Publish my listing →",
 }
 
-export function BoatFormFSBO() {
+type BoatFormFSBOProps = {
+  /** Dev/capture-only step preset (Figma Code Connect). */
+  figmaPreview?: FsboFigmaPreviewStep
+  /** Force mobile/desktop layout for Figma capture. */
+  previewMode?: FsboPreviewMode
+  initialStep?: FSBOStepNumber
+}
+
+export function BoatFormFSBO({
+  figmaPreview,
+  previewMode,
+  initialStep,
+}: BoatFormFSBOProps = {}) {
   const router = useRouter()
-  const [step, setStep] = useState<FSBOStepNumber>(1)
+  const isFigmaPreview = Boolean(figmaPreview)
+  const previewStep = figmaPreview ? figmaPreviewStepNumber(figmaPreview) : undefined
+  const [step, setStep] = useState<FSBOStepNumber>(
+    initialStep ?? previewStep ?? 1
+  )
   const [direction, setDirection] = useState<1 | -1>(1)
-  const [photos, setPhotos] = useState<FSBOPhoto[]>([])
+  const [photos, setPhotos] = useState<FSBOPhoto[]>(() =>
+    isFigmaPreview && previewStep && previewStep >= 2
+      ? figmaPreviewMockPhotos()
+      : []
+  )
   const photosRef = useRef(photos)
   photosRef.current = photos
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [isHydrated, setIsHydrated] = useState(false)
-  const [aiResult, setAIResult] = useState<AIPreFillResult | null>(null)
+  const [isHydrated, setIsHydrated] = useState(isFigmaPreview)
+  const [aiResult, setAIResult] = useState<AIPreFillResult | null>(() =>
+    isFigmaPreview ? figmaPreviewMockAIResult() : null
+  )
   const [aiBannerDismissed, setAIBannerDismissed] = useState(false)
   const [userEditedAIFields, setUserEditedAIFields] = useState<Set<string>>(new Set())
 
@@ -59,6 +90,8 @@ export function BoatFormFSBO() {
       year: "" as unknown as number,
       email: "",
       boatType: "",
+      category: "",
+      hullMaterial: "",
       length: "" as unknown as number,
       location: "",
       listedElsewhere: false,
@@ -92,8 +125,24 @@ export function BoatFormFSBO() {
     })
   }, [photos.length, step, form])
 
+  // Figma Code Connect — seed mock data without localStorage
+  useEffect(() => {
+    if (!isFigmaPreview) return
+    const mock = figmaPreviewMockFormValues()
+    ;(Object.keys(mock) as (keyof FSBOFormData)[]).forEach((key) => {
+      const value = mock[key]
+      if (value !== undefined) {
+        form.setValue(key, value as FSBOFormData[typeof key], {
+          shouldValidate: false,
+        })
+      }
+    })
+    setIsHydrated(true)
+  }, [isFigmaPreview, form])
+
   // Hydrate from localStorage
   useEffect(() => {
+    if (isFigmaPreview) return
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
       try {
@@ -120,10 +169,11 @@ export function BoatFormFSBO() {
       return
     }
     setIsHydrated(true)
-  }, [router, form])
+  }, [isFigmaPreview, router, form])
 
   // AI pre-fill from LP make/model/year (once on mount)
   useEffect(() => {
+    if (isFigmaPreview) return
     const stored = localStorage.getItem(STORAGE_KEY)
     if (!stored) return
     try {
@@ -153,7 +203,7 @@ export function BoatFormFSBO() {
     } catch {
       // Silently ignore parse errors
     }
-  }, [form])
+  }, [isFigmaPreview, form])
 
   const handleUserEditAIField = (fieldName: string) => {
     setUserEditedAIFields((prev) => {
@@ -169,8 +219,9 @@ export function BoatFormFSBO() {
 
   // Scroll to top on step change
   useEffect(() => {
+    if (isFigmaPreview) return
     window.scrollTo({ top: 0, behavior: "smooth" })
-  }, [step])
+  }, [isFigmaPreview, step])
 
   // Auto-save to localStorage on step complete
   const saveProgress = (nextStep: FSBOStepNumber) => {
@@ -206,6 +257,14 @@ export function BoatFormFSBO() {
     setStep((step - 1) as FSBOStepNumber)
   }
 
+  const handleSkipPhotos = () => {
+    form.setValue("photoCount", 0, { shouldValidate: false })
+    const nextStep = 3 as FSBOStepNumber
+    saveProgress(nextStep)
+    setDirection(1)
+    setStep(nextStep)
+  }
+
   /** Prototype publish — mock payment, no Zod gate (card fields are visual only) */
   const handlePublish = async () => {
     setIsSubmitting(true)
@@ -238,15 +297,38 @@ export function BoatFormFSBO() {
   const year = form.watch("year")
   const boatSummary = formatBoatSummary(brand, model, year)
 
+  const showSuccess = isSuccess || figmaPreview === "success"
+
+  const previewShell = (children: ReactNode) => {
+    if (previewMode === "mobile") {
+      return (
+        <div className="mx-auto w-full max-w-[402px] min-h-[874px] border-x border-border bg-background">
+          {children}
+        </div>
+      )
+    }
+    if (previewMode === "desktop") {
+      return (
+        <div className="w-full min-h-[900px] bg-background">{children}</div>
+      )
+    }
+    return children
+  }
+
   if (!isHydrated) return null
-  if (isSuccess) {
-    return (
-      <div className="fixed inset-0 z-50 overflow-y-auto bg-background">
+  if (showSuccess) {
+    return previewShell(
+      <div
+        className={cn(
+          "overflow-y-auto bg-background",
+          isFigmaPreview ? "px-4 py-8" : "fixed inset-0 z-50"
+        )}
+      >
         <div className="mx-auto max-w-lg px-4 py-8">
           <FSBOSuccessScreen
             plan={form.getValues("selectedPlan")}
             boatSummary={boatSummary}
-            onReset={handleReset}
+            onReset={isFigmaPreview ? () => {} : handleReset}
           />
         </div>
       </div>
@@ -278,7 +360,7 @@ export function BoatFormFSBO() {
     exit: (dir: number) => ({ x: dir > 0 ? -40 : 40, opacity: 0 }),
   }
 
-  return (
+  return previewShell(
     <form
       onSubmit={(e) => e.preventDefault()}
       className="relative flex flex-col min-h-0"
@@ -317,6 +399,7 @@ export function BoatFormFSBO() {
                 form={form}
                 photos={photos}
                 onPhotosChange={setPhotos}
+                onSkip={handleSkipPhotos}
               />
             )}
             {step === 3 && <FSBOStep3YourDetails form={form} />}

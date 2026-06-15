@@ -128,7 +128,9 @@ export function SearchableSelect({
           triggerClassName
         )}
       >
-        <span className="truncate">{selectedOption?.label ?? placeholder}</span>
+        <span className="min-w-0 flex-1 truncate text-left">
+          {selectedOption?.label ?? placeholder}
+        </span>
 
         <span className="ml-2 flex shrink-0 items-center gap-1">
           {selectedOption && clearable && (

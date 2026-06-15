@@ -16,6 +16,8 @@ interface SellBWizardLayoutProps {
   totalSteps?: number
   /** When true, hide the step 1 header (anchor + title + subtitle) */
   hideStepHeader?: boolean
+  /** When true, hide the left image column entirely */
+  hideImage?: boolean
   children: React.ReactNode
   className?: string
 }
@@ -24,6 +26,7 @@ export function SellBWizardLayout({
   currentStep,
   totalSteps = 3,
   hideStepHeader = false,
+  hideImage = false,
   children,
   className,
 }: SellBWizardLayoutProps) {
@@ -32,21 +35,26 @@ export function SellBWizardLayout({
   return (
     <div
       className={cn(
-        "grid h-screen w-screen max-w-none grid-cols-1 grid-rows-[auto_1fr] overflow-hidden bg-background lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:grid-rows-1",
+        "grid h-screen w-screen max-w-none overflow-hidden bg-background",
+        hideImage
+          ? "grid-cols-1 grid-rows-1"
+          : "grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:grid-rows-1",
         className
       )}
     >
-      {/* Left column: image — on mobile/tablet top banner (responsive height), on lg full-height sidebar */}
-      <div className="relative h-40 w-full shrink-0 sm:h-48 md:h-56 lg:h-full lg:min-h-0">
-        <Image
-          src={WIZARD_IMAGE.src}
-          alt={WIZARD_IMAGE.alt}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1023px) 100vw, 42vw"
-          priority
-        />
-      </div>
+      {/* Left column: image — hidden when hideImage=true */}
+      {!hideImage && (
+        <div className="relative h-40 w-full shrink-0 sm:h-48 md:h-56 lg:h-full lg:min-h-0">
+          <Image
+            src={WIZARD_IMAGE.src}
+            alt={WIZARD_IMAGE.alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1023px) 100vw, 42vw"
+            priority
+          />
+        </div>
+      )}
 
       {/* Right column: scrollable form area — full width responsive */}
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-auto bg-background">
