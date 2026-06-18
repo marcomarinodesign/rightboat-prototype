@@ -26,15 +26,19 @@ export function figmaPreviewStepNumber(
 
 export function figmaPreviewMockFormValues(): Partial<FSBOFormData> {
   return {
-    brand: "bavaria",
-    model: "vision-46",
-    year: 2018,
+    brand: "Jeanneau",
+    model: "Sun Odyssey 36i",
+    year: 2010,
     email: "seller@example.com",
     boatType: "Sailboat",
-    condition: "Used",
-    length: 14,
+    condition: "Good",
+    length: 36,
     location: "Southampton, UK",
-    expectedPrice: 85000,
+    expectedPrice: 49000,
+    category: "Sailing Cruiser",
+    hullMaterial: "GRP / Fiberglass",
+    description:
+      "This 2010 Jeanneau Sun Odyssey 36i is a well-maintained sailing cruiser offering a great combination of performance, comfort, and reliability. She has been carefully looked after with regular servicing and is ready for her next adventure. The boat features a spacious cockpit, comfortable saloon, two cabins, and a well-equipped galley. Full service history available on request. Viewing highly recommended.",
     fullName: "Alex Mariner",
     phone: "+44 7700 900123",
     preferredContact: "email",
@@ -44,6 +48,11 @@ export function figmaPreviewMockFormValues(): Partial<FSBOFormData> {
     password: "securePass1",
     selectedPlan: "premium",
     photoCount: 3,
+    engineMake: "",
+    numberOfEngines: "",
+    beam: "",
+    draft: "",
+    cabinsBerths: "",
   }
 }
 
@@ -57,17 +66,21 @@ export function figmaPreviewMockPhotos(): FSBOPhoto[] {
 
 export function figmaPreviewMockAIResult(): AIPreFillResult {
   return {
-    filledFields: new Set(["boatType", "condition", "length"]),
+    filledFields: new Set(["boatType", "category", "hullMaterial", "length", "description", "condition"]),
     values: {
       boatType: "Sailboat",
-      condition: "Used",
-      length: 14,
+      category: "Sailing Cruiser",
+      hullMaterial: "GRP / Fiberglass",
+      length: 36,
+      description:
+        "This 2010 Jeanneau Sun Odyssey 36i is a well-maintained sailing cruiser offering a great combination of performance, comfort, and reliability. She has been carefully looked after with regular servicing and is ready for her next adventure. The boat features a spacious cockpit, comfortable saloon, two cabins, and a well-equipped galley. Full service history available on request. Viewing highly recommended.",
+      condition: "Good",
     },
   }
 }
 
 export function figmaPreviewBoatSummary() {
-  return "Bavaria · Vision 46 · 2018"
+  return "Jeanneau · Sun Odyssey 36i · 2010"
 }
 
 const FSBO_PREVIEW_STEPS: FsboFigmaPreviewStep[] = [

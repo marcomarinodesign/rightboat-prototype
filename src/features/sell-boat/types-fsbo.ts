@@ -10,6 +10,12 @@ export interface FSBOPhoto {
   file: File
 }
 
+/** Centralised plan prices — import from here in Step 4, Step 5, and Success */
+export const PLANS = {
+  premium: { id: "premium" as const, name: "Rightboat Premium", price: 79, billing: "month" },
+  basic:   { id: "basic"   as const, name: "Rightboat Basic",   price: 49, billing: "month" },
+}
+
 /** Package selection */
 export const fsboPlanSchema = z.object({
   selectedPlan: z.enum(["basic", "premium"]).default("premium"),
@@ -26,7 +32,7 @@ export const fsboFormSchema = step1LPSchema
         required_error: "Please enter an asking price",
         invalid_type_error: "Please enter a valid price",
       })
-      .min(1000, "Minimum price is £1,000"),
+      .min(1000, "Minimum price is €1,000"),
     photoCount: z
       .number()
       .min(0)
@@ -35,6 +41,17 @@ export const fsboFormSchema = step1LPSchema
       .string()
       .min(8, "Password must be at least 8 characters")
       .max(128, "Password is too long"),
+    // preferredContact removed from Step 3 UI (not in Figma Q2 design)
+    preferredContact: z.string().optional().or(z.literal("")),
+    // Step 1 — new fields added in Q2 Figma sync
+    description: z.string().max(5000).optional().or(z.literal("")),
+    engineMake: z.string().optional().or(z.literal("")),
+    numberOfEngines: z.string().optional().or(z.literal("")),
+    // Override engineHours from wizardStep2Schema to string (select-based UI)
+    engineHours: z.string().optional().or(z.literal("")),
+    beam: z.string().optional().or(z.literal("")),
+    draft: z.string().optional().or(z.literal("")),
+    cabinsBerths: z.string().optional().or(z.literal("")),
   })
 
 export type FSBOFormData = z.infer<typeof fsboFormSchema>
@@ -51,7 +68,7 @@ export const FSBO_STEPS = [
   {
     step: 3,
     name: "Your Details",
-    fields: ["fullName", "phone", "preferredContact", "gdprConsent", "password"],
+    fields: ["fullName", "phone", "gdprConsent", "password"],
   },
   { step: 4, name: "Choose Plan",   fields: ["selectedPlan"] },
   { step: 5, name: "Payment",       fields: [] },

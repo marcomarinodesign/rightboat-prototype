@@ -21,9 +21,11 @@ interface FSBOSuccessScreenProps {
   onReset: () => void
 }
 
-const PLAN_LABEL = {
-  basic: "Basic · $49/mo",
-  premium: "Premium · $99/mo",
+import { PLANS } from "../types-fsbo"
+
+const PLAN_LABEL: Record<"basic" | "premium", string> = {
+  basic:   `Basic · $${PLANS.basic.price}/mo`,
+  premium: `Premium · $${PLANS.premium.price}/mo`,
 }
 
 /** Prototype BDP — same active listing as site-map “Boat detail — active listing” */
@@ -85,14 +87,14 @@ export function FSBOSuccessScreen({
         <h2 className="text-2xl font-extrabold tracking-tight text-foreground">
           Your listing is live!
         </h2>
-        <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed">
+        <p className="text-sm text-foreground max-w-xs mx-auto leading-relaxed">
           Buyers on Rightboat can find your boat right now.
         </p>
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2">
         {boatSummary && (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm font-medium text-foreground">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fafafa] text-sm font-medium text-foreground">
             <Anchor className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {boatSummary}
           </span>
@@ -102,20 +104,20 @@ export function FSBOSuccessScreen({
             "inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide",
             plan === "premium"
               ? "bg-primary text-primary-foreground"
-              : "bg-muted text-foreground"
+              : "bg-[#fafafa] text-foreground"
           )}
         >
           {PLAN_LABEL[plan]}
         </span>
       </div>
 
-      <div className="w-full max-w-sm rounded-lg bg-muted p-4 text-left space-y-3">
+      <div className="w-full max-w-sm rounded-xl bg-[#f4f9ff] p-4 text-left space-y-3">
         <p className="text-sm font-semibold text-foreground">What happens next</p>
         <ul className="space-y-2.5">
           {NEXT_STEPS.map(({ icon: Icon, text }) => (
-            <li key={text} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+            <li key={text} className="flex items-start gap-2.5 text-sm text-foreground">
               <Icon
-                className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
+                className="mt-0.5 h-4 w-4 shrink-0 text-primary"
                 aria-hidden="true"
               />
               <span className="leading-snug">{text}</span>
@@ -143,13 +145,9 @@ export function FSBOSuccessScreen({
         </Button>
       </div>
 
-      <button
-        type="button"
-        onClick={onReset}
-        className="text-sm text-muted-foreground underline hover:text-foreground transition-colors duration-[var(--transition-duration-fast)]"
-      >
+      <Button variant="link" onClick={onReset}>
         List another boat
-      </button>
+      </Button>
     </motion.div>
   )
 }

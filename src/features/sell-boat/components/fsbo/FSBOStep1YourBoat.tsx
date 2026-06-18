@@ -1,16 +1,15 @@
 "use client"
 
+import { useState } from "react"
 import { UseFormReturn, Controller } from "react-hook-form"
-import { Anchor } from "lucide-react"
 import { FSBOFormData } from "../../types-fsbo"
 import { FSBOAIBanner } from "@/components/fsbo/FSBOAIBanner"
 import { BoatTypeSelector } from "@/components/fsbo/BoatTypeSelector"
-import { PillGroup } from "@/components/ui/pill-group"
 import { LengthInput } from "@/components/fsbo/LengthInput"
 import { PriceInput } from "@/components/fsbo/PriceInput"
+import { PriceComparisonWidget } from "@/components/fsbo/PriceComparisonWidget"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
 import {
   Select,
   SelectContent,
@@ -30,44 +29,67 @@ interface FSBOStep1YourBoatProps {
 const CONDITION_OPTIONS = [
   { label: "Excellent", value: "Excellent" },
   { label: "Good", value: "Good" },
+  { label: "Fair", value: "Fair" },
   { label: "Needs Work", value: "Needs Work" },
 ]
 
-const CATEGORY_OPTIONS = [
-  "Day Cruiser",
-  "Cabin Cruiser",
-  "Express Cruiser",
-  "Sportsboat",
-  "Walkaround",
-  "Narrowboat",
-  "Wide Beam",
-  "RIB",
-  "Pontoon",
-  "Sailing Cruiser",
-  "Racing Yacht",
-  "Dinghy",
-  "Catamaran",
-  "Other",
-]
-
-const HULL_MATERIAL_OPTIONS = [
-  "GRP / Fiberglass",
-  "Aluminium",
-  "Steel",
-  "Timber",
-  "Carbon Fibre",
-  "Inflatable / Hypalon",
-  "Other",
-]
+const ENGINE_MAKE_OPTIONS = ["Volvo Penta", "Yanmar", "Mercury", "Suzuki", "Honda", "Mercruiser", "Yamaha", "BMW", "Other"]
+const NUMBER_OF_ENGINES_OPTIONS = ["1", "2", "3", "4"]
+const ENGINE_HOURS_OPTIONS = ["Under 500h", "500–1,000h", "1,000–2,000h", "2,000–5,000h", "Over 5,000h"]
+const BEAM_OPTIONS = ["Under 2m", "2–3m", "3–4m", "4–5m", "Over 5m"]
+const DRAFT_OPTIONS = ["Under 0.5m", "0.5–1m", "1–1.5m", "1.5–2m", "Over 2m"]
+const CABINS_BERTHS_OPTIONS = ["None", "1 cabin", "2 cabins", "3 cabins", "4+ cabins"]
 
 function AIFilledTag() {
   return (
-    <span className="inline-flex items-center gap-1 ml-1.5 px-1.5 py-0.5 rounded bg-tag-bg text-primary text-[10px] font-semibold leading-none align-middle">
+    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] bg-[#b8e7ff] text-foreground text-xs font-bold whitespace-nowrap">
       <svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
         <path d="M8 1L9.5 6H14.5L10.5 9L12 14L8 11L4 14L5.5 9L1.5 6H6.5L8 1Z" />
       </svg>
-      AI
+      Rightboat AI
     </span>
+  )
+}
+
+// Helper: render a field label row with optional AI badge
+function FieldLabel({ children, hasAI }: { children: React.ReactNode; hasAI: boolean }) {
+  return (
+    <div className="flex items-center gap-2 py-0.5">
+      {children}
+      {hasAI && <AIFilledTag />}
+    </div>
+  )
+}
+
+// Helper: a Select field
+function SelectField({
+  name,
+  control,
+  options,
+  placeholder,
+}: {
+  name: string
+  control: UseFormReturn<FSBOFormData>["control"]
+  options: string[]
+  placeholder?: string
+}) {
+  return (
+    <Controller
+      name={name as keyof FSBOFormData}
+      control={control}
+      render={({ field }) => (
+        <Select value={(field.value as string) ?? ""} onValueChange={field.onChange}>
+          <SelectTrigger>
+            <SelectValue placeholder={placeholder ?? "Select"} />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((opt) => (
+              <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
+    />
   )
 }
 
@@ -78,48 +100,42 @@ export function FSBOStep1YourBoat({
   onDismissAIBanner,
   onUserEditAIField,
 }: FSBOStep1YourBoatProps) {
-  const {
-    register,
-    control,
-    formState: { errors },
-    setValue,
-    watch,
-  } = form
+  const { register, control, formState: { errors }, watch } = form
+  const [detailsOpen, setDetailsOpen] = useState(false)
 
-  const listedElsewhere = watch("listedElsewhere")
   const brand = watch("brand")
   const model = watch("model")
   const year = watch("year")
+  const expectedPrice = watch("expectedPrice")
+
+  const boatName = [brand, model, year].filter(Boolean).join(" ")
 
   return (
-    <div className="space-y-7">
-      {/* Pre-filled boat summary chip */}
-      {(brand || model || year) && (
-        <div className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-sm font-medium text-foreground">
-          <Anchor className="h-4 w-4 shrink-0" aria-hidden="true" />
-          <span>{[brand, model, year].filter(Boolean).join(" · ")}</span>
-        </div>
-      )}
+    <div className="flex flex-col gap-4">
+      {/* Title */}
+      <h2 className="text-2xl font-bold tracking-tight text-foreground leading-8">
+        {boatName ? (
+          <>Tell us about your <span className="text-primary">{boatName}</span></>
+        ) : (
+          "Tell us about your boat"
+        )}
+      </h2>
+
+      {/* Subtitle */}
+      <p className="text-base text-foreground">
+        We&apos;ll use this to create your listing and suggest a competitive price.
+      </p>
 
       {/* AI pre-fill banner */}
       {showAIBanner && (
         <FSBOAIBanner filledFields={aiFields} onDismiss={onDismissAIBanner} />
       )}
 
-      {/* Step intro */}
-      <div className="space-y-1">
-        <h2 className="text-xl font-bold tracking-tight">Tell us about your boat</h2>
-        <p className="text-sm text-muted-foreground">
-          The more detail you add, the more enquiries you&apos;ll get.
-        </p>
-      </div>
-
       {/* ── Boat Type ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Boat Type <span className="text-destructive">*</span>
-          {aiFields.has("boatType") && <AIFilledTag />}
-        </Label>
+      <div className="flex flex-col gap-1 pt-7">
+        <FieldLabel hasAI={aiFields.has("boatType")}>
+          <Label className="text-sm font-bold text-foreground leading-5">Boat Type</Label>
+        </FieldLabel>
         <Controller
           name="boatType"
           control={control}
@@ -137,130 +153,89 @@ export function FSBOStep1YourBoat({
       </div>
 
       {/* ── Category (optional) ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Category{" "}
-          <span className="text-muted-foreground font-normal text-xs">(optional)</span>
-        </Label>
-        <Controller
-          name="category"
-          control={control}
-          render={({ field }) => (
-            <Select
-              value={field.value ?? ""}
-              onValueChange={field.onChange}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a category" />
-              </SelectTrigger>
-              <SelectContent>
-                {CATEGORY_OPTIONS.map((opt) => (
-                  <SelectItem key={opt} value={opt}>
-                    {opt}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-      </div>
-
-      {/* ── Hull Material (optional) ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Hull Material{" "}
-          <span className="text-muted-foreground font-normal text-xs">(optional)</span>
-        </Label>
-        <Controller
-          name="hullMaterial"
-          control={control}
-          render={({ field }) => (
-            <Select
-              value={field.value ?? ""}
-              onValueChange={field.onChange}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select hull material" />
-              </SelectTrigger>
-              <SelectContent>
-                {HULL_MATERIAL_OPTIONS.map((opt) => (
-                  <SelectItem key={opt} value={opt}>
-                    {opt}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-      </div>
-
-      {/* ── Condition ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Condition <span className="text-destructive">*</span>
-          {aiFields.has("condition") && <AIFilledTag />}
-        </Label>
-        <Controller
-          name="condition"
-          control={control}
-          render={({ field }) => (
-            <PillGroup
-              options={CONDITION_OPTIONS}
-              value={field.value}
-              onChange={(val) => {
-                field.onChange(val)
-                if (aiFields.has("condition")) onUserEditAIField("condition")
-              }}
-            />
-          )}
-        />
-        {errors.condition && (
-          <p className="text-sm text-destructive mt-1">{errors.condition.message}</p>
-        )}
-      </div>
-
-      {/* ── Length ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Length <span className="text-destructive">*</span>
-          {aiFields.has("length") && <AIFilledTag />}
-        </Label>
-        <Controller
-          name="length"
-          control={control}
-          render={({ field }) => (
-            <LengthInput
-              value={field.value}
-              onChange={(val) => {
-                field.onChange(val)
-                if (aiFields.has("length")) onUserEditAIField("length")
-              }}
-              error={errors.length?.message}
-            />
-          )}
-        />
-      </div>
-
-      {/* ── Location ── */}
-      <div className="space-y-2">
-        <Label htmlFor="location" className="text-sm font-semibold">
-          Location <span className="text-destructive">*</span>
-        </Label>
+      <div className="flex flex-col gap-1 pt-7">
+        <FieldLabel hasAI={aiFields.has("category")}>
+          <Label className="text-sm font-bold text-foreground leading-5">
+            Category{" "}
+            <span className="font-bold text-muted-foreground">(optional)</span>
+          </Label>
+        </FieldLabel>
         <Input
-          id="location"
-          placeholder="e.g. Brighton Marina, UK"
-          {...register("location")}
+          placeholder="e.g. Sailing Cruiser"
+          {...register("category")}
+          onChange={(e) => {
+            register("category").onChange(e)
+            if (aiFields.has("category")) onUserEditAIField("category")
+          }}
         />
-        {errors.location && (
-          <p className="text-sm text-destructive mt-1">{errors.location.message}</p>
-        )}
       </div>
+
+      {/* ── Hull Material + Length (2-col) ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-1 pt-7">
+          <FieldLabel hasAI={aiFields.has("hullMaterial")}>
+            <Label className="text-sm font-bold text-foreground leading-5">
+              Hull Material{" "}
+              <span className="font-bold text-muted-foreground">(optional)</span>
+            </Label>
+          </FieldLabel>
+          <Input
+            placeholder="e.g. Fiberglass"
+            {...register("hullMaterial")}
+            onChange={(e) => {
+              register("hullMaterial").onChange(e)
+              if (aiFields.has("hullMaterial")) onUserEditAIField("hullMaterial")
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1 pt-7">
+          <FieldLabel hasAI={aiFields.has("length")}>
+            <Label className="text-sm font-bold text-foreground leading-5">Length</Label>
+          </FieldLabel>
+          <Controller
+            name="length"
+            control={control}
+            render={({ field }) => (
+              <LengthInput
+                value={field.value}
+                onChange={(val) => {
+                  field.onChange(val)
+                  if (aiFields.has("length")) onUserEditAIField("length")
+                }}
+                error={errors.length?.message}
+              />
+            )}
+          />
+        </div>
+      </div>
+
+      {/* ── Description ── */}
+      <div className="flex flex-col gap-1 pt-7">
+        <FieldLabel hasAI={aiFields.has("description")}>
+          <Label className="text-sm font-bold text-foreground leading-5">Description</Label>
+        </FieldLabel>
+        <textarea
+          className="flex w-full h-[160px] rounded-lg border border-input bg-background px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors resize-none"
+          placeholder="Describe your boat — condition, upgrades, history..."
+          {...register("description")}
+          onChange={(e) => {
+            register("description").onChange(e)
+            if (aiFields.has("description")) onUserEditAIField("description")
+          }}
+        />
+        <p className="text-xs text-muted-foreground">Min. 100 characters</p>
+      </div>
+
+      {/* ── Section divider: Add your information ── */}
+      <div className="h-px bg-border w-full" />
+      <h3 className="text-2xl font-bold tracking-tight text-foreground leading-8">
+        Add your information
+      </h3>
 
       {/* ── Asking Price ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Asking Price <span className="text-destructive">*</span>
-        </Label>
+      <div className="flex flex-col gap-1 pt-4">
+        <Label className="text-sm font-bold text-foreground leading-5">Asking Price</Label>
         <Controller
           name="expectedPrice"
           control={control}
@@ -269,56 +244,149 @@ export function FSBOStep1YourBoat({
               value={field.value ? String(field.value) : ""}
               onChange={field.onChange}
               error={errors.expectedPrice?.message}
+              currencySymbol="$"
             />
           )}
         />
-        <p className="text-xs text-muted-foreground">
-          Not sure what to charge?{" "}
-          <a
-            href="/boats-for-sale"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline text-primary hover:text-primary/80"
-          >
-            See similar listings →
-          </a>
-        </p>
       </div>
 
-      {/* ── Engine Hours (optional) ── */}
-      <div className="space-y-2">
-        <Label htmlFor="engineHours" className="text-sm font-semibold">
-          Engine Hours{" "}
-          <span className="text-muted-foreground font-normal text-xs">(optional)</span>
-        </Label>
-        <Input
-          id="engineHours"
-          type="number"
-          inputMode="numeric"
-          placeholder="e.g. 450"
-          {...register("engineHours")}
-        />
-        <p className="text-xs text-muted-foreground">
-          Engine hours help buyers assess wear.
-        </p>
-      </div>
+      {/* ── Price comparison widget (shows when price entered) ── */}
+      {Number(expectedPrice) >= 1000 && (
+        <PriceComparisonWidget askingPrice={Number(expectedPrice)} />
+      )}
 
-      {/* ── Listed Elsewhere (optional) ── */}
-      <div className="flex items-center justify-between rounded-lg bg-muted px-4 py-4">
-        <div>
-          <Label htmlFor="listedElsewhere" className="text-sm font-semibold cursor-pointer">
-            Listed on another platform?
+      {/* ── Location ── */}
+      <div className="flex flex-col gap-1 pt-4">
+        <div className="flex items-center gap-2 py-0.5">
+          <Label htmlFor="location" className="text-sm font-bold text-foreground leading-5">
+            Location <span className="text-destructive">*</span>
           </Label>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Optional — no penalty, just useful data.
-          </p>
         </div>
-        <Switch
-          id="listedElsewhere"
-          checked={listedElsewhere}
-          onCheckedChange={(v) => setValue("listedElsewhere", v)}
+        <Input
+          id="location"
+          placeholder="e.g. Brighton Marina, UK"
+          {...register("location")}
         />
+        {errors.location && <p className="text-sm text-destructive">{errors.location.message}</p>}
       </div>
+
+      {/* ── Section divider + collapsible Details ── */}
+      <div className="h-px bg-border w-full" />
+
+      {/* Details accordion header */}
+      <button
+        type="button"
+        onClick={() => setDetailsOpen((v) => !v)}
+        className="flex items-center gap-4 py-5 w-full text-left"
+      >
+        <h3 className="flex-1 text-2xl font-bold tracking-tight text-foreground leading-8">Details</h3>
+        {(aiFields.size > 0 || !!brand || !!model) && <AIFilledTag />}
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 text-foreground transition-transform duration-200 ${detailsOpen ? "rotate-180" : ""}`}
+        >
+          <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {/* Details fields — divider always shown, but moves below fields when expanded */}
+      {detailsOpen ? (
+        <>
+          {/* ── Manufacturer / Make + Model (2-col) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-1 pt-7">
+              <FieldLabel hasAI={!!brand}>
+                <Label className="text-sm font-bold text-foreground leading-5">Manufacturer / Make</Label>
+              </FieldLabel>
+              <Input id="brand" placeholder="e.g. Jeanneau" {...register("brand")} />
+              {errors.brand && <p className="text-sm text-destructive">{errors.brand.message}</p>}
+            </div>
+
+            <div className="flex flex-col gap-1 pt-7">
+              <FieldLabel hasAI={!!model}>
+                <Label className="text-sm font-bold text-foreground leading-5">Model</Label>
+              </FieldLabel>
+              <Input id="model" placeholder="e.g. Sun Odyssey 36i" {...register("model")} />
+              {errors.model && <p className="text-sm text-destructive">{errors.model.message}</p>}
+            </div>
+          </div>
+
+          {/* ── Year + Condition (2-col) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-1 pt-7">
+              <FieldLabel hasAI={!!year}>
+                <Label className="text-sm font-bold text-foreground leading-5">Year</Label>
+              </FieldLabel>
+              <Input id="year" type="number" inputMode="numeric" placeholder="e.g. 2010" {...register("year")} />
+              {errors.year && <p className="text-sm text-destructive">{errors.year.message}</p>}
+            </div>
+
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Condition</Label>
+              <Controller
+                name="condition"
+                control={control}
+                render={({ field }) => (
+                  <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CONDITION_OPTIONS.map((opt) => (
+                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {errors.condition && <p className="text-sm text-destructive">{errors.condition.message}</p>}
+            </div>
+          </div>
+
+          {/* ── Engine make + Number of Engines (2-col) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Engine make</Label>
+              <SelectField name="engineMake" control={control} options={ENGINE_MAKE_OPTIONS} />
+            </div>
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Number of Engines</Label>
+              <SelectField name="numberOfEngines" control={control} options={NUMBER_OF_ENGINES_OPTIONS} />
+            </div>
+          </div>
+
+          {/* ── Engine Hours + Beam (2-col) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Engine Hours</Label>
+              <SelectField name="engineHours" control={control} options={ENGINE_HOURS_OPTIONS} />
+            </div>
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Beam</Label>
+              <SelectField name="beam" control={control} options={BEAM_OPTIONS} />
+            </div>
+          </div>
+
+          {/* ── Draft + Cabins/Berths (2-col) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Draft</Label>
+              <SelectField name="draft" control={control} options={DRAFT_OPTIONS} />
+            </div>
+            <div className="flex flex-col gap-1 pt-7">
+              <Label className="text-sm font-bold text-foreground leading-5">Cabins/Berths</Label>
+              <SelectField name="cabinsBerths" control={control} options={CABINS_BERTHS_OPTIONS} />
+            </div>
+          </div>
+          <div className="h-px bg-border w-full" />
+        </>
+      ) : (
+        <div className="h-px bg-border w-full" />
+      )}
     </div>
   )
 }

@@ -3,7 +3,6 @@
 import { UseFormReturn, Controller } from "react-hook-form"
 import { FSBOFormData } from "../../types-fsbo"
 import { PasswordInput } from "@/components/fsbo/PasswordInput"
-import { PillGroup } from "@/components/ui/pill-group"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -11,12 +10,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 interface FSBOStep3YourDetailsProps {
   form: UseFormReturn<FSBOFormData>
 }
-
-const CONTACT_OPTIONS = [
-  { label: "Phone", value: "phone" },
-  { label: "Email", value: "email" },
-  { label: "WhatsApp", value: "whatsapp" },
-]
 
 export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
   const {
@@ -29,39 +22,37 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
   const email = watch("email")
 
   return (
-    <div className="space-y-7">
-      {/* Step intro */}
-      <div className="space-y-1">
-        <h2 className="text-xl font-bold tracking-tight">Your details</h2>
-        <p className="text-sm text-muted-foreground">
-          So buyers can reach you — and to create your Rightboat account.
-        </p>
-      </div>
+    <div className="flex flex-col gap-4">
+      {/* Title */}
+      <h2 className="text-2xl font-bold tracking-tight text-foreground leading-8">Your details</h2>
 
-      {/* ── Email (read-only, pre-filled from LP) ── */}
-      <div className="space-y-2">
-        <Label htmlFor="email-display" className="text-sm font-semibold">
-          Email
-        </Label>
-        <div className="flex items-center gap-2 h-11 px-3 rounded-lg border border-input bg-muted text-sm text-muted-foreground">
+      {/* Subtitle */}
+      <p className="text-base text-foreground">
+        So buyers can reach you — and to create your Rightboat account.
+      </p>
+
+      {/* ── Email (read-only) ── */}
+      <div className="flex flex-col gap-1 pt-7">
+        <Label className="text-sm font-bold text-foreground leading-5">Email</Label>
+        <div className="flex items-center gap-2 h-11 px-3.5 rounded-xl border border-[#e4e5e9] bg-[#fafafa] text-sm">
           <LockIcon />
-          <span className="truncate">{email || "—"}</span>
+          <span className="truncate text-[#9699a0]">{email || "seller@example.com"}</span>
         </div>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-[#9699a0] pt-2">
           Entered at the start.{" "}
           <a
             href="/fsbo"
-            className="underline text-primary hover:opacity-80 transition-opacity duration-[var(--transition-duration-fast)]"
+            className="text-primary hover:opacity-80 transition-opacity"
           >
             Change
           </a>
         </p>
       </div>
 
-      {/* ── Full Name ── */}
-      <div className="space-y-2">
-        <Label htmlFor="fullName" className="text-sm font-semibold">
-          Full name <span className="text-destructive">*</span>
+      {/* ── Full name ── */}
+      <div className="flex flex-col gap-1 pt-7">
+        <Label htmlFor="fullName" className="text-sm font-bold text-foreground leading-5">
+          Full name
         </Label>
         <Input
           id="fullName"
@@ -71,14 +62,14 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
           {...register("fullName")}
         />
         {errors.fullName && (
-          <p className="text-sm text-destructive mt-1">{errors.fullName.message}</p>
+          <p className="text-sm text-destructive">{errors.fullName.message}</p>
         )}
       </div>
 
-      {/* ── Phone ── */}
-      <div className="space-y-2">
-        <Label htmlFor="phone" className="text-sm font-semibold">
-          Phone number <span className="text-destructive">*</span>
+      {/* ── Phone number ── */}
+      <div className="flex flex-col gap-1 pt-7">
+        <Label htmlFor="phone" className="text-sm font-bold text-foreground leading-5">
+          Phone number
         </Label>
         <Input
           id="phone"
@@ -89,37 +80,16 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
           {...register("phone")}
         />
         {errors.phone && (
-          <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
+          <p className="text-sm text-destructive">{errors.phone.message}</p>
         )}
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-[#9699a0] pt-2">
           Only shared with interested buyers — never displayed publicly.
         </p>
       </div>
 
-      {/* ── Preferred Contact ── */}
-      <div className="space-y-2">
-        <Label className="text-sm font-semibold">
-          Preferred contact method <span className="text-destructive">*</span>
-        </Label>
-        <Controller
-          name="preferredContact"
-          control={control}
-          render={({ field }) => (
-            <PillGroup
-              options={CONTACT_OPTIONS}
-              value={field.value}
-              onChange={field.onChange}
-            />
-          )}
-        />
-        {errors.preferredContact && (
-          <p className="text-sm text-destructive mt-1">{errors.preferredContact.message}</p>
-        )}
-      </div>
-
       {/* ── Password ── */}
-      <div className="space-y-2">
-        <Label htmlFor="password" className="text-sm font-semibold">
+      <div className="flex flex-col gap-1 pt-7">
+        <Label htmlFor="password" className="text-sm font-bold text-foreground leading-5">
           Create a password <span className="text-destructive">*</span>
         </Label>
         <PasswordInput
@@ -128,13 +98,13 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
           {...register("password")}
           error={errors.password?.message}
         />
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-[#9699a0] pt-2">
           This creates your Rightboat account so you can manage your listing.
         </p>
       </div>
 
       {/* ── GDPR Consent ── */}
-      <div className="space-y-2">
+      <div className="pt-7">
         <Controller
           name="gdprConsent"
           control={control}
@@ -143,23 +113,19 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
               <Checkbox
                 id="gdprConsent"
                 checked={field.value === true}
-                onCheckedChange={(checked) =>
-                  field.onChange(checked === true ? true : false)
-                }
-                aria-describedby="gdpr-desc"
+                onCheckedChange={(checked) => field.onChange(checked === true)}
                 className="mt-0.5 shrink-0"
               />
               <label
                 htmlFor="gdprConsent"
-                id="gdpr-desc"
-                className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+                className="text-sm text-[#9699a0] leading-5 cursor-pointer"
               >
                 I agree to Rightboat&apos;s{" "}
                 <a
                   href="/terms"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-foreground hover:text-primary transition-colors duration-[var(--transition-duration-fast)]"
+                  className="underline text-foreground hover:text-primary transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Terms of Service
@@ -169,7 +135,7 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
                   href="/privacy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-foreground hover:text-primary transition-colors duration-[var(--transition-duration-fast)]"
+                  className="underline text-foreground hover:text-primary transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Privacy Policy
@@ -180,7 +146,7 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
           )}
         />
         {errors.gdprConsent && (
-          <p className="text-sm text-destructive mt-1">{errors.gdprConsent.message}</p>
+          <p className="text-sm text-destructive mt-2">{errors.gdprConsent.message}</p>
         )}
       </div>
     </div>
@@ -195,7 +161,7 @@ function LockIcon() {
       viewBox="0 0 14 14"
       fill="none"
       aria-hidden="true"
-      className="shrink-0 text-muted-foreground"
+      className="shrink-0 text-[#9699a0]"
     >
       <rect x="2" y="6" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
       <path

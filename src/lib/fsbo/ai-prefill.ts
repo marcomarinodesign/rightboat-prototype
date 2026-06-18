@@ -45,28 +45,28 @@ const BRAND_TYPE_MAP: Record<string, string> = {
   Freeman: "Motorboat",
   Birchwood: "Motorboat",
   Fletcher: "Motorboat",
-  // Rigid Inflatable Boats
-  Ribeye: "RIB",
-  Avon: "RIB",
-  Zodiac: "RIB",
-  Narwhal: "RIB",
-  Humber: "RIB",
-  Honwave: "RIB",
-  Bombard: "RIB",
-  // Catamarans
-  Lagoon: "Catamaran",
-  Leopard: "Catamaran",
-  Fountaine: "Catamaran",
-  Catana: "Catamaran",
-  Privilege: "Catamaran",
-  // Canal Boats
-  Springer: "Canal Boat",
-  "Liverpool Boats": "Canal Boat",
-  "Heritage Narrowboats": "Canal Boat",
-  // Fishing Boats
-  Orkney: "Fishing Boat",
-  "Boston Whaler": "Fishing Boat",
-  Stabicraft: "Fishing Boat",
+  // Rigid Inflatable Boats → Motorboat
+  Ribeye: "Motorboat",
+  Avon: "Motorboat",
+  Zodiac: "Motorboat",
+  Narwhal: "Motorboat",
+  Humber: "Motorboat",
+  Honwave: "Motorboat",
+  Bombard: "Motorboat",
+  // Catamarans → Sailboat
+  Lagoon: "Sailboat",
+  Leopard: "Sailboat",
+  Fountaine: "Sailboat",
+  Catana: "Sailboat",
+  Privilege: "Sailboat",
+  // Canal Boats → Motorboat
+  Springer: "Motorboat",
+  "Liverpool Boats": "Motorboat",
+  "Heritage Narrowboats": "Motorboat",
+  // Fishing Boats → Motorboat
+  Orkney: "Motorboat",
+  "Boston Whaler": "Motorboat",
+  Stabicraft: "Motorboat",
 }
 
 function inferBoatType(brand: string): string | null {
@@ -75,6 +75,26 @@ function inferBoatType(brand: string): string | null {
     if (b.includes(key.toLowerCase())) return type
   }
   return null
+}
+
+// ─── Infer category from boat type ──────────────────────────────────────────
+function inferCategory(boatType: string): string | null {
+  const map: Record<string, string> = {
+    Sailboat: "Sailing Cruiser",
+    Motorboat: "Motor Cruiser",
+    Catamaran: "Catamaran",
+    RIB: "RIB",
+    "Canal Boat": "Narrowboat",
+    "Fishing Boat": "Fishing Boat",
+  }
+  return map[boatType] ?? null
+}
+
+// ─── Generate a template description ────────────────────────────────────────
+function generateDescription(brand: string, model: string, year: number, boatType: string): string {
+  const displayName = [brand, model].filter(Boolean).join(" ")
+  const typeLabel = boatType || "boat"
+  return `This ${year ? year + " " : ""}${displayName} is a well-maintained ${typeLabel.toLowerCase()} offering a great combination of performance, comfort, and reliability. She has been carefully looked after and is ready for her next adventure. Full service history available on request. Viewing highly recommended.`
 }
 
 const MIN_LENGTH_FT = 10
@@ -161,6 +181,9 @@ export interface AIPreFillResult {
     boatType?: string
     length?: number
     condition?: string
+    category?: string
+    hullMaterial?: string
+    description?: string
   }
 }
 
@@ -172,6 +195,18 @@ export function runAIPreFill(input: AIPreFillInput): AIPreFillResult {
   if (boatType) {
     values.boatType = boatType
     filledFields.add("boatType")
+
+    const category = inferCategory(boatType)
+    if (category) {
+      values.category = category
+      filledFields.add("category")
+    }
+  }
+
+  // Always set hull material when brand is known
+  if (input.brand) {
+    values.hullMaterial = "GRP / Fiberglass"
+    filledFields.add("hullMaterial")
   }
 
   const length = inferLength(input.model, input.brand)
@@ -183,6 +218,16 @@ export function runAIPreFill(input: AIPreFillInput): AIPreFillResult {
   if (input.year && input.year > 1900) {
     values.condition = inferCondition(input.year)
     filledFields.add("condition")
+  }
+
+  if (input.brand || input.model) {
+    values.description = generateDescription(
+      input.brand,
+      input.model,
+      input.year,
+      values.boatType ?? ""
+    )
+    filledFields.add("description")
   }
 
   return { filledFields, values }

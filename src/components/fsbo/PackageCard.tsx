@@ -1,19 +1,15 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
 
 export interface PackageCardProps {
-  /** "basic" | "premium" */
   plan: "basic" | "premium"
   name: string
   price: number
-  /** e.g. "per month" */
   billing: string
-  /** Optional badge text — shown in top-right next to price (e.g. "Recommended") */
   badge?: string
   features: string[]
-  /** Features only in this plan vs Basic — shown with a star marker instead of check */
-  premiumFeatures?: string[]
   selected: boolean
   onSelect: () => void
 }
@@ -34,10 +30,10 @@ export function PackageCard({
     <label
       htmlFor={inputId}
       className={cn(
-        "relative block rounded-lg border-2 p-5 cursor-pointer",
-        "transition-colors duration-[var(--transition-duration-fast)]",
-        "border-border bg-card hover:border-primary",
-        selected && "border-primary bg-card"
+        "relative block rounded-xl border-2 p-[22px] cursor-pointer transition-colors",
+        selected
+          ? "border-primary bg-white"
+          : "border-[#e4e5e9] bg-white hover:border-primary/40"
       )}
     >
       <input
@@ -50,14 +46,13 @@ export function PackageCard({
         className="sr-only"
       />
 
+      {/* Radio indicator — absolute top-right */}
       <div
         className={cn(
-          "absolute top-4 right-4",
-          "flex items-center justify-center w-5 h-5 rounded-full border-2",
-          "transition-colors duration-[var(--transition-duration-fast)]",
+          "absolute top-4 right-4 flex items-center justify-center w-5 h-5 rounded-full border-2 transition-colors",
           selected
-            ? "border-primary bg-primary text-primary-foreground"
-            : "border-border bg-transparent"
+            ? "border-primary bg-primary text-white"
+            : "border-[#e4e5e9] bg-transparent"
         )}
         aria-hidden="true"
       >
@@ -74,29 +69,29 @@ export function PackageCard({
         )}
       </div>
 
-      <div className="pr-8 space-y-2">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-base font-bold text-foreground">{name}</span>
-          {badge && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wide leading-none">
-              {badge}
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-baseline gap-1">
-          <span className="text-3xl font-extrabold tracking-tight text-foreground">
-            ${price}
-          </span>
-          <span className="text-sm text-muted-foreground font-medium">
-            /{billing}
-          </span>
-        </div>
+      {/* Plan name + badge */}
+      <div className="pr-8 flex items-center gap-2">
+        <span className="text-base font-bold text-foreground">{name}</span>
+        {badge && (
+          <Badge variant="default" className="text-[10px] uppercase tracking-[0.25px]">
+            {badge}
+          </Badge>
+        )}
       </div>
 
-      <div className="my-4 border-t border-border" />
+      {/* Price */}
+      <div className="flex items-baseline gap-1 pt-2">
+        <span className="text-[30px] font-extrabold tracking-[-0.75px] text-foreground leading-9">
+          ${price}
+        </span>
+        <span className="text-sm text-[#9699a0] font-medium">/{billing}</span>
+      </div>
 
-      <ul className="space-y-2.5">
+      {/* Divider */}
+      <div className="mt-4 border-t border-[#e4e5e9]" />
+
+      {/* Features */}
+      <ul className="pt-4 flex flex-col gap-2.5">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-2.5 text-sm">
             <CheckIcon className="shrink-0 mt-0.5 text-primary" />
@@ -118,9 +113,8 @@ function CheckIcon({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <circle cx="7" cy="7" r="6.5" stroke="currentColor" strokeWidth="1" opacity="0.3" />
       <path
-        d="M4 7L6 9.5L10 4.5"
+        d="M2.5 7L5.5 10L11.5 4"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"

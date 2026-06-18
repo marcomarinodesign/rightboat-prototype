@@ -16,7 +16,7 @@ figma.connect(
         step={1}
         totalSteps={5}
         stepName="Your Boat"
-        onBack={() => {}}
+        onClose={() => {}}
       />
     ),
   }

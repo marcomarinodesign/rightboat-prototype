@@ -7,6 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast } from "sonner"
 
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog"
 import { runAIPreFill, type AIPreFillResult } from "@/lib/fsbo/ai-prefill"
 import {
   figmaPreviewMockAIResult,
@@ -39,12 +47,14 @@ function formatBoatSummary(brand: string, model: string, year: number | string) 
 
 /** CTA label per step */
 const CTA_LABELS: Record<FSBOStepNumber, string> = {
-  1: "Continue →",
-  2: "Continue →",
-  3: "Continue →",
-  4: "Continue to payment →",
+  1: "Next",
+  2: "Next",
+  3: "Next",
+  4: "Next",
   5: "Publish my listing →",
 }
+
+const STEP4_DISCLAIMER = "Cancel or change plan any time from your dashboard. No long-term commitment."
 
 type BoatFormFSBOProps = {
   /** Dev/capture-only step preset (Figma Code Connect). */
@@ -81,6 +91,7 @@ export function BoatFormFSBO({
   )
   const [aiBannerDismissed, setAIBannerDismissed] = useState(false)
   const [userEditedAIFields, setUserEditedAIFields] = useState<Set<string>>(new Set())
+  const [showExitDialog, setShowExitDialog] = useState(false)
 
   const form = useForm<FSBOFormData>({
     resolver: zodResolver(fsboFormSchema),
@@ -100,6 +111,12 @@ export function BoatFormFSBO({
       engineHours: "",
       lastMaintenanceYear: "",
       extras: [],
+      description: "",
+      engineMake: "",
+      numberOfEngines: "",
+      beam: "",
+      draft: "",
+      cabinsBerths: "",
       fullName: "",
       phone: "",
       preferredContact: "",
@@ -198,6 +215,15 @@ export function BoatFormFSBO({
       if (result.values.condition) {
         form.setValue("condition", result.values.condition, { shouldValidate: false })
       }
+      if (result.values.category) {
+        form.setValue("category", result.values.category, { shouldValidate: false })
+      }
+      if (result.values.hullMaterial) {
+        form.setValue("hullMaterial", result.values.hullMaterial, { shouldValidate: false })
+      }
+      if (result.values.description) {
+        form.setValue("description", result.values.description as string, { shouldValidate: false })
+      }
 
       setAIResult(result)
     } catch {
@@ -292,6 +318,12 @@ export function BoatFormFSBO({
     router.push("/fsbo")
   }
 
+  const handleExitConfirm = () => {
+    setShowExitDialog(false)
+    photos.forEach((p) => URL.revokeObjectURL(p.url))
+    router.push("/fsbo")
+  }
+
   const brand = form.watch("brand")
   const model = form.watch("model")
   const year = form.watch("year")
@@ -365,16 +397,43 @@ export function BoatFormFSBO({
       onSubmit={(e) => e.preventDefault()}
       className="relative flex flex-col min-h-0"
     >
-      {/* Sticky progress header */}
+      {/* Exit confirmation dialog */}
+      <Dialog open={showExitDialog} onOpenChange={setShowExitDialog}>
+        <DialogContent className="max-w-sm rounded-2xl" showCloseButton={false}>
+          <div className="flex flex-col gap-3">
+            <DialogTitle>Exit your listing?</DialogTitle>
+            <DialogDescription>
+              Your progress will be saved. You can continue from where you left off next time.
+            </DialogDescription>
+          </div>
+          <div className="flex flex-col gap-2 pt-4">
+            <Button
+              variant="destructive"
+              size="sm"
+              className="w-full"
+              onClick={handleExitConfirm}
+            >
+              Exit anyway
+            </Button>
+            <DialogClose asChild>
+              <Button variant="outline" size="sm" className="w-full">
+                Keep editing
+              </Button>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Progress header */}
       <WizardProgress
         step={step}
         totalSteps={TOTAL_STEPS}
         stepName={currentStepMeta.name}
-        onBack={step > 1 ? goBack : undefined}
+        onClose={isFigmaPreview ? undefined : () => setShowExitDialog(true)}
       />
 
       {/* Scrollable step content */}
-      <div className="flex-1 py-6">
+      <div className="flex-1 pt-4 pb-6">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={step}
@@ -414,13 +473,17 @@ export function BoatFormFSBO({
         </AnimatePresence>
       </div>
 
-      {/* Sticky footer CTA */}
+      {/* Footer CTA */}
       <WizardFooter
         label={CTA_LABELS[step]}
         onClick={isLastStep ? () => void handlePublish() : goNext}
         isSubmit={false}
         disabled={continueDisabled}
         isLoading={isSubmitting}
+        onBack={step > 1 ? goBack : undefined}
+        skipLabel={step === 2 ? "Skip for now" : undefined}
+        onSkip={step === 2 ? handleSkipPhotos : undefined}
+        disclaimer={step === 4 ? STEP4_DISCLAIMER : undefined}
       />
     </form>
   )

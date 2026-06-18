@@ -1,7 +1,7 @@
 "use client"
 
 import { UseFormReturn } from "react-hook-form"
-import { FSBOFormData } from "../../types-fsbo"
+import { FSBOFormData, PLANS } from "../../types-fsbo"
 import { MockCardForm } from "@/components/fsbo/MockCardForm"
 
 interface FSBOStep5PaymentProps {
@@ -9,75 +9,75 @@ interface FSBOStep5PaymentProps {
   selectedPlan: "basic" | "premium"
 }
 
-const PLAN_DETAILS = {
-  basic: {
-    name: "Basic",
-    price: 49,
-    highlight: "Live listing · 20 photos · Email enquiries",
-  },
-  premium: {
-    name: "Premium",
-    price: 99,
-    highlight: "Featured placement · Priority matching · Premium analytics",
-  },
+const PLAN_HIGHLIGHTS: Record<"basic" | "premium", string> = {
+  premium: "Featured placement · Priority matching · Premium analytics",
+  basic: "Listed on Rightboat.com · Up to 20 photos · Email enquiries",
 }
 
 export function FSBOStep5Payment({ selectedPlan }: FSBOStep5PaymentProps) {
-  const plan = PLAN_DETAILS[selectedPlan]
+  const plan = PLANS[selectedPlan]
+  const highlight = PLAN_HIGHLIGHTS[selectedPlan]
 
   return (
-    <div className="space-y-7">
-      <div className="space-y-1">
-        <h2 className="text-xl font-bold tracking-tight">Payment</h2>
-        <p className="text-sm text-muted-foreground">
-          Your listing goes live the moment payment is confirmed.
-        </p>
-      </div>
+    <div className="flex flex-col gap-4">
+      {/* Title */}
+      <h2 className="text-2xl font-bold tracking-tight text-foreground leading-8">Payment</h2>
 
-      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-          Order summary
-        </p>
+      {/* Subtitle */}
+      <p className="text-sm text-foreground">
+        Your listing goes live the moment payment is confirmed.
+      </p>
 
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-0.5">
-            <p className="text-base font-semibold text-foreground">
-              Rightboat {plan.name}
-            </p>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              {plan.highlight}
-            </p>
-          </div>
-          <div className="text-right shrink-0">
-            <p className="text-xl font-extrabold text-foreground">${plan.price}</p>
-            <p className="text-xs text-muted-foreground">per month</p>
-          </div>
-        </div>
-
-        <div className="border-t border-border pt-3 flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">Billed monthly · Cancel any time</p>
-          <p className="text-sm font-bold text-foreground">
-            ${plan.price}
-            <span className="font-normal text-muted-foreground">/mo</span>
+      {/* Order summary */}
+      <div className="pt-7">
+        <div className="rounded-xl border border-[#e4e5e9] p-[17px] flex flex-col gap-3">
+          <p className="text-xs font-semibold uppercase tracking-[1.2px] text-[#9699a0]">
+            Order summary
           </p>
+
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-col gap-0.5">
+              <p className="text-base font-semibold text-foreground">
+                Rightboat {plan.name}
+              </p>
+              <p className="text-xs text-[#9699a0] leading-5">{highlight}</p>
+            </div>
+            <div className="text-right shrink-0">
+              <p className="text-[20px] font-extrabold text-foreground leading-7">${plan.price}</p>
+              <p className="text-xs text-[#9699a0]">per month</p>
+            </div>
+          </div>
+
+          <div className="border-t border-[#e4e5e9] pt-[13px] flex items-center justify-between">
+            <p className="text-sm text-[#9699a0]">Billed monthly · Cancel any time</p>
+            <p className="text-sm font-bold text-foreground">
+              ${plan.price}
+              <span className="font-normal text-[#9699a0]">/mo</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <MockCardForm />
+      {/* Card form */}
+      <div className="pt-7">
+        <MockCardForm />
+      </div>
 
-      <div className="flex items-center justify-center gap-4 flex-wrap">
+      {/* Trust row */}
+      <div className="flex items-center justify-center gap-4 flex-wrap pt-3">
         <TrustBadge icon={<LockIcon />} label="SSL encrypted" />
         <TrustBadge icon={<ShieldIcon />} label="Secure checkout" />
-        <TrustBadge icon={<StripeIcon />} label="Powered by Stripe" />
+        <TrustBadge icon={<StripeWordmark />} label="Powered by Stripe" />
       </div>
 
-      <p className="text-xs text-muted-foreground text-center leading-relaxed">
+      {/* Legal */}
+      <p className="text-xs text-[#9699a0] text-center leading-5">
         By publishing you confirm your listing complies with Rightboat&apos;s{" "}
         <a
           href="/terms"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline hover:text-foreground transition-colors duration-[var(--transition-duration-fast)]"
+          className="underline hover:opacity-80 transition-opacity"
         >
           listing guidelines
         </a>
@@ -89,7 +89,7 @@ export function FSBOStep5Payment({ selectedPlan }: FSBOStep5PaymentProps) {
 
 function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+    <div className="flex items-center gap-1.5 text-xs text-[#0073e6]">
       {icon}
       <span>{label}</span>
     </div>
@@ -98,52 +98,29 @@ function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
 
 function LockIcon() {
   return (
-    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="text-[#0073e6]">
       <rect x="1" y="6" width="10" height="7.5" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
-      <path
-        d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
+      <path d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   )
 }
 
 function ShieldIcon() {
   return (
-    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="text-[#0073e6]">
       <path
         d="M6 1L1 3.5V7C1 9.8 3.2 12.4 6 13C8.8 12.4 11 9.8 11 7V3.5L6 1Z"
         stroke="currentColor"
         strokeWidth="1.2"
         strokeLinejoin="round"
       />
-      <path
-        d="M4 7L5.5 8.5L8.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M4 7L5.5 8.5L8.5 5.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
-function StripeIcon() {
+function StripeWordmark() {
   return (
-    <svg width="28" height="12" viewBox="0 0 28 12" fill="none" aria-hidden="true">
-      <text
-        x="0"
-        y="10"
-        fontSize="10"
-        fontWeight="700"
-        fontFamily="system-ui, sans-serif"
-        fill="currentColor"
-        opacity="0.6"
-      >
-        stripe
-      </text>
-    </svg>
+    <span className="text-[10px] font-bold text-[#0073e6] italic tracking-wide">stripe</span>
   )
 }

@@ -5,20 +5,18 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 export interface WizardFooterProps {
-  /** Primary CTA label */
   label: string
-  /** Called on primary CTA click. If type="submit" is needed, set isSubmit=true. */
   onClick?: () => void
-  /** If true, renders as type="submit" (for the last step form submission) */
   isSubmit?: boolean
-  /** Disables the primary CTA */
   disabled?: boolean
-  /** Shows a loading spinner inside the button */
   isLoading?: boolean
-  /** Optional secondary text link below the button */
-  secondaryLabel?: string
-  /** Called when secondary link is clicked */
-  onSecondary?: () => void
+  /** When provided, renders Back (left) + primary (right) layout */
+  onBack?: () => void
+  /** "Skip for now" link shown below the button row (step 2 only) */
+  skipLabel?: string
+  onSkip?: () => void
+  /** Disclaimer text shown below the button row (step 4) */
+  disclaimer?: string
   className?: string
 }
 
@@ -28,48 +26,64 @@ export function WizardFooter({
   isSubmit = false,
   disabled = false,
   isLoading = false,
-  secondaryLabel,
-  onSecondary,
+  onBack,
+  skipLabel,
+  onSkip,
+  disclaimer,
   className,
 }: WizardFooterProps) {
-  return (
-    <div
-      className={cn(
-        // Sticky at bottom, full bleed (compensate parent padding)
-        "sticky bottom-0 z-20 bg-background",
-        "-mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 lg:-mx-[68px] lg:px-[68px]",
-        "border-t border-border pt-4",
-        className
-      )}
-      style={{
-        paddingBottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))",
-      }}
+  const primaryButton = (
+    <Button
+      type={isSubmit ? "submit" : "button"}
+      onClick={isSubmit ? undefined : onClick}
+      disabled={disabled || isLoading}
+      size="sm"
+      className={onBack ? "flex-1" : "w-full"}
     >
-      <Button
-        type={isSubmit ? "submit" : "button"}
-        onClick={isSubmit ? undefined : onClick}
-        disabled={disabled || isLoading}
-        size="lg"
-        className="w-full rounded-xl text-base font-semibold h-[52px]"
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Please wait...
-          </>
-        ) : (
-          label
-        )}
-      </Button>
+      {isLoading ? (
+        <>
+          <Loader2 className="w-4 h-4 animate-spin" />
+          Please wait...
+        </>
+      ) : (
+        label
+      )}
+    </Button>
+  )
 
-      {secondaryLabel && onSecondary && (
-        <button
+  return (
+    <div className={cn("pt-7 flex flex-col gap-3", className)}>
+      {onBack ? (
+        <div className="flex justify-between items-center gap-4">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={onBack}
+            className="flex-1"
+          >
+            Back
+          </Button>
+          {primaryButton}
+        </div>
+      ) : (
+        primaryButton
+      )}
+
+      {skipLabel && onSkip && (
+        <Button
           type="button"
-          onClick={onSecondary}
-          className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors text-center"
+          variant="link"
+          size="sm"
+          onClick={onSkip}
+          className="w-full"
         >
-          {secondaryLabel}
-        </button>
+          {skipLabel}
+        </Button>
+      )}
+
+      {disclaimer && (
+        <p className="text-sm text-muted-foreground text-center">{disclaimer}</p>
       )}
     </div>
   )
