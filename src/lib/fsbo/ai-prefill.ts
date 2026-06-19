@@ -80,12 +80,12 @@ function inferBoatType(brand: string): string | null {
 // ─── Infer category from boat type ──────────────────────────────────────────
 function inferCategory(boatType: string): string | null {
   const map: Record<string, string> = {
-    Sailboat: "Sailing Cruiser",
-    Motorboat: "Motor Cruiser",
+    Sailboat: "Cruising Sailboats",
+    Motorboat: "Cruisers",
     Catamaran: "Catamaran",
-    RIB: "RIB",
-    "Canal Boat": "Narrowboat",
-    "Fishing Boat": "Fishing Boat",
+    RIB: "RIB boats",
+    "Canal Boat": "Narrowboats",
+    "Fishing Boat": "Fishing boats",
   }
   return map[boatType] ?? null
 }
@@ -205,7 +205,7 @@ export function runAIPreFill(input: AIPreFillInput): AIPreFillResult {
 
   // Always set hull material when brand is known
   if (input.brand) {
-    values.hullMaterial = "GRP / Fiberglass"
+    values.hullMaterial = "GRP"
     filledFields.add("hullMaterial")
   }
 
