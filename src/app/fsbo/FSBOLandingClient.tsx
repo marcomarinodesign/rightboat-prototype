@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { motion } from "framer-motion"
 import {
   ClipboardList,
   Send,
@@ -14,6 +15,8 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Testimonials } from "@/components/home/testimonials"
+import { FadeIn } from "@/components/motion/fade-in"
+import { easeOutExpo, staggerContainer, staggerItem } from "@/lib/motion-variants"
 import { step1LPSchema, type Step1LPData, type Step1LPFormInput } from "@/features/sell-boat/types-v3"
 import { StepOneLP } from "@/components/fsbo/StepOneLP"
 import { STORAGE_KEY } from "@/components/fsbo/SignupModal"
@@ -211,8 +214,13 @@ export function FSBOLandingClient({
               />
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left lg:py-16">
-              <div className="inline-flex items-center justify-center rounded-full bg-[#13022c] px-3 py-1.5">
+            <motion.div
+              className="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left lg:py-16"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease: easeOutExpo }}
+            >
+              <div className="inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-3 py-1.5">
                 <span className="text-xs font-normal leading-4 text-white">
                   Commission-free
                 </span>
@@ -222,24 +230,29 @@ export function FSBOLandingClient({
                 className="font-bold tracking-[-0.48px] text-white text-[48px] leading-[48px] lg:text-[72px] lg:leading-none"
               >
                 Sell your boat<br />online{" "}
-                <span className="text-[#0257fc]">privately</span>
+                <span className="text-primary">privately</span>
               </h1>
               <p className="whitespace-pre-line text-base font-normal leading-6 text-white">
                 {HERO_DESCRIPTION}
               </p>
-            </div>
+            </motion.div>
           )}
 
           {/* Form card */}
-          <div className="w-full max-w-[414px] rounded-xl bg-[#f4f9ff] border border-[#fafafa] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.05)] p-5 sm:p-6 lg:shrink-0 lg:p-[37px]">
-            <div className="mb-6 text-center text-[20px] font-bold leading-[27.5px] text-[#13022c]">
+          <motion.div
+            className="w-full max-w-[414px] rounded-xl bg-tag-bg border border-neutral-100 shadow-sm p-5 sm:p-6 lg:shrink-0 lg:p-[37px]"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.15 }}
+          >
+            <div className="mb-6 text-center text-[20px] font-bold leading-[27.5px] text-midnight">
               Takes less than 2 minutes.
             </div>
             <StepOneLP
               form={form}
               onSubmit={handleStep1Submit}
             />
-          </div>
+          </motion.div>
         </div>
 
       </section>
@@ -254,10 +267,10 @@ export function FSBOLandingClient({
         aria-labelledby="how-it-works-heading"
       >
         <div className="mx-auto w-full max-w-7xl">
-          <div className="mx-auto max-w-[720px] text-center">
+          <FadeIn className="mx-auto max-w-[720px] text-center">
             <h2
               id="how-it-works-heading"
-              className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl"
+              className="heading-lg text-foreground"
             >
               Sell Your Boat Online: How It Works
             </h2>
@@ -265,11 +278,17 @@ export function FSBOLandingClient({
               From listing to sale, you stay in control. Follow these simple
               steps to sell your boat privately.
             </p>
-          </div>
+          </FadeIn>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <motion.div
+            className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+          >
             {/* Col 1 — Step 01: image background */}
-            <div className="relative min-h-[400px] overflow-hidden rounded-[20px]">
+            <motion.div variants={staggerItem} className="relative min-h-[400px] overflow-hidden rounded-[20px] transition-all duration-[var(--transition-duration-normal)] hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transition-none">
               <Image
                 src="/how-it-works-boat.png"
                 alt="Boat listing"
@@ -277,23 +296,23 @@ export function FSBOLandingClient({
                 className="object-cover"
               />
               <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white p-5">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#0B6CFF]">01</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-primary">01</p>
                 <p className="mt-1 text-base font-bold text-foreground">Create your boat listing</p>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   Add high-quality photos, detailed boat specifications, and your asking price. Clear visuals and accurate information help you sell your boat online successfully by attracting more serious buyers.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Col 2 — Step 02 */}
-            <div className="flex min-h-[400px] flex-col justify-between rounded-[20px] bg-[#fafafa] p-6">
+            <motion.div variants={staggerItem} className="flex min-h-[400px] flex-col justify-between rounded-[20px] bg-neutral-100 p-6 transition-all duration-[var(--transition-duration-normal)] hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transition-none">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-[#0B6CFF]">02</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-primary">02</p>
                 <p className="mt-2 text-2xl font-bold text-foreground">Choose your plan</p>
               </div>
               <div className="flex gap-3">
                 {[Send, ClipboardList, Users, CircleDollarSign, TrendingUp].map((Icon, i) => (
-                  <div key={i} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0B6CFF]">
+                  <div key={i} className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
                     <Icon className="h-4 w-4 text-white" aria-hidden />
                   </div>
                 ))}
@@ -301,12 +320,12 @@ export function FSBOLandingClient({
               <p className="text-sm leading-relaxed text-muted-foreground">
                 Select Basic ($49/mo) or Premium ($99/mo) to go live. Premium gives your listing featured placement and priority buyer matching to help sell your boat faster.
               </p>
-            </div>
+            </motion.div>
 
             {/* Col 3 — Steps 03 + 04 stacked */}
-            <div className="flex flex-col gap-4">
+            <motion.div variants={staggerItem} className="flex flex-col gap-4">
               {/* Step 03 */}
-              <div className="flex min-h-[230px] flex-col justify-between rounded-[20px] bg-[#086bff] p-6">
+              <div className="flex min-h-[230px] flex-col justify-between rounded-[20px] bg-blue-300 p-6 transition-all duration-[var(--transition-duration-normal)] hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transition-none">
                 <p className="text-xs font-bold uppercase tracking-widest text-white/60">03</p>
                 <div>
                   <p className="text-2xl font-bold text-white">Connect with buyers</p>
@@ -316,15 +335,15 @@ export function FSBOLandingClient({
                 </div>
               </div>
               {/* Step 04 */}
-              <div className="flex min-h-[154px] flex-col justify-between rounded-[20px] bg-[#13022c] p-6">
+              <div className="flex min-h-[154px] flex-col justify-between rounded-[20px] bg-midnight p-6 transition-all duration-[var(--transition-duration-normal)] hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transition-none">
                 <p className="text-xs font-bold uppercase tracking-widest text-white/40">04</p>
                 <p className="text-sm leading-relaxed text-white">
                   <span className="font-bold">Negotiate directly:</span>{" "}
                   Manage offers and negotiate directly with buyers. Selling your boat privately gives you full flexibility without paying broker commission fees.
                 </p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -353,18 +372,26 @@ export function FSBOLandingClient({
         <div className="mx-auto w-full max-w-7xl space-y-16">
           {/* Section: Best Way to Sell Your Boat */}
           <section aria-labelledby="best-way-heading">
-            <h2
-              id="best-way-heading"
-              className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+            <FadeIn>
+              <h2
+                id="best-way-heading"
+                className="heading-sm text-foreground sm:heading-md"
+              >
+                What Is the Best Way to Sell Your Boat?
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                There are several ways to sell your boat, depending on your
+                experience level, budget, and how involved you want to be in the
+                process.
+              </p>
+            </FadeIn>
+            <motion.div
+              className="mt-6 grid gap-4 sm:grid-cols-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
             >
-              What Is the Best Way to Sell Your Boat?
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              There are several ways to sell your boat, depending on your
-              experience level, budget, and how involved you want to be in the
-              process.
-            </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {[
                 {
                   title: "Private sale",
@@ -379,12 +406,12 @@ export function FSBOLandingClient({
                   body: "Listing your boat on a high-traffic online marketplace helps you reach a much larger audience of serious buyers while staying in control of the sale.",
                 },
               ].map(({ title, body }) => (
-                <div key={title} className="rounded-2xl bg-[#0257fc] p-6">
+                <motion.div key={title} variants={staggerItem} className="rounded-2xl bg-primary p-6 transition-opacity duration-[var(--transition-duration-normal)] hover:opacity-90 motion-reduce:transition-none">
                   <h3 className="text-lg font-bold text-white">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/90">{body}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
             {surface !== "app" && (
               <div className="relative mt-6 h-[300px] overflow-hidden rounded-2xl">
                 <Image
@@ -400,19 +427,27 @@ export function FSBOLandingClient({
 
           {/* Section: How to Sell Your Boat Fast */}
           <section aria-labelledby="sell-fast-heading">
-            <h2
-              id="sell-fast-heading"
-              className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+            <FadeIn className="text-center">
+              <h2
+                id="sell-fast-heading"
+                className="heading-sm text-foreground sm:heading-md"
+              >
+                How to Sell Your Boat Fast
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                If you want to sell your boat fast, the key is creating a listing
+                that stands out and reaches the right buyers quickly.
+              </p>
+            </FadeIn>
+            <motion.div
+              className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
             >
-              How to Sell Your Boat Fast
-            </h2>
-            <p className="mt-4 text-center text-base leading-relaxed text-muted-foreground">
-              If you want to sell your boat fast, the key is creating a listing
-              that stands out and reaches the right buyers quickly.
-            </p>
-            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {SELL_FAST_TIPS.map(({ heading, body }) => (
-                <div key={heading} className="flex gap-4">
+                <motion.div key={heading} variants={staggerItem} className="flex gap-4">
                   <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary">
                     <svg
                       width="8"
@@ -438,14 +473,14 @@ export function FSBOLandingClient({
                       {body}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
             <p className="mt-6 text-sm text-muted-foreground">
               List your boat on Rightboat and reach buyers worldwide.{" "}
               <Link
                 href={sellCtaHref}
-                className="font-medium text-primary underline hover:opacity-80"
+                className="font-medium text-primary underline transition-opacity duration-[var(--transition-duration-fast)] hover:opacity-80"
               >
                 Start your listing →
               </Link>
@@ -454,16 +489,19 @@ export function FSBOLandingClient({
 
           {/* Section: Ways to Sell Your Boat (comparison table) */}
           <section aria-labelledby="ways-heading">
-            <h2
-              id="ways-heading"
-              className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
-            >
-              Ways to Sell Your Boat
-            </h2>
-            <p className="mt-4 text-center text-base text-muted-foreground">
-              There are several ways to sell your boat, depending on your
-              priorities:
-            </p>
+            <FadeIn className="text-center">
+              <h2
+                id="ways-heading"
+                className="heading-sm text-foreground sm:heading-md"
+              >
+                Ways to Sell Your Boat
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground">
+                There are several ways to sell your boat, depending on your
+                priorities:
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.1}>
             <div className="mt-6 overflow-x-auto rounded-lg border border-border">
               <table className="w-full text-sm">
                 <thead>
@@ -508,6 +546,7 @@ export function FSBOLandingClient({
                 </tbody>
               </table>
             </div>
+            </FadeIn>
           </section>
         </div>
       </div>
@@ -522,12 +561,15 @@ export function FSBOLandingClient({
         aria-labelledby="faq-heading"
       >
         <div className="mx-auto w-full max-w-7xl">
-          <h2
-            id="faq-heading"
-            className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
-          >
-            For Sale By Owner FAQs
-          </h2>
+          <FadeIn>
+            <h2
+              id="faq-heading"
+              className="heading-sm text-foreground sm:heading-md"
+            >
+              For Sale By Owner FAQs
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.1}>
           <div className="mt-6 divide-y divide-border overflow-hidden rounded-lg border border-border">
             {FAQS.map(({ q, a }) => (
               <details key={q} className="group bg-card">
@@ -558,6 +600,7 @@ export function FSBOLandingClient({
               </details>
             ))}
           </div>
+          </FadeIn>
         </div>
       </section>
     </div>

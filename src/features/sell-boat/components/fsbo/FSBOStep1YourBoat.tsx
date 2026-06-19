@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { UseFormReturn, Controller } from "react-hook-form"
 import { FSBOFormData } from "../../types-fsbo"
 import { BoatTypeSelector } from "@/components/fsbo/BoatTypeSelector"
@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { SRP_HULL_MATERIALS, SRP_CATEGORIES_BY_CLASS } from "@/components/filters/srp-filter-data"
 
 interface FSBOStep1YourBoatProps {
   form: UseFormReturn<FSBOFormData>
@@ -39,7 +40,7 @@ const CABINS_BERTHS_OPTIONS = ["None", "1 cabin", "2 cabins", "3 cabins", "4+ ca
 
 function AIFilledTag() {
   return (
-    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] bg-[#b8e7ff] text-foreground text-xs font-bold whitespace-nowrap">
+    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] bg-neutral-100 text-midnight text-xs font-normal whitespace-nowrap">
       <svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
         <path d="M8 1L9.5 6H14.5L10.5 9L12 14L8 11L4 14L5.5 9L1.5 6H6.5L8 1Z" />
       </svg>
@@ -102,6 +103,15 @@ export function FSBOStep1YourBoat({
   const model = watch("model")
   const year = watch("year")
   const expectedPrice = watch("expectedPrice")
+  const boatType = watch("boatType")
+
+  const categoryOptions = useMemo(() => {
+    const classKey = boatType === "Motorboat" ? "power" : boatType === "Sailboat" ? "sail" : null
+    const cats = classKey
+      ? [...SRP_CATEGORIES_BY_CLASS[classKey]]
+      : [...SRP_CATEGORIES_BY_CLASS.power, ...SRP_CATEGORIES_BY_CLASS.sail, ...SRP_CATEGORIES_BY_CLASS.unpowered]
+    return cats.sort()
+  }, [boatType])
 
   const boatName = [brand, model, year].filter(Boolean).join(" ")
 
@@ -110,7 +120,7 @@ export function FSBOStep1YourBoat({
       {/* Title */}
       <h2 className="text-2xl font-bold tracking-tight text-foreground leading-8">
         {boatName ? (
-          <>Tell us about your <span className="text-primary">{boatName}</span></>
+          <>Tell us about your {boatName}</>
         ) : (
           "Tell us about your boat"
         )}
@@ -150,13 +160,27 @@ export function FSBOStep1YourBoat({
             <span className="font-bold text-muted-foreground">(optional)</span>
           </Label>
         </FieldLabel>
-        <Input
-          placeholder="e.g. Sailing Cruiser"
-          {...register("category")}
-          onChange={(e) => {
-            register("category").onChange(e)
-            if (aiFields.has("category")) onUserEditAIField("category")
-          }}
+        <Controller
+          name="category"
+          control={control}
+          render={({ field }) => (
+            <Select
+              value={field.value ?? ""}
+              onValueChange={(v) => {
+                field.onChange(v)
+                if (aiFields.has("category")) onUserEditAIField("category")
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categoryOptions.map((opt) => (
+                  <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
         />
       </div>
 
@@ -169,13 +193,27 @@ export function FSBOStep1YourBoat({
               <span className="font-bold text-muted-foreground">(optional)</span>
             </Label>
           </FieldLabel>
-          <Input
-            placeholder="e.g. Fiberglass"
-            {...register("hullMaterial")}
-            onChange={(e) => {
-              register("hullMaterial").onChange(e)
-              if (aiFields.has("hullMaterial")) onUserEditAIField("hullMaterial")
-            }}
+          <Controller
+            name="hullMaterial"
+            control={control}
+            render={({ field }) => (
+              <Select
+                value={field.value ?? ""}
+                onValueChange={(v) => {
+                  field.onChange(v)
+                  if (aiFields.has("hullMaterial")) onUserEditAIField("hullMaterial")
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select hull material" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SRP_HULL_MATERIALS.map((opt) => (
+                    <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           />
         </div>
 
