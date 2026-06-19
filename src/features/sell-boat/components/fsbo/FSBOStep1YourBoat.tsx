@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { UseFormReturn, Controller } from "react-hook-form"
 import { FSBOFormData } from "../../types-fsbo"
-import { FSBOAIBanner } from "@/components/fsbo/FSBOAIBanner"
 import { BoatTypeSelector } from "@/components/fsbo/BoatTypeSelector"
 import { LengthInput } from "@/components/fsbo/LengthInput"
 import { PriceInput } from "@/components/fsbo/PriceInput"
@@ -21,8 +20,6 @@ import {
 interface FSBOStep1YourBoatProps {
   form: UseFormReturn<FSBOFormData>
   aiFields: Set<string>
-  showAIBanner: boolean
-  onDismissAIBanner: () => void
   onUserEditAIField: (field: string) => void
 }
 
@@ -96,8 +93,6 @@ function SelectField({
 export function FSBOStep1YourBoat({
   form,
   aiFields,
-  showAIBanner,
-  onDismissAIBanner,
   onUserEditAIField,
 }: FSBOStep1YourBoatProps) {
   const { register, control, formState: { errors }, watch } = form
@@ -125,11 +120,6 @@ export function FSBOStep1YourBoat({
       <p className="text-base text-foreground">
         We&apos;ll use this to create your listing and suggest a competitive price.
       </p>
-
-      {/* AI pre-fill banner */}
-      {showAIBanner && (
-        <FSBOAIBanner filledFields={aiFields} onDismiss={onDismissAIBanner} />
-      )}
 
       {/* ── Boat Type ── */}
       <div className="flex flex-col gap-1 pt-7">

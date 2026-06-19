@@ -57,14 +57,18 @@ export function getSiteMapSections(): SiteMapSection[] {
     {
       title: "Boats for sale",
       description:
-        "Search results page (SRP). Desktop and tablet can use the split layout with a visible filters column.",
+        "Search results page (SRP). Split layout (filters sidebar + card grid) is the default. Desktop and tablet only.",
       links: [
-        { label: "Search listings (default)", href: "/boats-for-sale" },
         {
-          label: "Search listings — split layout",
-          href: "/boats-for-sale?layout=split",
+          label: "Search listings",
+          href: "/boats-for-sale",
           description:
-            "Filters sidebar + 3-column card grid on desktop/tablet; mobile keeps the default sheet",
+            "Split layout — filters sidebar + 3-column card grid on desktop/tablet; mobile keeps the default sheet",
+        },
+        {
+          label: "Search listings — default layout",
+          href: "/boats-for-sale?layout=default",
+          description: "Original single-column layout (A/B test variant)",
         },
         {
           label: "SRP split — Mobile Overview (Figma)",

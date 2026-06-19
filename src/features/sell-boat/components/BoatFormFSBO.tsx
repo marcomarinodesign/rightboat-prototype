@@ -89,7 +89,6 @@ export function BoatFormFSBO({
   const [aiResult, setAIResult] = useState<AIPreFillResult | null>(() =>
     isFigmaPreview ? figmaPreviewMockAIResult() : null
   )
-  const [aiBannerDismissed, setAIBannerDismissed] = useState(false)
   const [userEditedAIFields, setUserEditedAIFields] = useState<Set<string>>(new Set())
   const [showExitDialog, setShowExitDialog] = useState(false)
 
@@ -399,25 +398,18 @@ export function BoatFormFSBO({
     >
       {/* Exit confirmation dialog */}
       <Dialog open={showExitDialog} onOpenChange={setShowExitDialog}>
-        <DialogContent className="max-w-sm rounded-2xl" showCloseButton={false}>
-          <div className="flex flex-col gap-3">
-            <DialogTitle>Exit your listing?</DialogTitle>
-            <DialogDescription>
-              Your progress will be saved. You can continue from where you left off next time.
-            </DialogDescription>
-          </div>
-          <div className="flex flex-col gap-2 pt-4">
-            <Button
-              variant="destructive"
-              size="sm"
-              className="w-full"
-              onClick={handleExitConfirm}
-            >
-              Exit anyway
-            </Button>
+        <DialogContent>
+          <DialogTitle>Exit your listing?</DialogTitle>
+          <DialogDescription>
+            Your progress will be saved. You can continue from where you left off next time.
+          </DialogDescription>
+          <div className="mt-6 flex justify-end gap-3">
             <DialogClose asChild>
-              <Button variant="outline" size="sm" className="w-full">
-                Keep editing
+              <Button variant="outline">Keep editing</Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="destructive" onClick={handleExitConfirm}>
+                Exit anyway
               </Button>
             </DialogClose>
           </div>
@@ -448,8 +440,7 @@ export function BoatFormFSBO({
               <FSBOStep1YourBoat
                 form={form}
                 aiFields={activeAIFields}
-                showAIBanner={!aiBannerDismissed && activeAIFields.size > 0}
-                onDismissAIBanner={() => setAIBannerDismissed(true)}
+
                 onUserEditAIField={handleUserEditAIField}
               />
             )}

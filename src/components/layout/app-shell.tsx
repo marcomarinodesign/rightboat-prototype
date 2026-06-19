@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { RIGHTBOAT_LOGO } from "@/lib/brand"
+import { RIGHTBOAT_LOGO, RIGHTBOAT_LOGO_WHITE } from "@/lib/brand"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -50,10 +50,11 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
+      <SiteHeader transparent={isFsbo} />
       <main
         className={cn(
-          "mx-auto w-full pb-24 pt-4",
+          "mx-auto w-full pb-24",
+          isFsbo ? "pt-0" : "pt-4",
           mainFullWidth ? "max-w-none px-0" : "max-w-7xl px-4 sm:px-6 lg:px-0"
         )}
       >
@@ -76,14 +77,24 @@ const rightNav = [
   { name: "Membership", href: "/broker-dealer" },
 ] as const
 
-function SiteHeader() {
+function SiteHeader({ transparent = false }: { transparent?: boolean }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const navLinkClass =
-    "rounded-lg px-3 py-2 text-[14px] font-normal leading-5 text-foreground transition-colors hover:text-foreground/80"
+  const logo = transparent ? RIGHTBOAT_LOGO_WHITE : RIGHTBOAT_LOGO
+  const navLinkClass = cn(
+    "rounded-lg px-3 py-2 text-[14px] font-normal leading-5 transition-colors",
+    transparent
+      ? "text-white hover:text-white/80"
+      : "text-foreground hover:text-foreground/80"
+  )
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className={cn(
+      "z-50",
+      transparent
+        ? "absolute inset-x-0 top-0"
+        : "sticky top-0 border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
+    )}>
       <nav
         aria-label="Global"
         className="relative mx-auto flex h-12 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-auto lg:px-8 lg:py-6"
@@ -102,10 +113,10 @@ function SiteHeader() {
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Rightboat</span>
             <Image
-              src={RIGHTBOAT_LOGO.src}
+              src={logo.src}
               alt="Rightboat"
-              width={RIGHTBOAT_LOGO.width}
-              height={RIGHTBOAT_LOGO.height}
+              width={logo.width}
+              height={logo.height}
               className="h-[26px] w-auto"
               priority
             />
@@ -135,6 +146,7 @@ function SiteHeader() {
                       width={RIGHTBOAT_LOGO.width}
                       height={RIGHTBOAT_LOGO.height}
                       className="h-[26px] w-auto"
+                      priority={false}
                     />
                   </Link>
                 </SheetHeader>

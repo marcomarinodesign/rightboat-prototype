@@ -3,3 +3,9 @@ export const RIGHTBOAT_LOGO = {
   width: 152,
   height: 26,
 } as const
+
+export const RIGHTBOAT_LOGO_WHITE = {
+  src: "/rightboat-logo-white.png",
+  width: 152,
+  height: 26,
+} as const

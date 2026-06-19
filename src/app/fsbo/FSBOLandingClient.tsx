@@ -10,13 +10,10 @@ import {
   Send,
   TrendingUp,
   CircleDollarSign,
-  Zap,
   Users,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Testimonials } from "@/components/home/testimonials"
-import { FeatureSection9 } from "@/components/blocks/feature-section-9"
-import { IconContainer } from "@/components/ui/icon-container"
 import { step1LPSchema, type Step1LPData, type Step1LPFormInput } from "@/features/sell-boat/types-v3"
 import { StepOneLP } from "@/components/fsbo/StepOneLP"
 import { STORAGE_KEY } from "@/components/fsbo/SignupModal"
@@ -25,48 +22,7 @@ import type { FsboPreviewMode } from "@/lib/fsbo/figma-preview"
 import { cn } from "@/lib/utils"
 
 const HERO_DESCRIPTION =
-  "Sell your boat online quickly, easily, and commission-free on Rightboat. Reach serious buyers worldwide and keep 100% of your sale price."
-
-const HERO_INTRO =
-  "If you're looking to sell your boat online, Rightboat's For Sale By Owner (FSBO) service gives you the platform to reach thousands of serious buyers worldwide. Whether you're selling a sailing boat, RIB, fishing boat, or day cruiser, Rightboat makes selling your boat privately simple, affordable, and fully in your control."
-
-const HOW_IT_WORKS_STEPS = [
-  {
-    step: "01",
-    title: "Create your boat listing",
-    description:
-      "Add high-quality photos, detailed boat specifications, and your asking price. Clear visuals and accurate information help you sell your boat online successfully by attracting more serious buyers.",
-    icon: ClipboardList,
-  },
-  {
-    step: "02",
-    title: "Choose your plan",
-    description:
-      "Select Basic ($49/mo) or Premium ($99/mo) to go live. Premium gives your listing featured placement and priority buyer matching to help sell your boat faster.",
-    icon: TrendingUp,
-  },
-  {
-    step: "03",
-    title: "Connect with buyers",
-    description:
-      "Buyer enquiries come directly to you. Fast communication is one of the best ways to sell your boat online more efficiently.",
-    icon: Send,
-  },
-  {
-    step: "04",
-    title: "Negotiate directly",
-    description:
-      "Manage offers and negotiate directly with buyers. Selling your boat privately gives you full flexibility without paying broker commission fees.",
-    icon: Users,
-  },
-  {
-    step: "05",
-    title: "Complete the sale",
-    description:
-      "Finalise paperwork and complete payment securely. Rightboat makes selling your boat online simple from listing to completed sale.",
-    icon: CircleDollarSign,
-  },
-] as const
+  "Sell your boat online quickly, easily, and commission-free on Rightboat.\nReach serious buyers worldwide and keep 100% of your sale price."
 
 const SELLING_METHODS = [
   { method: "Private Sale", speed: "Medium", control: "High", cost: "Low" },
@@ -133,10 +89,20 @@ const FAQS = [
   },
 ] as const
 
+// ── Hero background toggle ─────────────────────────────────────────────────
+// Change to "image" to revert to the static photo.
+const HERO_BG: "video" | "image" = "video"
+
 const HERO_IMAGE = {
-  src: "/ian-keefe-nGOK_EqQpY4-unsplash.png",
-  alt: "Close-up of sailboat deck and sail on open water",
+  src: "/fsbo-hero-bg.jpg",
+  alt: "Sailboat on open water",
 }
+
+const HERO_VIDEO = {
+  src1080: "https://videos.pexels.com/video-files/26271293/11944048_1920_1080_50fps.mp4",
+  src720:  "https://videos.pexels.com/video-files/26271293/11944047_1280_720_50fps.mp4",
+}
+// ──────────────────────────────────────────────────────────────────────────
 
 export type FSBOSurface = "web" | "app"
 
@@ -188,16 +154,53 @@ export function FSBOLandingClient({
         surface === "app" ? "gap-6" : "gap-10"
       )}
     >
-      {/* Hero — matches Figma FSBO hero layout */}
+      {/* Hero — full-bleed background image (desktop), stacked image banner (mobile) */}
       <section
         className={cn(
           surface === "app"
             ? "px-[var(--mobile-margin)] pb-6"
-            : "px-4 pt-10 pb-6 sm:px-6 sm:pt-14 sm:pb-8 lg:px-0 lg:pt-12 lg:pb-0"
+            : "relative overflow-hidden"
         )}
         aria-labelledby="fsbo-hero-heading"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+        {/* Background media — web only. Toggle HERO_BG above to switch. */}
+        {surface !== "app" && (
+          <div className="absolute inset-0">
+            {HERO_BG === "video" ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-hidden="true"
+                className="h-full w-full object-cover object-center"
+              >
+                <source src={HERO_VIDEO.src1080} type="video/mp4" />
+                <source src={HERO_VIDEO.src720} type="video/mp4" />
+              </video>
+            ) : (
+              <Image
+                src={HERO_IMAGE.src}
+                alt=""
+                fill
+                className="object-cover object-center"
+                sizes="100vw"
+                priority
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        )}
+
+        {/* Content */}
+        <div
+          className={cn(
+            "relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between",
+            surface === "app"
+              ? ""
+              : "px-4 pt-28 pb-14 sm:px-6 sm:pt-32 sm:pb-16 lg:px-8 lg:pt-[183px] lg:pb-20"
+          )}
+        >
           {surface === "app" ? (
             <div className="w-full">
               <MobileNativePageHeader
@@ -208,29 +211,28 @@ export function FSBOLandingClient({
               />
             </div>
           ) : (
-            <div className="flex max-w-[760px] flex-col items-center pt-2 text-center lg:items-start lg:pt-16 lg:text-left">
-              <div className="mb-5 inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-[14px] py-[6px] lg:mb-8">
+            <div className="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left lg:py-16">
+              <div className="inline-flex items-center justify-center rounded-full bg-[#13022c] px-3 py-1.5">
                 <span className="text-xs font-normal leading-4 text-white">
-                  For brokers & dealers
+                  Commission-free
                 </span>
               </div>
               <h1
                 id="fsbo-hero-heading"
-                className="max-w-[760px] text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[#13022c] sm:text-5xl lg:text-[48px]"
+                className="font-bold tracking-[-0.48px] text-white text-[48px] leading-[48px] lg:text-[72px] lg:leading-none"
               >
-                Sell your boat online{" "}
+                Sell your boat<br />online{" "}
                 <span className="text-[#0257fc]">privately</span>
               </h1>
-              <p className="mt-5 max-w-[720px] text-lg leading-[1.45] text-[#2b2140] sm:text-[1.05rem] lg:mt-6 lg:text-[1.05rem]">
+              <p className="whitespace-pre-line text-base font-normal leading-6 text-white">
                 {HERO_DESCRIPTION}
-              </p>
-              <p className="mt-4 max-w-[700px] text-base leading-relaxed text-[#2b2140] sm:text-sm lg:mt-5">
-                {HERO_INTRO}
               </p>
             </div>
           )}
-          <div className="relative z-10 mx-auto w-full min-w-0 max-w-[414px] overflow-visible rounded-lg border border-border bg-malibu-300 p-5 shadow-sm sm:p-6 lg:mx-0 lg:p-9">
-            <div className="mb-5 text-center text-lg font-bold leading-snug text-[#13022c] sm:mb-6 sm:text-xl">
+
+          {/* Form card */}
+          <div className="w-full max-w-[414px] rounded-xl bg-[#f4f9ff] border border-[#fafafa] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.05)] p-5 sm:p-6 lg:shrink-0 lg:p-[37px]">
+            <div className="mb-6 text-center text-[20px] font-bold leading-[27.5px] text-[#13022c]">
               Takes less than 2 minutes.
             </div>
             <StepOneLP
@@ -239,23 +241,10 @@ export function FSBOLandingClient({
             />
           </div>
         </div>
+
       </section>
 
-      {/* Hero image separator — full-bleed visual break */}
-      <section aria-hidden="true" className="w-full">
-        <div className="relative h-[320px] w-full overflow-hidden sm:h-[380px] lg:h-[560px]">
-          <Image
-            src={HERO_IMAGE.src}
-            alt={HERO_IMAGE.alt}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </div>
-      </section>
-
-      {/* How It Works */}
+      {/* How It Works — bento grid */}
       <section
         className={cn(
           surface === "app"
@@ -264,67 +253,78 @@ export function FSBOLandingClient({
         )}
         aria-labelledby="how-it-works-heading"
       >
-        <div className="mx-auto w-full max-w-7xl rounded-2xl bg-[#0B6CFF] px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
+        <div className="mx-auto w-full max-w-7xl">
           <div className="mx-auto max-w-[720px] text-center">
             <h2
               id="how-it-works-heading"
-              className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl"
+              className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl"
             >
               Sell Your Boat Online: How It Works
             </h2>
-            <p className="mt-3 text-base leading-7 text-white/90">
+            <p className="mt-3 text-base leading-7 text-muted-foreground">
               From listing to sale, you stay in control. Follow these simple
               steps to sell your boat privately.
             </p>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {HOW_IT_WORKS_STEPS.map((step) => {
-              const Icon = step.icon
-              return (
-                <div
-                  key={step.title}
-                  className="flex flex-col items-center rounded-2xl bg-white px-6 py-8 text-center shadow-sm"
-                >
-                  <div className="mb-1 text-xs font-bold tracking-widest text-[#0B6CFF] uppercase">
-                    {step.step}
+
+          <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {/* Col 1 — Step 01: image background */}
+            <div className="relative min-h-[400px] overflow-hidden rounded-[20px]">
+              <Image
+                src="/how-it-works-boat.png"
+                alt="Boat listing"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white p-5">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#0B6CFF]">01</p>
+                <p className="mt-1 text-base font-bold text-foreground">Create your boat listing</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  Add high-quality photos, detailed boat specifications, and your asking price. Clear visuals and accurate information help you sell your boat online successfully by attracting more serious buyers.
+                </p>
+              </div>
+            </div>
+
+            {/* Col 2 — Step 02 */}
+            <div className="flex min-h-[400px] flex-col justify-between rounded-[20px] bg-[#fafafa] p-6">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#0B6CFF]">02</p>
+                <p className="mt-2 text-2xl font-bold text-foreground">Choose your plan</p>
+              </div>
+              <div className="flex gap-3">
+                {[Send, ClipboardList, Users, CircleDollarSign, TrendingUp].map((Icon, i) => (
+                  <div key={i} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0B6CFF]">
+                    <Icon className="h-4 w-4 text-white" aria-hidden />
                   </div>
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#0B6CFF] text-white">
-                    <Icon className="h-5 w-5" aria-hidden />
-                  </div>
-                  <h3 className="text-base font-semibold text-foreground">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {step.description}
+                ))}
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Select Basic ($49/mo) or Premium ($99/mo) to go live. Premium gives your listing featured placement and priority buyer matching to help sell your boat faster.
+              </p>
+            </div>
+
+            {/* Col 3 — Steps 03 + 04 stacked */}
+            <div className="flex flex-col gap-4">
+              {/* Step 03 */}
+              <div className="flex min-h-[230px] flex-col justify-between rounded-[20px] bg-[#086bff] p-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-white/60">03</p>
+                <div>
+                  <p className="text-2xl font-bold text-white">Connect with buyers</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/90">
+                    Buyer enquiries come directly to you. Fast communication is one of the best ways to sell your boat online more efficiently.
                   </p>
                 </div>
-              )
-            })}
+              </div>
+              {/* Step 04 */}
+              <div className="flex min-h-[154px] flex-col justify-between rounded-[20px] bg-[#13022c] p-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-white/40">04</p>
+                <p className="text-sm leading-relaxed text-white">
+                  <span className="font-bold">Negotiate directly:</span>{" "}
+                  Manage offers and negotiate directly with buyers. Selling your boat privately gives you full flexibility without paying broker commission fees.
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="mt-8 text-center text-sm text-white/80">
-            Need help getting started?{" "}
-            <a
-              href="/blog/how-to-sell-your-boat"
-              className="text-white underline hover:text-white/70"
-            >
-              How to sell your boat
-            </a>
-            {", "}
-            <a
-              href="/blog/used-boat-values-a-guide-to-pricing-your-boat"
-              className="text-white underline hover:text-white/70"
-            >
-              pricing your boat
-            </a>
-            {", and "}
-            <a
-              href="/blog/preparing-your-boat-for-sale"
-              className="text-white underline hover:text-white/70"
-            >
-              preparing your boat for sale
-            </a>
-            .
-          </p>
         </div>
       </section>
 
@@ -338,70 +338,6 @@ export function FSBOLandingClient({
       >
         <div className="mx-auto w-full max-w-7xl">
           <Testimonials align="center" />
-        </div>
-      </section>
-
-      {/* Why List With Us – matches Propel layout */}
-      <section
-        className={cn(
-          surface === "app"
-            ? "px-[var(--mobile-margin)] py-10"
-            : "px-4 py-12 sm:px-6 lg:px-0 lg:py-16"
-        )}
-      >
-        <div className="mx-auto w-full max-w-7xl">
-          <FeatureSection9
-            title="Why List With Us"
-            description="Get more visibility and longer listing life with an optional Boost package."
-            features={[
-              {
-                title: "Thousands of buyers",
-                description:
-                  "Showcase your boat with extra media so buyers get a full picture.",
-                icon: (
-                  <IconContainer className="size-12 mb-0">
-                    <TrendingUp />
-                  </IconContainer>
-                ),
-              },
-              {
-                title: "No broker fees",
-                description:
-                  "Sell without paying broker commission. You set the price and keep 100% of the sale.",
-                icon: (
-                  <IconContainer className="size-12 mb-0">
-                    <CircleDollarSign />
-                  </IconContainer>
-                ),
-              },
-              {
-                title: "Fast and simple",
-                description:
-                  "Create your listing in minutes and keep it live until you sell.",
-                icon: (
-                  <IconContainer className="size-12 mb-0">
-                    <Zap />
-                  </IconContainer>
-                ),
-              },
-              {
-                title: "Full control",
-                description:
-                  "Receive and manage buyer enquiries directly in your inbox.",
-                icon: (
-                  <IconContainer className="size-12 mb-0">
-                    <Users />
-                  </IconContainer>
-                ),
-              },
-            ]}
-            headingId="why-list-heading"
-          />
-          <div className="mt-8 flex justify-center">
-            <Button size="lg" className="font-medium" asChild>
-              <Link href={sellCtaHref}>Sell your boat</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -443,49 +379,38 @@ export function FSBOLandingClient({
                   body: "Listing your boat on a high-traffic online marketplace helps you reach a much larger audience of serious buyers while staying in control of the sale.",
                 },
               ].map(({ title, body }) => (
-                <div key={title} className="space-y-2 rounded-lg bg-muted p-5">
-                  <h3 className="text-sm font-semibold text-foreground">
-                    {title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {body}
-                  </p>
+                <div key={title} className="rounded-2xl bg-[#0257fc] p-6">
+                  <h3 className="text-lg font-bold text-white">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/90">{body}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-6 rounded-lg border border-border bg-card p-5">
-              <p className="text-sm font-semibold text-foreground">
-                Why Rightboat?
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                Rightboat gives private sellers the best balance between
-                visibility, control, affordability, and speed. Sell your boat
-                online, connect directly with buyers worldwide, and keep 100% of
-                your final sale price.
-              </p>
-              <div className="mt-4">
-                <Button size="lg" asChild>
-                  <Link href={sellCtaHref}>
-                    Ready to sell your boat online? Start here →
-                  </Link>
-                </Button>
+            {surface !== "app" && (
+              <div className="relative mt-6 h-[300px] overflow-hidden rounded-2xl">
+                <Image
+                  src="/aerial-boat.jpg"
+                  alt="Aerial view of sailboat on turquoise water"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                />
               </div>
-            </div>
+            )}
           </section>
 
           {/* Section: How to Sell Your Boat Fast */}
           <section aria-labelledby="sell-fast-heading">
             <h2
               id="sell-fast-heading"
-              className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+              className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
             >
               How to Sell Your Boat Fast
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-center text-base leading-relaxed text-muted-foreground">
               If you want to sell your boat fast, the key is creating a listing
               that stands out and reaches the right buyers quickly.
             </p>
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {SELL_FAST_TIPS.map(({ heading, body }) => (
                 <div key={heading} className="flex gap-4">
                   <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary">
@@ -531,11 +456,11 @@ export function FSBOLandingClient({
           <section aria-labelledby="ways-heading">
             <h2
               id="ways-heading"
-              className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+              className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
             >
               Ways to Sell Your Boat
             </h2>
-            <p className="mt-4 text-base text-muted-foreground">
+            <p className="mt-4 text-center text-base text-muted-foreground">
               There are several ways to sell your boat, depending on your
               priorities:
             </p>
@@ -558,28 +483,28 @@ export function FSBOLandingClient({
                   </tr>
                 </thead>
                 <tbody>
-                  {SELLING_METHODS.map((row, i) => (
-                    <tr
-                      key={row.method}
-                      className={cn(
-                        "border-b border-border last:border-0",
-                        i % 2 === 1 && "bg-muted/40"
-                      )}
-                    >
-                      <td className="px-4 py-3 font-medium text-foreground">
-                        {row.method}
-                      </td>
-                      <td className="px-4 py-3 text-muted-foreground">
-                        {row.speed}
-                      </td>
-                      <td className="px-4 py-3 text-muted-foreground">
-                        {row.control}
-                      </td>
-                      <td className="px-4 py-3 text-muted-foreground">
-                        {row.cost}
-                      </td>
-                    </tr>
-                  ))}
+                  {SELLING_METHODS.map((row) => {
+                    const isHighlighted = row.method === "Online Marketplace"
+                    return (
+                      <tr
+                        key={row.method}
+                        className="border-b border-border last:border-0"
+                      >
+                        <td className={cn("px-4 py-3 font-medium", isHighlighted ? "text-primary font-medium" : "text-foreground")}>
+                          {row.method}
+                        </td>
+                        <td className={cn("px-4 py-3", isHighlighted ? "text-primary font-medium" : "text-muted-foreground")}>
+                          {row.speed}
+                        </td>
+                        <td className={cn("px-4 py-3", isHighlighted ? "text-primary font-medium" : "text-muted-foreground")}>
+                          {row.control}
+                        </td>
+                        <td className={cn("px-4 py-3", isHighlighted ? "text-primary font-medium" : "text-muted-foreground")}>
+                          {row.cost}
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
@@ -601,7 +526,7 @@ export function FSBOLandingClient({
             id="faq-heading"
             className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
           >
-            For Sale By Owner — Frequently Asked Questions
+            For Sale By Owner FAQs
           </h2>
           <div className="mt-6 divide-y divide-border overflow-hidden rounded-lg border border-border">
             {FAQS.map(({ q, a }) => (

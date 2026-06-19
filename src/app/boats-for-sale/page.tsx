@@ -25,7 +25,7 @@ type PageProps = {
 
 export default async function BoatsForSalePage({ searchParams }: PageProps) {
   const sp = searchParams ? await searchParams : {}
-  const layoutVariant = sp.layout === "split" ? "split" : "default"
+  const layoutVariant = sp.layout === "default" ? "default" : "split"
   const figmaPreview = parseFigmaPreviewState(sp.figmaPreview)
   const previewMode = figmaPreview ? ("mobile" as const) : undefined
 
