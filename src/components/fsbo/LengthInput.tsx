@@ -9,13 +9,14 @@ interface LengthInputProps {
   onChange: (value: number) => void
   error?: string
   className?: string
+  inputClassName?: string
 }
 
 type Unit = "ft" | "m"
 
 const FT_TO_M = 0.3048
 
-export function LengthInput({ value, onChange, error, className }: LengthInputProps) {
+export function LengthInput({ value, onChange, error, className, inputClassName }: LengthInputProps) {
   const [unit, setUnit] = useState<Unit>("ft")
   // Display value in the currently selected unit
   const displayValue =
@@ -50,7 +51,7 @@ export function LengthInput({ value, onChange, error, className }: LengthInputPr
             placeholder={unit === "ft" ? "e.g. 32" : "e.g. 9.8"}
             value={displayValue}
             onChange={handleChange}
-            className="pr-2"
+            className={cn("pr-2", inputClassName)}
             min={unit === "ft" ? 5 : 1.5}
             max={unit === "ft" ? 200 : 61}
           />

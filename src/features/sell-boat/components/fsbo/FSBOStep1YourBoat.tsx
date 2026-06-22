@@ -115,6 +115,13 @@ export function FSBOStep1YourBoat({
 
   const boatName = [brand, model, year].filter(Boolean).join(" ")
 
+  // Matches BoatTypeSelector selected style: 2px primary border + light blue tint
+  // For AI-filled fields (tracked in aiFields Set)
+  const aiCls = (field: string) => aiFields.has(field) ? "border-2 border-primary bg-[#f4f9ff]" : ""
+  // For user-supplied seed fields (brand/model/year) — same visual, aligned with FieldLabel badge condition
+  const AI_CLS = "border-2 border-primary bg-[#f4f9ff]"
+  const seedCls = (val: unknown) => val ? AI_CLS : ""
+
   return (
     <div className="flex flex-col gap-4">
       {/* Title */}
@@ -171,7 +178,7 @@ export function FSBOStep1YourBoat({
                 if (aiFields.has("category")) onUserEditAIField("category")
               }}
             >
-              <SelectTrigger>
+              <SelectTrigger className={aiCls("category")}>
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
@@ -204,7 +211,7 @@ export function FSBOStep1YourBoat({
                   if (aiFields.has("hullMaterial")) onUserEditAIField("hullMaterial")
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger className={aiCls("hullMaterial")}>
                   <SelectValue placeholder="Select hull material" />
                 </SelectTrigger>
                 <SelectContent>
@@ -232,6 +239,7 @@ export function FSBOStep1YourBoat({
                   if (aiFields.has("length")) onUserEditAIField("length")
                 }}
                 error={errors.length?.message}
+                inputClassName={aiCls("length")}
               />
             )}
           />
@@ -244,7 +252,7 @@ export function FSBOStep1YourBoat({
           <Label className="text-sm font-bold text-foreground leading-5">Description</Label>
         </FieldLabel>
         <textarea
-          className="flex w-full h-[160px] rounded-lg border border-input bg-background px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors resize-none"
+          className={`flex w-full h-[160px] rounded-lg px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors resize-none ${aiFields.has("description") ? "border-2 border-primary bg-[#f4f9ff]" : "border border-input bg-background"}`}
           placeholder="Describe your boat — condition, upgrades, history..."
           {...register("description")}
           onChange={(e) => {
@@ -330,7 +338,7 @@ export function FSBOStep1YourBoat({
               <FieldLabel hasAI={!!brand}>
                 <Label className="text-sm font-bold text-foreground leading-5">Manufacturer / Make</Label>
               </FieldLabel>
-              <Input id="brand" placeholder="e.g. Jeanneau" {...register("brand")} />
+              <Input id="brand" placeholder="e.g. Jeanneau" className={seedCls(brand)} {...register("brand")} />
               {errors.brand && <p className="text-sm text-destructive">{errors.brand.message}</p>}
             </div>
 
@@ -338,7 +346,7 @@ export function FSBOStep1YourBoat({
               <FieldLabel hasAI={!!model}>
                 <Label className="text-sm font-bold text-foreground leading-5">Model</Label>
               </FieldLabel>
-              <Input id="model" placeholder="e.g. Sun Odyssey 36i" {...register("model")} />
+              <Input id="model" placeholder="e.g. Sun Odyssey 36i" className={seedCls(model)} {...register("model")} />
               {errors.model && <p className="text-sm text-destructive">{errors.model.message}</p>}
             </div>
           </div>
@@ -349,18 +357,20 @@ export function FSBOStep1YourBoat({
               <FieldLabel hasAI={!!year}>
                 <Label className="text-sm font-bold text-foreground leading-5">Year</Label>
               </FieldLabel>
-              <Input id="year" type="number" inputMode="numeric" placeholder="e.g. 2010" {...register("year")} />
+              <Input id="year" type="number" inputMode="numeric" placeholder="e.g. 2010" className={seedCls(year)} {...register("year")} />
               {errors.year && <p className="text-sm text-destructive">{errors.year.message}</p>}
             </div>
 
             <div className="flex flex-col gap-1 pt-7">
-              <Label className="text-sm font-bold text-foreground leading-5">Condition</Label>
+              <FieldLabel hasAI={aiFields.has("condition")}>
+                <Label className="text-sm font-bold text-foreground leading-5">Condition</Label>
+              </FieldLabel>
               <Controller
                 name="condition"
                 control={control}
                 render={({ field }) => (
                   <Select value={field.value ?? ""} onValueChange={field.onChange}>
-                    <SelectTrigger>
+                    <SelectTrigger className={aiCls("condition")}>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
