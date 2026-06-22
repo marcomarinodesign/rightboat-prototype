@@ -1,0 +1,28 @@
+{
+  "background":       { "$type": "color", "$value": "{brand.midnight}" },
+  "foreground":       { "$type": "color", "$value": "#ffffff" },
+  "card": {
+    "background":     { "$type": "color", "$value": "#1b0a38" },
+    "foreground":     { "$type": "color", "$value": "#ffffff" }
+  },
+  "popover": {
+    "background":     { "$type": "color", "$value": "#1b0a38" },
+    "foreground":     { "$type": "color", "$value": "#ffffff" }
+  },
+  "primary":          { "$type": "color", "$value": "{brand.blue.400}" },
+  "primary-foreground": { "$type": "color", "$value": "#ffffff" },
+  "secondary":        { "$type": "color", "$value": "{brand.blue.500}" },
+  "secondary-foreground": { "$type": "color", "$value": "#ffffff" },
+  "muted":            { "$type": "color", "$value": "#1f123f" },
+  "muted-foreground": { "$type": "color", "$value": "#b9c4ff" },
+  "accent":           { "$type": "color", "$value": "{brand.blue.300}" },
+  "accent-foreground": { "$type": "color", "$value": "#ffffff" },
+  "destructive":      { "$type": "color", "$value": "#f07040" },
+  "border":           { "$type": "color", "$value": "#2b1a52" },
+  "border-card":      { "$type": "color", "$value": "#332060" },
+  "input":            { "$type": "color", "$value": "#2b1a52" },
+  "ring":             { "$type": "color", "$value": "{brand.blue.400}" },
+  "tag-bg":           { "$type": "color", "$value": "#1a0b3e" },
+  "overlay":          { "$type": "color", "$value": "#00000099" },
+  "overlay-sheet":    { "$type": "color", "$value": "#00000066" }
+}

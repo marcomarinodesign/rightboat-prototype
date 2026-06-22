@@ -40,9 +40,9 @@ const CABINS_BERTHS_OPTIONS = ["None", "1 cabin", "2 cabins", "3 cabins", "4+ ca
 
 function AIFilledTag() {
   return (
-    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] bg-neutral-100 text-midnight text-xs font-normal whitespace-nowrap">
-      <svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-        <path d="M8 1L9.5 6H14.5L10.5 9L12 14L8 11L4 14L5.5 9L1.5 6H6.5L8 1Z" />
+    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#354CC8] text-white text-xs font-semibold whitespace-nowrap">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M8 0L9.5 6.5L16 8L9.5 9.5L8 16L6.5 9.5L0 8L6.5 6.5L8 0Z" />
       </svg>
       Rightboat AI
     </span>

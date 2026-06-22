@@ -1,0 +1,13 @@
+{
+  "brand": {
+    "midnight": { "$type": "color", "$value": "#13022c", "$description": "Primary dark brand color" },
+    "blue": {
+      "200": { "$type": "color", "$value": "#208cff", "$description": "Brand blue — lightest" },
+      "300": { "$type": "color", "$value": "#086bff", "$description": "Brand blue — accent" },
+      "400": { "$type": "color", "$value": "#0257fc", "$description": "Brand blue — primary" },
+      "500": { "$type": "color", "$value": "#0944c4", "$description": "Brand blue — dark" },
+      "600": { "$type": "color", "$value": "#0e3d9a", "$description": "Brand blue — darkest" }
+    },
+    "white": { "$type": "color", "$value": "#ffffff" }
+  }
+}

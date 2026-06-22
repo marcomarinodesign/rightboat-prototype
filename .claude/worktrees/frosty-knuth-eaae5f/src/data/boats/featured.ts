@@ -1,0 +1,68 @@
+import type { Boat } from "./types"
+
+export const featuredBoats: Boat[] = [
+  {
+    id: "rb558443",
+    make: "Shearwater",
+    model: "25LTZ",
+    makeSlug: "shearwater",
+    modelSlug: "25ltz",
+    year: 2017,
+    condition: "Used",
+    length: "25 ft",
+    price: "$99,250",
+    location: "United States of America",
+    broker: "United Yacht Sales",
+    image:
+      "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp",
+    featured: true,
+  },
+  {
+    id: "rb539044",
+    make: "Fjord",
+    model: "39XP",
+    makeSlug: "fjord",
+    modelSlug: "39xp",
+    year: 2024,
+    condition: "New",
+    length: "39 ft",
+    price: "$1,024,000",
+    location: "United States of America",
+    broker: "Yacht Sales International",
+    image:
+      "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp",
+    featured: true,
+  },
+  {
+    id: "rb558103",
+    make: "Bavaria",
+    model: "Vision 46",
+    makeSlug: "bavaria-yachts",
+    modelSlug: "bavaria-vision-46",
+    year: 2015,
+    condition: "Used",
+    length: "46 ft",
+    price: "$299,500",
+    location: "United States of America",
+    broker: "Worth Avenue Yachts",
+    image:
+      "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp",
+    featured: true,
+  },
+  {
+    id: "rb559072",
+    make: "Princess",
+    model: "V65",
+    makeSlug: "princess",
+    modelSlug: "v65",
+    year: 2002,
+    condition: "Used",
+    length: "65 ft",
+    price: "$450,000",
+    location: "United States of America",
+    broker: "Rick Obey Yacht Sales",
+    image:
+      "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp",
+    featured: true,
+  },
+]
