@@ -161,6 +161,12 @@ export function getSiteMapSections(): SiteMapSection[] {
           description:
             "Q2 2026 monetization — 7 ad slots, 4 targeting segments, React Email render",
         },
+        {
+          label: "FSBO retargeting email preview",
+          href: "/fsbo-retargeting-email",
+          description:
+            "Abandoned wizard retargeting — Handlebars variables, pure HTML, Klaviyo-compatible",
+        },
       ],
     },
   ]

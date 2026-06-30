@@ -23,7 +23,7 @@ type AppShellProps = {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const isDesignSystem = pathname === "/design-system"
-  const isEmailPreview = pathname === "/email-preview"
+  const isEmailPreview = pathname === "/email-preview" || pathname === "/fsbo-retargeting-email"
   const isBoatDetailPage =
     typeof pathname === "string" &&
     pathname.startsWith("/boats-for-sale/") &&
