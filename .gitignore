@@ -10,3 +10,9 @@ node_modules
 .DS_Store
 *.log
 .vercel
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
