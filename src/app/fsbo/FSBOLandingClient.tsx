@@ -102,8 +102,8 @@ const HERO_IMAGE = {
 }
 
 const HERO_VIDEO = {
-  src1080: "https://videos.pexels.com/video-files/5092000/5092000-hd_1920_1080_25fps.mp4",
-  src720:  "https://videos.pexels.com/video-files/5092000/5092000-hd_1280_720_50fps.mp4",
+  src1080: "https://videos.pexels.com/video-files/33157253/14131176_2560_1440_60fps.mp4",
+  src720:  "https://videos.pexels.com/video-files/33157253/14131176_2560_1440_60fps.mp4",
 }
 // ──────────────────────────────────────────────────────────────────────────
 
