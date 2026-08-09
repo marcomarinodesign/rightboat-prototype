@@ -1,6 +1,7 @@
 "use client"
 
 import type { MouseEvent } from "react"
+import Image from "next/image"
 import Link from "next/link"
 
 import { Boat } from "@/data/boats"
@@ -31,6 +32,14 @@ type BoatCardProps = {
   href?: string
   /** Enables the Gallery View variation on this card. Omitted = control. */
   galleryView?: GalleryViewConfig
+  /**
+   * Media anatomy.
+   * - `single`: one 3:2 image (this prototype's original card).
+   * - `triptych`: hero + two thumbnails, mirroring the card that ships on
+   *   rightboat.com today. This is the real SRP control — see
+   *   docs/PRODUCTION_ALIGNMENT.md §4.
+   */
+  mediaLayout?: "single" | "triptych"
 }
 
 function specsSummary(boat: Boat) {
@@ -47,6 +56,7 @@ export function BoatCard({
   className,
   href,
   galleryView,
+  mediaLayout = "single",
 }: BoatCardProps) {
   const detailHref =
     href ?? `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
@@ -72,7 +82,80 @@ export function BoatCard({
       : Boolean(boat.manufacturerListing)
   const showMediaChrome = srpGrid && (isSponsored || isManufacture)
 
-  const imageSection = (
+  const badge = isManufacture ? (
+    <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
+      <span className="text-xs font-normal leading-4 text-primary-foreground">
+        Manufacture Listing
+      </span>
+    </div>
+  ) : isSponsored ? (
+    <div
+      className={cn(
+        "absolute left-2 top-2 z-10 rounded-full px-3 py-1.5",
+        srpGrid ? "bg-neutral-200" : "bg-primary"
+      )}
+    >
+      <span
+        className={cn(
+          "text-xs font-normal leading-4",
+          srpGrid ? "text-midnight" : "text-primary-foreground"
+        )}
+      >
+        Sponsored
+      </span>
+    </div>
+  ) : null
+
+  const IMG_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+
+  /**
+   * Production anatomy: a 160px hero over a 2-up row of 80px thumbnails inside
+   * a 256px media box. Three photos are visible at once — there is no carousel.
+   * A listing with a single photo lets the hero take the full box rather than
+   * leaving a gap.
+   */
+  const thumbs = images.slice(1, 3)
+  const triptychSection = (
+    <div className="relative flex h-64 w-full flex-col overflow-hidden">
+      <div className="flex flex-col">
+        <div
+          className={cn(
+            "relative w-full overflow-hidden rounded-t-lg",
+            thumbs.length ? "h-40" : "h-64"
+          )}
+        >
+          <Image
+            src={images[0]}
+            alt={boatName}
+            fill
+            sizes={IMG_SIZES}
+            className="object-cover"
+          />
+        </div>
+        {thumbs.length > 0 && (
+          <div className="grid grid-cols-2 gap-1 pt-1">
+            {thumbs.map((src, i) => (
+              <div
+                key={`${src}-${i}`}
+                className="relative h-20 overflow-hidden rounded-b"
+              >
+                <Image
+                  src={src}
+                  alt={`${boatName} (${i + 2}/${images.length})`}
+                  fill
+                  sizes={IMG_SIZES}
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {badge}
+    </div>
+  )
+
+  const singleSection = (
     <div className="relative w-full overflow-hidden rounded-[8px]">
       <ImageSlider
         images={images}
@@ -86,31 +169,11 @@ export function BoatCard({
         imageRoundedClassName="rounded-[8px]"
         slideBackdropClassName="bg-midnight/12"
       />
-      {isManufacture ? (
-        <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
-          <span className="text-xs font-normal leading-4 text-primary-foreground">
-            Manufacture Listing
-          </span>
-        </div>
-      ) : isSponsored ? (
-        <div
-          className={cn(
-            "absolute left-2 top-2 z-10 rounded-full px-3 py-1.5",
-            srpGrid ? "bg-neutral-200" : "bg-primary"
-          )}
-        >
-          <span
-            className={cn(
-              "text-xs font-normal leading-4",
-              srpGrid ? "text-midnight" : "text-primary-foreground"
-            )}
-          >
-            Sponsored
-          </span>
-        </div>
-      ) : null}
+      {badge}
     </div>
   )
+
+  const imageSection = mediaLayout === "triptych" ? triptychSection : singleSection
 
   const brokerRow = (
     <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
@@ -247,6 +310,27 @@ export function BoatCard({
           {detailsSection({ linkName: true, showContactCta: true })}
         </div>
       </article>
+    )
+  }
+
+  if (mediaLayout === "triptych") {
+    // Shell copied from the card that ships on rightboat.com.
+    return (
+      <Link
+        href={detailHref}
+        className={cn(
+          "flex w-full min-h-[29rem] cursor-pointer flex-col rounded-2xl border border-wireframe-4/95 bg-card p-2 shadow-sm",
+          "transition-shadow duration-[var(--transition-duration-normal)] hover:shadow-lg motion-reduce:transition-none",
+          className
+        )}
+      >
+        {imageSection}
+        {detailsSection({
+          linkName: false,
+          showContactCta: true,
+          ctaLayout: srpGrid ? "srp" : "default",
+        })}
+      </Link>
     )
   }
 
