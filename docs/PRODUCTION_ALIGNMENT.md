@@ -110,6 +110,33 @@ production counterpart at all.
 Note also that production's emphasis is baked into `subtitle-*` (always weight 700), which
 is structurally the same idea as the `body/*-bold` styles added to Figma on 9 Aug.
 
+### 3.1 Resolution — Figma's values, production's names
+
+Unlike colour (where production's greys were adopted), **design owns the type values**.
+Figma's styles were renamed to production's vocabulary without changing their values, so
+nothing in the Figma file reflowed. The slots production has that Figma lacked
+(`body-4`, `body-5`, `subtitle-0/1/3/4`) were added using production's values, since Figma
+had no opinion on them.
+
+Figma now carries 16 styles. `heading/md`, `heading/lg` and `heading/xl` are kept and
+labelled as having no production counterpart — available for marketing work, but they need
+a new class before anything using them can ship.
+
+**Deltas production needs to absorb** — three lines in the Rails Tailwind config:
+
+| Class | Production today | Should be | Live usages |
+|---|---|---|---|
+| `text-body-1` | 17px / 1.43 | **16px / 24px** | 79 |
+| `text-body-2` | 14px / 18px | **14px / 20px** | 136 |
+| `text-subtitle-2` | 24px / 30px | **24px / 32px** | 15 |
+
+`text-body-3` (12/16) already matches and is production's most-used class at 186 usages —
+no change needed there.
+
+Also worth flagging for whoever owns the config: **34 usages of raw Tailwind type classes**
+(`text-sm`, `text-lg`, `text-xl`, `text-2xl`) leak through on the two pages audited,
+bypassing the scale entirely.
+
 ---
 
 ## 4. The SRP card — different components

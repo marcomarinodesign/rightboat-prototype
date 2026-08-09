@@ -11,6 +11,30 @@
      `font-mono` element silently fell back to the inherited family. */
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+  /* Type scale — production names, Figma values. Where the two differ the
+     Figma value wins and production is the one that must change; the deltas
+     are listed in docs/PRODUCTION_ALIGNMENT.md §3. */
+  --text-body-1: 1rem;
+  --text-body-1--line-height: 1.5rem;
+  --text-body-2: 0.875rem;
+  --text-body-2--line-height: 1.25rem;
+  --text-body-3: 0.75rem;
+  --text-body-3--line-height: 1rem;
+  --text-body-4: 0.625rem;
+  --text-body-4--line-height: 0.75rem;
+  --text-body-5: 1.25rem;
+  --text-body-5--line-height: 1.75rem;
+  --text-subtitle-0: 5.625rem;
+  --text-subtitle-0--line-height: 5.625rem;
+  --text-subtitle-1: 1.75rem;
+  --text-subtitle-1--line-height: 2.125rem;
+  --text-subtitle-2: 1.5rem;
+  --text-subtitle-2--line-height: 2rem;
+  --text-subtitle-3: 1.125rem;
+  --text-subtitle-3--line-height: 1.5rem;
+  --text-subtitle-4: 1.25rem;
+  --text-subtitle-4--line-height: 1.625rem;
+
   /* Production tokens — prefer these. Same names as rightboat.com, so
      `text-primary-chinese-blue` here is `text-primary-chinese-blue` there. */
   --color-primary-blue: var(--primary-blue);

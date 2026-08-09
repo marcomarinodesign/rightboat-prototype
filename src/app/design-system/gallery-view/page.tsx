@@ -262,10 +262,8 @@ function Section({
 }) {
   return (
     <section className="mb-12">
-      <h2 className="mb-2 text-lg font-bold text-foreground">{title}</h2>
-      <p className="mb-6 max-w-3xl text-sm leading-6 text-midnight">
-        {description}
-      </p>
+      <h2 className="mb-2 text-subtitle-3 font-bold text-foreground">{title}</h2>
+      <p className="mb-6 max-w-3xl text-body-2 text-midnight">{description}</p>
       {children}
     </section>
   )
@@ -283,10 +281,8 @@ function Arm({
   return (
     <div className="flex max-w-[390px] flex-col gap-3">
       <div>
-        <div className="text-sm font-bold text-foreground">{label}</div>
-        <p className="mt-1 max-w-[300px] text-xs leading-5 text-midnight">
-          {caption}
-        </p>
+        <div className="text-body-2 font-bold text-foreground">{label}</div>
+        <p className="mt-1 max-w-[300px] text-body-3 text-midnight">{caption}</p>
       </div>
       {children}
     </div>
