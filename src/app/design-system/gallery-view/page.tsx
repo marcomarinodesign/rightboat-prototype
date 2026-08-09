@@ -88,16 +88,18 @@ export default function GalleryViewExplorationPage() {
 
         <header className="mb-10 border-b border-border-card pb-8">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-primary">
-            Q3 2026 · Exploration
+            Q3 2026 · Proposal
           </p>
           <h1 className="mb-3 text-3xl font-bold text-foreground">
             SRP Gallery View — A/B test
           </h1>
-          <p className="max-w-2xl text-sm leading-6 text-midnight">
+          <p className="max-w-2xl text-body-2 text-midnight">
             Image navigation inside the listing card, without leaving the SRP.
-            This page is the exploration surface for the W7 slot: it exists to
-            turn the brief&rsquo;s four open questions into decisions the team can
-            look at rather than discuss in the abstract.
+            Cards below are the real component, and the control is the card
+            that ships on rightboat.com today rather than the one the brief
+            describes. Recommendation is in{" "}
+            <span className="font-bold">The proposal</span> at the foot of the
+            page.
           </p>
         </header>
 
@@ -166,14 +168,28 @@ export default function GalleryViewExplorationPage() {
               </div>
             </Arm>
             <Arm
-              label="Variation — Figma proposal"
-              caption="One photo at a time, swipeable, with a position indicator and a route into the full gallery. Trades two always-visible thumbnails for depth."
+              label="Variation A — the brief as written"
+              caption="One photo at a time, swipeable, with a position indicator and a terminal frame. Trades two always-visible thumbnails for depth."
             >
               <div className={frameWidth}>
                 <BoatCard
                   boat={withPhotos(galleryBoat, 4, "variation")}
                   gridLayout="srp"
                   srpVariant="simple"
+                  galleryView={variation}
+                />
+              </div>
+            </Arm>
+            <Arm
+              label="Variation B — recommended"
+              caption="Production's layout kept intact; the second thumbnail becomes the route into the full gallery. Three photos still visible, and the brief's endpoint still gets its entry point."
+            >
+              <div className={frameWidth}>
+                <BoatCard
+                  boat={withPhotos(galleryBoat, 4, "variation-b")}
+                  gridLayout="srp"
+                  srpVariant="simple"
+                  mediaLayout="triptych"
                   galleryView={variation}
                 />
               </div>
@@ -223,35 +239,40 @@ export default function GalleryViewExplorationPage() {
           </div>
         </Section>
 
-        {/* Open questions */}
+        {/* Proposal */}
         <section className="mt-12 rounded-xl border border-border-card bg-neutral-100 p-6">
-          <h2 className="mb-4 text-base font-bold text-foreground">
-            What this page settles, and what it doesn&rsquo;t
+          <h2 className="mb-4 text-body-1 font-bold text-foreground">
+            The proposal
           </h2>
-          <dl className="space-y-4 text-sm leading-6">
+          <dl className="space-y-4 text-body-2">
             <QA
-              q="The brief's control does not exist"
-              a="The brief defines the control as “current listing card with one image”. Production serves three photos per card — a hero over two thumbnails — at every breakpoint. The test is therefore three static photos against five swipeable ones, not one against five. Part of the brief's stated objective, previewing several images from the SRP, already shipped."
-              status="blocked"
-            />
-            <QA
-              q="Which position indicator?"
-              a="Answerable here — section B. Recommendation: counter. It is the only one that survives a listing with 20 photos and the only one that tells the user the gallery has depth before they interact."
+              q="Run the test as Control vs Variation B"
+              a="Variation A wins on depth but shows one photo where the control shows three, so it is asking the SRP to give up breadth for a benefit that is one interaction away. Variation B keeps production's layout untouched and spends the second thumbnail on the route into the full gallery — the brief's actual endpoint. It is cheaper to build, cheaper to reverse, and it does not put the current card's strength at risk."
               status="ready"
             />
             <QA
-              q="What happens below 3 photos?"
-              a="Answerable here — section C. Recommendation: no affordance at 1 photo, and treat 2 as a real gallery. The card must not imply photos that do not exist."
+              q="Restate the control in the brief"
+              a="“Current listing card with one image” is not what ships. Production serves three photos at every breakpoint, so the honest framing is three static photos versus a route into 24. Part of the brief's own objective — previewing several images from the SRP — already shipped, which also means the expected engagement lift is smaller than the brief implies."
               status="ready"
             />
             <QA
-              q="Average photos per listing, and % under 3?"
-              a="Not answerable here. The prototype dataset caps at 4 real photos and only one boat has a gallery at all — that is a fixture limit, not a finding. Needs the production number from Nico or Joe before the indicator choice can be locked, since it decides whether dots ever degrade in practice."
+              q="If Variation A is run anyway: counter, and no affordance under 2 photos"
+              a="Section B — the counter is the only indicator that survives a 20-photo listing, states the total before the first interaction, and stays legible without adding a scrim. Section C — a single-photo listing gets no arrows, no indicator and no terminal frame."
+              status="ready"
+            />
+            <QA
+              q="Terminal frame advertises the listing total"
+              a="“View all 24 photos”, not the number previewed in the card. Wired through totalPhotoCount; the card preview is capped at five per the brief."
+              status="ready"
+            />
+            <QA
+              q="Average photos per listing, and % under 3"
+              a="Still unanswerable here — the prototype dataset caps at four real photos and only one boat has a gallery at all. It no longer blocks the recommendation, since Variation B degrades to plain production behaviour when a listing has one photo, but it does decide how often the gallery tile appears at all."
               status="blocked"
             />
             <QA
-              q="Does the A/B run on mobile, desktop or both?"
-              a="Not a design question — it is a scoping decision. Both arms are built responsive either way, so this does not block W7, but it does change the test spec."
+              q="Mobile, desktop or both"
+              a="A scoping call, not a design one. Both variations are responsive either way."
               status="external"
             />
           </dl>

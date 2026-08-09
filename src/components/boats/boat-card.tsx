@@ -3,6 +3,7 @@
 import type { MouseEvent } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { Images } from "lucide-react"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
@@ -137,20 +138,39 @@ export function BoatCard({
         </div>
         {thumbs.length > 0 && (
           <div className="grid grid-cols-2 gap-1 pt-1">
-            {thumbs.map((src, i) => (
-              <div
-                key={`${src}-${i}`}
-                className="relative h-20 overflow-hidden rounded-b"
-              >
-                <Image
-                  src={src}
-                  alt={`${boatName} (${i + 2}/${images.length})`}
-                  fill
-                  sizes={IMG_SIZES}
-                  className="object-cover"
-                />
-              </div>
-            ))}
+            {thumbs.map((src, i) => {
+              /*
+               * Variation B: rather than replacing three visible photos with
+               * one, keep production's layout and turn the last thumbnail into
+               * the route to the full gallery. Breadth is preserved and the
+               * brief's "View all N photos" endpoint still gets its entry
+               * point.
+               */
+              const isGalleryTile =
+                Boolean(galleryView?.viewAll) && i === thumbs.length - 1
+              return (
+                <div
+                  key={`${src}-${i}`}
+                  className="relative h-20 overflow-hidden rounded-b"
+                >
+                  <Image
+                    src={src}
+                    alt={`${boatName} (${i + 2}/${allPhotos.length})`}
+                    fill
+                    sizes={IMG_SIZES}
+                    className="object-cover"
+                  />
+                  {isGalleryTile && (
+                    <span className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 bg-primary-chinese-blue/65 text-primary-white">
+                      <Images className="size-4 shrink-0" aria-hidden strokeWidth={1.75} />
+                      <span className="text-body-3 font-bold leading-4">
+                        View all {allPhotos.length}
+                      </span>
+                    </span>
+                  )}
+                </div>
+              )
+            })}
           </div>
         )}
       </div>
