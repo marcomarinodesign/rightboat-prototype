@@ -139,7 +139,32 @@ bypassing the scale entirely.
 
 ---
 
-## 4. The SRP card — different components
+## 4. There is no "the listing card" — there are three
+
+Production serves three distinct listing-card anatomies. Only one of them shows three
+photos, which is why the brief's control is wrong in one place and right in two.
+
+| Layout | Where | Photos | Media box | Notes |
+|---|---|---|---|---|
+| **Triptych** | SRP | **3** | `h-64`: hero `h-40` + `grid-cols-2 gap-1` of two `h-20` | `rounded-2xl`, `min-h-[29rem]`, `p-2`, `border-wireframe-4/95`, status badge on `bg-secondary-malibu-strong` |
+| **Hero** | Homepage | **1** | `h-56`, `rounded-t-lg`, flush to the card edge | Location centred below in `text-body-3` |
+| **Hero + CTA** | BDP → similar boats | **1** | `h-56` | Condition badge top-left (`backdrop-blur-sm bg-background-neutral`), info block `h-48`, outlined "Discover more" CTA |
+
+All three carry the `Favourite` React island at `absolute top-0 right-0 p-4`.
+
+In this repo these are `mediaLayout="triptych"`, `"hero"` and `"hero"` respectively on
+`BoatCard`.
+
+> [!important] The recommendation splits by layout
+> On the SRP there is breadth to protect, so the gallery route should cost a thumbnail
+> rather than the whole media block (Variation B). On the homepage and the BDP rail the
+> card already shows a single photo, so the brief's carousel applies as written — there is
+> nothing to trade and it is pure gain.
+>
+> Unifying the three into one card would be a larger change than this test, would touch
+> three surfaces at once, and would confound the result.
+
+### 4.1 The SRP card versus Figma and this prototype
 
 The production listing card is **not** the card in Figma or in this prototype:
 

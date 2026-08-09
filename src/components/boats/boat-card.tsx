@@ -34,13 +34,13 @@ type BoatCardProps = {
   /** Enables the Gallery View variation on this card. Omitted = control. */
   galleryView?: GalleryViewConfig
   /**
-   * Media anatomy.
+   * Media anatomy. The last two mirror what rightboat.com ships today — see
+   * docs/PRODUCTION_ALIGNMENT.md §4.
    * - `single`: one 3:2 image (this prototype's original card).
-   * - `triptych`: hero + two thumbnails, mirroring the card that ships on
-   *   rightboat.com today. This is the real SRP control — see
-   *   docs/PRODUCTION_ALIGNMENT.md §4.
+   * - `triptych`: hero + two thumbnails in a 256px box. The SRP card.
+   * - `hero`: one 224px image. The homepage and BDP "similar boats" cards.
    */
-  mediaLayout?: "single" | "triptych"
+  mediaLayout?: "single" | "triptych" | "hero"
 }
 
 function specsSummary(boat: Boat) {
@@ -197,7 +197,37 @@ export function BoatCard({
     </div>
   )
 
-  const imageSection = mediaLayout === "triptych" ? triptychSection : singleSection
+  /**
+   * Production's one-photo card (homepage, BDP similar boats): a fixed 224px
+   * image, no thumbnails. With no breadth to protect, the brief's carousel
+   * applies here without a trade — it is pure gain over a static image.
+   */
+  const heroSection = (
+    <div className="relative w-full overflow-hidden">
+      <ImageSlider
+        images={images}
+        alt={boatName}
+        showDots={Boolean(galleryView)}
+        showNavArrows={Boolean(galleryView)}
+        indicator={galleryView?.indicator ?? "dots"}
+        arrowsOnHover={galleryView?.arrowsOnHover ?? false}
+        viewAllHref={galleryView?.viewAll ? `${detailHref}?gallery=1` : undefined}
+        totalPhotoCount={allPhotos.length}
+        dotsPlacement="overlay"
+        carouselFrameClassName="h-56 shrink-0"
+        imageRoundedClassName="rounded-t-lg"
+        slideBackdropClassName="bg-midnight/12"
+      />
+      {badge}
+    </div>
+  )
+
+  const imageSection =
+    mediaLayout === "triptych"
+      ? triptychSection
+      : mediaLayout === "hero"
+        ? heroSection
+        : singleSection
 
   const brokerRow = (
     <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
@@ -334,6 +364,25 @@ export function BoatCard({
           {detailsSection({ linkName: true, showContactCta: true })}
         </div>
       </article>
+    )
+  }
+
+  if (mediaLayout === "hero") {
+    // Production's one-photo card: image flush to the top edge, no padding.
+    return (
+      <Link
+        href={detailHref}
+        className={cn(
+          "flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-wireframe-4/95 bg-card shadow-sm",
+          "transition-shadow duration-[var(--transition-duration-normal)] hover:shadow-lg motion-reduce:transition-none",
+          className
+        )}
+      >
+        {imageSection}
+        <div className="px-4 pb-4">
+          {detailsSection({ linkName: false, showContactCta: true })}
+        </div>
+      </Link>
     )
   }
 

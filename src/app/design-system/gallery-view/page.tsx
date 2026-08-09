@@ -239,6 +239,53 @@ export default function GalleryViewExplorationPage() {
           </div>
         </Section>
 
+        {/* D — per card type */}
+        <Section
+          title="D · The three card layouts in production"
+          description="rightboat.com does not have one listing card, it has three. Only the SRP card shows three photos; the homepage and the BDP's “similar boats” rail both show one. That means the brief's control is wrong for the SRP and right for the other two — and the recommendation has to split accordingly."
+        >
+          <div className="flex flex-wrap gap-8">
+            <Arm
+              label="SRP — 3 photos"
+              caption="Breadth to protect. Recommendation: keep the layout, spend the last thumbnail on the gallery route (Variation B)."
+            >
+              <div className={frameWidth}>
+                <BoatCard
+                  boat={withPhotos(galleryBoat, 4, "type-srp")}
+                  gridLayout="srp"
+                  srpVariant="simple"
+                  mediaLayout="triptych"
+                  galleryView={variation}
+                />
+              </div>
+            </Arm>
+            <Arm
+              label="Homepage — 1 photo"
+              caption="Nothing to lose. The brief's carousel applies cleanly here: pure gain over a static image."
+            >
+              <div className={frameWidth}>
+                <BoatCard
+                  boat={withPhotos(galleryBoat, 4, "type-home")}
+                  mediaLayout="hero"
+                  galleryView={variation}
+                />
+              </div>
+            </Arm>
+            <Arm
+              label="BDP similar boats — 1 photo"
+              caption="Same anatomy as the homepage card. Same recommendation, and the highest-intent surface of the three."
+            >
+              <div className={frameWidth}>
+                <BoatCard
+                  boat={withPhotos(galleryBoat, 4, "type-bdp")}
+                  mediaLayout="hero"
+                  galleryView={variation}
+                />
+              </div>
+            </Arm>
+          </div>
+        </Section>
+
         {/* Proposal */}
         <section className="mt-12 rounded-xl border border-border-card bg-neutral-100 p-6">
           <h2 className="mb-4 text-body-1 font-bold text-foreground">
@@ -246,8 +293,13 @@ export default function GalleryViewExplorationPage() {
           </h2>
           <dl className="space-y-4 text-body-2">
             <QA
-              q="Run the test as Control vs Variation B"
-              a="Variation A wins on depth but shows one photo where the control shows three, so it is asking the SRP to give up breadth for a benefit that is one interaction away. Variation B keeps production's layout untouched and spends the second thumbnail on the route into the full gallery — the brief's actual endpoint. It is cheaper to build, cheaper to reverse, and it does not put the current card's strength at risk."
+              q="The recommendation splits by card layout"
+              a="On the SRP, where three photos are already visible, run Control vs Variation B: keep the layout and spend the last thumbnail on the route into the full gallery. On the homepage and the BDP's similar-boats rail, where the card shows a single photo, run the brief's carousel as written — there is no breadth to trade, so it is pure gain. One feature, two answers, because production has two anatomies."
+              status="ready"
+            />
+            <QA
+              q="Do not ship one card layout to rule them all"
+              a="Unifying the three cards would be a bigger change than this test, would touch the homepage and BDP at the same time, and would confound the result. Keep the anatomies as they are and let the photo feature adapt to each."
               status="ready"
             />
             <QA
