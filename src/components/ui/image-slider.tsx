@@ -30,6 +30,13 @@ type ImageSliderProps = {
   viewAllHref?: string
   /** Copy for the terminal slide. Defaults to `View all {n} photos`. */
   viewAllLabel?: string
+  /**
+   * Total photos on the listing, which is normally larger than the handful
+   * previewed in the card. The terminal frame advertises this number — "View
+   * all 24 photos" is the hook; "View all 5 photos" is not. Defaults to the
+   * number of images passed in.
+   */
+  totalPhotoCount?: number
   /** Reveal nav arrows only on hover (fine pointers). Always visible on touch. */
   arrowsOnHover?: boolean
   /** Applied to the scroll frame and slide masks; defaults to rounded corners matching other carousels. */
@@ -59,6 +66,7 @@ export function ImageSlider({
   indicator = "dots",
   viewAllHref,
   viewAllLabel,
+  totalPhotoCount,
   arrowsOnHover = false,
   imageRoundedClassName = "rounded-xl",
   slideBackdropClassName = "bg-muted",
@@ -272,7 +280,7 @@ export function ImageSlider({
             >
               <Images className="size-6 shrink-0" aria-hidden strokeWidth={1.75} />
               <span className="px-4 text-center text-sm font-medium leading-5">
-                {viewAllLabel ?? `View all ${imageCount} photos`}
+                {viewAllLabel ?? `View all ${totalPhotoCount ?? imageCount} photos`}
               </span>
             </button>
           </div>

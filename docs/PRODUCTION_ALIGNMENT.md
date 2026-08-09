@@ -158,10 +158,23 @@ The production listing card is **not** the card in Figma or in this prototype:
 Ours: single 3:2 image, broker row, "Contact Seller" button, `rounded-xl`.
 
 > [!important] Consequence for Q3 SRP Gallery View
-> The A/B test assumes a control of "one static hero image, no affordance". **That control
-> does not exist in production** — production already surfaces three photos per card.
-> The variation would *replace* that layout, not add to it, which changes both the
-> hypothesis and the metric. Worth confirming before the W7 build.
+> The brief ([SRP Listing-Card Gallery View — A/B Test](https://docs.google.com/document/d/1Z-G_M1q0ph-M14k98QzAIUBWNy4OAPw7csqPEiFzUK4/edit), Joe Lingerfelt, 27 Jul 2026)
+> states: *"Control: Current listing card with one image."* **That control does not exist
+> in production** — the card serves three photos at every breakpoint, with no responsive
+> prefix on the thumbnail grid.
+>
+> Two consequences. First, the test is three static photos against five swipeable ones,
+> not one against five, so the expected engagement delta is much smaller. Second, part of
+> the brief's own objective — *"preview several listing images directly from the SRP"* —
+> has already shipped.
+>
+> Seen side by side, the variation shows **less** at a glance than the control: it trades
+> three simultaneously visible photos for one visible and five browsable. That is a real
+> trade, not an obvious improvement, and it should be stated as the hypothesis rather than
+> assumed away.
+>
+> The brief also specifies the terminal frame as *"View all 24 photos"* — the listing's
+> total, not the number previewed in the card. Implemented via `totalPhotoCount`.
 
 ---
 

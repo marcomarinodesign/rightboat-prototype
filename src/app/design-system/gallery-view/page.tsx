@@ -149,19 +149,26 @@ export default function GalleryViewExplorationPage() {
         {/* A — Control vs variation */}
         <Section
           title="A · Control vs variation"
-          description="The control is the card as it ships today: a static hero image, no affordance. Note that the SRP already runs a gallery on sponsored and manufacturer cards, so the test arm is not new code so much as a rollout to the default card."
+          description="The brief describes the control as “current listing card with one image”. That is not what rightboat.com serves: production already shows three photos per card — a hero over two thumbnails — at every breakpoint. The real comparison is three static photos against five swipeable ones plus a route into the full gallery, which is a much smaller delta than the brief assumes."
         >
           <div className="flex flex-wrap gap-8">
-            <Arm label="Control" caption="Ships today on the default SRP card">
+            <Arm
+              label="Control — production today"
+              caption="Hero over a 2-up thumbnail row. Three photos visible, no interaction."
+            >
               <div className={frameWidth}>
                 <BoatCard
                   boat={withPhotos(galleryBoat, 4, "control")}
                   gridLayout="srp"
                   srpVariant="simple"
+                  mediaLayout="triptych"
                 />
               </div>
             </Arm>
-            <Arm label="Variation" caption="Gallery View enabled">
+            <Arm
+              label="Variation — Figma proposal"
+              caption="One photo at a time, swipeable, with a position indicator and a route into the full gallery. Trades two always-visible thumbnails for depth."
+            >
               <div className={frameWidth}>
                 <BoatCard
                   boat={withPhotos(galleryBoat, 4, "variation")}
@@ -222,6 +229,11 @@ export default function GalleryViewExplorationPage() {
             What this page settles, and what it doesn&rsquo;t
           </h2>
           <dl className="space-y-4 text-sm leading-6">
+            <QA
+              q="The brief's control does not exist"
+              a="The brief defines the control as “current listing card with one image”. Production serves three photos per card — a hero over two thumbnails — at every breakpoint. The test is therefore three static photos against five swipeable ones, not one against five. Part of the brief's stated objective, previewing several images from the SRP, already shipped."
+              status="blocked"
+            />
             <QA
               q="Which position indicator?"
               a="Answerable here — section B. Recommendation: counter. It is the only one that survives a listing with 20 photos and the only one that tells the user the gallery has depth before they interact."

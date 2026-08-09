@@ -65,9 +65,12 @@ export function BoatCard({
    * repeats of the hero image made every card look like a 4-photo gallery and
    * hid the sub-3-photo edge case the A/B test needs to account for.
    */
-  const images = boat.galleryImages?.length
+  const allPhotos = boat.galleryImages?.length
     ? boat.galleryImages
     : [boat.image]
+  /** The brief previews four or five in the card; the rest live on the BDP. */
+  const PREVIEW_LIMIT = 5
+  const images = allPhotos.slice(0, PREVIEW_LIMIT)
 
   const boatName = `${boat.make} ${boat.model}`
 
@@ -165,6 +168,7 @@ export function BoatCard({
         indicator={galleryView?.indicator ?? "dots"}
         arrowsOnHover={galleryView?.arrowsOnHover ?? false}
         viewAllHref={galleryView?.viewAll ? `${detailHref}?gallery=1` : undefined}
+        totalPhotoCount={allPhotos.length}
         dotsPlacement="overlay"
         imageRoundedClassName="rounded-[8px]"
         slideBackdropClassName="bg-midnight/12"
