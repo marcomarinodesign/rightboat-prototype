@@ -5,9 +5,19 @@ import Link from "next/link"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
-import { ImageSlider } from "@/components/ui/image-slider"
+import { ImageSlider, type SliderIndicator } from "@/components/ui/image-slider"
 import { BrokerLogo } from "@/components/boats/broker-logo"
 import type { SrpGridCardVariant } from "@/components/boats/srp-grid-card-variant"
+
+/** Q3 SRP Gallery View A/B test — the variation arm. Omit for the control. */
+export type GalleryViewConfig = {
+  /** Position indicator style under evaluation. */
+  indicator?: SliderIndicator
+  /** Append the terminal "View all photos" frame linking to the BDP gallery. */
+  viewAll?: boolean
+  /** Reveal arrows on hover instead of always-on. */
+  arrowsOnHover?: boolean
+}
 
 type BoatCardProps = {
   boat: Boat
@@ -19,6 +29,8 @@ type BoatCardProps = {
   className?: string
   /** Detail URL (defaults to `/boats-for-sale/{makeSlug}/{modelSlug}/{id}`). */
   href?: string
+  /** Enables the Gallery View variation on this card. Omitted = control. */
+  galleryView?: GalleryViewConfig
 }
 
 function specsSummary(boat: Boat) {
@@ -34,12 +46,18 @@ export function BoatCard({
   srpVariant,
   className,
   href,
+  galleryView,
 }: BoatCardProps) {
   const detailHref =
     href ?? `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
+  /**
+   * A listing shows only the photos it actually has. Padding the track with
+   * repeats of the hero image made every card look like a 4-photo gallery and
+   * hid the sub-3-photo edge case the A/B test needs to account for.
+   */
   const images = boat.galleryImages?.length
     ? boat.galleryImages
-    : [boat.image, boat.image, boat.image, boat.image]
+    : [boat.image]
 
   const boatName = `${boat.make} ${boat.model}`
 
@@ -59,8 +77,11 @@ export function BoatCard({
       <ImageSlider
         images={images}
         alt={boatName}
-        showDots={srpGrid ? showMediaChrome : true}
-        showNavArrows={showMediaChrome}
+        showDots={galleryView ? true : srpGrid ? showMediaChrome : true}
+        showNavArrows={galleryView ? true : showMediaChrome}
+        indicator={galleryView?.indicator ?? "dots"}
+        arrowsOnHover={galleryView?.arrowsOnHover ?? false}
+        viewAllHref={galleryView?.viewAll ? `${detailHref}?gallery=1` : undefined}
         dotsPlacement="overlay"
         imageRoundedClassName="rounded-[8px]"
         slideBackdropClassName="bg-midnight/12"

@@ -2,9 +2,13 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { ChevronLeft, ChevronRight, Images } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+
+/** Position indicator styles under evaluation for the SRP Gallery View A/B test. */
+export type SliderIndicator = "dots" | "counter" | "progress"
 
 type ImageSliderProps = {
   images: string[]
@@ -14,6 +18,20 @@ type ImageSliderProps = {
   showNavArrows?: boolean
   /** Dots below the carousel (default) or overlaid at the bottom of the image. */
   dotsPlacement?: "below" | "overlay"
+  /**
+   * Position indicator style. Defaults to `dots` (current production behaviour).
+   * `counter` renders a `2/5` pill; `progress` renders a segmented bar.
+   */
+  indicator?: SliderIndicator
+  /**
+   * Appends a terminal "View all photos" slide after the last image.
+   * Clicking it opens the given href (the BDP in full-gallery mode).
+   */
+  viewAllHref?: string
+  /** Copy for the terminal slide. Defaults to `View all {n} photos`. */
+  viewAllLabel?: string
+  /** Reveal nav arrows only on hover (fine pointers). Always visible on touch. */
+  arrowsOnHover?: boolean
   /** Applied to the scroll frame and slide masks; defaults to rounded corners matching other carousels. */
   imageRoundedClassName?: string
   /** Backdrop behind slides (e.g. Figma Boat Card: midnight @ 12% opacity). */
@@ -38,6 +56,10 @@ export function ImageSlider({
   showDots = true,
   showNavArrows = true,
   dotsPlacement = "below",
+  indicator = "dots",
+  viewAllHref,
+  viewAllLabel,
+  arrowsOnHover = false,
   imageRoundedClassName = "rounded-xl",
   slideBackdropClassName = "bg-muted",
   carouselFrameClassName,
@@ -46,29 +68,40 @@ export function ImageSlider({
   dotsOverlayClassName,
   className,
 }: ImageSliderProps) {
+  const router = useRouter()
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const [index, setIndex] = React.useState(0)
   const [isDragging, setIsDragging] = React.useState(false)
   const dragStart = React.useRef({ x: 0, scrollLeft: 0 })
 
-  const count = images.length
-  const hasMultiple = count > 1
+  const imageCount = images.length
+  /**
+   * The terminal "View all photos" frame is a slide, but never a photo.
+   * It requires a real gallery: on a single-photo listing it would manufacture
+   * a swipeable track and a nonsensical "1/1" counter for one image.
+   */
+  const hasViewAll = Boolean(viewAllHref) && imageCount > 1
+  const slideCount = imageCount + (hasViewAll ? 1 : 0)
+  const hasMultiple = slideCount > 1
+  const isTerminal = hasViewAll && index >= imageCount
+  /** Clamped so the counter never reads "5/4" while on the terminal frame. */
+  const photoPosition = Math.min(index + 1, imageCount)
 
   const scrollTo = React.useCallback((i: number) => {
     const el = scrollRef.current
     if (!el) return
-    const target = Math.max(0, Math.min(i, count - 1))
+    const target = Math.max(0, Math.min(i, slideCount - 1))
     el.scrollTo({ left: el.clientWidth * target, behavior: "smooth" })
     setIndex(target)
-  }, [count])
+  }, [slideCount])
 
   const handleScroll = React.useCallback(() => {
     const el = scrollRef.current
     if (!el || !hasMultiple) return
     const width = el.clientWidth
     const newIndex = Math.round(el.scrollLeft / width)
-    setIndex(Math.max(0, Math.min(newIndex, count - 1)))
-  }, [count, hasMultiple])
+    setIndex(Math.max(0, Math.min(newIndex, slideCount - 1)))
+  }, [slideCount, hasMultiple])
 
   const handlePointerDown = React.useCallback(
     (e: React.PointerEvent) => {
@@ -124,6 +157,16 @@ export function ImageSlider({
     return () => el.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  /**
+   * Touch has no hover, so arrows stay visible on coarse pointers and swipe
+   * remains the primary gesture there.
+   */
+  const hoverArrowClassName = cn(
+    "[@media(pointer:fine)]:opacity-0 [@media(pointer:fine)]:group-hover/slider:opacity-100",
+    "[@media(pointer:fine)]:focus-visible:opacity-100",
+    "transition-opacity duration-[var(--transition-duration-fast)] motion-reduce:transition-none"
+  )
+
   const frameSizing = carouselFrameClassName ?? "aspect-[3/2]"
   const slideInnerDefault = carouselFrameClassName
     ? "relative h-full w-full min-h-0 overflow-hidden"
@@ -149,7 +192,7 @@ export function ImageSlider({
 
   return (
     <div
-      className={cn("relative w-full", className)}
+      className={cn("group/slider relative w-full", className)}
       onKeyDown={handleKeyDown}
     >
       <div
@@ -179,7 +222,7 @@ export function ImageSlider({
             className="relative h-full min-w-full shrink-0 snap-start snap-always"
             role="group"
             aria-roledescription="slide"
-            aria-label={`${alt} image ${i + 1} of ${count}`}
+            aria-label={`${alt} image ${i + 1} of ${imageCount}`}
           >
             <div
               className={cn(
@@ -190,7 +233,7 @@ export function ImageSlider({
             >
               <Image
                 src={src}
-                alt={count > 1 ? `${alt} (${i + 1}/${count})` : alt}
+                alt={imageCount > 1 ? `${alt} (${i + 1}/${imageCount})` : alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
@@ -201,6 +244,39 @@ export function ImageSlider({
             </div>
           </div>
         ))}
+
+        {hasViewAll && (
+          <div
+            className="relative h-full min-w-full shrink-0 snap-start snap-always"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="View all photos"
+          >
+            {/*
+              A button rather than a link: the slider is routinely rendered
+              inside a card-wide <Link>, and a nested anchor is invalid HTML
+              that breaks hydration.
+            */}
+            <button
+              type="button"
+              className={cn(
+                slideInner,
+                imageRoundedClassName,
+                "flex flex-col items-center justify-center gap-2 bg-midnight text-white"
+              )}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                router.push(viewAllHref!)
+              }}
+            >
+              <Images className="size-6 shrink-0" aria-hidden strokeWidth={1.75} />
+              <span className="px-4 text-center text-sm font-medium leading-5">
+                {viewAllLabel ?? `View all ${imageCount} photos`}
+              </span>
+            </button>
+          </div>
+        )}
       </div>
 
       {hasMultiple && showNavArrows && (
@@ -215,6 +291,7 @@ export function ImageSlider({
             }}
             className={cn(
               "absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm",
+              arrowsOnHover && hoverArrowClassName,
               navButtonClassName
             )}
           >
@@ -230,6 +307,7 @@ export function ImageSlider({
             }}
             className={cn(
               "absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-sm",
+              arrowsOnHover && hoverArrowClassName,
               navButtonClassName
             )}
           >
@@ -237,7 +315,26 @@ export function ImageSlider({
           </button>
         </>
       )}
-      {showDots && hasMultiple && count > 1 && (
+      {/*
+        Dots and progress segments are white with no background of their own, so
+        they vanish over a bright photo. The counter carries its own pill and
+        does not need this.
+      */}
+      {showDots &&
+        hasMultiple &&
+        indicator !== "counter" &&
+        dotsPlacement === "overlay" && (
+          <div
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-16",
+              "bg-gradient-to-t from-black/45 to-transparent",
+              imageRoundedClassName
+            )}
+          />
+        )}
+
+      {showDots && hasMultiple && indicator === "dots" && (
         <div
           className={cn(
             "flex justify-center gap-1.5",
@@ -251,14 +348,19 @@ export function ImageSlider({
           role="tablist"
           aria-label="Slide indicator"
         >
-          {images.map((_, i) => (
+          {Array.from({ length: slideCount }, (_, i) => (
             <button
               key={i}
               type="button"
               role="tab"
               aria-selected={index === i}
-              aria-label={`Go to image ${i + 1}`}
+              aria-label={
+                hasViewAll && i === imageCount
+                  ? "Go to all photos"
+                  : `Go to image ${i + 1}`
+              }
               onClick={(e) => {
+                e.preventDefault()
                 e.stopPropagation()
                 scrollTo(i)
               }}
@@ -271,6 +373,43 @@ export function ImageSlider({
                   : index === i
                     ? "bg-foreground"
                     : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
+              )}
+            />
+          ))}
+        </div>
+      )}
+
+      {showDots && hasMultiple && indicator === "counter" && (
+        <div
+          className={cn(
+            "pointer-events-none absolute bottom-3 right-3 z-20 rounded-full bg-black/60 px-2 py-0.5",
+            "text-xs font-medium leading-4 tabular-nums text-white",
+            dotsOverlayClassName
+          )}
+          aria-live="polite"
+        >
+          {isTerminal ? "All photos" : `${photoPosition}/${imageCount}`}
+        </div>
+      )}
+
+      {showDots && hasMultiple && indicator === "progress" && (
+        <div
+          className={cn(
+            "pointer-events-none absolute bottom-3 left-1/2 z-20 flex w-[60%] -translate-x-1/2 gap-1",
+            dotsOverlayClassName
+          )}
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={slideCount}
+          aria-valuenow={index + 1}
+          aria-label="Slide indicator"
+        >
+          {Array.from({ length: slideCount }, (_, i) => (
+            <span
+              key={i}
+              className={cn(
+                "h-0.5 flex-1 rounded-full transition-colors duration-[var(--transition-duration-fast)] motion-reduce:transition-none",
+                i <= index ? "bg-white" : "bg-white/35"
               )}
             />
           ))}
