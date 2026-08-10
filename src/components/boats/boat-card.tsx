@@ -1,13 +1,25 @@
 "use client"
 
 import type { MouseEvent } from "react"
+import Image from "next/image"
 import Link from "next/link"
+import { Images } from "lucide-react"
 
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
-import { ImageSlider } from "@/components/ui/image-slider"
+import { ImageSlider, type SliderIndicator } from "@/components/ui/image-slider"
 import { BrokerLogo } from "@/components/boats/broker-logo"
 import type { SrpGridCardVariant } from "@/components/boats/srp-grid-card-variant"
+
+/** Q3 SRP Gallery View A/B test — the variation arm. Omit for the control. */
+export type GalleryViewConfig = {
+  /** Position indicator style under evaluation. */
+  indicator?: SliderIndicator
+  /** Append the terminal "View all photos" frame linking to the BDP gallery. */
+  viewAll?: boolean
+  /** Reveal arrows on hover instead of always-on. */
+  arrowsOnHover?: boolean
+}
 
 type BoatCardProps = {
   boat: Boat
@@ -19,6 +31,16 @@ type BoatCardProps = {
   className?: string
   /** Detail URL (defaults to `/boats-for-sale/{makeSlug}/{modelSlug}/{id}`). */
   href?: string
+  /** Enables the Gallery View variation on this card. Omitted = control. */
+  galleryView?: GalleryViewConfig
+  /**
+   * Media anatomy. The last two mirror what rightboat.com ships today — see
+   * docs/PRODUCTION_ALIGNMENT.md §4.
+   * - `single`: one 3:2 image (this prototype's original card).
+   * - `triptych`: hero + two thumbnails in a 256px box. The SRP card.
+   * - `hero`: one 224px image. The homepage and BDP "similar boats" cards.
+   */
+  mediaLayout?: "single" | "triptych" | "hero"
 }
 
 function specsSummary(boat: Boat) {
@@ -34,12 +56,22 @@ export function BoatCard({
   srpVariant,
   className,
   href,
+  galleryView,
+  mediaLayout = "single",
 }: BoatCardProps) {
   const detailHref =
     href ?? `/boats-for-sale/${boat.makeSlug}/${boat.modelSlug}/${boat.id}`
-  const images = boat.galleryImages?.length
+  /**
+   * A listing shows only the photos it actually has. Padding the track with
+   * repeats of the hero image made every card look like a 4-photo gallery and
+   * hid the sub-3-photo edge case the A/B test needs to account for.
+   */
+  const allPhotos = boat.galleryImages?.length
     ? boat.galleryImages
-    : [boat.image, boat.image, boat.image, boat.image]
+    : [boat.image]
+  /** The brief previews four or five in the card; the rest live on the BDP. */
+  const PREVIEW_LIMIT = 5
+  const images = allPhotos.slice(0, PREVIEW_LIMIT)
 
   const boatName = `${boat.make} ${boat.model}`
 
@@ -54,42 +86,148 @@ export function BoatCard({
       : Boolean(boat.manufacturerListing)
   const showMediaChrome = srpGrid && (isSponsored || isManufacture)
 
-  const imageSection = (
+  const badge = isManufacture ? (
+    <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
+      <span className="text-xs font-normal leading-4 text-primary-foreground">
+        Manufacture Listing
+      </span>
+    </div>
+  ) : isSponsored ? (
+    <div
+      className={cn(
+        "absolute left-2 top-2 z-10 rounded-full px-3 py-1.5",
+        srpGrid ? "bg-neutral-200" : "bg-primary"
+      )}
+    >
+      <span
+        className={cn(
+          "text-xs font-normal leading-4",
+          srpGrid ? "text-midnight" : "text-primary-foreground"
+        )}
+      >
+        Sponsored
+      </span>
+    </div>
+  ) : null
+
+  const IMG_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+
+  /**
+   * Production anatomy: a 160px hero over a 2-up row of 80px thumbnails inside
+   * a 256px media box. Three photos are visible at once — there is no carousel.
+   * A listing with a single photo lets the hero take the full box rather than
+   * leaving a gap.
+   */
+  const thumbs = images.slice(1, 3)
+  const triptychSection = (
+    <div className="relative flex h-64 w-full flex-col overflow-hidden">
+      <div className="flex flex-col">
+        <div
+          className={cn(
+            "relative w-full overflow-hidden rounded-t-lg",
+            thumbs.length ? "h-40" : "h-64"
+          )}
+        >
+          <Image
+            src={images[0]}
+            alt={boatName}
+            fill
+            sizes={IMG_SIZES}
+            className="object-cover"
+          />
+        </div>
+        {thumbs.length > 0 && (
+          <div className="grid grid-cols-2 gap-1 pt-1">
+            {thumbs.map((src, i) => {
+              /*
+               * Variation B: rather than replacing three visible photos with
+               * one, keep production's layout and turn the last thumbnail into
+               * the route to the full gallery. Breadth is preserved and the
+               * brief's "View all N photos" endpoint still gets its entry
+               * point.
+               */
+              const isGalleryTile =
+                Boolean(galleryView?.viewAll) && i === thumbs.length - 1
+              return (
+                <div
+                  key={`${src}-${i}`}
+                  className="relative h-20 overflow-hidden rounded-b"
+                >
+                  <Image
+                    src={src}
+                    alt={`${boatName} (${i + 2}/${allPhotos.length})`}
+                    fill
+                    sizes={IMG_SIZES}
+                    className="object-cover"
+                  />
+                  {isGalleryTile && (
+                    <span className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 bg-primary-chinese-blue/65 text-primary-white">
+                      <Images className="size-4 shrink-0" aria-hidden strokeWidth={1.75} />
+                      <span className="text-body-3 font-bold leading-4">
+                        View all {allPhotos.length}
+                      </span>
+                    </span>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </div>
+      {badge}
+    </div>
+  )
+
+  const singleSection = (
     <div className="relative w-full overflow-hidden rounded-[8px]">
       <ImageSlider
         images={images}
         alt={boatName}
-        showDots={srpGrid ? showMediaChrome : true}
-        showNavArrows={showMediaChrome}
+        showDots={galleryView ? true : srpGrid ? showMediaChrome : true}
+        showNavArrows={galleryView ? true : showMediaChrome}
+        indicator={galleryView?.indicator ?? "dots"}
+        arrowsOnHover={galleryView?.arrowsOnHover ?? false}
+        viewAllHref={galleryView?.viewAll ? `${detailHref}?gallery=1` : undefined}
+        totalPhotoCount={allPhotos.length}
         dotsPlacement="overlay"
         imageRoundedClassName="rounded-[8px]"
         slideBackdropClassName="bg-midnight/12"
       />
-      {isManufacture ? (
-        <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
-          <span className="text-xs font-normal leading-4 text-primary-foreground">
-            Manufacture Listing
-          </span>
-        </div>
-      ) : isSponsored ? (
-        <div
-          className={cn(
-            "absolute left-2 top-2 z-10 rounded-full px-3 py-1.5",
-            srpGrid ? "bg-neutral-200" : "bg-primary"
-          )}
-        >
-          <span
-            className={cn(
-              "text-xs font-normal leading-4",
-              srpGrid ? "text-midnight" : "text-primary-foreground"
-            )}
-          >
-            Sponsored
-          </span>
-        </div>
-      ) : null}
+      {badge}
     </div>
   )
+
+  /**
+   * Production's one-photo card (homepage, BDP similar boats): a fixed 224px
+   * image, no thumbnails. With no breadth to protect, the brief's carousel
+   * applies here without a trade — it is pure gain over a static image.
+   */
+  const heroSection = (
+    <div className="relative w-full overflow-hidden">
+      <ImageSlider
+        images={images}
+        alt={boatName}
+        showDots={Boolean(galleryView)}
+        showNavArrows={Boolean(galleryView)}
+        indicator={galleryView?.indicator ?? "dots"}
+        arrowsOnHover={galleryView?.arrowsOnHover ?? false}
+        viewAllHref={galleryView?.viewAll ? `${detailHref}?gallery=1` : undefined}
+        totalPhotoCount={allPhotos.length}
+        dotsPlacement="overlay"
+        carouselFrameClassName="h-56 shrink-0"
+        imageRoundedClassName="rounded-t-lg"
+        slideBackdropClassName="bg-midnight/12"
+      />
+      {badge}
+    </div>
+  )
+
+  const imageSection =
+    mediaLayout === "triptych"
+      ? triptychSection
+      : mediaLayout === "hero"
+        ? heroSection
+        : singleSection
 
   const brokerRow = (
     <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
@@ -226,6 +364,46 @@ export function BoatCard({
           {detailsSection({ linkName: true, showContactCta: true })}
         </div>
       </article>
+    )
+  }
+
+  if (mediaLayout === "hero") {
+    // Production's one-photo card: image flush to the top edge, no padding.
+    return (
+      <Link
+        href={detailHref}
+        className={cn(
+          "flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-wireframe-4/95 bg-card shadow-sm",
+          "transition-shadow duration-[var(--transition-duration-normal)] hover:shadow-lg motion-reduce:transition-none",
+          className
+        )}
+      >
+        {imageSection}
+        <div className="px-4 pb-4">
+          {detailsSection({ linkName: false, showContactCta: true })}
+        </div>
+      </Link>
+    )
+  }
+
+  if (mediaLayout === "triptych") {
+    // Shell copied from the card that ships on rightboat.com.
+    return (
+      <Link
+        href={detailHref}
+        className={cn(
+          "flex w-full min-h-[29rem] cursor-pointer flex-col rounded-2xl border border-wireframe-4/95 bg-card p-2 shadow-sm",
+          "transition-shadow duration-[var(--transition-duration-normal)] hover:shadow-lg motion-reduce:transition-none",
+          className
+        )}
+      >
+        {imageSection}
+        {detailsSection({
+          linkName: false,
+          showContactCta: true,
+          ctaLayout: srpGrid ? "srp" : "default",
+        })}
+      </Link>
     )
   }
 

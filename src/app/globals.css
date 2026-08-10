@@ -6,9 +6,73 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  /* Figma Colors — primitives (Tailwind: bg-midnight, bg-blue-400, text-malibu-500, …) */
+  --font-sans: var(--font-inter);
+  /* Previously aliased --font-geist-mono, which was never defined, so every
+     `font-mono` element silently fell back to the inherited family. */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  /* Type scale — production names, Figma values. Where the two differ the
+     Figma value wins and production is the one that must change; the deltas
+     are listed in docs/PRODUCTION_ALIGNMENT.md §3. */
+  --text-body-1: 1rem;
+  --text-body-1--line-height: 1.5rem;
+  --text-body-2: 0.875rem;
+  --text-body-2--line-height: 1.25rem;
+  --text-body-3: 0.75rem;
+  --text-body-3--line-height: 1rem;
+  --text-body-4: 0.625rem;
+  --text-body-4--line-height: 0.75rem;
+  --text-body-5: 1.25rem;
+  --text-body-5--line-height: 1.75rem;
+  --text-subtitle-0: 5.625rem;
+  --text-subtitle-0--line-height: 5.625rem;
+  --text-subtitle-1: 1.75rem;
+  --text-subtitle-1--line-height: 2.125rem;
+  --text-subtitle-2: 1.5rem;
+  --text-subtitle-2--line-height: 2rem;
+  --text-subtitle-3: 1.125rem;
+  --text-subtitle-3--line-height: 1.5rem;
+  --text-subtitle-4: 1.25rem;
+  --text-subtitle-4--line-height: 1.625rem;
+
+  /* Production tokens — prefer these. Same names as rightboat.com, so
+     `text-primary-chinese-blue` here is `text-primary-chinese-blue` there. */
+  --color-primary-blue: var(--primary-blue);
+  --color-primary-chinese-blue: var(--primary-chinese-blue);
+  --color-primary-white: var(--primary-white);
+  --color-primary-navy: var(--primary-navy);
+  --color-primary-bright-turquoise: var(--primary-bright-turquoise);
+  --color-primary-lime: var(--primary-lime);
+  --color-primary-cherry-red: var(--primary-cherry-red);
+  --color-secondary-blue: var(--secondary-blue);
+  --color-secondary-dark-purple: var(--secondary-dark-purple);
+  --color-secondary-ghost-white: var(--secondary-ghost-white);
+  --color-secondary-lavender: var(--secondary-lavender);
+  --color-secondary-malibu: var(--secondary-malibu);
+  --color-secondary-malibu-base: var(--secondary-malibu-base);
+  --color-secondary-malibu-strong: var(--secondary-malibu-strong);
+  --color-secondary-status-info: var(--secondary-status-info);
+  --color-secondary-tiffany-blue: var(--secondary-tiffany-blue);
+  --color-secondary-yellow: var(--secondary-yellow);
+  --color-wireframe-1: var(--wireframe-1);
+  --color-wireframe-2: var(--wireframe-2);
+  --color-wireframe-3: var(--wireframe-3);
+  --color-wireframe-4: var(--wireframe-4);
+  --color-wireframe-5: var(--wireframe-5);
+  --color-background-neutral: var(--background-neutral);
+  --color-background-paper: var(--background-paper);
+  --color-background-alice-blue: var(--background-alice-blue);
+  --color-background-table-header: var(--background-table-header);
+  --color-background-malibu: var(--background-malibu);
+  --color-background-black: var(--background-black);
+  --color-background-amber: var(--background-amber);
+  --color-gray-philippine-gray: var(--gray-philippine-gray);
+  --color-gray-raisin-black: var(--gray-raisin-black);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-alert: var(--alert);
+
+  /* Legacy Figma names — still generated so existing components compile. */
   --color-midnight: var(--midnight);
   --color-blue-200: var(--blue-200);
   --color-blue-300: var(--blue-300);
@@ -109,40 +173,89 @@
   --heading-md: 1.875rem;
   --heading-sm: 1.5rem;
 
-  /* ── Figma: Colors — primitives (paths mirror variable names: Blue/200 → --blue-200) ── */
-  --midnight: #13022c;
+  /* ────────────────────────────────────────────────────────────────────────
+     Production tokens — canonical.
+
+     Names and values mirror the Tailwind config behind rightboat.com, so a
+     token read in Figma is the class a dev types in production. Figma decides
+     the value; production owns the name. Figma source of truth:
+     El-Captain-DS → Colors. See docs/PRODUCTION_ALIGNMENT.md.
+     ──────────────────────────────────────────────────────────────────────── */
+  --primary-blue: #0257fc;
+  --primary-chinese-blue: #13022c;
+  --primary-white: #ffffff;
+  --primary-navy: #193154;
+  --primary-bright-turquoise: #03e5e5;
+  --primary-lime: #dcfce7;
+  --primary-cherry-red: #fef2f2;
+
+  --secondary-blue: #0141c6;
+  --secondary-dark-purple: #281e36;
+  --secondary-ghost-white: #f5f8ff;
+  --secondary-lavender: #dee8ff;
+  --secondary-malibu: #b8e7ff;
+  --secondary-malibu-base: #09a9ee;
+  --secondary-malibu-strong: #0087cc;
+  --secondary-status-info: #0073e6;
+  --secondary-tiffany-blue: #03bfbf;
+  --secondary-yellow: #d4a017;
+
+  /* Production greys are neutral, not blue-tinted. */
+  --wireframe-1: #333333;
+  --wireframe-2: #595959;
+  --wireframe-3: #8c8c8c;
+  --wireframe-4: #cccccc;
+  --wireframe-5: #f2f2f2;
+
+  --background-neutral: #f4f9ff;
+  --background-paper: #fafafa;
+  --background-alice-blue: #f0f4ff;
+  --background-table-header: #f5f5f5;
+  --background-malibu: #33c1fd;
+  --background-black: #000000;
+  --background-amber: #fef3c7;
+
+  --gray-philippine-gray: #8b8b8b;
+  --gray-raisin-black: #262626;
+
+  --danger: #eb5757;
+  --success: #30cf22;
+  --alert: #f1dc1a;
+
+  /* ── Aliases onto the canonical set — existing components keep working ── */
+  --midnight: var(--primary-chinese-blue);
+  --blue-400: var(--primary-blue);
+  --blue-500: var(--secondary-blue);
+  --neutral-white: var(--primary-white);
+  --neutral-black: var(--background-black);
+  --neutral-100: var(--background-paper);
+  --neutral-200: var(--wireframe-5);
+  --neutral-300: var(--wireframe-4);
+  --neutral-400: var(--wireframe-3);
+  --neutral-500: var(--wireframe-2);
+  --neutral-600: var(--wireframe-1);
+  --malibu-200: var(--secondary-malibu);
+  --malibu-400: var(--background-malibu);
+  --malibu-500: var(--secondary-malibu-base);
+  --malibu-600: var(--secondary-malibu-strong);
+  --status-info-100: var(--background-neutral);
+  --status-info-200: var(--secondary-status-info);
+
+  /* ── No production equivalent — Figma/prototype only, values from Figma ── */
   --blue-200: #208cff;
   --blue-300: #086bff;
-  --blue-400: #0257fc;
-  --blue-500: #0944c4;
   --blue-600: #0e3d9a;
-  /* Malibu: secondary accent scale (verify hex in Figma Dev Mode if needed) */
-  --malibu-200: #e0f7ff;
-  --malibu-300: #b2ebf9;
-  --malibu-400: #4fc3f7;
-  --malibu-500: #29b6f6;
-  --malibu-600: #039be5;
-  --neutral-white: #ffffff;
-  --neutral-black: #000000;
-  --neutral-100: #fafafa;
-  --neutral-200: #e4e5e9;
-  --neutral-300: #caccd0;
-  --neutral-400: #9da6c2;
-  --neutral-500: #7181b4;
-  --neutral-600: #3d4556;
-  /* Figma: Status/Success|Warning|Error|Info — 100 surface, 200 main, 300 emphasis */
-  --status-success-100: #dcfce7;
-  --status-success-200: #22c55e;
-  --status-success-300: #15803d;
-  --status-warning-100: #fef3c7;
-  --status-warning-200: #f59e0b;
-  --status-warning-300: #b45309;
-  --status-error-100: #fee2e2;
-  --status-error-200: #e55a5a;
-  --status-error-300: #b91c1c;
-  --status-info-100: #f4f9ff;
-  --status-info-200: #3b82f6;
-  --status-info-300: #1d4ed8;
+  --malibu-300: #60cdff;
+  --status-info-300: #114394;
+  --status-success-100: #e2ffee;
+  --status-success-200: #008a05;
+  --status-success-300: #005a25;
+  --status-warning-100: #fff3dd;
+  --status-warning-200: #c25400;
+  --status-warning-300: #823300;
+  --status-error-100: #ffece4;
+  --status-error-200: #eb1400;
+  --status-error-300: #a1000b;
 
   /* Legacy aliases — prefer --blue-* and --midnight */
   --brand-midnight: var(--midnight);

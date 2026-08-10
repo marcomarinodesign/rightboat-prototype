@@ -198,6 +198,8 @@ export function BoatsForSaleListing({
           boat={boat}
           gridLayout="srp"
           srpVariant={srpGridCardVariantAt(index, sortedBoats.length)}
+          /* Matches the card shipping on rightboat.com — see docs/PRODUCTION_ALIGNMENT.md */
+          mediaLayout="triptych"
         />
       ))}
     </div>
