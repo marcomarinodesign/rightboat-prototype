@@ -69,7 +69,7 @@ export function BdpContactSeller({
           <div className="space-y-2 pt-1">
             <Button className="w-full rounded-lg">Contact Manufacturer</Button>
             <Button
-              variant="outline"
+              variant="tertiary"
               className="w-full rounded-lg border-primary text-primary"
             >
               <Phone className="h-4 w-4" />

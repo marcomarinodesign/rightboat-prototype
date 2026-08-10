@@ -6,8 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* Figma Colors — primitives (Tailwind: bg-midnight, bg-blue-400, text-malibu-500, …) */
   --color-midnight: var(--midnight);
   --color-blue-200: var(--blue-200);
@@ -81,6 +81,8 @@
   --color-border-card: var(--border-card);
   --color-overlay: var(--overlay);
   --color-overlay-sheet: var(--overlay-sheet);
+  /* Figma Buttons & Links: controles a 8px. El radio de tarjetas (--radius, 12px) es aparte. */
+  --radius-control: 0.5rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -116,33 +118,33 @@
   --blue-400: #0257fc;
   --blue-500: #0944c4;
   --blue-600: #0e3d9a;
-  /* Malibu: secondary accent scale (verify hex in Figma Dev Mode if needed) */
-  --malibu-200: #e0f7ff;
-  --malibu-300: #b2ebf9;
-  --malibu-400: #4fc3f7;
-  --malibu-500: #29b6f6;
-  --malibu-600: #039be5;
+  /* Malibu: secondary accent scale — variables Malibu/200…600 (rightboat.com: secondary-malibu*) */
+  --malibu-200: #b8e7ff;
+  --malibu-300: #60cdff;
+  --malibu-400: #33c1fd;
+  --malibu-500: #09a9ee;
+  --malibu-600: #0087cc;
   --neutral-white: #ffffff;
   --neutral-black: #000000;
   --neutral-100: #fafafa;
   --neutral-200: #e4e5e9;
   --neutral-300: #caccd0;
-  --neutral-400: #9da6c2;
-  --neutral-500: #7181b4;
-  --neutral-600: #3d4556;
+  --neutral-400: #9699a0;
+  --neutral-500: #51545c;
+  --neutral-600: #37393f;
   /* Figma: Status/Success|Warning|Error|Info — 100 surface, 200 main, 300 emphasis */
-  --status-success-100: #dcfce7;
-  --status-success-200: #22c55e;
-  --status-success-300: #15803d;
-  --status-warning-100: #fef3c7;
-  --status-warning-200: #f59e0b;
-  --status-warning-300: #b45309;
-  --status-error-100: #fee2e2;
-  --status-error-200: #e55a5a;
-  --status-error-300: #b91c1c;
+  --status-success-100: #e2ffee;
+  --status-success-200: #008a05;
+  --status-success-300: #005a25;
+  --status-warning-100: #fff3dd;
+  --status-warning-200: #c25400;
+  --status-warning-300: #823300;
+  --status-error-100: #ffece4;
+  --status-error-200: #eb1400;
+  --status-error-300: #a1000b;
   --status-info-100: #f4f9ff;
-  --status-info-200: #3b82f6;
-  --status-info-300: #1d4ed8;
+  --status-info-200: #0073e6;
+  --status-info-300: #114394;
 
   /* Legacy aliases — prefer --blue-* and --midnight */
   --brand-midnight: var(--midnight);
@@ -308,13 +310,6 @@
   }
   .section-title-gap-sm {
     gap: 1rem;
-  }
-}
-
-@layer components {
-  /** Figma: text buttons / tertiary links (13px Medium, Blue/400) */
-  .primary-text-link {
-    @apply text-[13px] font-medium leading-normal text-primary;
   }
 }
 

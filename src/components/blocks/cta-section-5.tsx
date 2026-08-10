@@ -69,7 +69,7 @@ export function CtaSection5({
             {secondaryButton && (
               secondaryButton.onClick ? (
                 <Button
-                  variant="outline"
+                  variant="tertiary"
                   size="lg"
                   className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50"
                   onClick={secondaryButton.onClick}
@@ -78,7 +78,7 @@ export function CtaSection5({
                 </Button>
               ) : (
                 secondaryButton.href && (
-                  <Button asChild variant="outline" size="lg" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50">
+                  <Button asChild variant="tertiary" size="lg" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50">
                     <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
                   </Button>
                 )

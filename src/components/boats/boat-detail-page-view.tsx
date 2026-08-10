@@ -20,6 +20,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { detailGallery, listingBoats } from "@/data/boats"
 import type { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
+import { textLinkVariants } from "@/components/ui/text-link"
 
 export type BoatDetailLinkMode = "web" | "app"
 
@@ -221,7 +222,7 @@ export function BoatDetailPageView({
           )}
         >
           <h2 className="heading-sm">Similar boats</h2>
-          <Link href={moreListingsHref} className="primary-text-link">
+          <Link href={moreListingsHref} className={textLinkVariants()}>
             View more details
           </Link>
         </div>

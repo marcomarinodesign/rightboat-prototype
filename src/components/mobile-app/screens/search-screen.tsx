@@ -145,7 +145,7 @@ export function MobileSearchScreen() {
           <p className="mt-1 text-sm text-muted-foreground">
             Try adjusting your filters to see more results.
           </p>
-          <Button variant="outline" className="mt-4" onClick={clearAll}>
+          <Button variant="tertiary" className="mt-4" onClick={clearAll}>
             Clear all filters
           </Button>
         </div>

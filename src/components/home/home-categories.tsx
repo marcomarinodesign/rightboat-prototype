@@ -11,6 +11,7 @@ import {
 } from "@/components/home/home-surface-context"
 import { boatCategories } from "@/data/categories-extended"
 import { Badge } from "@/components/ui/badge"
+import { textLinkVariants } from "@/components/ui/text-link"
 
 /** Light frosted strip: only bottom ~55% (title block); top of card stays clear */
 const CATEGORY_CARD_OVERLAY_BOTTOM =
@@ -85,7 +86,7 @@ export function HomeCategories() {
         </div>
         <Link
           href={listingsHref("/boats-for-sale", surface)}
-          className="primary-text-link"
+          className={textLinkVariants()}
         >
           See all
         </Link>

@@ -27,7 +27,7 @@ export function BdpBreadcrumb({
     <div className="flex flex-wrap items-center justify-between gap-4">
       <div className="flex flex-wrap items-center gap-3 text-sm">
         <Button
-          variant="outline"
+          variant="tertiary"
           size="icon"
           className="size-11 min-h-[44px] min-w-[44px] shrink-0 rounded-full active:opacity-80 [-webkit-tap-highlight-color:transparent]"
           asChild

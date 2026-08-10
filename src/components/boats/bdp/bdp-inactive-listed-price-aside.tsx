@@ -56,7 +56,7 @@ export function BdpInactiveListedPriceAside({
             >
               See similar boats
             </Button>
-            <Button variant="outline" className="h-11 w-full rounded-lg text-sm font-medium" asChild>
+            <Button variant="tertiary" className="h-11 w-full rounded-lg text-sm font-medium" asChild>
               <Link href={findSimilarHref}>{findSimilarLabel}</Link>
             </Button>
           </div>

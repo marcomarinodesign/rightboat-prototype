@@ -131,7 +131,7 @@ export function BdpAiExplorer({ boatTitle }: BdpAiExplorerProps) {
             <Button
               key={question}
               type="button"
-              variant="outline"
+              variant="tertiary"
               size="sm"
               className="rounded-full border-primary/60 text-primary hover:bg-primary/5"
               onClick={() => handleSuggestedClick(question)}

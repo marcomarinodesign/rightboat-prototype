@@ -137,7 +137,7 @@ export function FSBOSuccessScreen({
 
         <Button
           size="lg"
-          variant="outline"
+          variant="tertiary"
           className="w-full"
           onClick={handleShare}
         >

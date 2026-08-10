@@ -8,7 +8,6 @@ import {
   Check,
   Heart,
   Home,
-  Loader2,
   Mail,
   Search,
   Settings,
@@ -21,6 +20,7 @@ import {
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { TextLink } from "@/components/ui/text-link"
 import {
   Card,
   CardContent,
@@ -613,54 +613,90 @@ export default function DesignSystemPage() {
           <Section
             id="button"
             title="Button"
-            description="Interactive action trigger. Supports variants, sizes, and icons."
+            description="Figma: Buttons & Links → button_web. Primary · Secondary · Tertiary, radio 8px, texto 16/22 Bold."
             a11y={[
-              "WCAG 2.5.5 — 44px touch target (h-11 default · h-11 icon)",
-              "sm h-10 · default h-11 · lg h-11 · icon h-11",
+              "Contraste AA: blanco sobre Blue/400 5.57 · Blue/400 sobre blanco 5.57 · Midnight sobre blanco 19.58",
+              "Large h-12 (48) · Medium h-10 (40) · Small h-9 (36) — Small queda bajo el objetivo táctil de 44px (WCAG 2.5.5), reservar para densidad alta",
             ]}
           >
-            <Group label="Variants">
+            <Group label="Variants — del design system">
               <div className="flex flex-wrap items-center gap-3">
-                <Button>Default</Button>
+                <Button>Primary</Button>
                 <Button variant="secondary">Secondary</Button>
-                <Button variant="outline">Outline</Button>
+                <Button variant="tertiary">Tertiary</Button>
+              </div>
+            </Group>
+
+            <Group label="Variants — extensiones fuera del set de Figma">
+              <div className="flex flex-wrap items-center gap-3">
                 <Button variant="ghost">Ghost</Button>
                 <Button variant="destructive">Destructive</Button>
                 <Button variant="link">Link</Button>
               </div>
             </Group>
 
-            <Group label="Sizes — h-10 sm · h-11 default · h-11 lg · h-11 icon">
+            <Group label="Sizes — Large 48 · Medium 40 (default) · Small 36 · Icon 40">
               <div className="flex flex-wrap items-end gap-3">
-                <Button size="sm">Small</Button>
-                <Button>Default</Button>
                 <Button size="lg">Large</Button>
+                <Button>Medium</Button>
+                <Button size="sm">Small</Button>
                 <Button size="icon">
                   <Star className="h-4 w-4" />
                 </Button>
               </div>
             </Group>
 
-            <Group label="States & with icon">
+            <Group label="States — hover y active en vivo, pasa el cursor por encima">
               <div className="flex flex-wrap items-center gap-3">
                 <Button disabled>Disabled</Button>
-                <Button>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Loading
+                <Button variant="secondary" disabled>
+                  Disabled
                 </Button>
+                <Button variant="tertiary" disabled>
+                  Disabled
+                </Button>
+                <Button loading>Loading</Button>
+              </div>
+            </Group>
+
+            <Group label="Con icono">
+              <div className="flex flex-wrap items-center gap-3">
                 <Button>
                   <Check className="h-4 w-4" />
                   Confirm
                 </Button>
-                <Button variant="outline">
+                <Button variant="secondary">
                   <Mail className="h-4 w-4" />
                   Contact seller
                 </Button>
-                <Button variant="outline">
-                  <Search className="h-4 w-4" />
+                <Button variant="tertiary">
                   Search
+                  <Search className="h-4 w-4" />
                 </Button>
               </div>
+            </Group>
+
+            <Group label="Block — ocupa todo el ancho">
+              <div className="flex max-w-sm flex-col gap-3">
+                <Button block>Primary block</Button>
+                <Button variant="secondary" block>
+                  Secondary block
+                </Button>
+              </div>
+            </Group>
+
+            <Group label="TextLink — CTA de texto (See all, Discover more)">
+              <div className="flex flex-wrap items-center gap-6">
+                <TextLink href="#button">See all</TextLink>
+                <TextLink href="#button" size="sm">
+                  Discover more
+                </TextLink>
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Para links de navegación en línea. Cuando haga falta área táctil o{" "}
+                <code className="font-mono">onClick</code>, usa{" "}
+                <code className="font-mono">Button variant=&quot;link&quot;</code>.
+              </p>
             </Group>
           </Section>
 
@@ -1005,7 +1041,7 @@ export default function DesignSystemPage() {
                   </DialogDescription>
                   <div className="mt-6 flex justify-end gap-3">
                     <DialogClose asChild>
-                      <Button variant="outline">Cancel</Button>
+                      <Button variant="tertiary">Cancel</Button>
                     </DialogClose>
                     <DialogClose asChild>
                       <Button>Send enquiry</Button>
@@ -1030,7 +1066,7 @@ export default function DesignSystemPage() {
                 {(["right", "left", "top", "bottom"] as const).map((side) => (
                   <Button
                     key={side}
-                    variant="outline"
+                    variant="tertiary"
                     onClick={() => openSheet(side)}
                   >
                     Open {side}
@@ -1058,7 +1094,7 @@ export default function DesignSystemPage() {
                   </div>
                   <SheetFooter className="mt-8">
                     <SheetClose asChild>
-                      <Button variant="outline">Dismiss</Button>
+                      <Button variant="tertiary">Dismiss</Button>
                     </SheetClose>
                     <SheetClose asChild>
                       <Button>Apply</Button>

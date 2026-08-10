@@ -405,7 +405,7 @@ export function BoatFormFSBO({
           </DialogDescription>
           <div className="mt-6 flex justify-end gap-3">
             <DialogClose asChild>
-              <Button variant="outline">Keep editing</Button>
+              <Button variant="tertiary">Keep editing</Button>
             </DialogClose>
             <DialogClose asChild>
               <Button variant="destructive" onClick={handleExitConfirm}>

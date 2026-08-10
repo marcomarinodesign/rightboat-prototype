@@ -27,6 +27,7 @@ import {
   staggerItem,
 } from "@/lib/motion-variants"
 import { cn } from "@/lib/utils"
+import { textLinkVariants } from "@/components/ui/text-link"
 
 type HomeViewProps = {
   /** `app`: same homepage sections as web, links into `/app/*`, horizontal padding for shell-less layout. */
@@ -126,7 +127,7 @@ function HomeViewInner() {
           <h2 id="featured-heading" className="heading-sm">
             Featured boats
           </h2>
-          <Link href={discoverHref} className="primary-text-link">
+          <Link href={discoverHref} className={textLinkVariants()}>
             Discover more
           </Link>
         </motion.div>
@@ -183,7 +184,7 @@ function HomeViewInner() {
                 ? "/app/research"
                 : "https://www.rightboat.com/blog"
             }
-            className="primary-text-link"
+            className={textLinkVariants()}
           >
             See more articles
           </Link>

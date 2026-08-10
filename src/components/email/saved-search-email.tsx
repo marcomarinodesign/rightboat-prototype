@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils"
 import { RIGHTBOAT_LOGO } from "@/lib/brand"
 import { SPONSORED_LABEL } from "@/lib/sponsored-badge"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -183,7 +183,7 @@ function HorizontalListingRow({ listing, boatType, className }: HorizontalListin
         <p className="text-base font-bold leading-6 text-primary">{listing.price}</p>
         <a
           href={listing.href}
-          className="self-start inline-flex h-10 items-center justify-center rounded-[12px] bg-primary px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-primary/90"
+          className={cn(buttonVariants({ size: "md" }), "self-start")}
         >
           View listing →
         </a>
@@ -554,7 +554,7 @@ export function SavedSearchEmail({
 
       {/* ── View all CTA ── */}
       <div className="px-6 pb-5 pt-1 text-center">
-        <Button variant="default" className="h-10 rounded-[12px] px-4 text-[13px] font-medium">
+        <Button variant="primary" className="h-10 rounded-[12px] px-4 text-[13px] font-medium">
           View all results
         </Button>
       </div>

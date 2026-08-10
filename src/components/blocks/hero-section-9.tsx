@@ -82,12 +82,12 @@ export function HeroSection9({
               )}
               {secondaryButton && (
                 secondaryButton.onClick ? (
-                  <Button variant="outline" size="lg" onClick={secondaryButton.onClick}>
+                  <Button variant="tertiary" size="lg" onClick={secondaryButton.onClick}>
                     {secondaryButton.text}
                   </Button>
                 ) : (
                   secondaryButton.href && (
-                    <Button asChild variant="outline" size="lg">
+                    <Button asChild variant="tertiary" size="lg">
                       <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
                     </Button>
                   )

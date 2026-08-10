@@ -101,7 +101,7 @@ export function FSBOPhotoUploader({ currentCount, onAdd }: FSBOPhotoUploaderProp
       <div className="flex gap-4">
         <Button
           type="button"
-          variant="outline"
+          variant="tertiary"
           className="flex-1 gap-2"
           onClick={() => galleryRef.current?.click()}
           disabled={atLimit}

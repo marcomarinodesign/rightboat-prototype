@@ -237,7 +237,7 @@ export function BoatFormV3({
       >
         <div className="flex w-full gap-3">
           {step > 1 && (
-            <Button type="button" variant="outline" onClick={prevStep}>
+            <Button type="button" variant="tertiary" onClick={prevStep}>
               <ArrowLeft className="w-4 h-4 mr-1" /> Back
             </Button>
           )}

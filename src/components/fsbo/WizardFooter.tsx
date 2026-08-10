@@ -57,7 +57,7 @@ export function WizardFooter({
         <div className="flex justify-between items-center gap-4">
           <Button
             type="button"
-            variant="outline"
+            variant="tertiary"
             size="sm"
             onClick={onBack}
             className="flex-1"

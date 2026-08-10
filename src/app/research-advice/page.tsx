@@ -83,7 +83,7 @@ export default function ResearchAdvicePage() {
         <ArticlesGrid articles={displayedArticles} />
         {hasMoreArticles && (
           <div className="flex justify-center pt-4">
-            <Button onClick={handleLoadMore} variant="outline" size="lg">
+            <Button onClick={handleLoadMore} variant="tertiary" size="lg">
               Load more articles
             </Button>
           </div>

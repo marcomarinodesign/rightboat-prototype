@@ -23,7 +23,7 @@ export function BdpInactiveBanner() {
         </div>
         <Button
           size="sm"
-          variant="outline"
+          variant="tertiary"
           className="min-h-[44px] shrink-0"
           onClick={scrollToSimilar}
         >

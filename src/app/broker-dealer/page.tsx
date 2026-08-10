@@ -194,7 +194,7 @@ export default function BrokerDealerPage() {
                   <span>See More Boats From (link to your company profile page)</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full mt-6" onClick={openContact}>
+              <Button variant="tertiary" className="w-full mt-6" onClick={openContact}>
                 More Information
               </Button>
             </CardContent>
@@ -243,7 +243,7 @@ export default function BrokerDealerPage() {
                   <span>Your top 10% boats Sponsored</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full mt-6" onClick={openContact}>
+              <Button variant="tertiary" className="w-full mt-6" onClick={openContact}>
                 More Information
               </Button>
             </CardContent>
@@ -288,7 +288,7 @@ export default function BrokerDealerPage() {
                   <span>Category or Brand Takeover</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full mt-6" onClick={openContact}>
+              <Button variant="tertiary" className="w-full mt-6" onClick={openContact}>
                 Ask Us
               </Button>
             </CardContent>

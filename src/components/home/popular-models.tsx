@@ -68,7 +68,7 @@ export function PopularModels() {
                 </span>
                 <Button
                   asChild
-                  variant="outline"
+                  variant="tertiary"
                   size="sm"
                   className="h-10 px-4 text-[13px] font-medium"
                 >

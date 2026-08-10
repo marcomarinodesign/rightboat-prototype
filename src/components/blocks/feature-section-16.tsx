@@ -111,13 +111,13 @@ export function FeatureSection16({
             {activeFeature.link && (
               <div className="flex flex-col gap-3 sm:flex-row">
                 {activeFeature.link.onClick ? (
-                  <Button variant="default" size="sm" onClick={activeFeature.link.onClick}>
+                  <Button variant="primary" size="sm" onClick={activeFeature.link.onClick}>
                     {activeFeature.link.text}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 ) : (
                   activeFeature.link.href && (
-                    <Button asChild variant="default" size="sm">
+                    <Button asChild variant="primary" size="sm">
                       <Link href={activeFeature.link.href}>
                         {activeFeature.link.text}
                         <ArrowRight className="ml-2 h-4 w-4" />
