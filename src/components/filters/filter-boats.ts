@@ -1,4 +1,4 @@
-import { getLocationSearchQuery } from "@/components/filters/location-filter-helpers"
+import { getLocationSearchQueries } from "@/components/filters/location-filter-helpers"
 import {
   boatClassForCategory,
   fuelTypeMatches,
@@ -23,13 +23,23 @@ function lengthFtToM(ft: number): number {
 }
 
 export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
+  const locationQueries = getLocationSearchQueries(filters).map((query) =>
+    query.toLowerCase()
+  )
+  // A region with every location excluded matches nothing, not everything.
+  if (
+    filters.locationTab === "region" &&
+    filters.locationRegion &&
+    locationQueries.length === 0
+  ) {
+    return []
+  }
   return boats.filter((boat) => {
-    const locationQuery = getLocationSearchQuery(filters)
-    if (
-      locationQuery &&
-      !boat.location.toLowerCase().includes(locationQuery.toLowerCase())
-    ) {
-      return false
+    if (locationQueries.length > 0) {
+      const location = boat.location.toLowerCase()
+      if (!locationQueries.some((query) => location.includes(query))) {
+        return false
+      }
     }
     if (filters.boatType && boat.boatType && boat.boatType !== filters.boatType) {
       return false

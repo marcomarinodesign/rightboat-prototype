@@ -105,6 +105,8 @@ type BoatsForSaleListingProps = {
   /** Dev/capture-only UI state preset. */
   figmaPreview?: FigmaPreviewState
   initialFilters?: FiltersState
+  /** Opt-in Location → Region filter (prototype: /boats-for-sale/regions). */
+  enableRegions?: boolean
 }
 
 export function BoatsForSaleListing({
@@ -113,6 +115,7 @@ export function BoatsForSaleListing({
   previewMode,
   figmaPreview,
   initialFilters: initialFiltersProp,
+  enableRegions = false,
 }: BoatsForSaleListingProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -168,7 +171,7 @@ export function BoatsForSaleListing({
   const listingCountLabel = `${resultCount} ${resultCount === 1 ? "listing" : "listings"}`
 
   const updateDraftLive = React.useCallback(
-    (field: keyof FiltersState, value: string) => {
+    (field: keyof FiltersState, value: string | string[]) => {
       setFilters((prev) => ({ ...prev, [field]: value }))
     },
     [setFilters]
@@ -306,6 +309,7 @@ export function BoatsForSaleListing({
                 updateDraft={updateDraftLive}
                 updateCondition={updateConditionLive}
                 scrollClassName="px-0"
+                enableRegions={enableRegions}
               />
             </div>
           </aside>
@@ -333,6 +337,7 @@ export function BoatsForSaleListing({
           boats={boats}
           previewMode={previewMode}
           scrollOnOpen={figmaPreviewScrollDrawer(figmaPreview)}
+          enableRegions={enableRegions}
         />
       )}
     </div>

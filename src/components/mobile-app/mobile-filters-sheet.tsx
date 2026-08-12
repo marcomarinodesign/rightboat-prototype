@@ -44,7 +44,7 @@ export function MobileFiltersSheet({
     if (open) setDraft(filters)
   }, [open, filters])
 
-  const updateDraft = (field: keyof FiltersState, value: string) => {
+  const updateDraft = (field: keyof FiltersState, value: string | string[]) => {
     setDraft((prev) => ({ ...prev, [field]: value }))
   }
 

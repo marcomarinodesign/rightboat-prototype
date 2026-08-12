@@ -27,6 +27,8 @@ type FiltersDrawerProps = {
   previewMode?: "mobile" | "desktop"
   /** Scroll filter form to Location section when drawer opens (Figma capture). */
   scrollOnOpen?: boolean
+  /** Opt-in Location → Region tab (prototype: /boats-for-sale/regions). */
+  enableRegions?: boolean
 }
 
 export function FiltersDrawer({
@@ -39,6 +41,7 @@ export function FiltersDrawer({
   boats,
   previewMode,
   scrollOnOpen = false,
+  enableRegions = false,
 }: FiltersDrawerProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -64,7 +67,7 @@ export function FiltersDrawer({
     return () => window.clearTimeout(id)
   }, [open, scrollOnOpen])
 
-  const updateDraft = (field: keyof FiltersState, value: string) => {
+  const updateDraft = (field: keyof FiltersState, value: string | string[]) => {
     setDraft((prev) => ({ ...prev, [field]: value }))
   }
 
@@ -122,6 +125,7 @@ export function FiltersDrawer({
           boats={boats}
           updateDraft={updateDraft}
           updateCondition={updateCondition}
+          enableRegions={enableRegions}
         />
 
         <div

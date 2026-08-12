@@ -1,4 +1,4 @@
-export type LocationTab = "zip" | "city-state" | "radius"
+export type LocationTab = "zip" | "city-state" | "radius" | "region"
 
 export type FiltersState = {
   /** @deprecated Legacy field; effective query comes from tab-specific fields. */
@@ -9,6 +9,12 @@ export type FiltersState = {
   locationCountry: string
   locationState: string
   locationCity: string
+  /** Region slug (see region-data.ts); only used by the `region` tab. */
+  locationRegion: string
+  /** Locations from the region the user removed from the search. */
+  locationRegionExcluded: string[]
+  /** Individual locations added on top of the region. */
+  locationRegionAdded: string[]
   /** power | sail | unpowered — production boat class filter */
   boatClass: string
   /** Category within the selected class (e.g. Center console) */
@@ -37,6 +43,9 @@ export const defaultFilters: FiltersState = {
   locationCountry: "",
   locationState: "",
   locationCity: "",
+  locationRegion: "",
+  locationRegionExcluded: [],
+  locationRegionAdded: [],
   boatClass: "",
   boatType: "",
   priceMin: "",

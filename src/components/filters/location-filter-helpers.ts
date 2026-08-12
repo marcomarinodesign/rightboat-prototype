@@ -5,6 +5,10 @@ import {
   getStateLabel,
   isUnitedStatesCountry,
 } from "@/components/filters/location-geo-data"
+import {
+  getRegionEffectiveLocations,
+  getRegionLabel,
+} from "@/components/filters/region-data"
 import type { FiltersState, LocationTab } from "@/components/filters/types"
 
 export const LOCATION_RADIUS_OPTIONS_ZIP_CITY = [
@@ -35,9 +39,34 @@ export function getLocationSearchQuery(filters: FiltersState): string {
   return ""
 }
 
+/** Locations searched by the region tab (region minus excluded, plus added). */
+export function getRegionSearchLocations(filters: FiltersState) {
+  if (filters.locationTab !== "region" || !filters.locationRegion) return []
+  return getRegionEffectiveLocations(
+    filters.locationRegion,
+    filters.locationRegionExcluded,
+    filters.locationRegionAdded
+  )
+}
+
+/**
+ * All texts a listing may match for the active location tab. A listing passes
+ * when it matches any of them (a region covers several states / countries).
+ */
+export function getLocationSearchQueries(filters: FiltersState): string[] {
+  if (filters.locationTab === "region") {
+    return getRegionSearchLocations(filters).map((location) => location.match)
+  }
+  const query = getLocationSearchQuery(filters)
+  return query ? [query] : []
+}
+
 export function hasActiveLocationFilter(filters: FiltersState): boolean {
   if (filters.locationTab === "radius") {
     return filters.locationRadius !== "" && filters.locationRadius !== "25"
+  }
+  if (filters.locationTab === "region") {
+    return Boolean(filters.locationRegion)
   }
   if (filters.locationTab === "city-state") {
     if (!filters.locationCountry) return false
@@ -51,6 +80,9 @@ export function hasActiveLocationFilter(filters: FiltersState): boolean {
 
 export function formatLocationActiveFilterLabel(filters: FiltersState): string {
   const radiusLabel = getLocationRadiusLabel(filters.locationRadius)
+  if (filters.locationTab === "region") {
+    return getRegionLabel(filters.locationRegion)
+  }
   if (filters.locationTab === "zip") {
     const zip = filters.locationZip.trim()
     return zip ? `${zip} · ${radiusLabel}` : radiusLabel
@@ -84,6 +116,9 @@ export function clearLocationFields(): Pick<
   | "locationCountry"
   | "locationState"
   | "locationCity"
+  | "locationRegion"
+  | "locationRegionExcluded"
+  | "locationRegionAdded"
 > {
   return {
     location: "",
@@ -93,11 +128,22 @@ export function clearLocationFields(): Pick<
     locationCountry: "",
     locationState: "",
     locationCity: "",
+    locationRegion: "",
+    locationRegionExcluded: [],
+    locationRegionAdded: [],
   }
 }
 
 export const LOCATION_TABS: { id: LocationTab; label: string }[] = [
   { id: "zip", label: "Zip Code" },
+  { id: "city-state", label: "City / State" },
+  { id: "radius", label: "By Radius" },
+]
+
+/** Tab order when the Region filter is enabled (Region sits before country/state). */
+export const LOCATION_TABS_WITH_REGION: { id: LocationTab; label: string }[] = [
+  { id: "zip", label: "Zip Code" },
+  { id: "region", label: "Region" },
   { id: "city-state", label: "City / State" },
   { id: "radius", label: "By Radius" },
 ]

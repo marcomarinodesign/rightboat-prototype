@@ -8,6 +8,7 @@ import {
   formatLocationActiveFilterLabel,
   hasActiveLocationFilter,
 } from "@/components/filters/location-filter-helpers"
+import { getRegionLocation } from "@/components/filters/region-data"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
 import { modelLabelFromValue } from "@/components/filters/srp-filter-data"
 
@@ -53,6 +54,8 @@ export function useFiltersState(initialFilters?: FiltersState) {
     setFilters({
       ...defaultFilters,
       condition: { ...defaultFilters.condition },
+      locationRegionExcluded: [],
+      locationRegionAdded: [],
     })
   }, [])
 
@@ -60,15 +63,42 @@ export function useFiltersState(initialFilters?: FiltersState) {
     const items: ActiveFilter[] = []
 
     if (hasActiveLocationFilter(filters)) {
+      const isRegion = filters.locationTab === "region"
+      const excludedCount = isRegion ? filters.locationRegionExcluded.length : 0
+      // The SRP shows the region name, not every state or country under it.
+      const regionLabel = `${formatLocationActiveFilterLabel(filters)}${
+        excludedCount > 0 ? ` (−${excludedCount})` : ""
+      }`
       items.push({
         key: "location",
-        label: `Location: ${formatLocationActiveFilterLabel(filters)}`,
+        label: isRegion
+          ? regionLabel
+          : `Location: ${formatLocationActiveFilterLabel(filters)}`,
         onRemove: () =>
           setFilters((prev) => ({
             ...prev,
             ...clearLocationFields(),
           })),
       })
+    }
+
+    // Locations added on top of a region get their own removable chip.
+    if (filters.locationTab === "region" && filters.locationRegion) {
+      for (const value of filters.locationRegionAdded) {
+        const location = getRegionLocation(value)
+        if (!location) continue
+        items.push({
+          key: `region-added-${value}`,
+          label: location.label,
+          onRemove: () =>
+            setFilters((prev) => ({
+              ...prev,
+              locationRegionAdded: prev.locationRegionAdded.filter(
+                (item) => item !== value
+              ),
+            })),
+        })
+      }
     }
 
     if (filters.boatClass) {

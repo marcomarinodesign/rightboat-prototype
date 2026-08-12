@@ -24,10 +24,12 @@ import type { Boat } from "@/data/boats"
 export type FiltersFormBodyProps = {
   draft: FiltersState
   boats: Boat[]
-  updateDraft: (field: keyof FiltersState, value: string) => void
+  updateDraft: (field: keyof FiltersState, value: string | string[]) => void
   updateCondition: (key: "new" | "used", checked: boolean) => void
   /** Extra class on the scroll wrapper (e.g. app sheet padding). */
   scrollClassName?: string
+  /** Opt-in Location → Region tab (prototype: /boats-for-sale/regions). */
+  enableRegions?: boolean
 }
 
 export function FilterSection({
@@ -119,6 +121,7 @@ export function FiltersFormBody({
   updateDraft,
   updateCondition,
   scrollClassName = "min-h-0 flex-1 overflow-y-auto px-6",
+  enableRegions = false,
 }: FiltersFormBodyProps) {
   const boatsForHistogram = React.useMemo(
     () => filterBoats(boats, { ...draft, priceMin: "", priceMax: "" }),
@@ -131,6 +134,9 @@ export function FiltersFormBody({
       draft.locationCountry,
       draft.locationState,
       draft.locationCity,
+      draft.locationRegion,
+      draft.locationRegionExcluded,
+      draft.locationRegionAdded,
       draft.boatClass,
       draft.boatType,
       draft.condition,
@@ -204,6 +210,19 @@ export function FiltersFormBody({
             updateDraft("locationCity", "")
           }}
           onCityChange={(v) => updateDraft("locationCity", v)}
+          enableRegions={enableRegions}
+          locationRegion={draft.locationRegion}
+          locationRegionExcluded={draft.locationRegionExcluded}
+          locationRegionAdded={draft.locationRegionAdded}
+          onRegionChange={(v) => {
+            updateDraft("locationRegion", v)
+            updateDraft("locationRegionExcluded", [])
+            updateDraft("locationRegionAdded", [])
+          }}
+          onRegionExcludedChange={(v) =>
+            updateDraft("locationRegionExcluded", v)
+          }
+          onRegionAddedChange={(v) => updateDraft("locationRegionAdded", v)}
         />
       </FilterSection>
 

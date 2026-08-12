@@ -12,7 +12,9 @@ import {
   LOCATION_RADIUS_OPTIONS_BY_RADIUS,
   LOCATION_RADIUS_OPTIONS_ZIP_CITY,
   LOCATION_TABS,
+  LOCATION_TABS_WITH_REGION,
 } from "@/components/filters/location-filter-helpers"
+import { RegionFilter } from "@/components/filters/region-filter"
 import { SearchableSelect } from "@/components/filters/searchable-select"
 import type { LocationTab } from "@/components/filters/types"
 import {
@@ -40,13 +42,23 @@ type LocationFilterProps = {
   onCountryChange: (value: string) => void
   onStateChange: (value: string) => void
   onCityChange: (value: string) => void
+  /** Opt-in Region tab (prototype: /boats-for-sale/regions). */
+  enableRegions?: boolean
+  locationRegion?: string
+  locationRegionExcluded?: string[]
+  locationRegionAdded?: string[]
+  onRegionChange?: (value: string) => void
+  onRegionExcludedChange?: (values: string[]) => void
+  onRegionAddedChange?: (values: string[]) => void
 }
 
 function LocationSegmentedControl({
   value,
+  tabs,
   onChange,
 }: {
   value: LocationTab
+  tabs: { id: LocationTab; label: string }[]
   onChange: (tab: LocationTab) => void
 }) {
   return (
@@ -55,7 +67,7 @@ function LocationSegmentedControl({
       aria-label="Location search type"
       className="flex gap-0.5 rounded-full bg-muted/80 p-1"
     >
-      {LOCATION_TABS.map((tab) => {
+      {tabs.map((tab) => {
         const active = value === tab.id
         return (
           <button
@@ -189,7 +201,16 @@ export function LocationFilter({
   onCountryChange,
   onStateChange,
   onCityChange,
+  enableRegions = false,
+  locationRegion = "",
+  locationRegionExcluded = [],
+  locationRegionAdded = [],
+  onRegionChange,
+  onRegionExcludedChange,
+  onRegionAddedChange,
 }: LocationFilterProps) {
+  const tabs = enableRegions ? LOCATION_TABS_WITH_REGION : LOCATION_TABS
+
   const handleTabChange = (tab: LocationTab) => {
     onTabChange(tab)
     if (tab === "radius") {
@@ -207,7 +228,22 @@ export function LocationFilter({
 
   return (
     <div className="space-y-3">
-      <LocationSegmentedControl value={locationTab} onChange={handleTabChange} />
+      <LocationSegmentedControl
+        value={locationTab}
+        tabs={tabs}
+        onChange={handleTabChange}
+      />
+
+      {enableRegions && locationTab === "region" && (
+        <RegionFilter
+          region={locationRegion}
+          excluded={locationRegionExcluded}
+          added={locationRegionAdded}
+          onRegionChange={(value) => onRegionChange?.(value)}
+          onExcludedChange={(values) => onRegionExcludedChange?.(values)}
+          onAddedChange={(values) => onRegionAddedChange?.(values)}
+        />
+      )}
 
       {locationTab === "zip" && (
         <div
