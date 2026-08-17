@@ -116,6 +116,43 @@ const EMAIL_SEGMENTS: { id: string; label: string }[] = [
 const EXPLORATIONS: SiteMapExploration[] = [
   // ── Q3 2026 ────────────────────────────────────────────────────────────
   {
+    id: "ai-conversational-search",
+    title: "AI conversational search (Smart Filter)",
+    quarter: "Q3 2026",
+    area: "Search & discovery",
+    summary:
+      "Natural-language search as a first-class homepage mode next to classic make, model and location. One field lands on the live split-view SRP with editable interpreted chips (type, price, location, lifestyle). Starting points are a two-up carousel. Option A from the Q3 brief: Smart Filter, not a chatbot.",
+    links: [
+      {
+        label: "Homepage — AI Search",
+        href: "/",
+        description:
+          "Centered pill selector: AI Search (Sparkles CTA) vs Make, model & location (magnifier CTA)",
+      },
+      {
+        label: "SRP — interpreted query",
+        href: "/boats-for-sale?q=A%20fishing%20boat%20with%20a%20cabin%20for%20weekends%20on%20Puget%20Sound%2C%20under%20%24150%2C000",
+        description:
+          "We understood your search as: editable chips + sidebar filters",
+      },
+      {
+        label: "SRP — conversational field",
+        href: "/boats-for-sale",
+        description: "AI Search field above the live split listing",
+      },
+      {
+        label: "App home — same hero",
+        href: "/app/home",
+        description: "AI / classic modes inside the app shell",
+      },
+      {
+        label: "App SRP — interpreted query",
+        href: "/app/boats-for-sale?q=A%20comfortable%20family%20cruiser%20under%2040%20feet%20in%20Florida%2C%20under%20%24300%2C000",
+        description: "Same Smart Filter chips on the app listing",
+      },
+    ],
+  },
+  {
     id: "regional-search-filter",
     title: "Regional search filter",
     quarter: "Q3 2026",

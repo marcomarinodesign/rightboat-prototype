@@ -46,10 +46,11 @@ export function SuggestedSearchCarousel({
                   <button
                     key={example.query}
                     type="button"
+                    title={example.label}
                     onClick={() => onSelect(example.query)}
-                    className="h-full min-h-[4.75rem] rounded-lg border border-border bg-background px-3.5 py-3 text-left text-sm leading-5 text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg"
+                    className="flex h-11 items-center overflow-hidden rounded-lg border border-input bg-background px-3.5 text-left text-sm text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg"
                   >
-                    {example.label}
+                    <span className="min-w-0 truncate">{example.label}</span>
                   </button>
                 ))}
               </div>
