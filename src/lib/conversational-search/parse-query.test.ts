@@ -3,7 +3,8 @@ import { describe, it } from "node:test"
 
 import { listingBoats } from "../../data/boats/listing"
 import { filterBoats } from "../../components/filters/filter-boats"
-import { parseConversationalQuery } from "./parse-query"
+import { buildClassicSearchQuery } from "./classic-query"
+import { broadenActions, parseConversationalQuery } from "./parse-query"
 
 describe("parseConversationalQuery", () => {
   it("maps fishing boats with a cabin in Puget Sound", () => {
@@ -72,10 +73,34 @@ describe("parseConversationalQuery", () => {
     assert.equal(result.filters.locationZip, "Washington")
   })
 
+  it("builds a classic search query the parser can interpret", () => {
+    const query = buildClassicSearchQuery({
+      boatType: "sail",
+      location: "fl",
+      priceRange: "50-150",
+    })
+    assert.equal(query, "sailboats in Florida from $50,000 under $150,000")
+    const parsed = parseConversationalQuery(query)
+    assert.equal(parsed.filters.boatType, "Sailboats")
+    assert.equal(parsed.filters.locationZip, "Florida")
+    assert.equal(parsed.filters.priceMin, "50000")
+    assert.equal(parsed.filters.priceMax, "150000")
+  })
+
   it("returns unmatched leftovers when nothing maps", () => {
     const result = parseConversationalQuery("xyzzy jacuzzi only")
     assert.equal(result.filters.boatType, "")
     assert.ok(result.unmatched.length > 0)
+  })
+
+  it("offers broaden actions from active filters", () => {
+    const parsed = parseConversationalQuery(
+      "Fishing boats with a cabin in Puget Sound under $150,000"
+    )
+    const actions = broadenActions(parsed.filters)
+    assert.ok(actions.some((action) => action.filterGroup === "price"))
+    assert.ok(actions.some((action) => action.filterGroup === "location"))
+    assert.ok(actions.some((action) => action.filterGroup === "intent"))
   })
 
   it("finds prototype listings for the brief example searches", () => {

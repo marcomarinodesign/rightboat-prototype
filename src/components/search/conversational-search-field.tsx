@@ -8,12 +8,14 @@ import {
   listingsHref,
   useHomeSurface,
 } from "@/components/home/home-surface-context"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
+  CONVERSATIONAL_SEARCH_HEADING,
   CONVERSATIONAL_SEARCH_PLACEHOLDER,
   ROTATING_PLACEHOLDERS,
-  SUGGESTED_SEARCHES,
+  SUGGESTED_SEARCH_CHIPS,
 } from "@/lib/conversational-search/examples"
 import { cn } from "@/lib/utils"
 
@@ -21,6 +23,7 @@ type ConversationalSearchFieldProps = {
   variant?: "hero" | "srp"
   defaultQuery?: string
   showSuggestions?: boolean
+  listingsBasePath?: string
   className?: string
 }
 
@@ -35,16 +38,19 @@ export function ConversationalSearchField({
   variant = "hero",
   defaultQuery = "",
   showSuggestions,
+  listingsBasePath,
   className,
 }: ConversationalSearchFieldProps) {
   const router = useRouter()
   const surface = useHomeSurface()
-  const listingsPath = listingsHref("/boats-for-sale", surface)
+  const listingsPath =
+    listingsBasePath ?? listingsHref("/boats-for-sale", surface)
   const [query, setQuery] = React.useState(defaultQuery)
   const [placeholderIndex, setPlaceholderIndex] = React.useState(0)
   const [submitting, setSubmitting] = React.useState(false)
   const suggestionsVisible = showSuggestions ?? variant === "hero"
   const isHero = variant === "hero"
+  const inputId = `conversational-search-${variant}`
 
   React.useEffect(() => {
     setQuery(defaultQuery)
@@ -72,22 +78,19 @@ export function ConversationalSearchField({
   return (
     <div className={cn("space-y-3 text-left", className)}>
       {isHero ? (
-        <p className="text-sm font-semibold text-foreground">
-          What kind of boat are you looking for?
+        <p className="text-lg font-semibold leading-6 text-foreground">
+          {CONVERSATIONAL_SEARCH_HEADING}
         </p>
       ) : null}
       <form
-        className={cn(
-          "flex flex-col gap-2",
-          isHero ? "sm:flex-row sm:items-center" : "sm:flex-row"
-        )}
+        className="flex flex-col gap-2 sm:flex-row sm:items-center"
         onSubmit={(event) => {
           event.preventDefault()
           submit(query)
         }}
       >
-        <label className="sr-only" htmlFor={`conversational-search-${variant}`}>
-          Describe the boat you are looking for
+        <label className="sr-only" htmlFor={inputId}>
+          {CONVERSATIONAL_SEARCH_PLACEHOLDER}
         </label>
         <div className="relative min-w-0 flex-1">
           <Sparkles
@@ -95,22 +98,24 @@ export function ConversationalSearchField({
             aria-hidden
           />
           <Input
-            id={`conversational-search-${variant}`}
+            id={inputId}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}
             autoComplete="off"
             className={cn(
-              "h-12 rounded-lg border-border bg-background pl-10 text-sm",
-              isHero && "h-12 md:h-12"
+              "rounded-lg border-border bg-background pl-10 text-sm",
+              isHero ? "h-12 md:h-14 md:text-base" : "h-12"
             )}
           />
         </div>
         <Button
           type="submit"
           className={cn(
-            "h-12 min-h-12 gap-2 font-semibold",
-            isHero ? "w-full sm:w-auto sm:px-6" : "w-full sm:w-auto"
+            "gap-2 font-semibold",
+            isHero
+              ? "h-12 min-h-12 w-full sm:h-14 sm:min-h-14 sm:w-auto sm:px-6"
+              : "h-12 min-h-12 w-full sm:w-auto"
           )}
           disabled={submitting}
         >
@@ -125,17 +130,22 @@ export function ConversationalSearchField({
       {suggestionsVisible ? (
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs text-muted-foreground">Try:</span>
-          {SUGGESTED_SEARCHES.map((example) => (
+          {SUGGESTED_SEARCH_CHIPS.map((example) => (
             <button
-              key={example}
+              key={example.query}
               type="button"
+              title={example.query}
               onClick={() => {
-                setQuery(example)
-                submit(example)
+                setQuery(example.query)
+                submit(example.query)
               }}
-              className="rounded-full border border-border bg-background px-3 py-1 text-left text-xs text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg"
             >
-              {example}
+              <Badge
+                variant="outline"
+                className="cursor-pointer rounded-full bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg hover:text-primary"
+              >
+                {example.label}
+              </Badge>
             </button>
           ))}
         </div>

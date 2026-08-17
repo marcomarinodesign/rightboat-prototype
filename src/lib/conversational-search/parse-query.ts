@@ -5,6 +5,7 @@ import {
   INTENT_LABELS,
   type ConversationalParseResult,
   type InterpretedChip,
+  type InterpretedFilterGroup,
 } from "@/lib/conversational-search/types"
 
 type Span = {
@@ -662,25 +663,84 @@ export function clearConversationalChip(
   return next
 }
 
+export type BroadenAction = {
+  id: string
+  label: string
+  filterGroup: InterpretedFilterGroup
+}
+
+export function broadenActions(
+  filters: FiltersState
+): BroadenAction[] {
+  const actions: BroadenAction[] = []
+  if (filters.priceMax || filters.priceMin) {
+    actions.push({
+      id: "price",
+      label: "Remove the price limit",
+      filterGroup: "price",
+    })
+  }
+  if (
+    filters.locationZip ||
+    filters.locationCity ||
+    filters.locationState ||
+    filters.locationRegion
+  ) {
+    actions.push({
+      id: "location",
+      label: "Search a wider area",
+      filterGroup: "location",
+    })
+  }
+  if (filters.intentTags.length > 0) {
+    actions.push({
+      id: "intent",
+      label: "Drop lifestyle requirements",
+      filterGroup: "intent",
+    })
+  }
+  if (filters.lengthMax || filters.lengthMin) {
+    actions.push({
+      id: "length",
+      label: "Widen the length range",
+      filterGroup: "length",
+    })
+  }
+  if (filters.boatType || filters.boatClass) {
+    actions.push({
+      id: "boatType",
+      label: "Search all boat types",
+      filterGroup: "boatType",
+    })
+  }
+  return actions
+}
+
+/** @deprecated Prefer broadenActions; kept for copy-only fallbacks. */
 export function broadenSuggestions(result: ConversationalParseResult): string[] {
-  const suggestions: string[] = []
-  if (result.filters.priceMax || result.filters.priceMin) {
-    suggestions.push("Remove the price limit")
+  const actions = broadenActions(result.filters)
+  if (actions.length === 0) return ["Try one of the suggested searches"]
+  return actions.map((action) => action.label)
+}
+
+export function clearFilterGroup(
+  group: InterpretedFilterGroup,
+  filters: FiltersState
+): FiltersState {
+  if (group === "intent") {
+    return {
+      ...filters,
+      condition: { ...filters.condition },
+      intentTags: [],
+    }
   }
-  if (result.filters.locationZip || result.filters.locationCity) {
-    suggestions.push("Search a wider area")
-  }
-  if (result.filters.intentTags.length > 0) {
-    suggestions.push("Drop lifestyle requirements such as cabin or liveaboard")
-  }
-  if (result.filters.lengthMax || result.filters.lengthMin) {
-    suggestions.push("Widen the length range")
-  }
-  if (result.filters.boatType) {
-    suggestions.push("Search all boat types")
-  }
-  if (suggestions.length === 0) {
-    suggestions.push("Try one of the suggested searches")
-  }
-  return suggestions
+  return clearConversationalChip(
+    {
+      id: `clear-${group}`,
+      label: group,
+      filterGroup: group,
+      source: "filter",
+    },
+    filters
+  )
 }

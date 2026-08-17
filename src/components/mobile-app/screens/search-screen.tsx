@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
 import { SlidersHorizontal } from "lucide-react"
 
 import { BoatCard } from "@/components/boats/boat-card"
@@ -9,7 +10,13 @@ import { filterBoats } from "@/components/filters/filter-boats"
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
 import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-url-sync"
-import { parseConversationalQuery } from "@/lib/conversational-search"
+import { ConversationalSearchField } from "@/components/search/conversational-search-field"
+import { InterpretedSearchBanner } from "@/components/search/interpreted-search-banner"
+import {
+  clearConversationalChip,
+  clearFilterGroup,
+  parseConversationalQuery,
+} from "@/lib/conversational-search"
 import {
   mobileAppGutterXClass,
   mobileAppStickyUnderTopbarClass,
@@ -80,7 +87,12 @@ export function MobileSearchScreen({
     enabled: locationVariant === "region-test",
     filters,
   })
+  const router = useRouter()
   const [filtersOpen, setFiltersOpen] = React.useState(false)
+  React.useEffect(() => {
+    if (!conversationalQuery?.trim()) return
+    setFilters(parseConversationalQuery(conversationalQuery).filters)
+  }, [conversationalQuery, setFilters])
   const [sort, setSort] = React.useState<
     "featured" | "price-low" | "price-high" | "newest"
   >("featured")
@@ -101,6 +113,34 @@ export function MobileSearchScreen({
         title="Boats for sale"
         description="Discover a wide range of new and used boats for sale on Rightboat, with listings from trusted brokers, dealers, and manufacturers worldwide. Search by boat type, brand, price, or location and use our advanced filters to compare options and find the right boat for your needs."
       />
+
+      <div className={cn(mobileAppGutterXClass, "mt-4 space-y-3")}>
+        <ConversationalSearchField
+          variant="srp"
+          defaultQuery={conversationalQuery ?? ""}
+          showSuggestions={!parsedQuery}
+          listingsBasePath="/app/boats-for-sale"
+        />
+        {parsedQuery ? (
+          <InterpretedSearchBanner
+            result={parsedQuery}
+            filters={filters}
+            resultCount={resultCount}
+            onRemoveChip={(chip) =>
+              setFilters((prev) => clearConversationalChip(chip, prev))
+            }
+            onEditChip={() => setFiltersOpen(true)}
+            onBroaden={(action) =>
+              setFilters((prev) => clearFilterGroup(action.filterGroup, prev))
+            }
+            onSuggestedSearch={(nextQuery) =>
+              router.push(
+                `/app/boats-for-sale?q=${encodeURIComponent(nextQuery)}`
+              )
+            }
+          />
+        ) : null}
+      </div>
 
       {/* Web parity: Filters + Sort below description, full width 50/50 */}
       <div
@@ -161,7 +201,7 @@ export function MobileSearchScreen({
         ))}
       </div>
 
-      {sortedBoats.length === 0 ? (
+      {sortedBoats.length === 0 && !parsedQuery ? (
         <div className="mx-[var(--mobile-margin)] rounded-2xl border border-border/60 bg-muted/20 px-6 py-12 text-center">
           <p className="text-lg font-semibold text-foreground">No boats found</p>
           <p className="mt-1 text-sm text-muted-foreground">

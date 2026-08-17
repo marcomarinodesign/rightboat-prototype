@@ -56,17 +56,17 @@ Misma UX que A, pero un modelo interpreta cada query.
 
 **Recomendación:** A ahora. B como fase 2 si los unmatched y los chips de lifestyle se usan de verdad. D cuando haya inventario y taxonomía reales.
 
-## Contrato de esta prueba (código)
+## Contrato implementado (opción A)
 
 | Estado | Comportamiento |
 |---|---|
-| Vacío | Placeholder rotativo + suggested searches clicables |
+| Vacío | Placeholder rotativo + suggested searches cortas (chip) |
 | Procesando | “Understanding your search…” al aterrizar en el SRP con `?q=` |
-| Resultados | Chips *We understood* + filtros del sidebar ya aplicados + grid split |
+| Resultados | Chips *We understood* editables (lápiz → sidebar) y quitables; filtros del split ya aplicados |
 | Parcial | Chips de lo entendido + pedido de refinar lo que no mapeó |
-| Sin resultados | Copy para ampliar (quitar precio, zona, lifestyle) + sugerencias |
+| Sin resultados | Acciones para ampliar (quitar precio, zona, lifestyle) + sugerencias |
 
-URL: `/boats-for-sale?q=…`. El parser vive en `src/lib/conversational-search/` y pinta `FiltersState` existente (`boatType`, precio, eslora, condition, location, más `intentTags` para lifestyle).
+URL: `/boats-for-sale?q=…`. El search clásico de homepage se traduce a la misma query. El parser vive en `src/lib/conversational-search/` y pinta `FiltersState` existente (`boatType`, precio, eslora, condition, location, más `intentTags` para lifestyle).
 
 Limitación honesta: el matching lifestyle es por tags/descripción del mock, no por un modelo. Los ejemplos del brief tienen listings de apoyo en el dataset del prototipo.
 

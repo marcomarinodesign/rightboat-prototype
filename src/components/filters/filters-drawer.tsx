@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/sheet"
 import { FiltersFormBody } from "@/components/filters/filters-form-body"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
+import { scrollToFilterSection } from "@/lib/conversational-search/filter-sections"
+import type { InterpretedFilterGroup } from "@/lib/conversational-search/types"
 import { useIsMobile } from "@/lib/use-media-query"
 import type { Boat } from "@/data/boats"
 
@@ -30,6 +32,8 @@ type FiltersDrawerProps = {
   /** Opt-in Location → Region tab (prototype: /boats-for-sale/regions). */
   enableRegions?: boolean
   locationVariant?: "region-test"
+  focusedSection?: InterpretedFilterGroup | null
+  scrollToSectionId?: string
 }
 
 export function FiltersDrawer({
@@ -44,6 +48,8 @@ export function FiltersDrawer({
   scrollOnOpen = false,
   enableRegions = false,
   locationVariant,
+  focusedSection = null,
+  scrollToSectionId,
 }: FiltersDrawerProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -68,6 +74,14 @@ export function FiltersDrawer({
     }, 300)
     return () => window.clearTimeout(id)
   }, [open, scrollOnOpen])
+
+  React.useEffect(() => {
+    if (!open || !scrollToSectionId) return
+    const timer = window.setTimeout(() => {
+      scrollToFilterSection(scrollToSectionId)
+    }, 320)
+    return () => window.clearTimeout(timer)
+  }, [open, scrollToSectionId])
 
   const updateDraft = (field: keyof FiltersState, value: string | string[]) => {
     setDraft((prev) => ({ ...prev, [field]: value }))
@@ -129,6 +143,7 @@ export function FiltersDrawer({
           updateCondition={updateCondition}
           enableRegions={enableRegions}
           locationVariant={locationVariant}
+          focusedSection={focusedSection}
         />
 
         <div

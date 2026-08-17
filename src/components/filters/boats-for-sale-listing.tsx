@@ -26,9 +26,13 @@ import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-u
 import { ConversationalSearchField } from "@/components/search/conversational-search-field"
 import { InterpretedSearchBanner } from "@/components/search/interpreted-search-banner"
 import {
+  FILTER_SECTION_IDS,
   clearConversationalChip,
+  clearFilterGroup,
   parseConversationalQuery,
+  scrollToFilterSection,
 } from "@/lib/conversational-search"
+import type { InterpretedChip } from "@/lib/conversational-search/types"
 import type { Boat } from "@/data/boats"
 import { useIsMobile } from "@/lib/use-media-query"
 import { cn } from "@/lib/utils"
@@ -159,6 +163,10 @@ export function BoatsForSaleListing({
   const [processingQuery, setProcessingQuery] = React.useState(
     Boolean(parsedQuery)
   )
+  const [focusedSection, setFocusedSection] = React.useState<
+    InterpretedChip["filterGroup"] | null
+  >(null)
+  const [scrollToSectionId, setScrollToSectionId] = React.useState<string>()
 
   React.useEffect(() => {
     if (!conversationalQuery?.trim()) {
@@ -171,6 +179,12 @@ export function BoatsForSaleListing({
     const timer = window.setTimeout(() => setProcessingQuery(false), 550)
     return () => window.clearTimeout(timer)
   }, [conversationalQuery, setFilters])
+
+  React.useEffect(() => {
+    if (!focusedSection) return
+    const timer = window.setTimeout(() => setFocusedSection(null), 2400)
+    return () => window.clearTimeout(timer)
+  }, [focusedSection])
   useRegionFilterUrlSync({
     enabled: locationVariant === "region-test",
     filters,
@@ -183,6 +197,25 @@ export function BoatsForSaleListing({
 
   const splitDesktop = layoutVariant === "split" && !isMobile
   const showFiltersDrawer = isMobile || layoutVariant !== "split"
+
+  const handleEditChip = React.useCallback(
+    (chip: InterpretedChip) => {
+      const sectionId = FILTER_SECTION_IDS[chip.filterGroup]
+      setFocusedSection(chip.filterGroup)
+      if (chip.filterGroup === "intent") {
+        document.getElementById("conversational-search-srp")?.focus()
+        scrollToFilterSection("conversational-search-srp")
+        return
+      }
+      if (splitDesktop) {
+        scrollToFilterSection(sectionId)
+        return
+      }
+      setScrollToSectionId(sectionId)
+      setDrawerOpen(true)
+    },
+    [splitDesktop]
+  )
 
   const filteredBoats = React.useMemo(
     () => filterBoats(boats, filters),
@@ -233,11 +266,12 @@ export function BoatsForSaleListing({
 
   const cardsGrid = (
     <div
-      className={
+      className={cn(
         splitDesktop
           ? "grid min-w-0 gap-2 md:grid-cols-3"
-          : "grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
-      }
+          : "grid gap-2 sm:grid-cols-2 lg:grid-cols-4",
+        processingQuery && "pointer-events-none opacity-50"
+      )}
     >
       {sortedBoats.map((boat, index) => (
         <BoatCard
@@ -275,9 +309,13 @@ export function BoatsForSaleListing({
 
   const splitResultsToolbar = (
     <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-      <p className="text-xs font-bold uppercase tracking-widest text-foreground">
-        {listingCountLabel}
-      </p>
+      {parsedQuery ? (
+        <span className="sr-only">{listingCountLabel}</span>
+      ) : (
+        <p className="text-xs font-bold uppercase tracking-widest text-foreground">
+          {listingCountLabel}
+        </p>
+      )}
       <ListingSortSelect
         value={sortValue}
         onValueChange={setSortValue}
@@ -322,9 +360,11 @@ export function BoatsForSaleListing({
         </div>
         <div>
           <h1 className="text-3xl font-bold text-foreground">Boats for sale</h1>
-          <BoatsForSaleListingIntro
-            className={splitDesktop ? "mt-1" : "mt-2"}
-          />
+          {parsedQuery ? null : (
+            <BoatsForSaleListingIntro
+              className={splitDesktop ? "mt-1" : "mt-2"}
+            />
+          )}
         </div>
         <div className="mt-5">
           <ConversationalSearchField
@@ -342,6 +382,10 @@ export function BoatsForSaleListing({
               processing={processingQuery}
               onRemoveChip={(chip) =>
                 setFilters((prev) => clearConversationalChip(chip, prev))
+              }
+              onEditChip={handleEditChip}
+              onBroaden={(action) =>
+                setFilters((prev) => clearFilterGroup(action.filterGroup, prev))
               }
               onSuggestedSearch={(nextQuery) =>
                 router.push(
@@ -380,6 +424,7 @@ export function BoatsForSaleListing({
                 scrollClassName="px-0"
                 enableRegions={enableRegions}
                 locationVariant={locationVariant}
+                focusedSection={focusedSection}
               />
             </div>
           </aside>
@@ -409,6 +454,8 @@ export function BoatsForSaleListing({
           scrollOnOpen={figmaPreviewScrollDrawer(figmaPreview)}
           enableRegions={enableRegions}
           locationVariant={locationVariant}
+          focusedSection={focusedSection}
+          scrollToSectionId={scrollToSectionId}
         />
       )}
     </div>
