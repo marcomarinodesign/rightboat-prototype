@@ -20,7 +20,7 @@ const STATES = [
 ]
 
 function srpMobileUrl(state) {
-  return `http://localhost:3000/boats-for-sale?layout=split&figmaPreview=${encodeURIComponent(state)}`
+  return `http://localhost:3000/boats-for-sale?figmaPreview=${encodeURIComponent(state)}`
 }
 
 async function waitForState(page, state) {

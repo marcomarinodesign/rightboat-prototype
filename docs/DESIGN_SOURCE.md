@@ -55,6 +55,12 @@ flowchart LR
 - **Commits:** cuando tenga sentido, el mismo enlace en el cuerpo del mensaje o en el PR asociado.  
 - **Cambios grandes de diseño:** añade una entrada breve en [`DESIGN_SYNC.md`](../DESIGN_SYNC.md) (fecha, pantallas o componentes, enlace Figma, PR).
 
+## Decisiones de producto (cerradas)
+
+| Decisión | Resultado |
+|----------|-----------|
+| **SRP desktop layout (Q2)** | **Split view gana.** Sidebar de filtros + grid de 3 columnas es el listing live (`/boats-for-sale`). El grid de 4 columnas con drawer queda archivado en [`/archive/srp-grid`](../src/app/archive/srp-grid/page.tsx). No reabrir el A/B ni evolucionar el frame Figma [83-737](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737). |
+
 ## Estructura relacionada en el repo
 
 | Ruta | Propósito |

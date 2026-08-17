@@ -152,9 +152,16 @@ const EXPLORATIONS: SiteMapExploration[] = [
         figma: ds("80-65"),
       },
       {
-        label: "SRP grid — default layout",
-        href: "/boats-for-sale?layout=default",
-        description: "Same cards in the single-column layout",
+        label: "SRP grid — split layout",
+        href: "/boats-for-sale",
+        description: "Live SRP after Q2: sidebar + 3-column grid",
+        figma: ds("279-1422"),
+      },
+      {
+        label: "SRP grid — archived 4-col layout",
+        href: "/archive/srp-grid",
+        description: "Q2 A/B loser; kept for reference",
+        figma: ds("83-737"),
       },
       {
         label: "SRP grid — empty state",
@@ -283,19 +290,20 @@ const EXPLORATIONS: SiteMapExploration[] = [
     quarter: "Q2 2026",
     area: "Search & discovery",
     summary:
-      "Filters sidebar + 3-column card grid as the default desktop/tablet SRP, against the original single-column layout.",
+      "Q2 experiment winner. Filters sidebar + 3-column card grid is the live desktop/tablet SRP. The original 4-column grid with a filters drawer is archived.",
     figma: ds("279-1422"),
     links: [
       {
-        label: "Split layout (default)",
+        label: "Split layout (live SRP)",
         href: "/boats-for-sale",
         description: "Filters sidebar + 3-column grid; mobile keeps the sheet",
         figma: ds("279-1422"),
       },
       {
-        label: "Default layout (A/B variant)",
-        href: "/boats-for-sale?layout=default",
-        description: "Original single-column layout",
+        label: "Archived: 4-column grid (A/B loser)",
+        href: "/archive/srp-grid",
+        description: "Original drawer layout, kept for reference",
+        figma: ds("83-737"),
       },
       {
         label: "Page header",
@@ -446,7 +454,14 @@ const EXPLORATIONS: SiteMapExploration[] = [
     quarter: "Q1 2026",
     area: "Internal",
     summary: "This page — every exploration by quarter and area.",
-    links: [{ label: "Sitemap", href: "/sitemap" }],
+    links: [
+      { label: "Sitemap", href: "/sitemap" },
+      {
+        label: "Archived SRP 4-col grid",
+        href: "/archive/srp-grid",
+        description: "Q2 A/B loser; live SRP is split view",
+      },
+    ],
   },
 ]
 

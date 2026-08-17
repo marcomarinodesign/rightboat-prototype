@@ -96,7 +96,8 @@ function SaveSearchButton({ className }: { className?: string }) {
   )
 }
 
-type LayoutVariant = "default" | "split"
+/** Q2 winner is split. `archived-grid` is the 4-col + drawer A/B loser. */
+type LayoutVariant = "split" | "archived-grid"
 
 type BoatsForSaleListingProps = {
   boats: Boat[]
@@ -113,7 +114,7 @@ type BoatsForSaleListingProps = {
 
 export function BoatsForSaleListing({
   boats,
-  layoutVariant = "default",
+  layoutVariant = "split",
   previewMode,
   figmaPreview,
   initialFilters: initialFiltersProp,

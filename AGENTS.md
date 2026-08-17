@@ -4,6 +4,8 @@
 
 Nautical marketplace prototype. Next.js + Tailwind + Framer Motion.
 
+**SRP:** split view won the Q2 experiment. `/boats-for-sale` is the live listing (filters sidebar + 3-col grid on desktop). The 4-col grid is archived at `/archive/srp-grid` — do not treat it as the product default.
+
 ## Figma skills (repo)
 
 - `skills/figma-use/SKILL.md` — Plugin API / `use_figma` (obligatorio antes de escrituras en canvas).

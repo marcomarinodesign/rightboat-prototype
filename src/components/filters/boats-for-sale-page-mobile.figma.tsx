@@ -86,7 +86,7 @@ figma.connect(
   "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-11",
   {
     imports: [
-      "// src/app/boats-for-sale/page.tsx?layout=split&figmaPreview=marketing-footer",
+      "// src/app/boats-for-sale/page.tsx?figmaPreview=marketing-footer",
       'import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"',
       'import { listingBoats } from "@/data/boats"',
     ],

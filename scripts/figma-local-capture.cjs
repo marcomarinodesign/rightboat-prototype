@@ -6,7 +6,7 @@
  *     → App SRP preset: /app/boats-for-sale + Filters sheet, viewport 420×900
  *
  *   npx --package=playwright@1.52.0 node scripts/figma-local-capture.cjs <captureId> srp-mobile [state]
- *     → Web SRP Mobile Overview: /boats-for-sale?layout=split&figmaPreview={state}
+ *     → Web SRP Mobile Overview: /boats-for-sale?figmaPreview={state}
  *     → state: default | filters-open | active-filters | empty | sort-open |
  *              filters-scrolled | save-search-toast | marketing-footer
  *     → viewport 402×874, selector body
@@ -45,7 +45,7 @@ function parseViewport(spec, fallbackW, fallbackH) {
 
 function srpMobileUrl(state) {
   const preview = state === "default" ? "default" : state
-  return `http://localhost:3000/boats-for-sale?layout=split&figmaPreview=${encodeURIComponent(preview)}`
+  return `http://localhost:3000/boats-for-sale?figmaPreview=${encodeURIComponent(preview)}`
 }
 
 async function waitForState(page, mode, state) {

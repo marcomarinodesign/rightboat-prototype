@@ -108,7 +108,7 @@ Genera un JSON con todos los snippets que se publicarían. Útil para revisar an
 
 ## Mobile Overview (402×874)
 
-Frames en la página [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055) enlazan la versión mobile del SRP split (`/boats-for-sale?layout=split`).
+Frames en la página [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055) enlazan la versión mobile del SRP (`/boats-for-sale`). Split view ganó el experimento de Q2 y es el listing live; en mobile el drawer se mantiene.
 
 ### Preview states (`figmaPreview` query param)
 

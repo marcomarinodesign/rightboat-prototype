@@ -1,14 +1,14 @@
 // FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
-// LAST SYNC: 2026-05-21
+// LAST SYNC: 2026-08-17
 //
-// SRP / Split view — node 279-1422 (no modificar SRP legacy 83-737)
-// SRP / Default      — node 83-737
+// SRP / Split view — node 279-1422 (canonical SRP after Q2)
+// SRP / Archived grid — node 83-737 (Q2 A/B loser; do not evolve)
 
 /**
- * Code Connect — BoatsForSaleListing (split + default layouts)
+ * Code Connect — BoatsForSaleListing
  *
- * Split:  /boats-for-sale?layout=split  → sidebar FiltersFormBody + 3-col grid
- * Default: /boats-for-sale             → Filters drawer + 4-col grid
+ * Split (live):     /boats-for-sale              → sidebar + 3-col grid
+ * Archived grid:    /archive/srp-grid            → 4-col grid + filters drawer
  */
 import figma from "@figma/code-connect/react"
 
@@ -16,14 +16,12 @@ import { BoatsForSaleListing } from "./boats-for-sale-listing"
 import { listingBoats } from "@/data/boats"
 
 function SrpSplitView() {
-  return (
-    <BoatsForSaleListing boats={listingBoats} layoutVariant="split" />
-  )
+  return <BoatsForSaleListing boats={listingBoats} layoutVariant="split" />
 }
 
-function SrpDefaultView() {
+function SrpArchivedGridView() {
   return (
-    <BoatsForSaleListing boats={listingBoats} layoutVariant="default" />
+    <BoatsForSaleListing boats={listingBoats} layoutVariant="archived-grid" />
   )
 }
 
@@ -32,7 +30,7 @@ figma.connect(
   "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422",
   {
     imports: [
-      "// Split: src/app/boats-for-sale/page.tsx?layout=split",
+      "// Live SRP: src/app/boats-for-sale/page.tsx",
       'import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"',
       'import { listingBoats } from "@/data/boats"',
     ],
@@ -41,14 +39,14 @@ figma.connect(
 )
 
 figma.connect(
-  SrpDefaultView,
+  SrpArchivedGridView,
   "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737",
   {
     imports: [
-      "// Default: src/app/boats-for-sale/page.tsx",
+      "// Archived Q2 A/B: src/app/archive/srp-grid/page.tsx",
       'import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"',
       'import { listingBoats } from "@/data/boats"',
     ],
-    example: () => <SrpDefaultView />,
+    example: () => <SrpArchivedGridView />,
   }
 )

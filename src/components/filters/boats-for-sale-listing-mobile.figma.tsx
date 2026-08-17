@@ -2,7 +2,7 @@
 // PAGE: Mobile Overview (333-2055)
 // LAST SYNC: 2026-05-27
 //
-// Mobile frames for /boats-for-sale?layout=split (402×874 — mobile uses drawer layout)
+// Mobile frames for /boats-for-sale (402×874 — split desktop; mobile uses drawer)
 
 /**
  * Code Connect — BoatsForSaleListing mobile states (Mobile Overview)
@@ -68,7 +68,7 @@ function SrpMobileSaveSearchToast() {
 }
 
 const MOBILE_IMPORTS = [
-  "// Mobile: /boats-for-sale?layout=split (402×874)",
+  "// Mobile: /boats-for-sale (402×874)",
   'import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"',
   'import { listingBoats } from "@/data/boats"',
 ]

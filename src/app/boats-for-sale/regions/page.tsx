@@ -11,20 +11,18 @@ export const metadata: Metadata = {
 }
 
 type PageProps = {
-  searchParams?: Promise<{ layout?: string; region?: string }>
+  searchParams?: Promise<{ region?: string }>
 }
 
 export default async function BoatsForSaleRegionsPage({
   searchParams,
 }: PageProps) {
   const sp = searchParams ? await searchParams : {}
-  const layoutVariant = sp.layout === "default" ? "default" : "split"
   const initialFilters = regionInitialFilters(sp.region)
 
   return (
     <BoatsForSaleListing
       boats={listingBoats}
-      layoutVariant={layoutVariant}
       initialFilters={initialFilters}
       enableRegions
     />

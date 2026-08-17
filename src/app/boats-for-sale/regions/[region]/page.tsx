@@ -9,7 +9,6 @@ import { listingBoats } from "@/data/boats"
 
 type PageProps = {
   params: Promise<{ region: string }>
-  searchParams?: Promise<{ layout?: string }>
 }
 
 export function generateStaticParams() {
@@ -29,16 +28,10 @@ export async function generateMetadata({
 }
 
 /** Stable, readable region URL: /boats-for-sale/regions/pacific-northwest */
-export default async function RegionLandingPage({
-  params,
-  searchParams,
-}: PageProps) {
+export default async function RegionLandingPage({ params }: PageProps) {
   const { region: slug } = await params
   const region = getRegion(slug)
   if (!region) notFound()
-
-  const sp = searchParams ? await searchParams : {}
-  const layoutVariant = sp.layout === "default" ? "default" : "split"
 
   return (
     <div className="space-y-8">
@@ -72,7 +65,6 @@ export default async function RegionLandingPage({
 
       <BoatsForSaleListing
         boats={listingBoats}
-        layoutVariant={layoutVariant}
         initialFilters={regionInitialFilters(slug)}
         enableRegions
       />

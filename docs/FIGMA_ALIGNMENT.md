@@ -21,6 +21,8 @@ Hay **tres fuentes**, no dos:
 
 En Figma hay una página `🔀 Production ↔ Proposal` con la comparación completa. Cada página de producto tiene un frame de spec con un panel final etiquetado `PROPOSAL` / `OPEN` / `DONE`. Léelos antes de decidir nada.
 
+**SRP:** split view ganó el experimento de Q2. `/boats-for-sale` es sidebar + grid 3 col en desktop (drawer en mobile). El grid 4 col está archivado en `/archive/srp-grid` — no lo reactives ni lo alinees como si fuera el listing live.
+
 ---
 
 ## 1 · Tokens — verificar, no reescribir

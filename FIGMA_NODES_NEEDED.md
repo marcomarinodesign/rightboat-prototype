@@ -18,7 +18,7 @@ npm run figma:connect:publish
 | `BdpInactiveBanner`    | `src/components/boats/bdp/bdp-inactive-banner.figma.tsx`      | Status Banner / Inactive   | BDP              | —                                 | — (sin props externas; contenido fijo)               |
 | BDP — Active           | `src/components/boats/bdp/bdp-detail-page.figma.tsx`          | BDP / Active               | BDP              | State: Active                     | Boat Name, Price, Year, Length, Location             |
 | BDP — Inactive         | `src/components/boats/bdp/bdp-detail-page-inactive.figma.tsx` | BDP / Inactive             | BDP              | State: Inactive (o frame separado)| Boat Name, Listed Price, Boat Type                   |
-| SRP — Split view       | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP / Split view           | Test Cursor      | — (frame de pantalla)             | Hero, Filters panel, Results 3-col                   |
+| SRP — Split view       | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP / Split view           | Test Cursor      | — (frame de pantalla)             | Hero, Filters panel, Results 3-col — **canonical SRP (Q2 winner)** |
 | SRP — Page Header      | `src/components/filters/boats-for-sale-page-header.figma.tsx` | SRP / Page Header          | Complex Components | breadcrumb, H1, intro           | [301-77](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=301-77) |
 | SRP — Sort Select      | `src/components/filters/listing-sort-select.figma.tsx`        | SRP / Sort Select          | Complex Components | Label: Featured / price / newest | [296-81](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=296-81) |
 | Filters — Select Field | `src/components/filters/filters-select-field.figma.tsx`       | Filters / Select Field     | Complex Components | placeholder, disabled           | [294-87](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=294-87) |
@@ -26,16 +26,16 @@ npm run figma:connect:publish
 | `LocationFilter`       | `src/components/filters/location-filter.figma.tsx`            | Filters / Location Filter  | Complex Components | —                               | [289-102](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-102) |
 | `PriceHistogram`       | `src/components/filters/price-histogram.figma.tsx`            | Filters / Price Histogram  | Complex Components | —                               | [289-161](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-161) |
 | `BoatCard`             | `src/components/boats/boat-card.figma.tsx`                    | Boat Card                  | Components       | Simple / Sponsored / Manufacture + Alt* (SRP) | [80-65](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=80-65) — Alt* solo en SRP |
-| SRP — Default          | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP                        | Test Cursor      | 4-col grid + drawer (código)      | `SrpDefaultView` → node 83-737                       |
+| SRP — Archived grid    | `src/components/filters/boats-for-sale-listing.figma.tsx`     | SRP (archived)             | Test Cursor      | 4-col grid + drawer               | `SrpArchivedGridView` → node 83-737 — **do not evolve** |
 | `PremiumPartnerBanner` | `src/components/email/premium-partner-banner.figma.tsx`       | Email / Ad Slots / Premium Partner | Email      | —                                 | 600×150 hero · aspect 4:1                            |
 | `ServiceSponsorCard`   | `src/components/email/service-sponsor-card.figma.tsx`         | Email / Ad Slots / Service Sponsor | Email    | slotIndex: 1, 2                   | Native card · 96×64 image                            |
 | `TrustedPartnerBanner` | `src/components/email/trusted-partner-banner.figma.tsx`       | Email / Ad Slots / Trusted Partner | Email    | —                                 | 600×200 hero · aspect 3:1                            |
 | `FooterSponsor`        | `src/components/email/footer-sponsor.figma.tsx`               | Email / Ad Slots / Footer Sponsor | Email     | slotIndex: 1, 2, 3                | Buyer Resources pill · ~16:9 image                   |
 | `SavedSearchEmail`     | `src/components/email/saved-search-email.figma.tsx`           | Email / Templates / Saved Search | Email      | boatType: center-console, sailboat, yacht, catamaran | Full template · 7 ad slots · 600px max width |
 
-**SRP existente (no modificar):** [SRP default](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737)
+**SRP live (Q2 winner):** [SRP / Split view](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422)
 
-**SRP split (Code Connect):** [SRP / Split view](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422)
+**SRP archived (Q2 A/B loser — no modificar):** [SRP 4-col grid](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737) — prototipo: `/archive/srp-grid`
 
 ---
 
@@ -96,7 +96,7 @@ npm run figma:connect:publish
 
 Página Figma: [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2055)
 
-Ruta prototipo: `/boats-for-sale?layout=split` (+ `figmaPreview` para estados de captura).
+Ruta prototipo: `/boats-for-sale` (+ `figmaPreview` para estados de captura). Split view is the live SRP; mobile still uses the filters drawer.
 
 | Frame Figma | Node ID | Code Connect | `figmaPreview` |
 |-------------|---------|--------------|------------------|
@@ -144,7 +144,7 @@ Tarjeta de listing usada en grids de búsqueda y en la sección "Similar boats" 
 
 **Variantes en Figma (Property 1):**
 - `Simple` / `Sponsored` / `Manufacture` — CTA full-width; homepage, carousels, BDP
-- `AltSimple` / `AltSponsored` / `AltManufacture` — broker + CTA en fila; **solo grids SRP** (`83-737`, `279-1422`)
+- `AltSimple` / `AltSponsored` / `AltManufacture` — broker + CTA en fila; **solo grids SRP** (live `279-1422`; archivado `83-737`)
 
 **Props del component set:**
 - `Boat Name` (string)

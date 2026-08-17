@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
 import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"
 import { BoatsForSaleFigmaEffects } from "@/components/filters/boats-for-sale-figma-effects"
@@ -33,7 +34,9 @@ type PageProps = {
 
 export default async function BoatsForSalePage({ searchParams }: PageProps) {
   const sp = searchParams ? await searchParams : {}
-  const layoutVariant = sp.layout === "default" ? "default" : "split"
+  if (sp.layout === "default") {
+    redirect("/archive/srp-grid")
+  }
   const figmaPreview = parseFigmaPreviewState(sp.figmaPreview)
   const previewMode = figmaPreview ? ("mobile" as const) : undefined
   const locationVariant =
@@ -47,7 +50,6 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
       <BoatsForSaleFigmaEffects figmaPreview={figmaPreview} />
       <BoatsForSaleListing
         boats={listingBoats}
-        layoutVariant={layoutVariant}
         previewMode={previewMode}
         figmaPreview={figmaPreview}
         initialFilters={initialFilters}
