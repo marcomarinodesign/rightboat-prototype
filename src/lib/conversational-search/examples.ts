@@ -4,38 +4,21 @@ export const CONVERSATIONAL_SEARCH_HEADING =
 export const CONVERSATIONAL_SEARCH_PLACEHOLDER =
   "Describe the boat you are looking for…"
 
+export const SUGGESTED_SEARCH_PROMPT =
+  "Need a starting point? Try describing it like this:"
+
+/** Natural-language prompts shown as inspiration; each is also the query. */
 export const SUGGESTED_SEARCHES = [
-  "Fishing boats with a cabin in Puget Sound under $150,000",
-  "Used family cruisers under 40 feet in Florida",
-  "Bluewater sailboats suitable for living aboard",
-  "A fast day boat for six people near Miami",
-  "New center consoles with twin outboards",
+  "A fishing boat with a cabin for weekends on Puget Sound, under $150,000",
+  "A comfortable family cruiser under 40 feet in Florida, under $300,000",
+  "A used sailboat we could live aboard and take offshore",
+  "A fast day boat near Miami for six people",
+  "A new center console with twin outboards, ready for fishing days",
 ] as const
 
 export const SUGGESTED_SEARCH_CHIPS: {
   query: (typeof SUGGESTED_SEARCHES)[number]
   label: string
-}[] = [
-  {
-    query: "Fishing boats with a cabin in Puget Sound under $150,000",
-    label: "Fishing cabin · Puget Sound",
-  },
-  {
-    query: "Used family cruisers under 40 feet in Florida",
-    label: "Family cruisers · Florida",
-  },
-  {
-    query: "Bluewater sailboats suitable for living aboard",
-    label: "Liveaboard sailboats",
-  },
-  {
-    query: "A fast day boat for six people near Miami",
-    label: "Day boat · Miami",
-  },
-  {
-    query: "New center consoles with twin outboards",
-    label: "New center consoles",
-  },
-]
+}[] = SUGGESTED_SEARCHES.map((query) => ({ query, label: query }))
 
 export const ROTATING_PLACEHOLDERS = SUGGESTED_SEARCHES

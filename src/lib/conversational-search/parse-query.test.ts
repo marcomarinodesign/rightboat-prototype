@@ -3,6 +3,7 @@ import { describe, it } from "node:test"
 
 import { listingBoats } from "../../data/boats/listing"
 import { filterBoats } from "../../components/filters/filter-boats"
+import { SUGGESTED_SEARCHES } from "./examples"
 import { buildClassicSearchQuery } from "./classic-query"
 import { broadenActions, parseConversationalQuery } from "./parse-query"
 
@@ -101,6 +102,30 @@ describe("parseConversationalQuery", () => {
     assert.ok(actions.some((action) => action.filterGroup === "price"))
     assert.ok(actions.some((action) => action.filterGroup === "location"))
     assert.ok(actions.some((action) => action.filterGroup === "intent"))
+  })
+
+  it("parses inspirational suggested searches into filters", () => {
+    const fishing = parseConversationalQuery(SUGGESTED_SEARCHES[0])
+    assert.equal(fishing.filters.boatType, "Fishing boats")
+    assert.equal(fishing.filters.locationZip, "Washington")
+    assert.ok(fishing.filters.intentTags.includes("cabin"))
+    assert.equal(fishing.filters.priceMax, "150000")
+
+    const family = parseConversationalQuery(SUGGESTED_SEARCHES[1])
+    assert.equal(family.filters.boatType, "Cabin cruisers")
+    assert.ok(family.filters.intentTags.includes("family"))
+    assert.equal(family.filters.lengthMax, "12.2")
+
+    const liveaboard = parseConversationalQuery(SUGGESTED_SEARCHES[2])
+    assert.equal(liveaboard.filters.boatType, "Sailboats")
+    assert.equal(liveaboard.filters.condition.used, true)
+    assert.ok(liveaboard.filters.intentTags.includes("liveaboard"))
+    assert.ok(liveaboard.filters.intentTags.includes("offshore"))
+
+    const center = parseConversationalQuery(SUGGESTED_SEARCHES[4])
+    assert.equal(center.filters.boatType, "Center console")
+    assert.equal(center.filters.condition.new, true)
+    assert.deepEqual(center.filters.intentTags, ["twin-outboards"])
   })
 
   it("finds prototype listings for the brief example searches", () => {

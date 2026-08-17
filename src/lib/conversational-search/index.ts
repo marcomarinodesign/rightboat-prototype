@@ -3,6 +3,7 @@ export {
   CONVERSATIONAL_SEARCH_PLACEHOLDER,
   ROTATING_PLACEHOLDERS,
   SUGGESTED_SEARCH_CHIPS,
+  SUGGESTED_SEARCH_PROMPT,
   SUGGESTED_SEARCHES,
 } from "@/lib/conversational-search/examples"
 export { buildClassicSearchQuery } from "@/lib/conversational-search/classic-query"

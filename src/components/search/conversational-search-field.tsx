@@ -8,7 +8,6 @@ import {
   listingsHref,
   useHomeSurface,
 } from "@/components/home/home-surface-context"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import {
   searchBarRowClass,
@@ -19,6 +18,7 @@ import {
   CONVERSATIONAL_SEARCH_PLACEHOLDER,
   ROTATING_PLACEHOLDERS,
   SUGGESTED_SEARCH_CHIPS,
+  SUGGESTED_SEARCH_PROMPT,
 } from "@/lib/conversational-search/examples"
 import { cn } from "@/lib/utils"
 
@@ -117,26 +117,25 @@ export function ConversationalSearchField({
         </SearchSubmitButton>
       </form>
       {suggestionsVisible ? (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-muted-foreground">Try:</span>
-          {SUGGESTED_SEARCH_CHIPS.map((example) => (
-            <button
-              key={example.query}
-              type="button"
-              title={example.query}
-              onClick={() => {
-                setQuery(example.query)
-                submit(example.query)
-              }}
-            >
-              <Badge
-                variant="outline"
-                className="cursor-pointer rounded-full bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg hover:text-primary"
+        <div className="space-y-2">
+          <p className="text-sm text-muted-foreground">
+            {SUGGESTED_SEARCH_PROMPT}
+          </p>
+          <div className="flex flex-col gap-2">
+            {SUGGESTED_SEARCH_CHIPS.map((example) => (
+              <button
+                key={example.query}
+                type="button"
+                onClick={() => {
+                  setQuery(example.query)
+                  submit(example.query)
+                }}
+                className="rounded-lg border border-border bg-background px-3.5 py-2.5 text-left text-sm leading-5 text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg"
               >
                 {example.label}
-              </Badge>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
     </div>

@@ -52,6 +52,18 @@ const STOPWORDS = new Set([
   "want",
   "with",
   "you",
+  "we",
+  "could",
+  "our",
+  "weekend",
+  "weekends",
+  "comfortable",
+  "something",
+  "ready",
+  "days",
+  "take",
+  "around",
+  "ideally",
 ])
 
 type LocationHit = {

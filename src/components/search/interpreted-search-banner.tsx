@@ -162,14 +162,14 @@ export function InterpretedSearchBanner({
                   ))}
                 </div>
               ) : null}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-col gap-2">
                 {SUGGESTED_SEARCH_CHIPS.slice(0, 3).map((example) => (
                   <Button
                     key={example.query}
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
-                    className="h-auto whitespace-normal py-1.5 text-left text-xs"
+                    className="h-auto whitespace-normal px-3.5 py-2.5 text-left text-sm font-normal leading-5"
                     onClick={() => onSuggestedSearch(example.query)}
                   >
                     {example.label}
