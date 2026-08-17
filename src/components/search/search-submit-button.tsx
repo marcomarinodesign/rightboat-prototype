@@ -1,13 +1,14 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { Loader2, Search } from "lucide-react"
+import { Loader2, Search, Sparkles } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
 type SearchSubmitButtonProps = {
   submitting?: boolean
   children?: ReactNode
+  icon?: "ai" | "search"
 }
 
 export const searchBarRowClass =
@@ -16,7 +17,10 @@ export const searchBarRowClass =
 export function SearchSubmitButton({
   submitting = false,
   children = "Search boats",
+  icon = "search",
 }: SearchSubmitButtonProps) {
+  const Icon = icon === "ai" ? Sparkles : Search
+
   return (
     <Button
       type="submit"
@@ -26,7 +30,7 @@ export function SearchSubmitButton({
       {submitting ? (
         <Loader2 className="animate-spin" aria-hidden />
       ) : (
-        <Search aria-hidden />
+        <Icon aria-hidden />
       )}
       {children}
     </Button>

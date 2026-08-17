@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Sparkles } from "lucide-react"
 
 import {
   listingsHref,
@@ -98,21 +97,15 @@ export function ConversationalSearchField({
         <label className="sr-only" htmlFor={inputId}>
           {CONVERSATIONAL_SEARCH_PLACEHOLDER}
         </label>
-        <div className="relative min-w-0 flex-1">
-          <Sparkles
-            className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-primary"
-            aria-hidden
-          />
-          <Input
-            id={inputId}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder={placeholder}
-            autoComplete="off"
-            className="pl-10"
-          />
-        </div>
-        <SearchSubmitButton submitting={submitting}>
+        <Input
+          id={inputId}
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder={placeholder}
+          autoComplete="off"
+          className="min-w-0 flex-1"
+        />
+        <SearchSubmitButton submitting={submitting} icon="ai">
           {isHero ? "Search boats" : "AI Search"}
         </SearchSubmitButton>
       </form>
