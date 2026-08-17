@@ -9,6 +9,8 @@ export type Boat = {
   length: string
   price: string
   location: string
+  /** Optional location taxonomy metadata used by experimental SRP filters. */
+  locationId?: string
   image: string
   broker: string
   featured?: boolean

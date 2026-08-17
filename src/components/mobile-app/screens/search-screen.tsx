@@ -6,7 +6,9 @@ import { SlidersHorizontal } from "lucide-react"
 import { BoatCard } from "@/components/boats/boat-card"
 import { ActiveFiltersChips } from "@/components/filters/active-filters-chips"
 import { filterBoats } from "@/components/filters/filter-boats"
+import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
+import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-url-sync"
 import {
   mobileAppGutterXClass,
   mobileAppStickyUnderTopbarClass,
@@ -55,9 +57,23 @@ function appBoatHref(id: string) {
   return `/app/boat/${id}`
 }
 
+type MobileSearchScreenProps = {
+  initialFilters?: FiltersState
+  locationVariant?: "region-test"
+}
+
 /** SRP: same filters and logic as web `BoatsForSaleListing`; app differs in hero + modal sheet. */
-export function MobileSearchScreen() {
-  const { filters, setFilters, clearAll, activeFilters } = useFiltersState()
+export function MobileSearchScreen({
+  initialFilters,
+  locationVariant,
+}: MobileSearchScreenProps) {
+  const { filters, setFilters, clearAll, activeFilters } = useFiltersState(
+    initialFilters
+  )
+  useRegionFilterUrlSync({
+    enabled: locationVariant === "region-test",
+    filters,
+  })
   const [filtersOpen, setFiltersOpen] = React.useState(false)
   const [sort, setSort] = React.useState<
     "featured" | "price-low" | "price-high" | "newest"
@@ -159,6 +175,7 @@ export function MobileSearchScreen() {
         onClearAll={clearAll}
         resultCount={resultCount}
         boats={listingBoats}
+        locationVariant={locationVariant}
       />
     </div>
   )

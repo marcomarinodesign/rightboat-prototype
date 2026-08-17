@@ -6,6 +6,10 @@ import {
   isUnitedStatesCountry,
 } from "@/components/filters/location-geo-data"
 import {
+  getLocationLabel as getTestLocationLabel,
+  getRegionLabel as getTestRegionLabel,
+} from "@/components/filters/location-regions"
+import {
   getRegionEffectiveLocations,
   getRegionLabel,
 } from "@/components/filters/region-data"
@@ -61,7 +65,16 @@ export function getLocationSearchQueries(filters: FiltersState): string[] {
   return query ? [query] : []
 }
 
+export function hasRegionTestSelection(filters: FiltersState): boolean {
+  return (
+    filters.selectedRegionIds.length > 0 ||
+    filters.includedLocationIds.length > 0 ||
+    filters.excludedLocationIds.length > 0
+  )
+}
+
 export function hasActiveLocationFilter(filters: FiltersState): boolean {
+  if (hasRegionTestSelection(filters)) return true
   if (filters.locationTab === "radius") {
     return filters.locationRadius !== "" && filters.locationRadius !== "25"
   }
@@ -80,6 +93,17 @@ export function hasActiveLocationFilter(filters: FiltersState): boolean {
 
 export function formatLocationActiveFilterLabel(filters: FiltersState): string {
   const radiusLabel = getLocationRadiusLabel(filters.locationRadius)
+  if (filters.selectedRegionIds.length > 0) {
+    return filters.selectedRegionIds.map(getTestRegionLabel).join(", ")
+  }
+  if (filters.includedLocationIds.length > 0) {
+    return filters.includedLocationIds.map(getTestLocationLabel).join(", ")
+  }
+  if (filters.excludedLocationIds.length > 0) {
+    return `Excluded: ${filters.excludedLocationIds
+      .map(getTestLocationLabel)
+      .join(", ")}`
+  }
   if (filters.locationTab === "region") {
     return getRegionLabel(filters.locationRegion)
   }
@@ -119,6 +143,9 @@ export function clearLocationFields(): Pick<
   | "locationRegion"
   | "locationRegionExcluded"
   | "locationRegionAdded"
+  | "selectedRegionIds"
+  | "includedLocationIds"
+  | "excludedLocationIds"
 > {
   return {
     location: "",
@@ -131,6 +158,9 @@ export function clearLocationFields(): Pick<
     locationRegion: "",
     locationRegionExcluded: [],
     locationRegionAdded: [],
+    selectedRegionIds: [],
+    includedLocationIds: [],
+    excludedLocationIds: [],
   }
 }
 

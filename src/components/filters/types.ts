@@ -15,6 +15,10 @@ export type FiltersState = {
   locationRegionExcluded: string[]
   /** Individual locations added on top of the region. */
   locationRegionAdded: string[]
+  /** Experimental multi-region IDs (`?locationVariant=region-test`). */
+  selectedRegionIds: string[]
+  includedLocationIds: string[]
+  excludedLocationIds: string[]
   /** power | sail | unpowered — production boat class filter */
   boatClass: string
   /** Category within the selected class (e.g. Center console) */
@@ -46,6 +50,9 @@ export const defaultFilters: FiltersState = {
   locationRegion: "",
   locationRegionExcluded: [],
   locationRegionAdded: [],
+  selectedRegionIds: [],
+  includedLocationIds: [],
+  excludedLocationIds: [],
   boatClass: "",
   boatType: "",
   priceMin: "",

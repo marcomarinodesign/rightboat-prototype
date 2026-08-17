@@ -30,6 +30,8 @@ export type FiltersFormBodyProps = {
   scrollClassName?: string
   /** Opt-in Location → Region tab (prototype: /boats-for-sale/regions). */
   enableRegions?: boolean
+  /** Experimental multi-region picker on the shared SRP. */
+  locationVariant?: "region-test"
 }
 
 export function FilterSection({
@@ -122,6 +124,7 @@ export function FiltersFormBody({
   updateCondition,
   scrollClassName = "min-h-0 flex-1 overflow-y-auto px-6",
   enableRegions = false,
+  locationVariant,
 }: FiltersFormBodyProps) {
   const boatsForHistogram = React.useMemo(
     () => filterBoats(boats, { ...draft, priceMin: "", priceMax: "" }),
@@ -137,6 +140,9 @@ export function FiltersFormBody({
       draft.locationRegion,
       draft.locationRegionExcluded,
       draft.locationRegionAdded,
+      draft.selectedRegionIds,
+      draft.includedLocationIds,
+      draft.excludedLocationIds,
       draft.boatClass,
       draft.boatType,
       draft.condition,
@@ -211,6 +217,7 @@ export function FiltersFormBody({
           }}
           onCityChange={(v) => updateDraft("locationCity", v)}
           enableRegions={enableRegions}
+          regionTestEnabled={locationVariant === "region-test"}
           locationRegion={draft.locationRegion}
           locationRegionExcluded={draft.locationRegionExcluded}
           locationRegionAdded={draft.locationRegionAdded}
@@ -223,6 +230,18 @@ export function FiltersFormBody({
             updateDraft("locationRegionExcluded", v)
           }
           onRegionAddedChange={(v) => updateDraft("locationRegionAdded", v)}
+          selectedRegionIds={draft.selectedRegionIds}
+          includedLocationIds={draft.includedLocationIds}
+          excludedLocationIds={draft.excludedLocationIds}
+          onSelectedRegionIdsChange={(ids) =>
+            updateDraft("selectedRegionIds", ids)
+          }
+          onIncludedLocationIdsChange={(ids) =>
+            updateDraft("includedLocationIds", ids)
+          }
+          onExcludedLocationIdsChange={(ids) =>
+            updateDraft("excludedLocationIds", ids)
+          }
         />
       </FilterSection>
 

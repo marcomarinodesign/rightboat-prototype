@@ -23,6 +23,7 @@ type MobileFiltersSheetProps = {
   onClearAll: () => void
   resultCount: number
   boats: Boat[]
+  locationVariant?: "region-test"
 }
 
 /** App-only presentation: full-screen sheet + drag handle. Same filter fields as web `FiltersDrawer`. */
@@ -34,6 +35,7 @@ export function MobileFiltersSheet({
   onClearAll,
   resultCount,
   boats,
+  locationVariant,
 }: MobileFiltersSheetProps) {
   const sheetRef = React.useRef<HTMLDivElement>(null)
   const [dragY, setDragY] = React.useState(0)
@@ -180,6 +182,7 @@ export function MobileFiltersSheet({
                 updateDraft={updateDraft}
                 updateCondition={updateCondition}
                 scrollClassName="min-h-0 flex-1 overflow-y-auto px-4 pb-2 scrollbar-hide"
+                locationVariant={locationVariant}
               />
 
               <div

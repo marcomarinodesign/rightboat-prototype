@@ -21,6 +21,7 @@ import {
 } from "@/components/filters/figma-preview"
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
+import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-url-sync"
 import type { Boat } from "@/data/boats"
 import { useIsMobile } from "@/lib/use-media-query"
 import { cn } from "@/lib/utils"
@@ -107,6 +108,7 @@ type BoatsForSaleListingProps = {
   initialFilters?: FiltersState
   /** Opt-in Location → Region filter (prototype: /boats-for-sale/regions). */
   enableRegions?: boolean
+  locationVariant?: "region-test"
 }
 
 export function BoatsForSaleListing({
@@ -116,6 +118,7 @@ export function BoatsForSaleListing({
   figmaPreview,
   initialFilters: initialFiltersProp,
   enableRegions = false,
+  locationVariant,
 }: BoatsForSaleListingProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -131,6 +134,10 @@ export function BoatsForSaleListing({
   const { filters, setFilters, clearAll, activeFilters } = useFiltersState(
     resolvedInitialFilters
   )
+  useRegionFilterUrlSync({
+    enabled: locationVariant === "region-test",
+    filters,
+  })
   const [drawerOpen, setDrawerOpen] = React.useState(() =>
     figmaPreviewInitialDrawerOpen(figmaPreview)
   )
@@ -310,6 +317,7 @@ export function BoatsForSaleListing({
                 updateCondition={updateConditionLive}
                 scrollClassName="px-0"
                 enableRegions={enableRegions}
+                locationVariant={locationVariant}
               />
             </div>
           </aside>
@@ -338,6 +346,7 @@ export function BoatsForSaleListing({
           previewMode={previewMode}
           scrollOnOpen={figmaPreviewScrollDrawer(figmaPreview)}
           enableRegions={enableRegions}
+          locationVariant={locationVariant}
         />
       )}
     </div>

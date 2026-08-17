@@ -29,6 +29,7 @@ type FiltersDrawerProps = {
   scrollOnOpen?: boolean
   /** Opt-in Location → Region tab (prototype: /boats-for-sale/regions). */
   enableRegions?: boolean
+  locationVariant?: "region-test"
 }
 
 export function FiltersDrawer({
@@ -42,6 +43,7 @@ export function FiltersDrawer({
   previewMode,
   scrollOnOpen = false,
   enableRegions = false,
+  locationVariant,
 }: FiltersDrawerProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -126,6 +128,7 @@ export function FiltersDrawer({
           updateDraft={updateDraft}
           updateCondition={updateCondition}
           enableRegions={enableRegions}
+          locationVariant={locationVariant}
         />
 
         <div

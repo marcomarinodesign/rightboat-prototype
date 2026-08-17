@@ -1,5 +1,9 @@
 import { getLocationSearchQueries } from "@/components/filters/location-filter-helpers"
 import {
+  getSelectedRegionLocationIds,
+  resolveBoatLocationId,
+} from "@/components/filters/location-regions"
+import {
   boatClassForCategory,
   fuelTypeMatches,
   hullMaterialMatches,
@@ -23,11 +27,19 @@ function lengthFtToM(ft: number): number {
 }
 
 export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
+  const regionalLocationIds = new Set([
+    ...getSelectedRegionLocationIds(filters.selectedRegionIds),
+    ...filters.includedLocationIds,
+  ])
+  const excludedLocationIds = new Set(filters.excludedLocationIds)
+  const useRegionTestMatching = regionalLocationIds.size > 0
+
   const locationQueries = getLocationSearchQueries(filters).map((query) =>
     query.toLowerCase()
   )
   // A region with every location excluded matches nothing, not everything.
   if (
+    !useRegionTestMatching &&
     filters.locationTab === "region" &&
     filters.locationRegion &&
     locationQueries.length === 0
@@ -35,7 +47,16 @@ export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
     return []
   }
   return boats.filter((boat) => {
-    if (locationQueries.length > 0) {
+    if (useRegionTestMatching) {
+      const boatLocationId = resolveBoatLocationId(boat)
+      if (
+        !boatLocationId ||
+        !regionalLocationIds.has(boatLocationId) ||
+        excludedLocationIds.has(boatLocationId)
+      ) {
+        return false
+      }
+    } else if (locationQueries.length > 0) {
       const location = boat.location.toLowerCase()
       if (!locationQueries.some((query) => location.includes(query))) {
         return false

@@ -7,7 +7,13 @@ import {
   clearLocationFields,
   formatLocationActiveFilterLabel,
   hasActiveLocationFilter,
+  hasRegionTestSelection,
 } from "@/components/filters/location-filter-helpers"
+import {
+  getLocationLabel,
+  getRegionLabel,
+  getRegionLocationIds,
+} from "@/components/filters/location-regions"
 import { getRegionLocation } from "@/components/filters/region-data"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
 import { modelLabelFromValue } from "@/components/filters/srp-filter-data"
@@ -62,7 +68,56 @@ export function useFiltersState(initialFilters?: FiltersState) {
   const activeFilters = React.useMemo<ActiveFilter[]>(() => {
     const items: ActiveFilter[] = []
 
-    if (hasActiveLocationFilter(filters)) {
+    if (hasRegionTestSelection(filters)) {
+      filters.selectedRegionIds.forEach((regionId) => {
+        const label = getRegionLabel(regionId)
+        items.push({
+          key: `region-${regionId}`,
+          label: `Location: ${label}`,
+          onRemove: () =>
+            setFilters((prev) => ({
+              ...prev,
+              selectedRegionIds: prev.selectedRegionIds.filter(
+                (id) => id !== regionId
+              ),
+              excludedLocationIds: prev.excludedLocationIds.filter(
+                (locationId) =>
+                  prev.selectedRegionIds
+                    .filter((id) => id !== regionId)
+                    .some((id) => getRegionLocationIds(id).includes(locationId))
+              ),
+            })),
+        })
+      })
+
+      filters.includedLocationIds.forEach((locationId) => {
+        items.push({
+          key: `included-location-${locationId}`,
+          label: `Location: ${getLocationLabel(locationId)}`,
+          onRemove: () =>
+            setFilters((prev) => ({
+              ...prev,
+              includedLocationIds: prev.includedLocationIds.filter(
+                (id) => id !== locationId
+              ),
+            })),
+        })
+      })
+
+      filters.excludedLocationIds.forEach((locationId) => {
+        items.push({
+          key: `excluded-location-${locationId}`,
+          label: `Excluded: ${getLocationLabel(locationId)}`,
+          onRemove: () =>
+            setFilters((prev) => ({
+              ...prev,
+              excludedLocationIds: prev.excludedLocationIds.filter(
+                (id) => id !== locationId
+              ),
+            })),
+        })
+      })
+    } else if (hasActiveLocationFilter(filters)) {
       const isRegion = filters.locationTab === "region"
       const excludedCount = isRegion ? filters.locationRegionExcluded.length : 0
       // The SRP shows the region name, not every state or country under it.

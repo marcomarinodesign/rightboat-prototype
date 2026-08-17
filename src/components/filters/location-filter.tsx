@@ -15,6 +15,7 @@ import {
   LOCATION_TABS_WITH_REGION,
 } from "@/components/filters/location-filter-helpers"
 import { RegionFilter } from "@/components/filters/region-filter"
+import { RegionFilterTest } from "@/components/filters/region-filter-test"
 import { SearchableSelect } from "@/components/filters/searchable-select"
 import type { LocationTab } from "@/components/filters/types"
 import {
@@ -50,6 +51,14 @@ type LocationFilterProps = {
   onRegionChange?: (value: string) => void
   onRegionExcludedChange?: (values: string[]) => void
   onRegionAddedChange?: (values: string[]) => void
+  /** Experimental multi-region picker (`?locationVariant=region-test`). */
+  regionTestEnabled?: boolean
+  selectedRegionIds?: string[]
+  includedLocationIds?: string[]
+  excludedLocationIds?: string[]
+  onSelectedRegionIdsChange?: (ids: string[]) => void
+  onIncludedLocationIdsChange?: (ids: string[]) => void
+  onExcludedLocationIdsChange?: (ids: string[]) => void
 }
 
 function LocationSegmentedControl({
@@ -208,11 +217,26 @@ export function LocationFilter({
   onRegionChange,
   onRegionExcludedChange,
   onRegionAddedChange,
+  regionTestEnabled = false,
+  selectedRegionIds = [],
+  includedLocationIds = [],
+  excludedLocationIds = [],
+  onSelectedRegionIdsChange,
+  onIncludedLocationIdsChange,
+  onExcludedLocationIdsChange,
 }: LocationFilterProps) {
-  const tabs = enableRegions ? LOCATION_TABS_WITH_REGION : LOCATION_TABS
+  const tabs =
+    enableRegions || regionTestEnabled
+      ? LOCATION_TABS_WITH_REGION
+      : LOCATION_TABS
 
   const handleTabChange = (tab: LocationTab) => {
     onTabChange(tab)
+    if (regionTestEnabled && tab !== "region" && locationTab === "region") {
+      onSelectedRegionIdsChange?.([])
+      onIncludedLocationIdsChange?.([])
+      onExcludedLocationIdsChange?.([])
+    }
     if (tab === "radius") {
       const valid = LOCATION_RADIUS_OPTIONS_BY_RADIUS.some(
         (o) => o.value === locationRadius
@@ -234,7 +258,20 @@ export function LocationFilter({
         onChange={handleTabChange}
       />
 
-      {enableRegions && locationTab === "region" && (
+      {regionTestEnabled && locationTab === "region" ? (
+        <RegionFilterTest
+          selectedRegionIds={selectedRegionIds}
+          includedLocationIds={includedLocationIds}
+          excludedLocationIds={excludedLocationIds}
+          onSelectedRegionIdsChange={(ids) => onSelectedRegionIdsChange?.(ids)}
+          onIncludedLocationIdsChange={(ids) =>
+            onIncludedLocationIdsChange?.(ids)
+          }
+          onExcludedLocationIdsChange={(ids) =>
+            onExcludedLocationIdsChange?.(ids)
+          }
+        />
+      ) : enableRegions && locationTab === "region" ? (
         <RegionFilter
           region={locationRegion}
           excluded={locationRegionExcluded}
@@ -243,7 +280,7 @@ export function LocationFilter({
           onExcludedChange={(values) => onRegionExcludedChange?.(values)}
           onAddedChange={(values) => onRegionAddedChange?.(values)}
         />
-      )}
+      ) : null}
 
       {locationTab === "zip" && (
         <div

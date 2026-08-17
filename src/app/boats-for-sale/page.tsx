@@ -4,6 +4,7 @@ import Link from "next/link"
 import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"
 import { BoatsForSaleFigmaEffects } from "@/components/filters/boats-for-sale-figma-effects"
 import { parseFigmaPreviewState } from "@/components/filters/figma-preview"
+import { regionTestFiltersFromSearchParams } from "@/components/filters/location-regions"
 import { listingBoats } from "@/data/boats"
 import {
   popularBrands,
@@ -20,7 +21,14 @@ export const metadata: Metadata = {
 }
 
 type PageProps = {
-  searchParams?: Promise<{ layout?: string; figmaPreview?: string }>
+  searchParams?: Promise<{
+    layout?: string
+    figmaPreview?: string
+    locationVariant?: string
+    region?: string | string[]
+    includeLocation?: string | string[]
+    excludeLocation?: string | string[]
+  }>
 }
 
 export default async function BoatsForSalePage({ searchParams }: PageProps) {
@@ -28,6 +36,11 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
   const layoutVariant = sp.layout === "default" ? "default" : "split"
   const figmaPreview = parseFigmaPreviewState(sp.figmaPreview)
   const previewMode = figmaPreview ? ("mobile" as const) : undefined
+  const locationVariant =
+    sp.locationVariant === "region-test" ? ("region-test" as const) : undefined
+  const initialFilters = locationVariant
+    ? regionTestFiltersFromSearchParams(sp)
+    : undefined
 
   return (
     <div className="space-y-10">
@@ -37,6 +50,8 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
         layoutVariant={layoutVariant}
         previewMode={previewMode}
         figmaPreview={figmaPreview}
+        initialFilters={initialFilters}
+        locationVariant={locationVariant}
       />
 
       <section
