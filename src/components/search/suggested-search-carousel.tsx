@@ -9,7 +9,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { SUGGESTED_SEARCH_CHIPS } from "@/lib/conversational-search/examples"
-import { cn } from "@/lib/utils"
 
 function chunk<T>(items: readonly T[], size: number): T[][] {
   const pages: T[][] = []
@@ -23,23 +22,15 @@ type SuggestedSearchCarouselProps = {
   onSelect: (query: string) => void
 }
 
-function SuggestedSearchSlides({
-  pageSize,
+export function SuggestedSearchCarousel({
   onSelect,
-  showArrows,
-  className,
-}: {
-  pageSize: 2 | 4
-  onSelect: (query: string) => void
-  showArrows?: boolean
-  className?: string
-}) {
-  const pages = chunk(SUGGESTED_SEARCH_CHIPS, pageSize)
+}: SuggestedSearchCarouselProps) {
+  const pages = chunk(SUGGESTED_SEARCH_CHIPS, 2)
 
   return (
     <Carousel
       opts={{ align: "start" }}
-      className={cn("relative w-full", className)}
+      className="relative w-full md:px-12"
       aria-label="Suggested searches"
     >
       <CarouselContent>
@@ -60,33 +51,9 @@ function SuggestedSearchSlides({
           </CarouselItem>
         ))}
       </CarouselContent>
-      {showArrows ? (
-        <>
-          <CarouselPrevious />
-          <CarouselNext />
-        </>
-      ) : null}
+      <CarouselPrevious className="hidden md:flex" />
+      <CarouselNext className="hidden md:flex" />
       <CarouselDots />
     </Carousel>
-  )
-}
-
-export function SuggestedSearchCarousel({
-  onSelect,
-}: SuggestedSearchCarouselProps) {
-  return (
-    <>
-      <div className="md:hidden">
-        <SuggestedSearchSlides pageSize={2} onSelect={onSelect} />
-      </div>
-      <div className="hidden md:block">
-        <SuggestedSearchSlides
-          pageSize={4}
-          onSelect={onSelect}
-          showArrows
-          className="px-12"
-        />
-      </div>
-    </>
   )
 }
