@@ -320,8 +320,8 @@ const CarouselDots = React.forwardRef<
           className={cn(
             "h-2 w-2 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             selectedIndex === index
-              ? "bg-foreground"
-              : "bg-muted-foreground/50 hover:bg-muted-foreground"
+              ? "bg-primary"
+              : "bg-primary/25 hover:bg-primary/40"
           )}
         />
       ))}
