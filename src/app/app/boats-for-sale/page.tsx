@@ -7,6 +7,7 @@ type PageProps = {
     region?: string | string[]
     includeLocation?: string | string[]
     excludeLocation?: string | string[]
+    q?: string
   }>
 }
 
@@ -19,11 +20,13 @@ export default async function MobileAppBoatsForSalePage({
   const initialFilters = locationVariant
     ? regionTestFiltersFromSearchParams(sp)
     : undefined
+  const conversationalQuery = typeof sp.q === "string" ? sp.q : undefined
 
   return (
     <MobileSearchScreen
       initialFilters={initialFilters}
       locationVariant={locationVariant}
+      conversationalQuery={conversationalQuery}
     />
   )
 }

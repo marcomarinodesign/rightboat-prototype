@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Bookmark, SlidersHorizontal } from "lucide-react"
 import { toast } from "sonner"
 
@@ -22,6 +23,12 @@ import {
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
 import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-url-sync"
+import { ConversationalSearchField } from "@/components/search/conversational-search-field"
+import { InterpretedSearchBanner } from "@/components/search/interpreted-search-banner"
+import {
+  clearConversationalChip,
+  parseConversationalQuery,
+} from "@/lib/conversational-search"
 import type { Boat } from "@/data/boats"
 import { useIsMobile } from "@/lib/use-media-query"
 import { cn } from "@/lib/utils"
@@ -110,6 +117,8 @@ type BoatsForSaleListingProps = {
   /** Opt-in Location → Region filter (prototype: /boats-for-sale/regions). */
   enableRegions?: boolean
   locationVariant?: "region-test"
+  /** Natural-language query from `?q=` (homepage / SRP conversational search). */
+  conversationalQuery?: string
 }
 
 export function BoatsForSaleListing({
@@ -120,6 +129,7 @@ export function BoatsForSaleListing({
   initialFilters: initialFiltersProp,
   enableRegions = false,
   locationVariant,
+  conversationalQuery,
 }: BoatsForSaleListingProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -129,12 +139,38 @@ export function BoatsForSaleListing({
         ? false
         : isMobileQuery
 
+  const router = useRouter()
+  const parsedQuery = React.useMemo(
+    () =>
+      conversationalQuery?.trim()
+        ? parseConversationalQuery(conversationalQuery)
+        : null,
+    [conversationalQuery]
+  )
+
   const resolvedInitialFilters =
-    initialFiltersProp ?? figmaPreviewInitialFilters(figmaPreview)
+    parsedQuery?.filters ??
+    initialFiltersProp ??
+    figmaPreviewInitialFilters(figmaPreview)
 
   const { filters, setFilters, clearAll, activeFilters } = useFiltersState(
     resolvedInitialFilters
   )
+  const [processingQuery, setProcessingQuery] = React.useState(
+    Boolean(parsedQuery)
+  )
+
+  React.useEffect(() => {
+    if (!conversationalQuery?.trim()) {
+      setProcessingQuery(false)
+      return
+    }
+    const parsed = parseConversationalQuery(conversationalQuery)
+    setFilters(parsed.filters)
+    setProcessingQuery(true)
+    const timer = window.setTimeout(() => setProcessingQuery(false), 550)
+    return () => window.clearTimeout(timer)
+  }, [conversationalQuery, setFilters])
   useRegionFilterUrlSync({
     enabled: locationVariant === "region-test",
     filters,
@@ -214,7 +250,7 @@ export function BoatsForSaleListing({
     </div>
   )
 
-  const emptyState = sortedBoats.length === 0 && (
+  const emptyState = sortedBoats.length === 0 && !parsedQuery && (
     <div className="rounded-2xl border border-border/60 bg-muted/20 px-6 py-12 text-center">
       <p className="text-lg font-semibold text-foreground">No boats found</p>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -290,6 +326,31 @@ export function BoatsForSaleListing({
             className={splitDesktop ? "mt-1" : "mt-2"}
           />
         </div>
+        <div className="mt-5">
+          <ConversationalSearchField
+            variant="srp"
+            defaultQuery={conversationalQuery ?? ""}
+            showSuggestions={!parsedQuery}
+          />
+        </div>
+        {parsedQuery ? (
+          <div className="mt-4">
+            <InterpretedSearchBanner
+              result={parsedQuery}
+              filters={filters}
+              resultCount={resultCount}
+              processing={processingQuery}
+              onRemoveChip={(chip) =>
+                setFilters((prev) => clearConversationalChip(chip, prev))
+              }
+              onSuggestedSearch={(nextQuery) =>
+                router.push(
+                  `/boats-for-sale?q=${encodeURIComponent(nextQuery)}`
+                )
+              }
+            />
+          </div>
+        ) : null}
       </div>
 
       {!splitDesktop && (

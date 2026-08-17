@@ -37,6 +37,11 @@ export type FiltersState = {
   model: string
   hullMaterial: string
   fuelType: string
+  /**
+   * Lifestyle / description-based requirements from conversational search
+   * (cabin, liveaboard, bluewater, …). Not a production SRP control.
+   */
+  intentTags: string[]
 }
 
 export const defaultFilters: FiltersState = {
@@ -69,4 +74,5 @@ export const defaultFilters: FiltersState = {
   model: "",
   hullMaterial: "",
   fuelType: "",
+  intentTags: [],
 }

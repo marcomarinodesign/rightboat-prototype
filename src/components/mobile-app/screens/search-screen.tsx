@@ -9,6 +9,7 @@ import { filterBoats } from "@/components/filters/filter-boats"
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
 import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-url-sync"
+import { parseConversationalQuery } from "@/lib/conversational-search"
 import {
   mobileAppGutterXClass,
   mobileAppStickyUnderTopbarClass,
@@ -60,15 +61,20 @@ function appBoatHref(id: string) {
 type MobileSearchScreenProps = {
   initialFilters?: FiltersState
   locationVariant?: "region-test"
+  conversationalQuery?: string
 }
 
 /** SRP: same filters and logic as web `BoatsForSaleListing`; app differs in hero + modal sheet. */
 export function MobileSearchScreen({
   initialFilters,
   locationVariant,
+  conversationalQuery,
 }: MobileSearchScreenProps) {
+  const parsedQuery = conversationalQuery?.trim()
+    ? parseConversationalQuery(conversationalQuery)
+    : null
   const { filters, setFilters, clearAll, activeFilters } = useFiltersState(
-    initialFilters
+    parsedQuery?.filters ?? initialFilters
   )
   useRegionFilterUrlSync({
     enabled: locationVariant === "region-test",

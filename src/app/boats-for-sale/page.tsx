@@ -29,6 +29,7 @@ type PageProps = {
     region?: string | string[]
     includeLocation?: string | string[]
     excludeLocation?: string | string[]
+    q?: string
   }>
 }
 
@@ -44,6 +45,7 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
   const initialFilters = locationVariant
     ? regionTestFiltersFromSearchParams(sp)
     : undefined
+  const conversationalQuery = typeof sp.q === "string" ? sp.q : undefined
 
   return (
     <div className="space-y-10">
@@ -54,6 +56,7 @@ export default async function BoatsForSalePage({ searchParams }: PageProps) {
         figmaPreview={figmaPreview}
         initialFilters={initialFilters}
         locationVariant={locationVariant}
+        conversationalQuery={conversationalQuery}
       />
 
       <section

@@ -1,6 +1,8 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
+import { ChevronDown } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -15,67 +17,93 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ConversationalSearchField } from "@/components/search/conversational-search-field"
+import { cn } from "@/lib/utils"
 
 export function HeroSearch() {
   const surface = useHomeSurface()
   const searchHref = listingsHref("/boats-for-sale", surface)
   const isApp = surface === "app"
+  const [classicOpen, setClassicOpen] = React.useState(false)
 
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-[25px] shadow-sm">
-      <div className="grid gap-3 md:grid-cols-4">
-        <Input
-          placeholder="Search by make or model"
-          aria-label="Search by make or model"
-          className="h-11 rounded-lg border-border bg-background text-sm"
+      <ConversationalSearchField variant="hero" />
+
+      <button
+        type="button"
+        className="flex items-center gap-1 text-left text-sm font-medium text-primary hover:underline"
+        aria-expanded={classicOpen}
+        onClick={() => setClassicOpen((open) => !open)}
+      >
+        Or search by make, model, type and location
+        <ChevronDown
+          className={cn(
+            "h-4 w-4 transition-transform duration-[var(--transition-duration-normal)]",
+            classicOpen && "rotate-180"
+          )}
+          aria-hidden
         />
-        <Select>
-          <SelectTrigger
-            aria-label="Boat type"
-            className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
-          >
-            <SelectValue placeholder="Boat type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="sail">Sailboats</SelectItem>
-            <SelectItem value="power">Powerboats</SelectItem>
-            <SelectItem value="yacht">Yachts</SelectItem>
-            <SelectItem value="cat">Catamaran</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select>
-          <SelectTrigger
-            aria-label="Location"
-            className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
-          >
-            <SelectValue placeholder="Location" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="fl">Florida</SelectItem>
-            <SelectItem value="ca">California</SelectItem>
-            <SelectItem value="tx">Texas</SelectItem>
-            <SelectItem value="uk">United Kingdom</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select>
-          <SelectTrigger
-            aria-label="Price range"
-            className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
-          >
-            <SelectValue placeholder="Price range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="0-50">$0 - $50k</SelectItem>
-            <SelectItem value="50-150">$50k - $150k</SelectItem>
-            <SelectItem value="150-500">$150k - $500k</SelectItem>
-            <SelectItem value="500+">$500k+</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      </button>
+
+      {classicOpen ? (
+        <div className="grid gap-3 md:grid-cols-4">
+          <Input
+            placeholder="Search by make or model"
+            aria-label="Search by make or model"
+            className="h-11 rounded-lg border-border bg-background text-sm"
+          />
+          <Select>
+            <SelectTrigger
+              aria-label="Boat type"
+              className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+            >
+              <SelectValue placeholder="Boat type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="sail">Sailboats</SelectItem>
+              <SelectItem value="power">Powerboats</SelectItem>
+              <SelectItem value="yacht">Yachts</SelectItem>
+              <SelectItem value="cat">Catamaran</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger
+              aria-label="Location"
+              className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+            >
+              <SelectValue placeholder="Location" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="fl">Florida</SelectItem>
+              <SelectItem value="ca">California</SelectItem>
+              <SelectItem value="tx">Texas</SelectItem>
+              <SelectItem value="uk">United Kingdom</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger
+              aria-label="Price range"
+              className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+            >
+              <SelectValue placeholder="Price range" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="0-50">$0 - $50k</SelectItem>
+              <SelectItem value="50-150">$50k - $150k</SelectItem>
+              <SelectItem value="150-500">$150k - $500k</SelectItem>
+              <SelectItem value="500+">$500k+</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      ) : null}
+
       {isApp ? (
-        <Button asChild className="min-h-[48px] w-full rounded-xl font-semibold">
-          <Link href={searchHref}>Search boats</Link>
-        </Button>
+        classicOpen ? (
+          <Button asChild className="min-h-[48px] w-full rounded-xl font-semibold">
+            <Link href={searchHref}>Search boats</Link>
+          </Button>
+        ) : null
       ) : (
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-col text-left">
@@ -89,9 +117,11 @@ export function HeroSearch() {
               location using our advanced global boat search.
             </p>
           </div>
-          <Button asChild>
-            <Link href={searchHref}>Search boats</Link>
-          </Button>
+          {classicOpen ? (
+            <Button asChild>
+              <Link href={searchHref}>Search boats</Link>
+            </Button>
+          ) : null}
         </div>
       )}
     </div>

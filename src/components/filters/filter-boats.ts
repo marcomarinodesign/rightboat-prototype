@@ -11,6 +11,7 @@ import {
 } from "@/components/filters/srp-filter-data"
 import type { Boat } from "@/data/boats"
 import type { FiltersState } from "@/components/filters/types"
+import { boatMatchesIntentTags } from "@/lib/conversational-search/intent-tags"
 
 function parsePrice(priceStr: string): number {
   const cleaned = priceStr.replace(/[^0-9]/g, "")
@@ -123,6 +124,12 @@ export function filterBoats(boats: Boat[], filters: FiltersState): Boat[] {
       return false
     }
     if (filters.fuelType && !fuelTypeMatches(filters.fuelType, boat.fuelType)) {
+      return false
+    }
+    if (
+      filters.intentTags?.length > 0 &&
+      !boatMatchesIntentTags(boat, filters.intentTags)
+    ) {
       return false
     }
     return true

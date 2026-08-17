@@ -16,6 +16,7 @@ import {
 } from "@/components/filters/location-regions"
 import { getRegionLocation } from "@/components/filters/region-data"
 import { defaultFilters, type FiltersState } from "@/components/filters/types"
+import { INTENT_LABELS } from "@/lib/conversational-search/types"
 import { modelLabelFromValue } from "@/components/filters/srp-filter-data"
 
 const formatCurrency = (value: string) => {
@@ -60,6 +61,7 @@ export function useFiltersState(initialFilters?: FiltersState) {
     setFilters({
       ...defaultFilters,
       condition: { ...defaultFilters.condition },
+      intentTags: [],
       locationRegionExcluded: [],
       locationRegionAdded: [],
     })
@@ -314,6 +316,18 @@ export function useFiltersState(initialFilters?: FiltersState) {
           setFilters((prev) => ({
             ...prev,
             fuelType: "",
+          })),
+      })
+    }
+
+    for (const tag of filters.intentTags) {
+      items.push({
+        key: `intent-${tag}`,
+        label: INTENT_LABELS[tag] ?? tag,
+        onRemove: () =>
+          setFilters((prev) => ({
+            ...prev,
+            intentTags: prev.intentTags.filter((item) => item !== tag),
           })),
       })
     }
