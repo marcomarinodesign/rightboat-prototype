@@ -126,6 +126,22 @@ describe("parseConversationalQuery", () => {
     assert.equal(center.filters.boatType, "Center console")
     assert.equal(center.filters.condition.new, true)
     assert.deepEqual(center.filters.intentTags, ["twin-outboards"])
+
+    const trawler = parseConversationalQuery(SUGGESTED_SEARCHES[5])
+    assert.equal(trawler.filters.boatType, "Trawlers")
+    assert.equal(trawler.filters.locationZip, "California")
+    assert.equal(trawler.filters.priceMax, "250000")
+
+    const catamaran = parseConversationalQuery(SUGGESTED_SEARCHES[6])
+    assert.equal(catamaran.filters.boatType, "Catamaran")
+    assert.equal(catamaran.filters.locationZip, "Florida")
+    assert.ok(catamaran.filters.intentTags.includes("family"))
+
+    const bowrider = parseConversationalQuery(SUGGESTED_SEARCHES[7])
+    assert.equal(bowrider.filters.boatType, "Bowrider")
+    assert.equal(bowrider.filters.locationZip, "Texas")
+    assert.equal(bowrider.filters.condition.used, true)
+    assert.equal(bowrider.filters.priceMax, "80000")
   })
 
   it("finds prototype listings for the brief example searches", () => {

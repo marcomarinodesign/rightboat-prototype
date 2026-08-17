@@ -13,11 +13,11 @@ import {
   searchBarRowClass,
   SearchSubmitButton,
 } from "@/components/search/search-submit-button"
+import { SuggestedSearchCarousel } from "@/components/search/suggested-search-carousel"
 import {
   CONVERSATIONAL_SEARCH_HEADING,
   CONVERSATIONAL_SEARCH_PLACEHOLDER,
   ROTATING_PLACEHOLDERS,
-  SUGGESTED_SEARCH_CHIPS,
   SUGGESTED_SEARCH_PROMPT,
 } from "@/lib/conversational-search/examples"
 import { cn } from "@/lib/utils"
@@ -121,21 +121,12 @@ export function ConversationalSearchField({
           <p className="text-sm text-muted-foreground">
             {SUGGESTED_SEARCH_PROMPT}
           </p>
-          <div className="flex flex-col gap-2">
-            {SUGGESTED_SEARCH_CHIPS.map((example) => (
-              <button
-                key={example.query}
-                type="button"
-                onClick={() => {
-                  setQuery(example.query)
-                  submit(example.query)
-                }}
-                className="rounded-lg border border-border bg-background px-3.5 py-2.5 text-left text-sm leading-5 text-foreground transition-colors duration-[var(--transition-duration-normal)] hover:border-primary hover:bg-tag-bg"
-              >
-                {example.label}
-              </button>
-            ))}
-          </div>
+          <SuggestedSearchCarousel
+            onSelect={(exampleQuery) => {
+              setQuery(exampleQuery)
+              submit(exampleQuery)
+            }}
+          />
         </div>
       ) : null}
     </div>

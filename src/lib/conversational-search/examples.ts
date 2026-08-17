@@ -14,6 +14,9 @@ export const SUGGESTED_SEARCHES = [
   "A used sailboat we could live aboard and take offshore",
   "A fast day boat near Miami for six people",
   "A new center console with twin outboards, ready for fishing days",
+  "A quiet trawler for coastal cruising in California, under $250,000",
+  "A catamaran in Florida for weekends with the family",
+  "A used bowrider for lake days in Texas, under $80,000",
 ] as const
 
 export const SUGGESTED_SEARCH_CHIPS: {

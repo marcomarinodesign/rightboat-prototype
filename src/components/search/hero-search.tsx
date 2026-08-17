@@ -4,7 +4,7 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 
-import { PillGroup } from "@/components/ui/pill-group"
+import { SegmentedControl } from "@/components/ui/segmented-control"
 import {
   listingsHref,
   useHomeSurface,
@@ -61,12 +61,14 @@ export function HeroSearch() {
 
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-[25px] shadow-sm">
-      <PillGroup
-        options={[...SEARCH_MODE_OPTIONS]}
-        value={mode}
-        onChange={(value) => setMode(value as SearchMode)}
-        aria-label="Search mode"
-      />
+      <div className="flex justify-center">
+        <SegmentedControl
+          options={[...SEARCH_MODE_OPTIONS]}
+          value={mode}
+          onChange={(value) => setMode(value as SearchMode)}
+          aria-label="Search mode"
+        />
+      </div>
 
       <AnimatePresence mode="wait" initial={false}>
         {mode === "ai" ? (

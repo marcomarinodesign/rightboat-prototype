@@ -64,6 +64,9 @@ const STOPWORDS = new Set([
   "take",
   "around",
   "ideally",
+  "quiet",
+  "coastal",
+  "lake",
 ])
 
 type LocationHit = {
