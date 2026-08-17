@@ -23,6 +23,7 @@ type ConversationalSearchFieldProps = {
   variant?: "hero" | "srp"
   defaultQuery?: string
   showSuggestions?: boolean
+  showHeading?: boolean
   listingsBasePath?: string
   className?: string
 }
@@ -38,6 +39,7 @@ export function ConversationalSearchField({
   variant = "hero",
   defaultQuery = "",
   showSuggestions,
+  showHeading,
   listingsBasePath,
   className,
 }: ConversationalSearchFieldProps) {
@@ -50,6 +52,7 @@ export function ConversationalSearchField({
   const [submitting, setSubmitting] = React.useState(false)
   const suggestionsVisible = showSuggestions ?? variant === "hero"
   const isHero = variant === "hero"
+  const headingVisible = showHeading ?? isHero
   const inputId = `conversational-search-${variant}`
 
   React.useEffect(() => {
@@ -77,7 +80,7 @@ export function ConversationalSearchField({
 
   return (
     <div className={cn("space-y-3 text-left", className)}>
-      {isHero ? (
+      {headingVisible ? (
         <p className="text-lg font-semibold leading-6 text-foreground">
           {CONVERSATIONAL_SEARCH_HEADING}
         </p>

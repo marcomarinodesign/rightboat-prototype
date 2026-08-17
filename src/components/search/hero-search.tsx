@@ -3,7 +3,6 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -11,6 +10,7 @@ import {
   useHomeSurface,
 } from "@/components/home/home-surface-context"
 import { Input } from "@/components/ui/input"
+import { PillGroup } from "@/components/ui/pill-group"
 import {
   Select,
   SelectContent,
@@ -18,17 +18,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { ConversationalSearchField, conversationalSearchHref } from "@/components/search/conversational-search-field"
+import {
+  ConversationalSearchField,
+  conversationalSearchHref,
+} from "@/components/search/conversational-search-field"
 import { buildClassicSearchQuery } from "@/lib/conversational-search/classic-query"
 import { easeOutExpo } from "@/lib/motion-variants"
-import { cn } from "@/lib/utils"
+
+const SEARCH_MODE_OPTIONS = [
+  { label: "AI Search", value: "ai" },
+  { label: "Make, model & location", value: "classic" },
+] as const
+
+type SearchMode = (typeof SEARCH_MODE_OPTIONS)[number]["value"]
 
 export function HeroSearch() {
   const surface = useHomeSurface()
   const router = useRouter()
   const searchHref = listingsHref("/boats-for-sale", surface)
   const isApp = surface === "app"
-  const [classicOpen, setClassicOpen] = React.useState(false)
+  const [mode, setMode] = React.useState<SearchMode>("ai")
   const [makeModel, setMakeModel] = React.useState("")
   const [boatType, setBoatType] = React.useState("")
   const [location, setLocation] = React.useState("")
@@ -49,36 +58,34 @@ export function HeroSearch() {
 
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-[25px] shadow-sm">
-      <ConversationalSearchField variant="hero" />
+      <PillGroup
+        options={[...SEARCH_MODE_OPTIONS]}
+        value={mode}
+        onChange={(value) => setMode(value as SearchMode)}
+        aria-label="Search mode"
+      />
 
-      <button
-        type="button"
-        className="flex items-center gap-1 text-left text-sm font-medium text-primary hover:underline"
-        aria-expanded={classicOpen}
-        onClick={() => setClassicOpen((open) => !open)}
-      >
-        Or search by make, model, type and location
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 transition-transform duration-[var(--transition-duration-normal)]",
-            classicOpen && "rotate-180"
-          )}
-          aria-hidden
-        />
-      </button>
-
-      <AnimatePresence initial={false}>
-        {classicOpen ? (
+      <AnimatePresence mode="wait" initial={false}>
+        {mode === "ai" ? (
+          <motion.div
+            key="ai"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: easeOutExpo }}
+          >
+            <ConversationalSearchField variant="hero" showHeading={false} />
+          </motion.div>
+        ) : (
           <motion.form
             key="classic"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: easeOutExpo }}
-            className="overflow-hidden"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: easeOutExpo }}
             onSubmit={submitClassic}
           >
-            <div className="grid gap-3 pb-1 md:grid-cols-4">
+            <div className="grid gap-3 md:grid-cols-4">
               <Input
                 placeholder="Search by make or model"
                 aria-label="Search by make or model"
@@ -133,10 +140,12 @@ export function HeroSearch() {
               </Select>
             </div>
             <div className="mt-3 flex justify-end">
-              <Button type="submit">Search boats</Button>
+              <Button type="submit" className="w-full sm:w-auto">
+                Search boats
+              </Button>
             </div>
           </motion.form>
-        ) : null}
+        )}
       </AnimatePresence>
 
       {isApp ? null : (

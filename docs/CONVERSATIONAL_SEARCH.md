@@ -32,7 +32,7 @@ Un campo prominente en homepage (“What kind of boat are you looking for?”) y
 - Estado parcial si una parte no se interpreta
 - Empty state con formas de ampliar la búsqueda
 
-Debajo, el camino actual: *Or search by make, model, type and location*.
+Debajo, un **PillGroup** del DS cambia de modalidad: *AI Search* o *Make, model & location*. No hay un segundo camino escondido en un desplegable.
 
 **Por qué:** cumple el brief, no crea un segundo listing, y se puede instrumentar (query, chips aceptados/rechazados, listing views).
 
