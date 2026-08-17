@@ -2,15 +2,18 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Loader2, Search, Sparkles } from "lucide-react"
+import { Sparkles } from "lucide-react"
 
 import {
   listingsHref,
   useHomeSurface,
 } from "@/components/home/home-surface-context"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  searchBarRowClass,
+  SearchSubmitButton,
+} from "@/components/search/search-submit-button"
 import {
   CONVERSATIONAL_SEARCH_HEADING,
   CONVERSATIONAL_SEARCH_PLACEHOLDER,
@@ -86,7 +89,7 @@ export function ConversationalSearchField({
         </p>
       ) : null}
       <form
-        className="flex flex-col gap-2 sm:flex-row sm:items-center"
+        className={searchBarRowClass}
         onSubmit={(event) => {
           event.preventDefault()
           submit(query)
@@ -106,29 +109,12 @@ export function ConversationalSearchField({
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}
             autoComplete="off"
-            className={cn(
-              "rounded-lg border-border bg-background pl-10 text-sm",
-              isHero ? "h-12 md:h-14 md:text-base" : "h-12"
-            )}
+            className="pl-10"
           />
         </div>
-        <Button
-          type="submit"
-          className={cn(
-            "gap-2 font-semibold",
-            isHero
-              ? "h-12 min-h-12 w-full sm:h-14 sm:min-h-14 sm:w-auto sm:px-6"
-              : "h-12 min-h-12 w-full sm:w-auto"
-          )}
-          disabled={submitting}
-        >
-          {submitting ? (
-            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-          ) : (
-            <Search className="h-4 w-4" aria-hidden />
-          )}
+        <SearchSubmitButton submitting={submitting}>
           {isHero ? "Search boats" : "AI Search"}
-        </Button>
+        </SearchSubmitButton>
       </form>
       {suggestionsVisible ? (
         <div className="flex flex-wrap items-center gap-2">

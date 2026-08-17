@@ -4,13 +4,12 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 
-import { Button } from "@/components/ui/button"
+import { PillGroup } from "@/components/ui/pill-group"
 import {
   listingsHref,
   useHomeSurface,
 } from "@/components/home/home-surface-context"
 import { Input } from "@/components/ui/input"
-import { PillGroup } from "@/components/ui/pill-group"
 import {
   Select,
   SelectContent,
@@ -22,6 +21,10 @@ import {
   ConversationalSearchField,
   conversationalSearchHref,
 } from "@/components/search/conversational-search-field"
+import {
+  searchBarRowClass,
+  SearchSubmitButton,
+} from "@/components/search/search-submit-button"
 import { buildClassicSearchQuery } from "@/lib/conversational-search/classic-query"
 import { easeOutExpo } from "@/lib/motion-variants"
 
@@ -85,64 +88,58 @@ export function HeroSearch() {
             transition={{ duration: 0.22, ease: easeOutExpo }}
             onSubmit={submitClassic}
           >
-            <div className="grid gap-3 md:grid-cols-4">
-              <Input
-                placeholder="Search by make or model"
-                aria-label="Search by make or model"
-                value={makeModel}
-                onChange={(event) => setMakeModel(event.target.value)}
-                className="h-11 rounded-lg border-border bg-background text-sm"
-              />
-              <Select value={boatType || undefined} onValueChange={setBoatType}>
-                <SelectTrigger
-                  aria-label="Boat type"
-                  className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+            <div className={searchBarRowClass}>
+              <div className="grid min-w-0 flex-1 gap-3 md:grid-cols-4">
+                <Input
+                  placeholder="Search by make or model"
+                  aria-label="Search by make or model"
+                  value={makeModel}
+                  onChange={(event) => setMakeModel(event.target.value)}
+                />
+                <Select
+                  value={boatType || undefined}
+                  onValueChange={setBoatType}
                 >
-                  <SelectValue placeholder="Boat type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="sail">Sailboats</SelectItem>
-                  <SelectItem value="power">Powerboats</SelectItem>
-                  <SelectItem value="yacht">Yachts</SelectItem>
-                  <SelectItem value="cat">Catamaran</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={location || undefined} onValueChange={setLocation}>
-                <SelectTrigger
-                  aria-label="Location"
-                  className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+                  <SelectTrigger aria-label="Boat type">
+                    <SelectValue placeholder="Boat type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sail">Sailboats</SelectItem>
+                    <SelectItem value="power">Powerboats</SelectItem>
+                    <SelectItem value="yacht">Yachts</SelectItem>
+                    <SelectItem value="cat">Catamaran</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select
+                  value={location || undefined}
+                  onValueChange={setLocation}
                 >
-                  <SelectValue placeholder="Location" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="fl">Florida</SelectItem>
-                  <SelectItem value="ca">California</SelectItem>
-                  <SelectItem value="tx">Texas</SelectItem>
-                  <SelectItem value="uk">United Kingdom</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select
-                value={priceRange || undefined}
-                onValueChange={setPriceRange}
-              >
-                <SelectTrigger
-                  aria-label="Price range"
-                  className="h-11 rounded-lg border-border bg-background px-[15px] text-sm data-[placeholder]:text-muted-foreground"
+                  <SelectTrigger aria-label="Location">
+                    <SelectValue placeholder="Location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fl">Florida</SelectItem>
+                    <SelectItem value="ca">California</SelectItem>
+                    <SelectItem value="tx">Texas</SelectItem>
+                    <SelectItem value="uk">United Kingdom</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select
+                  value={priceRange || undefined}
+                  onValueChange={setPriceRange}
                 >
-                  <SelectValue placeholder="Price range" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0-50">$0 - $50k</SelectItem>
-                  <SelectItem value="50-150">$50k - $150k</SelectItem>
-                  <SelectItem value="150-500">$150k - $500k</SelectItem>
-                  <SelectItem value="500+">$500k+</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="mt-3 flex justify-end">
-              <Button type="submit" className="w-full sm:w-auto">
-                Search boats
-              </Button>
+                  <SelectTrigger aria-label="Price range">
+                    <SelectValue placeholder="Price range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0-50">$0 - $50k</SelectItem>
+                    <SelectItem value="50-150">$50k - $150k</SelectItem>
+                    <SelectItem value="150-500">$150k - $500k</SelectItem>
+                    <SelectItem value="500+">$500k+</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <SearchSubmitButton />
             </div>
           </motion.form>
         )}
