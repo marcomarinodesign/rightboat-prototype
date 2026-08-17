@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 
 import { ArticleCard } from "@/components/blog/article-card"
@@ -39,76 +40,79 @@ function HomeViewInner() {
 
   return (
     <div className="space-y-16 md:space-y-20">
-      <section className="space-y-6 text-center">
-        <motion.div
-          className={cn(
-            "flex flex-col items-center justify-center gap-4",
-            surface === "app" ? "pt-0" : "pt-5"
-          )}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: easeOutExpo }}
-        >
-          {surface !== "app" ? (
-            <p className="text-xs font-semibold leading-4 tracking-[2px] uppercase text-foreground">
-              Boats for Sale Worldwide
-            </p>
-          ) : null}
-          {surface === "app" ? (
-            <div className="w-full text-left">
-              <MobileNativePageHeader
-                className="px-0"
-                title="Explore"
-                description="Search over 35,000 new and used boats for sale worldwide, including yachts, sailboats, motorboats, catamarans and fishing boats."
-              >
-                <HeroSearch />
-              </MobileNativePageHeader>
-            </div>
-          ) : (
-            <>
-              <h1 className="text-4xl font-bold leading-10 tracking-[-0.4px] text-foreground md:text-[3rem] md:leading-[3rem] md:tracking-[-0.48px]">
-                Buy &amp; Sell Boats on{" "}
-                <span className="text-primary">Right Boat</span>.
-              </h1>
-              <p className="text-base font-normal leading-6 text-foreground">
-                Search over 35,000 new and used boats for sale worldwide,
-                including yachts, sailboats, motorboats, catamarans and fishing
-                boats.
-              </p>
-            </>
-          )}
-        </motion.div>
-
-        {surface !== "app" ? (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.12 }}
-          >
-            <HeroSearch />
-          </motion.div>
-        ) : null}
-
-        <motion.div
-          className="relative aspect-video w-full overflow-hidden rounded-2xl bg-muted"
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.65, ease: easeOutExpo, delay: 0.2 }}
-        >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-            aria-label="Sailing in the middle of the ocean"
-          >
-            <source
-              src="https://videos.pexels.com/video-files/3083871/3083871-hd_1920_1080_25fps.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </motion.div>
+      <section
+        className={cn(
+          "flex flex-col items-center gap-4 text-center",
+          surface === "app" ? "pt-0" : "pt-5"
+        )}
+      >
+        {surface === "app" ? (
+          <div className="w-full text-left">
+            <MobileNativePageHeader
+              className="px-0"
+              title="Explore"
+              description="Search over 35,000 new and used boats for sale worldwide, including yachts, sailboats, motorboats, catamarans and fishing boats."
+            >
+              <HeroSearch />
+            </MobileNativePageHeader>
+          </div>
+        ) : (
+          <>
+            <motion.p
+              className="text-xs font-normal leading-4 text-midnight"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease: easeOutExpo }}
+            >
+              BOAT FOR SALE WORLDWIDE
+            </motion.p>
+            <motion.h1
+              className="text-4xl font-bold leading-10 tracking-[-0.4px] text-foreground md:text-[3rem] md:leading-[3rem] md:tracking-[-0.48px]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease: easeOutExpo, delay: 0.04 }}
+            >
+              Buy &amp; Sell Boats on{" "}
+              <span className="text-primary">Right Boat</span>.
+            </motion.h1>
+            <motion.p
+              className="text-base font-normal leading-6 text-foreground"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease: easeOutExpo, delay: 0.08 }}
+            >
+              Search over 35,000 new and used boats for sale worldwide,
+              including yachts, sailboats, motorboats, catamarans and fishing
+              boats.
+            </motion.p>
+            <motion.figure
+              className="relative h-[220px] w-full overflow-hidden rounded-2xl bg-muted md:h-[400px]"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.65, ease: easeOutExpo, delay: 0.12 }}
+            >
+              <Image
+                src="/home/hero-sponsor.png"
+                alt="Sunreef Yachts"
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                className="object-cover"
+              />
+              <figcaption className="sr-only">
+                Sponsored placement — Sunreef Yachts
+              </figcaption>
+            </motion.figure>
+            <motion.div
+              className="w-full"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.18 }}
+            >
+              <HeroSearch />
+            </motion.div>
+          </>
+        )}
       </section>
 
       <motion.section

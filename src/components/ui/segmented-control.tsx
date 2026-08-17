@@ -15,7 +15,7 @@ type SegmentedControlProps = {
   className?: string
 }
 
-/** Pill segmented control — same pattern as Location tabs, selected uses Blue/400. */
+/** Pill segmented control — active tab uses Malibu/200, matching the Figma Tab (Segmented). */
 export function SegmentedControl({
   options,
   value,
@@ -27,7 +27,10 @@ export function SegmentedControl({
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={cn("inline-flex gap-0.5 rounded-full bg-muted/80 p-1", className)}
+      className={cn(
+        "inline-flex items-center gap-4 overflow-hidden rounded-full bg-muted p-2",
+        className
+      )}
     >
       {options.map((option) => {
         const active = value === option.value
@@ -39,9 +42,9 @@ export function SegmentedControl({
             aria-selected={active}
             onClick={() => onChange(option.value)}
             className={cn(
-              "rounded-full px-3.5 py-1.5 text-center text-sm font-medium whitespace-nowrap transition-colors duration-[var(--transition-duration-fast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-5",
+              "rounded-full px-2 py-2 text-center text-[13px] font-normal leading-[1.45] whitespace-nowrap transition-colors duration-[var(--transition-duration-fast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
               active
-                ? "bg-blue-400 text-primary-foreground shadow-sm"
+                ? "bg-malibu-200 text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >

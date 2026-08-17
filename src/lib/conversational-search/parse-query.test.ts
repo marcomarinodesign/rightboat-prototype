@@ -77,15 +77,14 @@ describe("parseConversationalQuery", () => {
   it("builds a classic search query the parser can interpret", () => {
     const query = buildClassicSearchQuery({
       boatType: "sail",
-      location: "fl",
-      priceRange: "50-150",
+      condition: "used",
+      manufacturer: "Jeanneau",
     })
-    assert.equal(query, "sailboats in Florida from $50,000 under $150,000")
+    assert.equal(query, "used Jeanneau sailboats")
     const parsed = parseConversationalQuery(query)
     assert.equal(parsed.filters.boatType, "Sailboats")
-    assert.equal(parsed.filters.locationZip, "Florida")
-    assert.equal(parsed.filters.priceMin, "50000")
-    assert.equal(parsed.filters.priceMax, "150000")
+    assert.equal(parsed.filters.condition.used, true)
+    assert.equal(parsed.filters.manufacturer, "Jeanneau")
   })
 
   it("returns unmatched leftovers when nothing maps", () => {

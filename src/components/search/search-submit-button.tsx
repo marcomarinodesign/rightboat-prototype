@@ -12,7 +12,7 @@ type SearchSubmitButtonProps = {
 }
 
 export const searchBarRowClass =
-  "flex flex-col gap-3 md:flex-row md:items-center"
+  "flex flex-col gap-2 md:flex-row md:items-center md:gap-4"
 
 export function SearchSubmitButton({
   submitting = false,
@@ -24,6 +24,7 @@ export function SearchSubmitButton({
   return (
     <Button
       type="submit"
+      size="lg"
       className="w-full shrink-0 md:w-auto"
       disabled={submitting}
     >

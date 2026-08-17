@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 import {
   listingsHref,
@@ -20,6 +21,8 @@ import {
   SUGGESTED_SEARCH_PROMPT,
 } from "@/lib/conversational-search/examples"
 import { cn } from "@/lib/utils"
+
+const HERO_PROCESSING_DELAY_MS = 650
 
 type ConversationalSearchFieldProps = {
   variant?: "hero" | "srp"
@@ -62,12 +65,12 @@ export function ConversationalSearchField({
   }, [defaultQuery])
 
   React.useEffect(() => {
-    if (query.trim()) return
+    if (query.trim() || submitting) return
     const timer = window.setInterval(() => {
       setPlaceholderIndex((index) => (index + 1) % ROTATING_PLACEHOLDERS.length)
     }, 4000)
     return () => window.clearInterval(timer)
-  }, [query])
+  }, [query, submitting])
 
   const placeholder = query.trim()
     ? CONVERSATIONAL_SEARCH_PLACEHOLDER
@@ -77,11 +80,18 @@ export function ConversationalSearchField({
     const trimmed = value.trim()
     if (!trimmed || submitting) return
     setSubmitting(true)
-    router.push(conversationalSearchHref(trimmed, listingsPath))
+    const href = conversationalSearchHref(trimmed, listingsPath)
+    if (!isHero) {
+      router.push(href)
+      return
+    }
+    window.setTimeout(() => {
+      router.push(href)
+    }, HERO_PROCESSING_DELAY_MS)
   }
 
   return (
-    <div className={cn("space-y-3 text-left", className)}>
+    <div className={cn("space-y-4 text-left", className)}>
       {headingVisible ? (
         <p className="text-lg font-semibold leading-6 text-foreground">
           {CONVERSATIONAL_SEARCH_HEADING}
@@ -103,15 +113,26 @@ export function ConversationalSearchField({
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
           autoComplete="off"
-          className="min-w-0 flex-1"
+          disabled={submitting}
+          className="min-w-0 flex-1 truncate"
         />
         <SearchSubmitButton submitting={submitting} icon="ai">
-          {isHero ? "Search boats" : "AI Search"}
+          {submitting ? "Loading" : isHero ? "Search boats" : "AI Search"}
         </SearchSubmitButton>
       </form>
-      {suggestionsVisible ? (
-        <div className="space-y-2">
-          <p className="text-sm text-muted-foreground">
+      {submitting && isHero ? (
+        <div
+          className="flex w-full items-center justify-center gap-6 rounded-lg border border-border bg-tag-bg px-6 py-4 md:px-16"
+          aria-live="polite"
+        >
+          <Loader2 className="size-4 animate-spin text-foreground" aria-hidden />
+          <p className="text-sm font-bold leading-5 text-foreground">
+            Understanding your search…
+          </p>
+        </div>
+      ) : suggestionsVisible ? (
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-center text-xs leading-4 text-muted-foreground">
             {SUGGESTED_SEARCH_PROMPT}
           </p>
           <SuggestedSearchCarousel
