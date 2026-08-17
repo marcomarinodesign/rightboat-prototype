@@ -23,4 +23,6 @@ export type Boat = {
   loa?: string
   hullMaterial?: string
   fuelType?: string
+  /** Lifestyle / use-case tags used by conversational search. */
+  lifestyleTags?: string[]
 }

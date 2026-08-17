@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Bookmark, SlidersHorizontal } from "lucide-react"
 import { toast } from "sonner"
 
@@ -22,6 +23,16 @@ import {
 import type { FiltersState } from "@/components/filters/types"
 import { useFiltersState } from "@/components/filters/use-filters-state"
 import { useRegionFilterUrlSync } from "@/components/filters/use-region-filter-url-sync"
+import { ConversationalSearchField } from "@/components/search/conversational-search-field"
+import { InterpretedSearchBanner } from "@/components/search/interpreted-search-banner"
+import {
+  FILTER_SECTION_IDS,
+  clearConversationalChip,
+  clearFilterGroup,
+  parseConversationalQuery,
+  scrollToFilterSection,
+} from "@/lib/conversational-search"
+import type { InterpretedChip } from "@/lib/conversational-search/types"
 import type { Boat } from "@/data/boats"
 import { useIsMobile } from "@/lib/use-media-query"
 import { cn } from "@/lib/utils"
@@ -110,6 +121,8 @@ type BoatsForSaleListingProps = {
   /** Opt-in Location → Region filter (prototype: /boats-for-sale/regions). */
   enableRegions?: boolean
   locationVariant?: "region-test"
+  /** Natural-language query from `?q=` (homepage / SRP conversational search). */
+  conversationalQuery?: string
 }
 
 export function BoatsForSaleListing({
@@ -120,6 +133,7 @@ export function BoatsForSaleListing({
   initialFilters: initialFiltersProp,
   enableRegions = false,
   locationVariant,
+  conversationalQuery,
 }: BoatsForSaleListingProps) {
   const isMobileQuery = useIsMobile()
   const isMobile =
@@ -129,12 +143,48 @@ export function BoatsForSaleListing({
         ? false
         : isMobileQuery
 
+  const router = useRouter()
+  const parsedQuery = React.useMemo(
+    () =>
+      conversationalQuery?.trim()
+        ? parseConversationalQuery(conversationalQuery)
+        : null,
+    [conversationalQuery]
+  )
+
   const resolvedInitialFilters =
-    initialFiltersProp ?? figmaPreviewInitialFilters(figmaPreview)
+    parsedQuery?.filters ??
+    initialFiltersProp ??
+    figmaPreviewInitialFilters(figmaPreview)
 
   const { filters, setFilters, clearAll, activeFilters } = useFiltersState(
     resolvedInitialFilters
   )
+  const [processingQuery, setProcessingQuery] = React.useState(
+    Boolean(parsedQuery)
+  )
+  const [focusedSection, setFocusedSection] = React.useState<
+    InterpretedChip["filterGroup"] | null
+  >(null)
+  const [scrollToSectionId, setScrollToSectionId] = React.useState<string>()
+
+  React.useEffect(() => {
+    if (!conversationalQuery?.trim()) {
+      setProcessingQuery(false)
+      return
+    }
+    const parsed = parseConversationalQuery(conversationalQuery)
+    setFilters(parsed.filters)
+    setProcessingQuery(true)
+    const timer = window.setTimeout(() => setProcessingQuery(false), 550)
+    return () => window.clearTimeout(timer)
+  }, [conversationalQuery, setFilters])
+
+  React.useEffect(() => {
+    if (!focusedSection) return
+    const timer = window.setTimeout(() => setFocusedSection(null), 2400)
+    return () => window.clearTimeout(timer)
+  }, [focusedSection])
   useRegionFilterUrlSync({
     enabled: locationVariant === "region-test",
     filters,
@@ -147,6 +197,25 @@ export function BoatsForSaleListing({
 
   const splitDesktop = layoutVariant === "split" && !isMobile
   const showFiltersDrawer = isMobile || layoutVariant !== "split"
+
+  const handleEditChip = React.useCallback(
+    (chip: InterpretedChip) => {
+      const sectionId = FILTER_SECTION_IDS[chip.filterGroup]
+      setFocusedSection(chip.filterGroup)
+      if (chip.filterGroup === "intent") {
+        document.getElementById("conversational-search-srp")?.focus()
+        scrollToFilterSection("conversational-search-srp")
+        return
+      }
+      if (splitDesktop) {
+        scrollToFilterSection(sectionId)
+        return
+      }
+      setScrollToSectionId(sectionId)
+      setDrawerOpen(true)
+    },
+    [splitDesktop]
+  )
 
   const filteredBoats = React.useMemo(
     () => filterBoats(boats, filters),
@@ -197,11 +266,12 @@ export function BoatsForSaleListing({
 
   const cardsGrid = (
     <div
-      className={
+      className={cn(
         splitDesktop
           ? "grid min-w-0 gap-2 md:grid-cols-3"
-          : "grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
-      }
+          : "grid gap-2 sm:grid-cols-2 lg:grid-cols-4",
+        processingQuery && "pointer-events-none opacity-50"
+      )}
     >
       {sortedBoats.map((boat, index) => (
         <BoatCard
@@ -214,7 +284,7 @@ export function BoatsForSaleListing({
     </div>
   )
 
-  const emptyState = sortedBoats.length === 0 && (
+  const emptyState = sortedBoats.length === 0 && !parsedQuery && (
     <div className="rounded-2xl border border-border/60 bg-muted/20 px-6 py-12 text-center">
       <p className="text-lg font-semibold text-foreground">No boats found</p>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -239,9 +309,13 @@ export function BoatsForSaleListing({
 
   const splitResultsToolbar = (
     <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-      <p className="text-xs font-bold uppercase tracking-widest text-foreground">
-        {listingCountLabel}
-      </p>
+      {parsedQuery ? (
+        <span className="sr-only">{listingCountLabel}</span>
+      ) : (
+        <p className="text-xs font-bold uppercase tracking-widest text-foreground">
+          {listingCountLabel}
+        </p>
+      )}
       <ListingSortSelect
         value={sortValue}
         onValueChange={setSortValue}
@@ -286,10 +360,41 @@ export function BoatsForSaleListing({
         </div>
         <div>
           <h1 className="text-3xl font-bold text-foreground">Boats for sale</h1>
-          <BoatsForSaleListingIntro
-            className={splitDesktop ? "mt-1" : "mt-2"}
+          {parsedQuery ? null : (
+            <BoatsForSaleListingIntro
+              className={splitDesktop ? "mt-1" : "mt-2"}
+            />
+          )}
+        </div>
+        <div className="mt-5">
+          <ConversationalSearchField
+            variant="srp"
+            defaultQuery={conversationalQuery ?? ""}
+            showSuggestions={!parsedQuery}
           />
         </div>
+        {parsedQuery ? (
+          <div className="mt-4">
+            <InterpretedSearchBanner
+              result={parsedQuery}
+              filters={filters}
+              resultCount={resultCount}
+              processing={processingQuery}
+              onRemoveChip={(chip) =>
+                setFilters((prev) => clearConversationalChip(chip, prev))
+              }
+              onEditChip={handleEditChip}
+              onBroaden={(action) =>
+                setFilters((prev) => clearFilterGroup(action.filterGroup, prev))
+              }
+              onSuggestedSearch={(nextQuery) =>
+                router.push(
+                  `/boats-for-sale?q=${encodeURIComponent(nextQuery)}`
+                )
+              }
+            />
+          </div>
+        ) : null}
       </div>
 
       {!splitDesktop && (
@@ -319,6 +424,7 @@ export function BoatsForSaleListing({
                 scrollClassName="px-0"
                 enableRegions={enableRegions}
                 locationVariant={locationVariant}
+                focusedSection={focusedSection}
               />
             </div>
           </aside>
@@ -348,6 +454,8 @@ export function BoatsForSaleListing({
           scrollOnOpen={figmaPreviewScrollDrawer(figmaPreview)}
           enableRegions={enableRegions}
           locationVariant={locationVariant}
+          focusedSection={focusedSection}
+          scrollToSectionId={scrollToSectionId}
         />
       )}
     </div>

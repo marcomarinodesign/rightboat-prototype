@@ -13,6 +13,7 @@ interface PillGroupProps {
   onChange: (value: string) => void
   multiSelect?: boolean
   className?: string
+  "aria-label"?: string
 }
 
 export function PillGroup({
@@ -21,12 +22,17 @@ export function PillGroup({
   onChange,
   multiSelect = false,
   className,
+  "aria-label": ariaLabel,
 }: PillGroupProps) {
   const isSelected = (optValue: string) =>
     Array.isArray(value) ? value.includes(optValue) : value === optValue
 
   return (
-    <div className={cn("flex flex-wrap gap-2", className)}>
+    <div
+      role="group"
+      aria-label={ariaLabel}
+      className={cn("flex flex-wrap gap-2", className)}
+    >
       {options.map((opt) => (
         <button
           key={opt.value}

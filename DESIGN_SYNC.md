@@ -10,6 +10,7 @@ Formato sugerido:
 
 ## Entradas
 
+- 2026-08-17 — Prueba de AI Conversational Search (Smart Filter): campo NL en homepage + SRP, chips interpretados sobre el listing split. Brief: [`docs/CONVERSATIONAL_SEARCH.md`](docs/CONVERSATIONAL_SEARCH.md).
 - 2026-08-17 — SRP split view gana el experimento Q2 y queda como listing live (sidebar + grid 3 col). El grid 4 col + drawer se archiva en `/archive/srp-grid`. Figma: [Split view 279-1422](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422); archivo: [83-737](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737).
 - 2026-05-21 — Boat Card Alt CTA — SRP grid prioridad: **Manufacture** (mayoría, primeras posiciones) → Sponsored → Simple; ratio base 8/4/3 por 15 (`srp-grid-card-variant.ts`). Figma SRP alineado.
 - 2026-05-21 — SRP page header (Boats for sale + intro) — [SRP / Page Header](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=301-77) en el SRP live (split) y en el grid archivado; Code Connect `boats-for-sale-page-header.figma.tsx`.

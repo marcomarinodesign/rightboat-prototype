@@ -19,7 +19,10 @@ import {
   srpModelOptionsForManufacturer,
 } from "@/components/filters/srp-filter-data"
 import type { FiltersState } from "@/components/filters/types"
+import { FILTER_SECTION_IDS } from "@/lib/conversational-search/filter-sections"
+import type { InterpretedFilterGroup } from "@/lib/conversational-search/types"
 import type { Boat } from "@/data/boats"
+import { cn } from "@/lib/utils"
 
 export type FiltersFormBodyProps = {
   draft: FiltersState
@@ -32,17 +35,29 @@ export type FiltersFormBodyProps = {
   enableRegions?: boolean
   /** Experimental multi-region picker on the shared SRP. */
   locationVariant?: "region-test"
+  /** Highlight a section when an interpreted chip is being edited. */
+  focusedSection?: InterpretedFilterGroup | null
 }
 
 export function FilterSection({
   title,
   children,
+  id,
+  highlighted = false,
 }: {
   title: string
   children: React.ReactNode
+  id?: string
+  highlighted?: boolean
 }) {
   return (
-    <div className="py-3.5">
+    <div
+      id={id}
+      className={cn(
+        "rounded-lg py-3.5 transition-shadow duration-[var(--transition-duration-normal)]",
+        highlighted && "ring-2 ring-ring ring-offset-2"
+      )}
+    >
       <p className="mb-2 text-sm font-semibold text-foreground">{title}</p>
       {children}
     </div>
@@ -125,6 +140,7 @@ export function FiltersFormBody({
   scrollClassName = "min-h-0 flex-1 overflow-y-auto px-6",
   enableRegions = false,
   locationVariant,
+  focusedSection = null,
 }: FiltersFormBodyProps) {
   const boatsForHistogram = React.useMemo(
     () => filterBoats(boats, { ...draft, priceMin: "", priceMax: "" }),
@@ -195,7 +211,11 @@ export function FiltersFormBody({
         <SaveSearchButton />
       </div>
 
-      <FilterSection title="Location">
+      <FilterSection
+        title="Location"
+        id={FILTER_SECTION_IDS.location}
+        highlighted={focusedSection === "location"}
+      >
         <LocationFilter
           locationTab={draft.locationTab}
           locationRadius={draft.locationRadius}
@@ -247,7 +267,11 @@ export function FiltersFormBody({
 
       <FilterGroupDivider />
 
-      <FilterSection title="Price">
+      <FilterSection
+        title="Price"
+        id={FILTER_SECTION_IDS.price}
+        highlighted={focusedSection === "price"}
+      >
         <PriceHistogram
           boats={boatsForHistogram}
           priceMin={draft.priceMin}
@@ -257,7 +281,11 @@ export function FiltersFormBody({
         />
       </FilterSection>
 
-      <FilterSection title="Length">
+      <FilterSection
+        title="Length"
+        id={FILTER_SECTION_IDS.length}
+        highlighted={focusedSection === "length"}
+      >
         <RangeInputs
           minValue={draft.lengthMin}
           maxValue={draft.lengthMax}
@@ -281,7 +309,11 @@ export function FiltersFormBody({
 
       <FilterGroupDivider />
 
-      <FilterSection title="Condition">
+      <FilterSection
+        title="Condition"
+        id={FILTER_SECTION_IDS.condition}
+        highlighted={focusedSection === "condition"}
+      >
         <div className="flex items-center gap-4 text-sm">
           <label className="flex cursor-pointer items-center gap-2.5">
             <Checkbox
@@ -302,7 +334,13 @@ export function FiltersFormBody({
 
       <FilterGroupDivider />
 
-      <FilterSection title="Boat Type">
+      <FilterSection
+        title="Boat Type"
+        id={FILTER_SECTION_IDS.boatType}
+        highlighted={
+          focusedSection === "boatType" || focusedSection === "boatClass"
+        }
+      >
         <div className="space-y-3">
           <SearchableSelect
             value={draft.boatClass}
@@ -326,7 +364,11 @@ export function FiltersFormBody({
         </div>
       </FilterSection>
 
-      <FilterSection title="Manufacturer">
+      <FilterSection
+        title="Manufacturer"
+        id={FILTER_SECTION_IDS.manufacturer}
+        highlighted={focusedSection === "manufacturer"}
+      >
         <SearchableSelect
           value={draft.manufacturer}
           onValueChange={handleManufacturerChange}
@@ -357,7 +399,11 @@ export function FiltersFormBody({
         />
       </FilterSection>
 
-      <FilterSection title="Fuel Type">
+      <FilterSection
+        title="Fuel Type"
+        id={FILTER_SECTION_IDS.fuelType}
+        highlighted={focusedSection === "fuelType"}
+      >
         <SearchableSelect
           value={draft.fuelType}
           onValueChange={(v) => updateDraft("fuelType", v)}
