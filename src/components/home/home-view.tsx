@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 
@@ -95,19 +96,14 @@ function HomeViewInner() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.65, ease: easeOutExpo, delay: 0.2 }}
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-            aria-label="Sailing in the middle of the ocean"
-          >
-            <source
-              src="https://videos.pexels.com/video-files/3083871/3083871-hd_1920_1080_25fps.mp4"
-              type="video/mp4"
-            />
-          </video>
+          <Image
+            src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1920&q=80"
+            alt="White and blue yacht on the sea under a clear blue sky"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 1280px"
+            priority
+          />
         </motion.div>
       </section>
 
