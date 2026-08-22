@@ -337,16 +337,36 @@ export default function DesignSystemPage() {
           <Section
             id="colors"
             title="Colors"
-            description="Primitives match Figma library Colors: Blue, Malibu, Neutral, Midnight, Status (Success, Warning, Error, Info). Semantic tokens map UI roles to those primitives."
+            description="Primitives match Figma library Colors: Midnight/900–200, Blue/200–600, Malibu/200–600, Neutral/50–600, Status (Success, Warning, Error, Info). Semantic tokens map UI roles to those primitives."
           >
-            <Group label="Figma: Midnight">
-              <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
-                <Swatch label="Midnight" color="var(--midnight)" token="--midnight" />
+            <Group label="Figma: Midnight/900–200">
+              <div className="grid grid-cols-4 gap-4 sm:grid-cols-8">
+                {(
+                  [
+                    ["900", "--midnight-900"],
+                    ["800", "--midnight-800"],
+                    ["700", "--midnight-700"],
+                    ["600", "--midnight-600"],
+                    ["500", "--midnight-500"],
+                    ["400", "--midnight-400"],
+                    ["300", "--midnight-300"],
+                    ["200", "--midnight-200"],
+                  ] as const
+                ).map(([label, token]) => (
+                  <Swatch
+                    key={token}
+                    label={`Midnight ${label}`}
+                    color={`var(${token})`}
+                    token={token}
+                  />
+                ))}
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                Tailwind: <code className="font-mono">bg-midnight</code> · Legacy:{" "}
-                <code className="font-mono">--brand-midnight</code> aliases{" "}
-                <code className="font-mono">--midnight</code>
+                Tailwind: <code className="font-mono">bg-midnight-900</code>,{" "}
+                <code className="font-mono">text-midnight-200</code> · Alias:{" "}
+                <code className="font-mono">--midnight</code> →{" "}
+                <code className="font-mono">--midnight-900</code> (dark surfaces).
+                Steps 500/400/300 CSS-only pending screen validation.
               </p>
             </Group>
 
@@ -403,11 +423,12 @@ export default function DesignSystemPage() {
               </p>
             </Group>
 
-            <Group label="Figma: Neutral (100–600, White, Black)">
-              <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-8">
+            <Group label="Figma: Neutral (50–600, White, Black)">
+              <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-9">
                 {(
                   [
                     ["White", "--neutral-white"],
+                    ["50", "--neutral-50"],
                     ["100", "--neutral-100"],
                     ["200", "--neutral-200"],
                     ["300", "--neutral-300"],
@@ -419,12 +440,15 @@ export default function DesignSystemPage() {
                 ).map(([label, token]) => (
                   <Swatch
                     key={token}
-                    label={label.startsWith("Neutral") ? label : `Neutral ${label}`}
+                    label={label === "White" || label === "Black" ? `Neutral ${label}` : `Neutral ${label}`}
                     color={`var(${token})`}
                     token={token}
                   />
                 ))}
               </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Neutral/50 (#f2f2f2) absorbed from wireframe/5 in the Aug-22 Colors audit.
+              </p>
             </Group>
 
             <Group label="Figma: Status — Success, Warning, Error, Info (100 / 200 / 300)">
