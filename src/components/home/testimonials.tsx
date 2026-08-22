@@ -1,7 +1,6 @@
 import { Star } from "lucide-react"
 
 import { testimonials } from "@/data/testimonials"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 interface TestimonialsProps {
@@ -35,25 +34,26 @@ export function Testimonials({ align = "left" }: TestimonialsProps) {
           What Buyers Say About Rightboat
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-[10px] md:grid-cols-2">
         {testimonials.map((testimonial) => (
-          <Card
+          <div
             key={testimonial.id}
-            className="border-border/60 bg-muted/20"
+            className="flex flex-col gap-[26px] rounded-[12px] border border-[rgb(202,204,208)] bg-[rgb(244,249,255)] px-6 py-8"
           >
-            <CardHeader className="space-y-4">
+            {/* Stars + quote */}
+            <div className="flex flex-col gap-3">
               {testimonial.rating && (
-                <div className="flex gap-1">
+                <div className="flex gap-0.5">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
                       key={i}
-                      className="h-4 w-4 fill-primary text-primary"
+                      className="h-[14px] w-[14px] text-primary"
                       aria-hidden="true"
                     />
                   ))}
                 </div>
               )}
-              <blockquote className="text-lg leading-relaxed">
+              <blockquote className="text-base font-normal leading-6">
                 <span className="text-2xl leading-none text-muted-foreground">
                   &ldquo;
                 </span>
@@ -62,21 +62,20 @@ export function Testimonials({ align = "left" }: TestimonialsProps) {
                   &rdquo;
                 </span>
               </blockquote>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-1">
-                <div className="font-semibold">{testimonial.name}</div>
-                {testimonial.role && (
-                  <div className="text-sm text-muted-foreground">
-                    {testimonial.role}
-                  </div>
-                )}
-                <div className="text-sm text-muted-foreground">
-                  {testimonial.location}
+            </div>
+            {/* Author */}
+            <div className="flex flex-col gap-[5px]">
+              <div className="text-base font-bold leading-6">{testimonial.name}</div>
+              {testimonial.role && (
+                <div className="text-sm font-normal leading-5 text-muted-foreground">
+                  {testimonial.role}
                 </div>
+              )}
+              <div className="text-sm font-normal leading-5 text-muted-foreground">
+                {testimonial.location}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
     </section>

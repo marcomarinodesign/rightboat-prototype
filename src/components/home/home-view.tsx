@@ -134,7 +134,7 @@ function HomeViewInner() {
             Discover more
           </Link>
         </motion.div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {featuredBoats.map((boat) => (
             <motion.div key={boat.id} variants={staggerItem}>
               <BoatCard
@@ -192,7 +192,7 @@ function HomeViewInner() {
             See more articles
           </Link>
         </motion.div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {latestArticles.map((article) => (
             <motion.div key={article.id} variants={staggerItem}>
               <ArticleCard article={article} />

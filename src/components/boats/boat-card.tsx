@@ -64,6 +64,7 @@ export function BoatCard({
         dotsPlacement="overlay"
         imageRoundedClassName="rounded-[8px]"
         slideBackdropClassName="bg-midnight/12"
+        carouselFrameClassName={!srpGrid ? "h-[200px]" : undefined}
       />
       {isManufacture ? (
         <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
@@ -233,7 +234,7 @@ export function BoatCard({
     <Link
       href={detailHref}
       className={cn(
-        "flex w-full flex-col overflow-hidden rounded-xl border border-border-card bg-card p-3",
+        "flex w-full flex-col overflow-hidden rounded-2xl border border-border-card bg-card p-3",
         "transition-all hover:shadow-lg",
         className
       )}

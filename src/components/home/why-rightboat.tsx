@@ -36,17 +36,17 @@ export function WhyRightboat() {
           brands and find boats near you or internationally.
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {benefits.map((benefit, i) => {
           const Icon = iconMap[benefit.icon] || Globe
           const colorClass = cardColors[i % cardColors.length]
           return (
             <div
               key={benefit.id}
-              className={`${colorClass} flex flex-col gap-4 rounded-2xl p-6`}
+              className={`${colorClass} flex flex-col gap-4 rounded-[12px] px-6 py-[42px]`}
             >
               <Icon className="h-6 w-6 text-white" aria-hidden="true" />
-              <p className="text-lg font-bold leading-7 text-white">
+              <p className="text-2xl font-bold leading-8 text-white">
                 {benefit.title}
               </p>
             </div>

@@ -34,7 +34,7 @@ export function PremiumBrands() {
       </div>
 
       <div className="space-y-4">
-        <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+        <div className="grid grid-cols-3 gap-5 sm:grid-cols-5">
           {visible.map((brand) => (
             <BrandLogoCard key={brand.id} brand={brand} surface={surface} />
           ))}
@@ -89,7 +89,7 @@ function BrandLogoCard({
   return (
     <Link
       href={listingsHref(`/boats-for-sale?brand=${brand.slug}`, surface)}
-      className="group flex h-20 items-center justify-center rounded-xl border border-border/60 bg-card px-4 transition-shadow hover:shadow-sm"
+      className="group flex h-[140px] items-center justify-center rounded-[15px] border border-[rgb(228,229,233)] bg-white px-4 transition-shadow hover:shadow-sm"
     >
       {imageError ? (
         <span className="text-sm font-semibold text-muted-foreground transition-colors group-hover:text-foreground">

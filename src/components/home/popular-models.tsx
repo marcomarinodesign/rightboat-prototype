@@ -24,16 +24,16 @@ export function PopularModels() {
           listings.
         </p>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {popularModels.slice(0, 4).map((model) => {
           const webHref = `/boats-for-sale/${model.brandSlug}/${model.slug}`
           const href = listingsHref(webHref, surface)
           return (
             <div
               key={model.id}
-              className="overflow-hidden rounded-2xl border border-border/60 bg-card"
+              className="overflow-hidden rounded-2xl border border-[rgb(242,242,242)] bg-white"
             >
-              <div className="relative h-[200px] w-full overflow-hidden">
+              <div className="relative mx-3 mt-3 h-[180px] overflow-hidden rounded-[8px]">
                 <Image
                   src={model.images[0]}
                   alt={`${model.brand} ${model.name}`}
@@ -42,11 +42,15 @@ export function PopularModels() {
                   className="object-cover"
                 />
               </div>
-              <div className="flex flex-col gap-3 p-4">
-                <p className="text-sm font-semibold text-foreground">
+              <div className="flex flex-col items-center gap-2 px-3 pb-3 pt-2">
+                <p className="text-base font-bold leading-6 text-foreground">
                   {model.brand} {model.name}
                 </p>
-                <Button asChild variant="outline" size="sm" className="w-full">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-11 w-[168px] rounded-[8px] border-primary text-[14px] font-medium text-primary hover:bg-primary/5"
+                >
                   <Link href={href}>Discover model</Link>
                 </Button>
               </div>
