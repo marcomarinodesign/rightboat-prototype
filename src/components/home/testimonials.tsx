@@ -32,7 +32,7 @@ export function Testimonials({ align = "left" }: TestimonialsProps) {
             align === "center" && "text-[17.3px] leading-7"
           )}
         >
-          See what our customers say about their Rightboat experience
+          What Buyers Say About Rightboat
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">

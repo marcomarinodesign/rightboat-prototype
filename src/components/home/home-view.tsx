@@ -179,7 +179,7 @@ function HomeViewInner() {
           variants={staggerItem}
         >
           <h2 id="articles-heading" className="heading-sm">
-            Latest articles and boat reviews
+            Latest Boating Articles &amp; Buying Advice
           </h2>
           <Link
             href={

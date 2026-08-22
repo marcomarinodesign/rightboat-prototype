@@ -3,20 +3,24 @@ import {
   ShieldCheck,
   GitCompare,
   Award,
-  BookOpen,
   type LucideIcon,
 } from "lucide-react"
 
 import { benefits } from "@/data/benefits"
-import { IconContainer } from "@/components/ui/icon-container"
 
 const iconMap: Record<string, LucideIcon> = {
   Globe,
   ShieldCheck,
   Compare: GitCompare,
   Award,
-  BookOpen,
 }
+
+const cardColors = [
+  "bg-malibu-300",
+  "bg-malibu-500",
+  "bg-blue-300",
+  "bg-primary",
+]
 
 export function WhyRightboat() {
   return (
@@ -26,26 +30,25 @@ export function WhyRightboat() {
           Why Use Rightboat?
         </h2>
         <p className="mt-2 text-muted-foreground">
-          Everything you need to find and compare boats from trusted sources
+          Rightboat is one of the world&apos;s leading online boat marketplaces,
+          helping buyers and sellers connect since 2005. With over 35,000 boats
+          for sale worldwide, we make it easy to compare listings, research
+          brands and find boats near you or internationally.
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {benefits.map((benefit) => {
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {benefits.map((benefit, i) => {
           const Icon = iconMap[benefit.icon] || Globe
+          const colorClass = cardColors[i % cardColors.length]
           return (
             <div
               key={benefit.id}
-              className="space-y-3 rounded-lg border border-border/60 bg-card p-6"
+              className={`${colorClass} flex flex-col gap-4 rounded-2xl p-6`}
             >
-              <IconContainer className="size-12 mb-0">
-                <Icon aria-hidden="true" />
-              </IconContainer>
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold">{benefit.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {benefit.description}
-                </p>
-              </div>
+              <Icon className="h-6 w-6 text-white" aria-hidden="true" />
+              <p className="text-lg font-bold leading-7 text-white">
+                {benefit.title}
+              </p>
             </div>
           )
         })}
