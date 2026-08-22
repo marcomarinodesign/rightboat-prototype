@@ -9,7 +9,16 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   /* Figma Colors — primitives (Tailwind: bg-midnight, bg-blue-400, text-malibu-500, …) */
+  --color-neutral-50: var(--neutral-50);
   --color-midnight: var(--midnight);
+  --color-midnight-900: var(--midnight-900);
+  --color-midnight-800: var(--midnight-800);
+  --color-midnight-700: var(--midnight-700);
+  --color-midnight-600: var(--midnight-600);
+  --color-midnight-500: var(--midnight-500);
+  --color-midnight-400: var(--midnight-400);
+  --color-midnight-300: var(--midnight-300);
+  --color-midnight-200: var(--midnight-200);
   --color-blue-200: var(--blue-200);
   --color-blue-300: var(--blue-300);
   --color-blue-400: var(--blue-400);
@@ -110,39 +119,49 @@
   --heading-sm: 1.5rem;
 
   /* ── Figma: Colors — primitives (paths mirror variable names: Blue/200 → --blue-200) ── */
-  --midnight: #13022c;
+  /* Midnight ramp — dark surface scale (900 darkest → 200 lightest) */
+  --midnight-900: #13022c;
+  --midnight-800: #1b0a38;
+  --midnight-700: #1f123f;
+  --midnight-600: #2b1a52;
+  --midnight-500: #432876;
+  --midnight-400: #6048a8;
+  --midnight-300: #8e78d0;
+  --midnight-200: #b9c4ff;
+  --midnight: var(--midnight-900); /* backward-compatible alias */
   --blue-200: #208cff;
   --blue-300: #086bff;
   --blue-400: #0257fc;
   --blue-500: #0944c4;
   --blue-600: #0e3d9a;
   /* Malibu: secondary accent scale (verify hex in Figma Dev Mode if needed) */
-  --malibu-200: #e0f7ff;
-  --malibu-300: #b2ebf9;
-  --malibu-400: #4fc3f7;
-  --malibu-500: #29b6f6;
-  --malibu-600: #039be5;
+  --malibu-200: #b8e7ff;
+  --malibu-300: #60cdff;
+  --malibu-400: #33c1fd;
+  --malibu-500: #09a9ee;
+  --malibu-600: #0087cc;
+  --neutral-50: #f2f2f2;
   --neutral-white: #ffffff;
   --neutral-black: #000000;
   --neutral-100: #fafafa;
   --neutral-200: #e4e5e9;
   --neutral-300: #caccd0;
-  --neutral-400: #9da6c2;
-  --neutral-500: #7181b4;
-  --neutral-600: #3d4556;
+  --neutral-400: #9699a0;
+  --neutral-500: #51545c;
+  --neutral-600: #37393f;
   /* Figma: Status/Success|Warning|Error|Info — 100 surface, 200 main, 300 emphasis */
-  --status-success-100: #dcfce7;
-  --status-success-200: #22c55e;
-  --status-success-300: #15803d;
-  --status-warning-100: #fef3c7;
-  --status-warning-200: #f59e0b;
-  --status-warning-300: #b45309;
-  --status-error-100: #fee2e2;
+  --status-success-100: #e2ffee;
+  --status-success-200: #008a05;
+  --status-success-300: #005a25;
+  --status-warning-100: #fff3dd;
+  --status-warning-200: #c25400;
+  --status-warning-300: #823300;
+  --status-error-100: #ffece4;
   --status-error-200: #e55a5a;
-  --status-error-300: #b91c1c;
+  --status-error-300: #a1000b;
   --status-info-100: #f4f9ff;
-  --status-info-200: #3b82f6;
-  --status-info-300: #1d4ed8;
+  --status-info-200: #0073e6;
+  --status-info-300: #114394;
 
   /* Legacy aliases — prefer --blue-* and --midnight */
   --brand-midnight: var(--midnight);
@@ -215,37 +234,37 @@
 .dark {
   --background: var(--midnight);
   --foreground: var(--neutral-white);
-  --card: #1b0a38;
+  --card: var(--midnight-800);
   --card-foreground: var(--neutral-white);
-  --popover: #1b0a38;
+  --popover: var(--midnight-800);
   --popover-foreground: var(--neutral-white);
   --primary: var(--blue-400);
   --primary-foreground: var(--neutral-white);
   --secondary: var(--blue-500);
   --secondary-foreground: var(--neutral-white);
-  --muted: #1f123f;
-  --muted-foreground: #b9c4ff;
+  --muted: var(--midnight-700);
+  --muted-foreground: var(--midnight-200);
   --accent: var(--malibu-400);
   --accent-foreground: var(--midnight);
-  --destructive: #e8645a;
+  --destructive: var(--status-error-200);
   --destructive-foreground: var(--neutral-white);
-  --border: #2b1a52;
-  --input: #2b1a52;
+  --border: var(--midnight-600);
+  --input: var(--midnight-600);
   --ring: var(--blue-400);
-  --tag-bg: #1f123f;
-  --border-card: #2b1a52;
+  --tag-bg: var(--midnight-700);
+  --border-card: var(--midnight-600);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: #1b0a38;
+  --sidebar: var(--midnight-800);
   --sidebar-foreground: #ffffff;
   --sidebar-primary: var(--blue-400);
   --sidebar-primary-foreground: var(--neutral-white);
   --sidebar-accent: var(--blue-500);
   --sidebar-accent-foreground: var(--neutral-white);
-  --sidebar-border: #2b1a52;
+  --sidebar-border: var(--midnight-600);
   --sidebar-ring: var(--blue-400);
 }
 
