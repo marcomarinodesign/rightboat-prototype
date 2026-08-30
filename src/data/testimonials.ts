@@ -9,15 +9,6 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    id: "testimonial-1",
-    quote:
-      "Rightboat made finding our dream yacht effortless. The platform is intuitive, and we found exactly what we were looking for within days.",
-    name: "Sarah Mitchell",
-    role: "Boat Owner",
-    location: "Miami, FL",
-    rating: 5,
-  },
-  {
     id: "testimonial-2",
     quote:
       "As a first-time buyer, I appreciated the detailed listings and easy comparison tools. The verification process gave me confidence in my purchase.",
@@ -42,6 +33,15 @@ export const testimonials: Testimonial[] = [
     name: "Michael Chen",
     role: "Boat Seller",
     location: "Seattle, WA",
+    rating: 5,
+  },
+  {
+    id: "testimonial-1",
+    quote:
+      "Rightboat made finding our dream yacht effortless. The platform is intuitive, and we found exactly what we were looking for within days.",
+    name: "Sarah Mitchell",
+    role: "Boat Owner",
+    location: "Miami, FL",
     rating: 5,
   },
 ]

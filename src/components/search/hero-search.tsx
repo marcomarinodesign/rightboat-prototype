@@ -67,7 +67,7 @@ export function HeroSearch() {
       {isApp ? null : (
         <div
           className={cn(
-            "flex w-full flex-col text-left text-sm leading-5 text-muted-foreground"
+            "hidden w-full flex-col text-left text-sm leading-5 text-muted-foreground lg:flex"
           )}
         >
           <p>

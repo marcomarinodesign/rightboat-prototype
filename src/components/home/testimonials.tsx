@@ -34,8 +34,8 @@ export function Testimonials({ align = "left" }: TestimonialsProps) {
           What Buyers Say About Rightboat
         </p>
       </div>
-      <div className="grid gap-[10px] md:grid-cols-2">
-        {testimonials.map((testimonial) => (
+      <div className="grid gap-5 md:grid-cols-2">
+        {testimonials.slice(0, 4).map((testimonial) => (
           <div
             key={testimonial.id}
             className="flex flex-col gap-[26px] rounded-[12px] border border-[rgb(202,204,208)] bg-[rgb(244,249,255)] px-6 py-8"
@@ -43,11 +43,11 @@ export function Testimonials({ align = "left" }: TestimonialsProps) {
             {/* Stars + quote */}
             <div className="flex flex-col gap-3">
               {testimonial.rating && (
-                <div className="flex gap-0.5">
+                <div className="flex gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
                       key={i}
-                      className="h-[14px] w-[14px] text-primary"
+                      className="size-5 fill-primary text-primary"
                       aria-hidden="true"
                     />
                   ))}

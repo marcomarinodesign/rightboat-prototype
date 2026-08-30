@@ -170,7 +170,7 @@ export function ClassicSearcher() {
 /** SEO copy that lives inside the searcher panel (Figma Searcher 599:9883). Do not drop — it is what the page ranks on. */
 export function ClassicSearcherSeoCopy() {
   return (
-    <p className="mt-2 w-full text-sm leading-5 text-muted-foreground">
+    <p className="mt-2 w-full text-left text-sm leading-5 text-muted-foreground">
       Rightboat is a global boat marketplace connecting buyers with trusted
       brokers and private sellers across the US, UK and international markets.
       Find boats for sale by type, manufacturer, condition, price or location

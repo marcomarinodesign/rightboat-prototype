@@ -87,7 +87,7 @@ function HomeViewInner() {
               boats.
             </motion.p>
             <motion.figure
-              className="relative h-[220px] w-full overflow-hidden rounded-2xl bg-muted md:h-[400px]"
+              className="relative h-[109px] w-full overflow-hidden rounded-2xl bg-muted md:h-[260px] lg:h-[400px]"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.65, ease: easeOutExpo, delay: 0.12 }}
