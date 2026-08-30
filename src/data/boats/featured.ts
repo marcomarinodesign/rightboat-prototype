@@ -1,21 +1,20 @@
 import type { Boat } from "./types"
 
 const IMG = {
-  motorYacht:
-    "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp",
-  sportsCruiser:
-    "https://www.rightboat.com/boat_images/image_22499848/thumb_736c623ab056424a8ee8ab9f08b213278be2f1bff5584325a8494422a6bcffb0.webp",
-  sail: "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp",
-  flybridge:
-    "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp",
-  centerConsole:
-    "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp",
-  cruiser:
-    "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp",
-  catamaran:
-    "https://www.rightboat.com/boat_images/image_25862466/fbf1a2c2e9134e67b7b26a684a31824c18eaba91bb0f43feb2dc09f1ec23ac8f.webp",
-  dualConsole:
-    "https://www.rightboat.com/boat_images/image_26952275/9cf7a9d25233460d95f14f6e1cf506b3b99fe89a7b304c4898be4e64cd876e10.webp",
+  card1Hero: "/figma/boats/card1-hero.png",
+  card1Thumb1: "/figma/boats/card1-thumb1.png",
+  card1Thumb2: "/figma/boats/card1-thumb2.png",
+  card2Hero: "/figma/boats/card2-hero.png",
+  card2Thumb1: "/figma/boats/card2-thumb1.png",
+  card2Thumb2: "/figma/boats/card2-thumb2.png",
+  card3Hero: "/figma/boats/card3-hero.png",
+  card3Thumb1: "/figma/boats/card3-thumb1.png",
+  card3Thumb2: "/figma/boats/card3-thumb2.png",
+  card4: "/figma/boats/card4.png",
+  card5: "/figma/boats/card5.png",
+  card6: "/figma/boats/card6.png",
+  card7: "/figma/boats/card7.png",
+  card8: "/figma/boats/card8.png",
 }
 
 /**
@@ -38,8 +37,8 @@ export const featuredBoats: Boat[] = [
     price: "€1,890,000",
     location: "Palma de Mallorca, Spain",
     broker: "Sunseeker Monaco",
-    image: IMG.motorYacht,
-    galleryImages: [IMG.motorYacht, IMG.cruiser, IMG.flybridge],
+    image: IMG.card1Hero,
+    galleryImages: [IMG.card1Hero, IMG.card1Thumb1, IMG.card1Thumb2],
     featured: true,
     cardMedia: "triptych",
   },
@@ -57,8 +56,8 @@ export const featuredBoats: Boat[] = [
     price: "$4,850,000",
     location: "Monaco",
     broker: "Azimut Yachts",
-    image: IMG.flybridge,
-    galleryImages: [IMG.flybridge, IMG.motorYacht, IMG.cruiser],
+    image: IMG.card2Hero,
+    galleryImages: [IMG.card2Hero, IMG.card2Thumb1, IMG.card2Thumb2],
     manufacturerListing: true,
   },
   {
@@ -75,8 +74,8 @@ export const featuredBoats: Boat[] = [
     price: "€1,650,000",
     location: "Genoa, Italy",
     broker: "Fairline Yachts",
-    image: IMG.cruiser,
-    galleryImages: [IMG.cruiser, IMG.flybridge, IMG.motorYacht],
+    image: IMG.card3Hero,
+    galleryImages: [IMG.card3Hero, IMG.card3Thumb1, IMG.card3Thumb2],
     manufacturerListing: true,
   },
   {
@@ -93,7 +92,7 @@ export const featuredBoats: Boat[] = [
     price: "$389,000",
     location: "Annapolis, MD",
     broker: "Annapolis Yacht Sales",
-    image: IMG.sail,
+    image: IMG.card4,
   },
   {
     id: "rb559103",
@@ -109,8 +108,8 @@ export const featuredBoats: Boat[] = [
     price: "$1,250,000",
     location: "Fort Lauderdale, FL",
     broker: "United Yacht Sales",
-    image: IMG.sportsCruiser,
-    galleryImages: [IMG.sportsCruiser, IMG.motorYacht, IMG.cruiser, IMG.flybridge],
+    image: IMG.card5,
+    galleryImages: [IMG.card5, IMG.card1Hero, IMG.card3Hero, IMG.card2Hero],
     featured: true,
   },
   {
@@ -127,7 +126,7 @@ export const featuredBoats: Boat[] = [
     price: "$425,000",
     location: "Key West, FL",
     broker: "Denison Yacht Sales",
-    image: IMG.centerConsole,
+    image: IMG.card6,
   },
   {
     id: "rb559105",
@@ -143,7 +142,7 @@ export const featuredBoats: Boat[] = [
     price: "$315,000",
     location: "San Diego, CA",
     broker: "The Catamaran Company",
-    image: IMG.catamaran,
+    image: IMG.card7,
   },
   {
     id: "rb559106",
@@ -159,6 +158,6 @@ export const featuredBoats: Boat[] = [
     price: "$595,000",
     location: "Charleston, SC",
     broker: "Yacht Sales International",
-    image: IMG.dualConsole,
+    image: IMG.card8,
   },
 ]
