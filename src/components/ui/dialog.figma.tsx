@@ -9,7 +9,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "./dialog"
@@ -20,7 +19,7 @@ figma.connect(
   "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=43-2",
   {
     imports: [
-      'import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"',
+      'import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"',
     ],
     example: () => (
       <Dialog>
@@ -28,10 +27,8 @@ figma.connect(
           <Button variant="outline">Open</Button>
         </DialogTrigger>
         <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Dialog title</DialogTitle>
-            <DialogDescription>Supporting copy.</DialogDescription>
-          </DialogHeader>
+          <DialogTitle>Dialog title</DialogTitle>
+          <DialogDescription>Supporting copy.</DialogDescription>
         </DialogContent>
       </Dialog>
     ),
