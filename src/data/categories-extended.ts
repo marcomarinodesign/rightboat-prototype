@@ -13,8 +13,7 @@ export const boatCategories: Category[] = [
     id: "motorboats",
     name: "Motorboats",
     slug: "motorboats",
-    image:
-      "https://www.rightboat.com/boat_images/image_22741276/thumb_592ccc096be94ae688f2f798eb95baefec6e9108b5f34c6181cba1e676823e6e.webp",
+    image: "/figma/categories/motorboats.png",
     description: "Powerful and versatile boats for cruising and watersports",
     listingCount: 324,
   },
@@ -22,11 +21,27 @@ export const boatCategories: Category[] = [
     id: "sailboats",
     name: "Sailboats",
     slug: "sailboats",
-    image:
-      "https://www.rightboat.com/boat_images/image_22714358/thumb_a9c8f4fc612c494eadc9f29abc36093613be58406b80496088c4976067dbe181.webp",
-    description: "Classic sailing vessels for the traditional boating enthusiast",
-    listingCount: 186,
+    image: "/figma/categories/sailboats.png",
+    description: "Classic wind-powered vessels for leisurely cruises and racing",
+    listingCount: 187,
   },
+  {
+    id: "yachts",
+    name: "Yachts",
+    slug: "yachts",
+    image: "/figma/categories/yachts.png",
+    description: "Luxury crafts designed for comfort and long-distance voyages",
+    listingCount: 95,
+  },
+  {
+    id: "fishing-boats",
+    name: "Fishing Boats",
+    slug: "fishing-boats",
+    image: "/figma/categories/fishing-boats.png",
+    description: "Purpose-built boats equipped for freshwater and deep-sea fishing",
+    listingCount: 142,
+  },
+
   {
     id: "ribs",
     name: "RIBs",
@@ -37,15 +52,6 @@ export const boatCategories: Category[] = [
     listingCount: 92,
   },
   {
-    id: "yachts",
-    name: "Yachts",
-    slug: "yachts",
-    image:
-      "https://www.rightboat.com/boat_images/image_22772985/thumb_8a238693cc4a44599841019d3902ec653d78cab154af4d989db48ba448495701.webp",
-    description: "Luxury vessels for the ultimate boating experience",
-    listingCount: 141,
-  },
-  {
     id: "catamarans",
     name: "Catamarans",
     slug: "catamarans",
@@ -53,14 +59,5 @@ export const boatCategories: Category[] = [
       "https://www.rightboat.com/boat_images/image_24403046/3267a932434742d9b76334f6c3d2422aa541b5c487484d9d854c181311f4482d.webp",
     description: "Stable multi-hull boats ideal for comfort and space",
     listingCount: 78,
-  },
-  {
-    id: "fishing-boats",
-    name: "Fishing Boats",
-    slug: "fishing-boats",
-    image:
-      "https://www.rightboat.com/boat_images/image_24894677/1b9ee4fce58c439aa2dfc4de16dc838a783ecad71a0b4c0fb6a30576d4ffd949.webp",
-    description: "Specialized vessels designed for angling and fishing",
-    listingCount: 203,
   },
 ]

@@ -9,6 +9,7 @@ import {
 } from "@/components/home/home-surface-context"
 import { Button } from "@/components/ui/button"
 import { popularModels } from "@/data/models"
+import { CarouselRail } from "@/components/patterns/carousel-rail"
 
 export function PopularModels() {
   const surface = useHomeSurface()
@@ -24,7 +25,10 @@ export function PopularModels() {
           listings.
         </p>
       </div>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <CarouselRail
+        label="Popular boat models"
+        itemClassName="basis-[308px] md:basis-[calc((100%-40px)/3)] lg:basis-[calc((100%-60px)/4)]"
+      >
         {popularModels.slice(0, 4).map((model) => {
           const webHref = `/boats-for-sale/${model.brandSlug}/${model.slug}`
           const href = listingsHref(webHref, surface)
@@ -57,7 +61,7 @@ export function PopularModels() {
             </div>
           )
         })}
-      </div>
+      </CarouselRail>
     </section>
   )
 }

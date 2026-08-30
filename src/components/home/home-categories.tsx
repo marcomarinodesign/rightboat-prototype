@@ -9,6 +9,7 @@ import {
 } from "@/components/home/home-surface-context"
 import { boatCategories } from "@/data/categories-extended"
 import { Button } from "@/components/ui/button"
+import { CarouselRail } from "@/components/patterns/carousel-rail"
 
 export function HomeCategories() {
   const surface = useHomeSurface()
@@ -27,7 +28,10 @@ export function HomeCategories() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+      <CarouselRail
+        label="Boat categories"
+        itemClassName="basis-[308px] md:basis-[calc((100%-40px)/3)] lg:basis-[calc((100%-60px)/4)]"
+      >
         {boatCategories.map((category) => (
           <Link
             key={category.id}
@@ -35,7 +39,7 @@ export function HomeCategories() {
               `/boats-for-sale?type=${category.slug}`,
               surface
             )}
-            className="group relative block h-[380px] overflow-hidden rounded-[16px]"
+            className="group relative block h-[380px] w-full overflow-hidden rounded-[16px]"
           >
             <Image
               src={category.image}
@@ -53,8 +57,8 @@ export function HomeCategories() {
               }}
               aria-hidden
             />
-            <div className="pointer-events-none absolute inset-0 flex flex-col justify-end gap-2 p-4">
-              <span className="inline-flex w-fit items-center rounded-full bg-[rgb(184,231,255)] px-3 py-1.5 text-xs font-normal text-foreground">
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-end gap-2 p-4 text-center">
+              <span className="inline-flex w-fit items-center rounded-full bg-malibu-200 px-3 py-1.5 text-xs font-normal leading-4 text-midnight">
                 {category.listingCount.toLocaleString()} boats
               </span>
               <h3 className="text-2xl font-bold leading-8 tracking-[-0.24px] text-white">
@@ -65,7 +69,7 @@ export function HomeCategories() {
               </p>
               <Button
                 size="sm"
-                className="mt-1 w-[146px] rounded-[8px] px-4 py-2 text-[13px] font-medium pointer-events-none"
+                className="pointer-events-none mt-1 h-10 rounded-[8px] px-4 py-2 text-[13px] font-medium"
                 tabIndex={-1}
                 aria-hidden
               >
@@ -74,7 +78,7 @@ export function HomeCategories() {
             </div>
           </Link>
         ))}
-      </div>
+      </CarouselRail>
     </section>
   )
 }

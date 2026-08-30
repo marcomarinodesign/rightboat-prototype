@@ -20,6 +20,7 @@ import { PremiumBrands } from "@/components/home/premium-brands"
 import { WhyRightboat } from "@/components/home/why-rightboat"
 import { Testimonials } from "@/components/home/testimonials"
 import { FadeIn } from "@/components/motion/fade-in"
+import { CarouselRail } from "@/components/patterns/carousel-rail"
 import { featuredBoats } from "@/data/boats"
 import { latestArticles } from "@/data/articles"
 import {
@@ -194,13 +195,14 @@ function HomeViewInner() {
             See more articles
           </Link>
         </motion.div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <CarouselRail
+          label="Latest articles"
+          itemClassName="basis-[308px] md:basis-[calc((100%-40px)/3)] lg:basis-[calc((100%-60px)/4)]"
+        >
           {latestArticles.map((article) => (
-            <motion.div key={article.id} variants={staggerItem}>
-              <ArticleCard article={article} />
-            </motion.div>
+            <ArticleCard key={article.id} article={article} />
           ))}
-        </div>
+        </CarouselRail>
       </motion.section>
     </div>
   )

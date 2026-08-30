@@ -9,6 +9,7 @@ import {
   useHomeSurface,
 } from "@/components/home/home-surface-context"
 import { premiumBrands } from "@/data/brands"
+import { CarouselRail } from "@/components/patterns/carousel-rail"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const PAGE_SIZE = 5
@@ -34,11 +35,14 @@ export function PremiumBrands() {
       </div>
 
       <div className="space-y-4">
-        <div className="grid grid-cols-3 gap-5 sm:grid-cols-5">
+        <CarouselRail
+          label="Premium brands"
+          itemClassName="basis-[calc((100%-40px)/3)] sm:basis-[calc((100%-80px)/5)]"
+        >
           {visible.map((brand) => (
             <BrandLogoCard key={brand.id} brand={brand} surface={surface} />
           ))}
-        </div>
+        </CarouselRail>
 
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-3">
@@ -96,11 +100,13 @@ function BrandLogoCard({
           {brand.name}
         </span>
       ) : (
-        <div className="relative h-10 w-full">
+        // Figma BrandBox: the mark fills most of the 217×140 tile.
+        <div className="relative h-[92px] w-full">
           <Image
             src={brand.logo}
             alt={brand.name}
             fill
+            sizes="220px"
             className="object-contain object-center grayscale transition-[filter] group-hover:grayscale-0"
             onError={() => setImageError(true)}
             unoptimized
