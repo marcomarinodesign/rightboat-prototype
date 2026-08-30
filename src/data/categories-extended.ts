@@ -60,4 +60,20 @@ export const boatCategories: Category[] = [
     description: "Stable multi-hull boats ideal for comfort and space",
     listingCount: 78,
   },
+  {
+    id: "center-consoles",
+    name: "Center Consoles",
+    slug: "center-consoles",
+    image: "/figma/boats/card6.png",
+    description: "Open-deck boats built for fishing, diving and day cruising",
+    listingCount: 168,
+  },
+  {
+    id: "trawlers",
+    name: "Trawlers",
+    slug: "trawlers",
+    image: "/figma/boats/card2-hero.png",
+    description: "Long-range displacement cruisers made for living aboard",
+    listingCount: 64,
+  },
 ]
