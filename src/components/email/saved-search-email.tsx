@@ -165,7 +165,7 @@ function HorizontalListingRow({ listing, boatType, className }: HorizontalListin
           />
         )}
         {listing.photoCount != null && listing.photoCount > 0 && (
-          <div className="absolute bottom-2 right-2 z-10 rounded-full bg-[#b8e7ff] px-3 py-1.5">
+          <div className="absolute bottom-2 right-2 z-10 rounded-full bg-malibu-200 px-3 py-1.5">
             <span className="whitespace-nowrap text-[11px] font-semibold text-midnight">
               See {listing.photoCount} photos
             </span>

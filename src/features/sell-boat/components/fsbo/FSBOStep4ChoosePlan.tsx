@@ -74,7 +74,7 @@ export function FSBOStep4ChoosePlan({ form }: FSBOStep4ChoosePlanProps) {
       />
 
       {/* Social proof */}
-      <div className="rounded-xl bg-[#f4f9ff] px-4 py-3">
+      <div className="rounded-xl bg-tag-bg px-4 py-3">
         <p className="text-sm text-foreground">
           <span className="font-bold">78% of sellers</span> choose Premium — featured listings sell{" "}
           <span className="font-bold">2.4× faster</span> on average.

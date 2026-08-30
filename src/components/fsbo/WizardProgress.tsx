@@ -33,7 +33,7 @@ export function WizardProgress({
           <button
             type="button"
             onClick={onClose}
-            className="text-base text-[#51545c] leading-[22px] hover:opacity-70 transition-opacity"
+            className="text-base text-muted-foreground leading-[22px] hover:opacity-70 transition-opacity"
           >
             Close
           </button>
@@ -47,7 +47,7 @@ export function WizardProgress({
             key={i}
             className={[
               "flex-1 h-full rounded-sm transition-colors duration-300",
-              i < step ? "bg-primary" : "bg-[#f4f9ff]",
+              i < step ? "bg-primary" : "bg-tag-bg",
             ].join(" ")}
           />
         ))}

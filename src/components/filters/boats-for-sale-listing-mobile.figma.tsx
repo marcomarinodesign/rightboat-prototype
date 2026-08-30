@@ -73,6 +73,9 @@ const MOBILE_IMPORTS = [
   'import { listingBoats } from "@/data/boats"',
 ]
 
+// TODO(2026-08-30): frame "SRP / Mobile — Default" (333-2056) no longer exists in
+// El-Captain-DS and no equivalent frame exists on ✅ SRP Split View. Recreate the
+// frame (or capture it) and point this URL at it before publishing.
 figma.connect(
   SrpMobileDefault,
   "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2056",
@@ -84,7 +87,7 @@ figma.connect(
 
 figma.connect(
   SrpMobileActiveFilters,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-6",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-8609",
   {
     imports: MOBILE_IMPORTS,
     example: () => <SrpMobileActiveFilters />,
@@ -93,7 +96,7 @@ figma.connect(
 
 figma.connect(
   SrpMobileEmpty,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-7",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-9568",
   {
     imports: MOBILE_IMPORTS,
     example: () => <SrpMobileEmpty />,
@@ -102,7 +105,7 @@ figma.connect(
 
 figma.connect(
   SrpMobileSortOpen,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-8",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-9795",
   {
     imports: MOBILE_IMPORTS,
     example: () => <SrpMobileSortOpen />,
@@ -111,7 +114,7 @@ figma.connect(
 
 figma.connect(
   SrpMobileSaveSearchToast,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-10",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-12098",
   {
     imports: MOBILE_IMPORTS,
     example: () => <SrpMobileSaveSearchToast />,

@@ -15,9 +15,6 @@
   --color-midnight-800: var(--midnight-800);
   --color-midnight-700: var(--midnight-700);
   --color-midnight-600: var(--midnight-600);
-  --color-midnight-500: var(--midnight-500);
-  --color-midnight-400: var(--midnight-400);
-  --color-midnight-300: var(--midnight-300);
   --color-midnight-200: var(--midnight-200);
   --color-blue-200: var(--blue-200);
   --color-blue-300: var(--blue-300);
@@ -50,12 +47,6 @@
   --color-status-info-200: var(--status-info-200);
   --color-status-info-300: var(--status-info-300);
   /* Legacy aliases — same as Blue / Midnight (prefer blue-* / midnight in new code) */
-  --color-brand-midnight: var(--midnight);
-  --color-brand-200: var(--blue-200);
-  --color-brand-300: var(--blue-300);
-  --color-brand-400: var(--blue-400);
-  --color-brand-500: var(--blue-500);
-  --color-brand-600: var(--blue-600);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -124,9 +115,6 @@
   --midnight-800: #1b0a38;
   --midnight-700: #1f123f;
   --midnight-600: #2b1a52;
-  --midnight-500: #432876;
-  --midnight-400: #6048a8;
-  --midnight-300: #8e78d0;
   --midnight-200: #b9c4ff;
   --midnight: var(--midnight-900); /* backward-compatible alias */
   --blue-200: #208cff;
@@ -163,21 +151,13 @@
   --status-info-200: #0073e6;
   --status-info-300: #114394;
 
-  /* Legacy aliases — prefer --blue-* and --midnight */
-  --brand-midnight: var(--midnight);
-  --brand-blue-200: var(--blue-200);
-  --brand-blue-300: var(--blue-300);
-  --brand-blue-400: var(--blue-400);
-  --brand-blue-500: var(--blue-500);
-  --brand-blue-600: var(--blue-600);
-
   /* Semantic — map UI roles to primitives above */
   --background: var(--neutral-white);
-  --foreground: var(--midnight);
+  --foreground: var(--midnight-900);
   --card: var(--neutral-white);
-  --card-foreground: var(--midnight);
+  --card-foreground: var(--midnight-900);
   --popover: var(--neutral-white);
-  --popover-foreground: var(--midnight);
+  --popover-foreground: var(--midnight-900);
   --primary: var(--blue-400);
   --primary-foreground: var(--neutral-white);
   --secondary: var(--blue-200);
@@ -232,7 +212,7 @@
 }
 
 .dark {
-  --background: var(--midnight);
+  --background: var(--midnight-900);
   --foreground: var(--neutral-white);
   --card: var(--midnight-800);
   --card-foreground: var(--neutral-white);
@@ -245,7 +225,7 @@
   --muted: var(--midnight-700);
   --muted-foreground: var(--midnight-200);
   --accent: var(--malibu-400);
-  --accent-foreground: var(--midnight);
+  --accent-foreground: var(--midnight-900);
   --destructive: var(--status-error-200);
   --destructive-foreground: var(--neutral-white);
   --border: var(--midnight-600);

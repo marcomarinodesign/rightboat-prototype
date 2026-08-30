@@ -88,7 +88,7 @@ function BoatDetailPageInactive({
 
 figma.connect(
   BoatDetailPageInactive,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=212-2007",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-5554",
   {
     imports: [
       '// Demo page: src/app/boats-for-sale/seacamper/24/rb226195/page.tsx',

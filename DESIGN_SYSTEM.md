@@ -94,7 +94,7 @@ src/
 | **Status/Error** /100–/300 | `--status-error-*` | idem; `--destructive` → `--status-error-200` |
 | **Status/Info** /100–/300 | `--status-info-*` | idem; `--tag-bg` → `--status-info-100` |
 
-**Legacy aliases** (same values): `--brand-midnight` → `--midnight`, `--brand-blue-*` → `--blue-*`. Prefer new names in new code.
+**Legacy aliases**: `--brand-*` removed (2026-08-30, zero call sites). `--midnight` remains as alias of `--midnight-900` for utility classes (`bg-midnight`); semantic tokens reference `--midnight-900` directly.
 
 **Hex source of truth**: Dev Mode / variables in Figma. If a Malibu or Status hex drifts, update the primitive block in `globals.css` first, then semantic mappings if needed.
 

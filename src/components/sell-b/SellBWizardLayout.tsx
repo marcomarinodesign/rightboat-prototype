@@ -21,9 +21,9 @@ export function SellBWizardLayout({
   if (hideImage) {
     // FSBO wizard: gray page + centered white card
     return (
-      <div className={cn("min-h-screen bg-[#fafafa]", className)}>
+      <div className={cn("min-h-screen bg-muted", className)}>
         <div className="mx-auto max-w-[728px] px-4 py-6">
-          <div className="bg-white rounded-3xl border border-[#e4e5e9] px-4 py-6 sm:px-8 sm:py-8">
+          <div className="bg-white rounded-3xl border border-border px-4 py-6 sm:px-8 sm:py-8">
             {children}
           </div>
         </div>

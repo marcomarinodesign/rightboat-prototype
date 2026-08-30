@@ -40,7 +40,7 @@ const CABINS_BERTHS_OPTIONS = ["None", "1 cabin", "2 cabins", "3 cabins", "4+ ca
 
 function AIFilledTag() {
   return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#354CC8] text-white text-xs font-semibold whitespace-nowrap">
+    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold whitespace-nowrap">
       <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
         <path d="M8 0L9.5 6.5L16 8L9.5 9.5L8 16L6.5 9.5L0 8L6.5 6.5L8 0Z" />
       </svg>
@@ -117,9 +117,9 @@ export function FSBOStep1YourBoat({
 
   // Matches BoatTypeSelector selected style: 2px primary border + light blue tint
   // For AI-filled fields (tracked in aiFields Set)
-  const aiCls = (field: string) => aiFields.has(field) ? "border-2 border-primary bg-[#f4f9ff]" : ""
+  const aiCls = (field: string) => aiFields.has(field) ? "border-2 border-primary bg-tag-bg" : ""
   // For user-supplied seed fields (brand/model/year) — same visual, aligned with FieldLabel badge condition
-  const AI_CLS = "border-2 border-primary bg-[#f4f9ff]"
+  const AI_CLS = "border-2 border-primary bg-tag-bg"
   const seedCls = (val: unknown) => val ? AI_CLS : ""
 
   return (
@@ -252,7 +252,7 @@ export function FSBOStep1YourBoat({
           <Label className="text-sm font-bold text-foreground leading-5">Description</Label>
         </FieldLabel>
         <textarea
-          className={`flex w-full h-[160px] rounded-lg px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors resize-none ${aiFields.has("description") ? "border-2 border-primary bg-[#f4f9ff]" : "border border-input bg-background"}`}
+          className={`flex w-full h-[160px] rounded-lg px-3.5 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors resize-none ${aiFields.has("description") ? "border-2 border-primary bg-tag-bg" : "border border-input bg-background"}`}
           placeholder="Describe your boat — condition, upgrades, history..."
           {...register("description")}
           onChange={(e) => {

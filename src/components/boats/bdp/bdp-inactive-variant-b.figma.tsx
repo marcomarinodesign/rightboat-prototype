@@ -23,7 +23,7 @@ function BdpInactiveVariantBCalloutPreview({
 
 figma.connect(
   BdpInactiveVariantBCalloutPreview,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=212-1627",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-5486",
   {
     imports: [
       '// Full page: src/app/boats-for-sale/seacamper/24/rb226195-b/page.tsx',

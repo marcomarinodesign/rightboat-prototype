@@ -30,8 +30,8 @@ export function FSBOStep5Payment({ selectedPlan }: FSBOStep5PaymentProps) {
 
       {/* Order summary */}
       <div className="pt-7">
-        <div className="rounded-xl border border-[#e4e5e9] p-[17px] flex flex-col gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[1.2px] text-[#9699a0]">
+        <div className="rounded-xl border border-border p-[17px] flex flex-col gap-3">
+          <p className="text-xs font-semibold uppercase tracking-[1.2px] text-neutral-400">
             Order summary
           </p>
 
@@ -40,19 +40,19 @@ export function FSBOStep5Payment({ selectedPlan }: FSBOStep5PaymentProps) {
               <p className="text-base font-semibold text-foreground">
                 Rightboat {plan.name}
               </p>
-              <p className="text-xs text-[#9699a0] leading-5">{highlight}</p>
+              <p className="text-xs text-neutral-400 leading-5">{highlight}</p>
             </div>
             <div className="text-right shrink-0">
               <p className="text-[20px] font-extrabold text-foreground leading-7">${plan.price}</p>
-              <p className="text-xs text-[#9699a0]">per month</p>
+              <p className="text-xs text-neutral-400">per month</p>
             </div>
           </div>
 
-          <div className="border-t border-[#e4e5e9] pt-[13px] flex items-center justify-between">
-            <p className="text-sm text-[#9699a0]">Billed monthly · Cancel any time</p>
+          <div className="border-t border-border pt-[13px] flex items-center justify-between">
+            <p className="text-sm text-neutral-400">Billed monthly · Cancel any time</p>
             <p className="text-sm font-bold text-foreground">
               ${plan.price}
-              <span className="font-normal text-[#9699a0]">/mo</span>
+              <span className="font-normal text-neutral-400">/mo</span>
             </p>
           </div>
         </div>
@@ -71,7 +71,7 @@ export function FSBOStep5Payment({ selectedPlan }: FSBOStep5PaymentProps) {
       </div>
 
       {/* Legal */}
-      <p className="text-xs text-[#9699a0] text-center leading-5">
+      <p className="text-xs text-neutral-400 text-center leading-5">
         By publishing you confirm your listing complies with Rightboat&apos;s{" "}
         <a
           href="/terms"
@@ -89,7 +89,7 @@ export function FSBOStep5Payment({ selectedPlan }: FSBOStep5PaymentProps) {
 
 function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="flex items-center gap-1.5 text-xs text-[#0073e6]">
+    <div className="flex items-center gap-1.5 text-xs text-status-info-200">
       {icon}
       <span>{label}</span>
     </div>
@@ -98,7 +98,7 @@ function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
 
 function LockIcon() {
   return (
-    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="text-[#0073e6]">
+    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="text-status-info-200">
       <rect x="1" y="6" width="10" height="7.5" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
       <path d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
@@ -107,7 +107,7 @@ function LockIcon() {
 
 function ShieldIcon() {
   return (
-    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="text-[#0073e6]">
+    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" className="text-status-info-200">
       <path
         d="M6 1L1 3.5V7C1 9.8 3.2 12.4 6 13C8.8 12.4 11 9.8 11 7V3.5L6 1Z"
         stroke="currentColor"
@@ -121,6 +121,6 @@ function ShieldIcon() {
 
 function StripeWordmark() {
   return (
-    <span className="text-[10px] font-bold text-[#0073e6] italic tracking-wide">stripe</span>
+    <span className="text-[10px] font-bold text-status-info-200 italic tracking-wide">stripe</span>
   )
 }

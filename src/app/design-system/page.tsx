@@ -340,16 +340,13 @@ export default function DesignSystemPage() {
             description="Primitives match Figma library Colors: Midnight/900–200, Blue/200–600, Malibu/200–600, Neutral/50–600, Status (Success, Warning, Error, Info). Semantic tokens map UI roles to those primitives."
           >
             <Group label="Figma: Midnight/900–200">
-              <div className="grid grid-cols-4 gap-4 sm:grid-cols-8">
+              <div className="grid grid-cols-4 gap-4 sm:grid-cols-5">
                 {(
                   [
                     ["900", "--midnight-900"],
                     ["800", "--midnight-800"],
                     ["700", "--midnight-700"],
                     ["600", "--midnight-600"],
-                    ["500", "--midnight-500"],
-                    ["400", "--midnight-400"],
-                    ["300", "--midnight-300"],
                     ["200", "--midnight-200"],
                   ] as const
                 ).map(([label, token]) => (
@@ -366,7 +363,6 @@ export default function DesignSystemPage() {
                 <code className="font-mono">text-midnight-200</code> · Alias:{" "}
                 <code className="font-mono">--midnight</code> →{" "}
                 <code className="font-mono">--midnight-900</code> (dark surfaces).
-                Steps 500/400/300 CSS-only pending screen validation.
               </p>
             </Group>
 
@@ -391,9 +387,7 @@ export default function DesignSystemPage() {
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
                 Tailwind: <code className="font-mono">bg-blue-400</code>,{" "}
-                <code className="font-mono">text-blue-600</code> · Legacy{" "}
-                <code className="font-mono">--brand-blue-*</code> →{" "}
-                <code className="font-mono">--blue-*</code>
+                <code className="font-mono">text-blue-600</code>
               </p>
             </Group>
 

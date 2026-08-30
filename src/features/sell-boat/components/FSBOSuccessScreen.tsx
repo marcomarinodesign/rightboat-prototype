@@ -94,7 +94,7 @@ export function FSBOSuccessScreen({
 
       <div className="flex flex-wrap items-center justify-center gap-2">
         {boatSummary && (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fafafa] text-sm font-medium text-foreground">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm font-medium text-foreground">
             <Anchor className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {boatSummary}
           </span>
@@ -104,14 +104,14 @@ export function FSBOSuccessScreen({
             "inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide",
             plan === "premium"
               ? "bg-primary text-primary-foreground"
-              : "bg-[#fafafa] text-foreground"
+              : "bg-muted text-foreground"
           )}
         >
           {PLAN_LABEL[plan]}
         </span>
       </div>
 
-      <div className="w-full max-w-sm rounded-xl bg-[#f4f9ff] p-4 text-left space-y-3">
+      <div className="w-full max-w-sm rounded-xl bg-tag-bg p-4 text-left space-y-3">
         <p className="text-sm font-semibold text-foreground">What happens next</p>
         <ul className="space-y-2.5">
           {NEXT_STEPS.map(({ icon: Icon, text }) => (

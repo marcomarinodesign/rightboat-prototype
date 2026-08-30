@@ -21,13 +21,13 @@ export function PriceComparisonWidget({ askingPrice }: PriceComparisonWidgetProp
   const yourPct = maxPrice > 0 ? Math.round(((askingPrice || 0) / maxPrice) * 100) : 0
 
   return (
-    <div className="rounded-xl bg-[#f4f9ff] p-4 w-full">
+    <div className="rounded-xl bg-tag-bg p-4 w-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-3.5">
         <p className="text-base font-bold text-foreground">Price comparison</p>
-        <div className="flex items-center gap-1.5 bg-[#e2ffee] px-2.5 py-1 rounded-full">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#005a25] shrink-0" />
-          <span className="text-[11px] font-bold text-[#005a25] whitespace-nowrap">Good price</span>
+        <div className="flex items-center gap-1.5 bg-status-success-100 px-2.5 py-1 rounded-full">
+          <div className="w-1.5 h-1.5 rounded-full bg-status-success-300 shrink-0" />
+          <span className="text-[11px] font-bold text-status-success-300 whitespace-nowrap">Good price</span>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ export function PriceComparisonWidget({ askingPrice }: PriceComparisonWidgetProp
             <span>Your asking price</span>
             <span>{askingPrice ? formatPrice(askingPrice) : "—"}</span>
           </div>
-          <div className="bg-[#e4e5e9] h-2 rounded-full overflow-hidden">
+          <div className="bg-neutral-200 h-2 rounded-full overflow-hidden">
             <div
               className="bg-primary h-2 rounded-full transition-[width] duration-300"
               style={{ width: `${yourPct}%` }}
@@ -53,8 +53,8 @@ export function PriceComparisonWidget({ askingPrice }: PriceComparisonWidgetProp
             <span>Market average</span>
             <span>{formatPrice(marketAverage)}</span>
           </div>
-          <div className="bg-[#e4e5e9] h-2 rounded-full overflow-hidden">
-            <div className="bg-[#51545c] h-2 rounded-full w-full" />
+          <div className="bg-neutral-200 h-2 rounded-full overflow-hidden">
+            <div className="bg-neutral-500 h-2 rounded-full w-full" />
           </div>
         </div>
       </div>

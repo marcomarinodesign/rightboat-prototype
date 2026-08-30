@@ -1,6 +1,6 @@
 // FIGMA NODE: Location filter section — SRP / Split view → Filters panel
 // FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
-// COMPONENT: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-102
+// COMPONENT: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=524-132
 // STATUS: conectado al frame de sección (refinar a componente publicado si hace falta)
 // LAST SYNC: 2026-05-21
 
@@ -41,7 +41,7 @@ function LocationFilterPreview({
 
 figma.connect(
   LocationFilterPreview,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=289-102",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=524-132",
   {
     imports: [
       'import { LocationFilter } from "@/components/filters/location-filter"',

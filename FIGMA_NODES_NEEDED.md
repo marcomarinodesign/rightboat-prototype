@@ -2,6 +2,12 @@
 
 **Figma file**: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
 
+> **Estado 2026-08-30 — auditoría de cobertura (V2) ejecutada contra el archivo en vivo.**
+> Todos los node ids muertos fueron remapeados a los frames actuales: SRP Split `558-6909`, los 6 estados móviles del SRP a `558-*` (en ✅ SRP Split View), los 4 BDP inactivos a `558-*` (BDP InactiveDesign Proposals), Saved Search Email a `383-9`, y los mappings de variante suelta reapuntados a sus component sets (Location Filter `524-132`, Price Histogram `530-182`, Page Header SRP `595-9355`). Boat Card corregido: la propiedad real es `Variant` con 4 opciones (`Simple`, `Sponsored`, `Sponsored Alt`, `Manufacture`) — `AltSimple`/`AltManufacture` no existen en Figma.
+> **Sin target hoy (TODO en su .figma.tsx):** `SRP / Mobile — Default` (era 333-2056) y `SRP / Mobile — Marketing Footer` (era 337-11) — recrear frames. **Frame archivado 83-737 borrado de Figma:** el bloque de `SrpArchivedGridView` se retiró; la ruta `/archive/srp-grid` es el único artefacto.
+> **Ojo:** `294-87`/`294-93` (Filters / Select Field) son masters huérfanos — resuelven pero no cuelgan de ninguna página.
+> Informe completo: `Quantum Studio/Rightboat/Code Connect — cobertura.md` (vault).
+
 Una vez creados en Figma, copia el enlace al nodo (clic derecho → "Copy link to selection"),
 reemplázalo en el `.figma.tsx` correspondiente y ejecuta:
 
@@ -98,16 +104,16 @@ Página Figma: [Mobile Overview](https://www.figma.com/design/VOCH4pGubqSYza7CbL
 
 Ruta prototipo: `/boats-for-sale` (+ `figmaPreview` para estados de captura). Split view is the live SRP; mobile still uses the filters drawer.
 
-| Frame Figma | Node ID | Code Connect | `figmaPreview` |
+| Frame Figma | Node ID (2026-08-30) | Code Connect | `figmaPreview` |
 |-------------|---------|--------------|------------------|
-| SRP / Mobile — Default | [333-2056](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=333-2056) | `boats-for-sale-listing-mobile.figma.tsx` | `default` |
-| SRP / Mobile — Filters Open | [337-5](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-5) | `filters-drawer.figma.tsx` | `filters-open` |
-| SRP / Mobile — Active Filters | [337-6](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-6) | `boats-for-sale-listing-mobile.figma.tsx` | `active-filters` |
-| SRP / Mobile — Empty State | [337-7](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-7) | `boats-for-sale-listing-mobile.figma.tsx` | `empty` |
-| SRP / Mobile — Sort Open | [337-8](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-8) | `boats-for-sale-listing-mobile.figma.tsx` | `sort-open` |
-| SRP / Mobile — Filters Scrolled | [337-9](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-9) | `filters-drawer.figma.tsx` | `filters-scrolled` |
-| SRP / Mobile — Save Search Toast | [337-10](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-10) | `boats-for-sale-listing-mobile.figma.tsx` | `save-search-toast` |
-| SRP / Mobile — Marketing Footer | [337-11](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-11) | `boats-for-sale-page-mobile.figma.tsx` | `marketing-footer` |
+| SRP / Mobile — Default | **frame borrado** (era 333-2056) — recrear | `boats-for-sale-listing-mobile.figma.tsx` (TODO) | `default` |
+| SRP / Mobile — Filters Open | [558-7455](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-7455) | `filters-drawer.figma.tsx` | `filters-open` |
+| SRP / Mobile — Active Filters | [558-8609](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-8609) | `boats-for-sale-listing-mobile.figma.tsx` | `active-filters` |
+| SRP / Mobile — Empty State | [558-9568](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-9568) | `boats-for-sale-listing-mobile.figma.tsx` | `empty` |
+| SRP / Mobile — Sort Open | [558-9795](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-9795) | `boats-for-sale-listing-mobile.figma.tsx` | `sort-open` |
+| SRP / Mobile — Filters Scrolled | [558-10944](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-10944) | `filters-drawer.figma.tsx` | `filters-scrolled` |
+| SRP / Mobile — Save Search Toast | [558-12098](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-12098) | `boats-for-sale-listing-mobile.figma.tsx` | `save-search-toast` |
+| SRP / Mobile — Marketing Footer | **frame borrado** (era 337-11) — recrear | `boats-for-sale-page-mobile.figma.tsx` (TODO) | `marketing-footer` |
 
 Captura desde localhost (dev server + Figma MCP):
 

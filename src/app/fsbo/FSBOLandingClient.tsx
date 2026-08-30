@@ -220,7 +220,7 @@ export function FSBOLandingClient({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: easeOutExpo }}
             >
-              <div className="inline-flex items-center justify-center rounded-full bg-[#33c1fd] px-3 py-1.5">
+              <div className="inline-flex items-center justify-center rounded-full bg-malibu-400 px-3 py-1.5">
                 <span className="text-xs font-normal leading-4 text-white">
                   Commission-free
                 </span>
