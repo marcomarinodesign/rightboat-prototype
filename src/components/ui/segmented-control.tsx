@@ -45,7 +45,7 @@ export function SegmentedControl({
               "rounded-full px-2 py-2 text-center text-[13px] font-normal leading-[1.45] whitespace-nowrap transition-colors duration-[var(--transition-duration-fast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
               active
                 ? "bg-malibu-200 text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-foreground hover:text-foreground/80"
             )}
           >
             {option.label}

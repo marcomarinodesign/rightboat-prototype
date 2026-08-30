@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Boat } from "@/data/boats"
 import { cn } from "@/lib/utils"
 import { ImageSlider } from "@/components/ui/image-slider"
+import { PhotoTriptych } from "@/components/patterns/photo-triptych"
 import { BrokerLogo } from "@/components/boats/broker-logo"
 import type { SrpGridCardVariant } from "@/components/boats/srp-grid-card-variant"
 
@@ -24,7 +25,7 @@ type BoatCardProps = {
 function specsSummary(boat: Boat) {
   const len = boat.length.replace(/\s*ft\s*$/i, "ft").replace(/\s+/g, "")
   const type = boat.boatType ?? "Boat"
-  return `${boat.year} · ${len} · ${type} · ${boat.condition}`
+  return `${boat.year} · ${len} · ${type} · ${boat.conditionLabel ?? boat.condition}`
 }
 
 export function BoatCard({
@@ -52,39 +53,45 @@ export function BoatCard({
     srpGrid && srpVariant
       ? srpVariant === "manufacture"
       : Boolean(boat.manufacturerListing)
-  const showMediaChrome = srpGrid && (isSponsored || isManufacture)
+
+  // Figma Boat Card variants: Simple (plain photo), Sponsored (carousel chrome),
+  // Sponsored Alt / Manufacture (triptych). `boat.cardMedia` pins the anatomy per
+  // slot the way the Figma grid does; otherwise it follows the listing flags.
+  const mediaLayout =
+    boat.cardMedia ??
+    (isManufacture || (isSponsored && srpGrid)
+      ? "triptych"
+      : isSponsored
+        ? "carousel"
+        : "single")
+  const useTriptych = mediaLayout === "triptych"
+  const useCarouselChrome = mediaLayout === "carousel"
 
   const imageSection = (
     <div className="relative w-full overflow-hidden rounded-[8px]">
-      <ImageSlider
-        images={images}
-        alt={boatName}
-        showDots={srpGrid ? showMediaChrome : true}
-        showNavArrows={showMediaChrome}
-        dotsPlacement="overlay"
-        imageRoundedClassName="rounded-[8px]"
-        slideBackdropClassName="bg-midnight/12"
-        carouselFrameClassName={!srpGrid ? "h-[200px]" : undefined}
-      />
+      {useTriptych ? (
+        <PhotoTriptych images={images} alt={boatName} />
+      ) : (
+        <ImageSlider
+          images={images}
+          alt={boatName}
+          showDots={useCarouselChrome}
+          showNavArrows={useCarouselChrome}
+          dotsPlacement="overlay"
+          imageRoundedClassName="rounded-[8px]"
+          slideBackdropClassName="bg-midnight/12"
+          carouselFrameClassName="h-[200px]"
+        />
+      )}
       {isManufacture ? (
-        <div className="absolute left-2 top-2 z-10 rounded-full bg-primary px-3 py-1.5">
-          <span className="text-xs font-normal leading-4 text-primary-foreground">
+        <div className="absolute left-2 top-2 z-10 rounded-full bg-malibu-600 px-3 py-1.5">
+          <span className="text-xs font-normal leading-4 text-neutral-white">
             Manufacture Listing
           </span>
         </div>
       ) : isSponsored ? (
-        <div
-          className={cn(
-            "absolute left-2 top-2 z-10 rounded-full px-3 py-1.5",
-            srpGrid ? "bg-neutral-200" : "bg-primary"
-          )}
-        >
-          <span
-            className={cn(
-              "text-xs font-normal leading-4",
-              srpGrid ? "text-midnight" : "text-primary-foreground"
-            )}
-          >
+        <div className="absolute left-2 top-2 z-10 rounded-full bg-malibu-300 px-3 py-1.5">
+          <span className="text-xs font-normal leading-4 text-midnight">
             Sponsored
           </span>
         </div>
@@ -92,19 +99,17 @@ export function BoatCard({
     </div>
   )
 
-  const brokerRow = (
-    <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
-      <div className="relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 shadow-sm ring-1 ring-neutral-200">
-        <BrokerLogo
-          key={`${boat.id}-${boat.broker}`}
-          broker={boat.broker}
-          alt={boat.broker || "Broker logo"}
-          width={28}
-          height={28}
-          className="size-full object-contain"
-        />
-      </div>
-      <span className="truncate text-xs leading-4 text-midnight">{boat.broker}</span>
+  /** Figma: broker logo sits in a bordered 73×44 box, not a round avatar with a name. */
+  const brokerLogoBox = (
+    <div className="relative flex h-11 w-[73px] shrink-0 items-center justify-center overflow-hidden rounded-[8px] border border-border bg-card">
+      <BrokerLogo
+        key={`${boat.id}-${boat.broker}`}
+        broker={boat.broker}
+        alt={boat.broker || "Broker logo"}
+        width={73}
+        height={44}
+        className="h-full w-full object-contain p-1"
+      />
     </div>
   )
 
@@ -117,51 +122,14 @@ export function BoatCard({
       e.stopPropagation()
     }
 
-    if (layout === "srp") {
-      const prominent = isSponsored || isManufacture
-      if (prominent) {
-        return (
-          <button
-            type="button"
-            className={cn(
-              "flex h-11 min-w-0 flex-1 items-center justify-center rounded-lg border border-input bg-background px-5 text-sm font-medium text-foreground",
-              ctaHoverPrimary
-            )}
-            onClick={stopNav}
-          >
-            Contact Seller
-          </button>
-        )
-      }
-      return (
-        <button
-          type="button"
-          className={cn(
-            "shrink-0 rounded-lg px-3 py-2 text-sm font-medium text-foreground",
-            ctaHoverPrimary
-          )}
-          onClick={stopNav}
-        >
-          Contact Seller
-        </button>
-      )
-    }
-
+    void layout
     return (
       <button
         type="button"
-        className={cn(
-          "flex h-11 w-full items-center justify-center rounded-lg px-8 text-sm font-medium transition-colors duration-[var(--transition-duration-normal)]",
-          boat.featured || boat.manufacturerListing
-            ? "bg-primary text-primary-foreground hover:bg-primary/90"
-            : cn(
-                "border border-input bg-background text-foreground",
-                ctaHoverPrimary
-              )
-        )}
+        className="flex h-11 min-w-0 flex-1 items-center justify-center rounded-[8px] bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors duration-[var(--transition-duration-normal)] hover:bg-primary/90"
         onClick={stopNav}
       >
-        Contact Seller
+        {isManufacture ? "Contact Manufacturer" : "Contact Seller"}
       </button>
     )
   }
@@ -171,10 +139,11 @@ export function BoatCard({
     showContactCta?: boolean
     ctaLayout?: "default" | "srp"
   }) => (
+    // Figma info order: specs → title → location → price → divider → broker + CTA row.
     <div className="flex min-w-0 flex-col gap-2 pt-3">
-      <div className="text-base font-bold leading-6 text-primary">
-        {boat.price}
-      </div>
+      <p className="line-clamp-2 text-sm leading-5 text-midnight">
+        {specsSummary(boat)}
+      </p>
       {options?.linkName ? (
         <Link
           href={detailHref}
@@ -191,21 +160,18 @@ export function BoatCard({
           {boatName}
         </span>
       )}
-      <p className="line-clamp-2 text-sm leading-5 text-midnight">
-        {specsSummary(boat)}
-      </p>
       <p className="line-clamp-2 text-sm leading-5 text-midnight">{boat.location}</p>
+      <div className="text-base font-bold leading-6 text-primary">
+        {boat.price}
+      </div>
       <div className="h-px w-full bg-border-card" />
-      {options?.showContactCta && options.ctaLayout === "srp" ? (
-        <div className="flex w-full items-center gap-2">
-          {brokerRow}
-          {contactCta("srp")}
+      {options?.showContactCta ? (
+        <div className="flex w-full items-start gap-2">
+          {brokerLogoBox}
+          {contactCta(options.ctaLayout ?? "default")}
         </div>
       ) : (
-        <>
-          {brokerRow}
-          {options?.showContactCta ? contactCta("default") : null}
-        </>
+        brokerLogoBox
       )}
     </div>
   )
@@ -234,7 +200,7 @@ export function BoatCard({
     <Link
       href={detailHref}
       className={cn(
-        "flex w-full flex-col overflow-hidden rounded-2xl border border-border-card bg-card p-3",
+        "flex w-full flex-col overflow-hidden rounded-xl border border-border-card bg-card p-3",
         "transition-all hover:shadow-lg",
         className
       )}

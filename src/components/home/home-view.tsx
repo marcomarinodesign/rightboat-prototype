@@ -20,6 +20,7 @@ import { PremiumBrands } from "@/components/home/premium-brands"
 import { WhyRightboat } from "@/components/home/why-rightboat"
 import { Testimonials } from "@/components/home/testimonials"
 import { FadeIn } from "@/components/motion/fade-in"
+import { CarouselRail } from "@/components/patterns/carousel-rail"
 import { featuredBoats } from "@/data/boats"
 import { latestArticles } from "@/data/articles"
 import {
@@ -86,7 +87,7 @@ function HomeViewInner() {
               boats.
             </motion.p>
             <motion.figure
-              className="relative h-[220px] w-full overflow-hidden rounded-2xl bg-muted md:h-[400px]"
+              className="relative h-[109px] w-full overflow-hidden rounded-2xl bg-muted md:h-[260px] lg:h-[400px]"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.65, ease: easeOutExpo, delay: 0.12 }}
@@ -123,8 +124,9 @@ function HomeViewInner() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
+        {/* Figma shows this header on Tablet/Mobile only; on Desktop the grid starts flush. */}
         <motion.div
-          className="flex items-center justify-between"
+          className="flex items-center justify-between lg:sr-only"
           variants={staggerItem}
         >
           <h2 id="featured-heading" className="heading-sm">
@@ -134,16 +136,20 @@ function HomeViewInner() {
             Discover more
           </Link>
         </motion.div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {/* Figma: a scrolling rail on Mobile/Tablet, 4×2 grid on Desktop (203:1485). */}
+        <CarouselRail
+          label="Featured boats"
+          wrapAtDesktop
+          itemClassName="basis-[308px] md:basis-[251px] lg:basis-[calc((100%-60px)/4)]"
+        >
           {featuredBoats.map((boat) => (
-            <motion.div key={boat.id} variants={staggerItem}>
-              <BoatCard
-                boat={boat}
-                {...(surface === "app" ? { href: `/app/boat/${boat.id}` } : {})}
-              />
-            </motion.div>
+            <BoatCard
+              key={boat.id}
+              boat={boat}
+              {...(surface === "app" ? { href: `/app/boat/${boat.id}` } : {})}
+            />
           ))}
-        </div>
+        </CarouselRail>
       </motion.section>
 
       <FadeIn>
@@ -192,13 +198,14 @@ function HomeViewInner() {
             See more articles
           </Link>
         </motion.div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <CarouselRail
+          label="Latest articles"
+          itemClassName="basis-[308px] md:basis-[calc((100%-40px)/3)] lg:basis-[calc((100%-60px)/4)]"
+        >
           {latestArticles.map((article) => (
-            <motion.div key={article.id} variants={staggerItem}>
-              <ArticleCard article={article} />
-            </motion.div>
+            <ArticleCard key={article.id} article={article} />
           ))}
-        </div>
+        </CarouselRail>
       </motion.section>
     </div>
   )

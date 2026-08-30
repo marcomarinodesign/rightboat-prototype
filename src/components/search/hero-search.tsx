@@ -5,7 +5,10 @@ import { AnimatePresence, motion } from "framer-motion"
 
 import { SegmentedControl } from "@/components/ui/segmented-control"
 import { useHomeSurface } from "@/components/home/home-surface-context"
-import { ClassicSearcher } from "@/components/search/classic-searcher"
+import {
+  ClassicSearcher,
+  ClassicSearcherSeoCopy,
+} from "@/components/search/classic-searcher"
 import { ConversationalSearchField } from "@/components/search/conversational-search-field"
 import { easeOutExpo } from "@/lib/motion-variants"
 import { cn } from "@/lib/utils"
@@ -18,12 +21,12 @@ const SEARCH_MODE_OPTIONS = [
 type SearchMode = (typeof SEARCH_MODE_OPTIONS)[number]["value"]
 
 const searchPanelClass =
-  "w-full rounded-2xl border border-neutral-200 bg-card p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]"
+  "w-full rounded-2xl border border-neutral-200 bg-card p-5 shadow-[0_2px_6px_rgba(0,0,0,0.06)]"
 
 export function HeroSearch() {
   const surface = useHomeSurface()
   const isApp = surface === "app"
-  const [mode, setMode] = React.useState<SearchMode>("ai")
+  const [mode, setMode] = React.useState<SearchMode>("classic")
 
   return (
     <div className="flex w-full flex-col items-center gap-4 md:gap-2">
@@ -56,6 +59,7 @@ export function HeroSearch() {
             transition={{ duration: 0.22, ease: easeOutExpo }}
           >
             <ClassicSearcher />
+            <ClassicSearcherSeoCopy />
           </motion.div>
         )}
       </AnimatePresence>
@@ -63,7 +67,7 @@ export function HeroSearch() {
       {isApp ? null : (
         <div
           className={cn(
-            "flex w-full flex-col text-left text-sm leading-5 text-muted-foreground"
+            "hidden w-full flex-col text-left text-sm leading-5 text-muted-foreground lg:flex"
           )}
         >
           <p>

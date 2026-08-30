@@ -67,14 +67,8 @@ export function AppShell({ children }: AppShellProps) {
 
 const leftNav = [
   { name: "Boats for sale", href: "/boats-for-sale" },
-  { name: "Power", href: "/boats-for-sale?type=power" },
-  { name: "Sail", href: "/boats-for-sale?type=sail" },
-  { name: "Research", href: "/research-advice" },
-] as const
-
-const rightNav = [
-  { name: "Propel Program", href: "/propel" },
-  { name: "Membership", href: "/broker-dealer" },
+  { name: "Research & Advice", href: "/research-advice" },
+  { name: "Loan Calculator", href: "#" },
 ] as const
 
 function SiteHeader({ transparent = false }: { transparent?: boolean }) {
@@ -97,7 +91,7 @@ function SiteHeader({ transparent = false }: { transparent?: boolean }) {
     )}>
       <nav
         aria-label="Global"
-        className="relative mx-auto flex h-12 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-auto lg:px-8 lg:py-6"
+        className="relative mx-auto flex h-16 w-full items-center justify-between px-4 sm:px-6 md:h-[72px] lg:h-[88px] lg:px-16 lg:py-0"
       >
         {/* ── Desktop left nav ── */}
         <div className="hidden lg:flex lg:items-center lg:gap-2">
@@ -163,21 +157,17 @@ function SiteHeader({ transparent = false }: { transparent?: boolean }) {
                           {item.name}
                         </Link>
                       ))}
-                      <p className="-mx-3 px-3 py-2 text-sm font-medium text-muted-foreground">
-                        More
-                      </p>
-                      {rightNav.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="-mx-3 ml-2 block rounded-lg px-3 py-2 text-base font-semibold text-foreground hover:bg-muted"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
                     </div>
                     <div className="space-y-3 py-6">
+                      <Button
+                        variant="ghost"
+                        className="w-full text-[13px] font-medium text-primary"
+                        asChild
+                      >
+                        <Link href="#" onClick={() => setMobileMenuOpen(false)}>
+                          Log In/Sign In
+                        </Link>
+                      </Button>
                       <Button className="w-full text-[13px] font-medium" asChild>
                         <Link href="/fsbo" onClick={() => setMobileMenuOpen(false)}>
                           Sell your boat
@@ -192,12 +182,20 @@ function SiteHeader({ transparent = false }: { transparent?: boolean }) {
 
           {/* Desktop right nav */}
           <div className="hidden lg:flex lg:items-center lg:gap-2">
-            {rightNav.map((item) => (
-              <Link key={item.name} href={item.href} className={navLinkClass}>
-                {item.name}
-              </Link>
-            ))}
-            <Button size="sm" className="text-[13px] font-medium" asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className={cn(
+                "rounded-[8px] text-[13px] font-medium hover:bg-transparent",
+                transparent
+                  ? "text-white hover:text-white/80"
+                  : "text-primary hover:text-primary/80"
+              )}
+              asChild
+            >
+              <Link href="#">Log In/Sign In</Link>
+            </Button>
+            <Button size="sm" className="rounded-[8px] text-[13px] font-medium" asChild>
               <Link href="/fsbo">Sell your boat</Link>
             </Button>
           </div>

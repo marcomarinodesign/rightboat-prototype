@@ -63,7 +63,7 @@ function ChoiceGroup<T extends string>({
               aria-pressed={selected}
               onClick={() => onChange(option.value)}
               className={cn(
-                "h-10 flex-1 md:h-11 md:flex-none md:px-5",
+                "h-10 flex-1 rounded-[8px] md:h-11 md:flex-none md:px-5",
                 !selected && "border-neutral-300 bg-background text-foreground"
               )}
             >
@@ -134,7 +134,7 @@ export function ClassicSearcher() {
         >
           <SelectTrigger
             aria-label="Manufacturer"
-            className="border-neutral-300"
+            className="h-11 rounded-[8px] border-neutral-300"
           >
             <SelectValue placeholder="All boat manufacturer" />
           </SelectTrigger>
@@ -150,7 +150,7 @@ export function ClassicSearcher() {
       </div>
       <PanelDivider />
       <div className="flex w-full flex-col items-stretch justify-center md:w-auto">
-        <Button type="submit" size="lg" className="w-full md:w-auto">
+        <Button type="submit" size="lg" className="w-full rounded-[8px] md:w-auto">
           Start Search
         </Button>
         <Button
@@ -164,5 +164,17 @@ export function ClassicSearcher() {
         </Button>
       </div>
     </form>
+  )
+}
+
+/** SEO copy that lives inside the searcher panel (Figma Searcher 599:9883). Do not drop — it is what the page ranks on. */
+export function ClassicSearcherSeoCopy() {
+  return (
+    <p className="mt-2 w-full text-left text-sm leading-5 text-muted-foreground">
+      Rightboat is a global boat marketplace connecting buyers with trusted
+      brokers and private sellers across the US, UK and international markets.
+      Find boats for sale by type, manufacturer, condition, price or location
+      using our advanced global boat search.
+    </p>
   )
 }

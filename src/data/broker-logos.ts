@@ -7,7 +7,11 @@
  * To add or fix a broker: set the domain to the company’s primary marketing site (same domain
  * Clearbit indexes). Adjust the map if a logo is wrong or missing.
  */
-export const BROKER_LOGO_PLACEHOLDER = "/brands/broker-placeholder.svg"
+/**
+ * Exported from the Figma Boat Card (BrandLogoLink slot), which uses the
+ * Sunseeker mark as its stand-in for every broker.
+ */
+export const BROKER_LOGO_PLACEHOLDER = "/figma/brokers/sunseeker.png"
 
 const CLEARBIT = "https://logo.clearbit.com"
 

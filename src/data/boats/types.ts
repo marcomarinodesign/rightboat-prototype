@@ -6,6 +6,8 @@ export type Boat = {
   modelSlug: string
   year: number
   condition: "New" | "Used"
+  /** Display condition shown in card specs (Figma: "Like New", "Excellent", "Good"). Falls back to `condition`. */
+  conditionLabel?: string
   length: string
   price: string
   location: string
@@ -16,6 +18,12 @@ export type Boat = {
   featured?: boolean
   /** Manufacturer-direct listing (SRP grid badge + Alt CTA). */
   manufacturerListing?: boolean
+  /**
+   * Figma Boat Card media anatomy. "triptych" = hero + two thumbs (Sponsored Alt,
+   * Manufacture); "carousel" = single photo with dots and arrows (Sponsored).
+   * Defaults from the listing flags when omitted.
+   */
+  cardMedia?: "triptych" | "carousel" | "single"
   galleryImages?: string[]
   description?: string
   boatType?: string
