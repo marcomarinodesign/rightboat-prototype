@@ -391,9 +391,7 @@ export default function DesignSystemPage() {
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
                 Tailwind: <code className="font-mono">bg-blue-400</code>,{" "}
-                <code className="font-mono">text-blue-600</code> · Legacy{" "}
-                <code className="font-mono">--brand-blue-*</code> →{" "}
-                <code className="font-mono">--blue-*</code>
+                <code className="font-mono">text-blue-600</code>
               </p>
             </Group>
 

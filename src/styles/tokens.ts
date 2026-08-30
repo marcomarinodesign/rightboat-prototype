@@ -25,6 +25,7 @@ export const tokens = {
     neutral: {
       white: "var(--neutral-white)",
       black: "var(--neutral-black)",
+      50: "var(--neutral-50)",
       100: "var(--neutral-100)",
       200: "var(--neutral-200)",
       300: "var(--neutral-300)",
@@ -52,17 +53,6 @@ export const tokens = {
         100: "var(--status-info-100)",
         200: "var(--status-info-200)",
         300: "var(--status-info-300)",
-      },
-    },
-    /** @deprecated Use colors.blue / midnight — kept for older call sites */
-    brand: {
-      midnight: "var(--midnight)",
-      blue: {
-        200: "var(--blue-200)",
-        300: "var(--blue-300)",
-        400: "var(--blue-400)",
-        500: "var(--blue-500)",
-        600: "var(--blue-600)",
       },
     },
     semantic: {
