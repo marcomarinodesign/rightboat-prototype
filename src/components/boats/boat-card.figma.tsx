@@ -56,16 +56,10 @@ figma.connect(
       const boat =
         figmaVariant === "srp-sponsored" || figmaVariant === "default-sponsored"
           ? MOCK_SPONSORED
-          : figmaVariant === "srp-manufacture" ||
-              figmaVariant === "default-manufacture"
+          : figmaVariant === "default-manufacture"
             ? MOCK_MANUFACTURE
             : MOCK_BOAT
-      const gridLayout =
-        figmaVariant === "srp" ||
-        figmaVariant === "srp-sponsored" ||
-        figmaVariant === "srp-manufacture"
-          ? "srp"
-          : "default"
+      const gridLayout = figmaVariant === "srp-sponsored" ? "srp" : "default"
       return <BoatCard boat={boat} gridLayout={gridLayout} />
     },
   }
