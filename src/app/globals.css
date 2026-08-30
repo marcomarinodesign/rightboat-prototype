@@ -15,9 +15,6 @@
   --color-midnight-800: var(--midnight-800);
   --color-midnight-700: var(--midnight-700);
   --color-midnight-600: var(--midnight-600);
-  --color-midnight-500: var(--midnight-500);
-  --color-midnight-400: var(--midnight-400);
-  --color-midnight-300: var(--midnight-300);
   --color-midnight-200: var(--midnight-200);
   --color-blue-200: var(--blue-200);
   --color-blue-300: var(--blue-300);
@@ -118,9 +115,6 @@
   --midnight-800: #1b0a38;
   --midnight-700: #1f123f;
   --midnight-600: #2b1a52;
-  --midnight-500: #432876;
-  --midnight-400: #6048a8;
-  --midnight-300: #8e78d0;
   --midnight-200: #b9c4ff;
   --midnight: var(--midnight-900); /* backward-compatible alias */
   --blue-200: #208cff;
