@@ -11,6 +11,8 @@ type CarouselRailProps = {
   label: string
   /** Tailwind basis classes controlling how many items are visible per breakpoint. */
   itemClassName?: string
+  /** Stop scrolling at lg and wrap into a static grid, as the Figma desktop frames do. */
+  wrapAtDesktop?: boolean
   className?: string
 }
 
@@ -23,6 +25,7 @@ export function CarouselRail({
   children,
   label,
   itemClassName = "basis-[calc((100%-60px)/4)]",
+  wrapAtDesktop = false,
   className,
 }: CarouselRailProps) {
   const trackRef = React.useRef<HTMLDivElement>(null)
@@ -37,12 +40,19 @@ export function CarouselRail({
 
   return (
     <div className={cn("flex items-center gap-5", className)}>
-      <NavArrow direction="left" onClick={() => scrollBy(-1)} />
+      <NavArrow
+        direction="left"
+        onClick={() => scrollBy(-1)}
+        hideAtDesktop={wrapAtDesktop}
+      />
       <div
         ref={trackRef}
         role="group"
         aria-label={label}
-        className="scrollbar-hide flex min-w-0 flex-1 snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
+        className={cn(
+          "scrollbar-hide flex min-w-0 flex-1 snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth",
+          wrapAtDesktop && "lg:snap-none lg:flex-wrap lg:overflow-x-visible"
+        )}
       >
         {React.Children.map(children, (child) => (
           <div className={cn("min-w-0 shrink-0 snap-start", itemClassName)}>
@@ -50,7 +60,11 @@ export function CarouselRail({
           </div>
         ))}
       </div>
-      <NavArrow direction="right" onClick={() => scrollBy(1)} />
+      <NavArrow
+        direction="right"
+        onClick={() => scrollBy(1)}
+        hideAtDesktop={wrapAtDesktop}
+      />
     </div>
   )
 }
@@ -58,9 +72,11 @@ export function CarouselRail({
 function NavArrow({
   direction,
   onClick,
+  hideAtDesktop = false,
 }: {
   direction: "left" | "right"
   onClick: () => void
+  hideAtDesktop?: boolean
 }) {
   const Icon = direction === "left" ? ChevronLeft : ChevronRight
   return (
@@ -68,7 +84,10 @@ function NavArrow({
       type="button"
       onClick={onClick}
       aria-label={direction === "left" ? "Previous" : "Next"}
-      className="hidden size-8 shrink-0 items-center justify-center rounded-full bg-neutral-300 text-midnight transition-colors hover:bg-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline-flex"
+      className={cn(
+        "hidden size-8 shrink-0 items-center justify-center rounded-full bg-neutral-300 text-midnight transition-colors hover:bg-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline-flex",
+        hideAtDesktop && "lg:hidden"
+      )}
     >
       <Icon className="size-3" aria-hidden />
     </button>

@@ -136,17 +136,20 @@ function HomeViewInner() {
             Discover more
           </Link>
         </motion.div>
-        {/* Figma Featured Section: 4 columns × 2 rows, 20px gutters (203:1485). */}
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {/* Figma: a scrolling rail on Mobile/Tablet, 4×2 grid on Desktop (203:1485). */}
+        <CarouselRail
+          label="Featured boats"
+          wrapAtDesktop
+          itemClassName="basis-[308px] md:basis-[251px] lg:basis-[calc((100%-60px)/4)]"
+        >
           {featuredBoats.map((boat) => (
-            <motion.div key={boat.id} variants={staggerItem}>
-              <BoatCard
-                boat={boat}
-                {...(surface === "app" ? { href: `/app/boat/${boat.id}` } : {})}
-              />
-            </motion.div>
+            <BoatCard
+              key={boat.id}
+              boat={boat}
+              {...(surface === "app" ? { href: `/app/boat/${boat.id}` } : {})}
+            />
           ))}
-        </div>
+        </CarouselRail>
       </motion.section>
 
       <FadeIn>
