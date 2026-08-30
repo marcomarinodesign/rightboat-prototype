@@ -7,34 +7,52 @@ export type PremiumBrand = {
 
 export const premiumBrands: PremiumBrand[] = [
   {
+    id: "sunseeker",
+    name: "Sunseeker",
+    slug: "sunseeker",
+    logo: "/figma/brands/sunseeker.png",
+  },
+  {
     id: "fairline",
     name: "Fairline",
     slug: "fairline",
-    logo: "/figma/brands/brand1.png",
+    logo: "/figma/brands/fairline.png",
   },
   {
     id: "beneteau",
     name: "Beneteau",
     slug: "beneteau",
-    logo: "/figma/brands/brand2.png",
+    logo: "/figma/brands/beneteau.png",
   },
   {
     id: "jeanneau",
     name: "Jeanneau",
     slug: "jeanneau",
-    logo: "/figma/brands/brand3.png",
+    logo: "/figma/brands/jeanneau.png",
   },
   {
     id: "sea-ray",
     name: "Sea Ray",
     slug: "sea-ray",
-    logo: "/figma/brands/brand4.png",
+    logo: "/figma/brands/sea-ray.png",
   },
   {
     id: "aquila",
     name: "Aquila",
     slug: "aquila",
-    logo: "/figma/brands/brand5.png",
+    logo: "/figma/brands/aquila.png",
+  },
+  {
+    id: "princess",
+    name: "Princess",
+    slug: "princess",
+    logo: "/brands/princess.png",
+  },
+  {
+    id: "azimut",
+    name: "Azimut",
+    slug: "azimut",
+    logo: "/brands/azimut.png",
   },
 ]
 

@@ -29,7 +29,7 @@ export function PopularModels() {
         label="Popular boat models"
         itemClassName="basis-[308px] md:basis-[calc((100%-40px)/3)] lg:basis-[calc((100%-60px)/4)]"
       >
-        {popularModels.slice(0, 4).map((model) => {
+        {popularModels.slice(0, 8).map((model) => {
           const webHref = `/boats-for-sale/${model.brandSlug}/${model.slug}`
           const href = listingsHref(webHref, surface)
           return (

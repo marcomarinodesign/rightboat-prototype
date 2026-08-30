@@ -51,4 +51,40 @@ export const latestArticles: Article[] = [
     image: "/figma/articles/article4.png",
     href: "https://www.rightboat.com/blog/the-best-boat-binoculars",
   },
+  {
+    id: "a5",
+    title: "New vs Used: Which Boat Makes More Sense for a First Purchase?",
+    date: "Jun 10, 2026",
+    excerpt:
+      "Depreciation, warranty cover and survey costs compared, so you can weigh a new build against a well-kept used boat.",
+    image: "/figma/boats/card4.png",
+    href: "https://www.rightboat.com/blog",
+  },
+  {
+    id: "a6",
+    title: "Understanding Boat Surveys: What a Marine Surveyor Actually Checks",
+    date: "May 22, 2026",
+    excerpt:
+      "From hull moisture readings to sea trials, a walkthrough of the inspection that protects your offer before you sign.",
+    image: "/figma/boats/card8.png",
+    href: "https://www.rightboat.com/blog",
+  },
+  {
+    id: "a7",
+    title: "Sailboat or Catamaran? Choosing the Right Hull for Your Cruising Plans",
+    date: "May 6, 2026",
+    excerpt:
+      "Stability, marina fees, upwind performance and liveaboard space, compared for couples planning long passages.",
+    image: "/figma/boats/card7.png",
+    href: "https://www.rightboat.com/blog",
+  },
+  {
+    id: "a8",
+    title: "The True Cost of Boat Ownership: Mooring, Insurance and Winter Storage",
+    date: "Apr 18, 2026",
+    excerpt:
+      "A realistic annual budget for a 40-foot cruiser, from berth rates and antifouling to engine servicing.",
+    image: "/figma/boats/card5.png",
+    href: "https://www.rightboat.com/blog",
+  },
 ]

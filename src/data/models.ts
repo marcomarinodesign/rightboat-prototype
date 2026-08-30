@@ -94,4 +94,30 @@ export const popularModels: PopularModel[] = [
     type: "Sailboat",
     priceRange: "$300,000 - $350,000",
   },
+  {
+    id: "model-7",
+    name: "580",
+    brand: "Ferretti Yachts",
+    brandSlug: "ferretti-yachts",
+    slug: "580",
+    images: [
+      "/figma/boats/card3-hero.png",
+    ],
+    length: "58 ft",
+    type: "Motor Yacht",
+    priceRange: "$1,600,000 - $1,900,000",
+  },
+  {
+    id: "model-8",
+    name: "330 Outrage",
+    brand: "Boston Whaler",
+    brandSlug: "boston-whaler",
+    slug: "330-outrage",
+    images: [
+      "/figma/boats/card6.png",
+    ],
+    length: "33 ft",
+    type: "Center Console",
+    priceRange: "$400,000 - $460,000",
+  },
 ]

@@ -12,7 +12,8 @@ import { premiumBrands } from "@/data/brands"
 import { CarouselRail } from "@/components/patterns/carousel-rail"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const PAGE_SIZE = 5
+// All brands ride in the carousel rail; the rail arrows replace the old paging.
+const PAGE_SIZE = 8
 
 export function PremiumBrands() {
   const surface = useHomeSurface()
@@ -37,7 +38,7 @@ export function PremiumBrands() {
       <div className="space-y-4">
         <CarouselRail
           label="Premium brands"
-          itemClassName="basis-[calc((100%-40px)/3)] sm:basis-[calc((100%-80px)/5)]"
+          itemClassName="basis-[calc((100%-40px)/3)] sm:basis-[calc((100%-80px)/5)] lg:basis-[calc((100%-80px)/5)]"
         >
           {visible.map((brand) => (
             <BrandLogoCard key={brand.id} brand={brand} surface={surface} />
