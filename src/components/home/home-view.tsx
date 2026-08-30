@@ -123,8 +123,9 @@ function HomeViewInner() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
+        {/* Figma shows this header on Tablet/Mobile only; on Desktop the grid starts flush. */}
         <motion.div
-          className="flex items-center justify-between"
+          className="flex items-center justify-between lg:sr-only"
           variants={staggerItem}
         >
           <h2 id="featured-heading" className="heading-sm">
@@ -134,6 +135,7 @@ function HomeViewInner() {
             Discover more
           </Link>
         </motion.div>
+        {/* Figma Featured Section: 4 columns × 2 rows, 20px gutters (203:1485). */}
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {featuredBoats.map((boat) => (
             <motion.div key={boat.id} variants={staggerItem}>
