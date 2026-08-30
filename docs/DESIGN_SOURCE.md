@@ -59,7 +59,7 @@ flowchart LR
 
 | Decisión | Resultado |
 |----------|-----------|
-| **SRP desktop layout (Q2)** | **Split view gana.** Sidebar de filtros + grid de 3 columnas es el listing live (`/boats-for-sale`). El grid de 4 columnas con drawer queda archivado en [`/archive/srp-grid`](../src/app/archive/srp-grid/page.tsx). No reabrir el A/B ni evolucionar el frame Figma [83-737](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737). |
+| **SRP desktop layout (Q2)** | **Split view gana.** Sidebar de filtros + grid de 3 columnas es el listing live (`/boats-for-sale`), frame Figma [558-6909](https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-6909). El grid de 4 columnas con drawer queda archivado en [`/archive/srp-grid`](../src/app/archive/srp-grid/page.tsx); su frame Figma (83-737) fue borrado del archivo — verificado 2026-08-30 — y la ruta del prototipo es el único artefacto. No reabrir el A/B. |
 
 ## Estructura relacionada en el repo
 

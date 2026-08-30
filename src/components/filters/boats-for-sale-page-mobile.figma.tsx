@@ -81,6 +81,9 @@ function BoatsForSalePageMobileMarketingFooter() {
   )
 }
 
+// TODO(2026-08-30): frame "SRP / Mobile — Marketing Footer" (337-11) no longer
+// exists in El-Captain-DS and no equivalent frame exists on ✅ SRP Split View.
+// Recreate the frame and point this URL at it before publishing.
 figma.connect(
   BoatsForSalePageMobileMarketingFooter,
   "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-11",

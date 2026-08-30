@@ -1,10 +1,11 @@
 // FIGMA NODE: Boat Card — listing card component in El-Captain-DS
 // FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
 // COMPONENT SET: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=80-65
-// LAST SYNC: 2026-05-21
+// LAST SYNC: 2026-08-30
 //
-// Variants Simple / Sponsored / Manufacture — homepage, carousels, BDP (gridLayout default)
-// Variants Alt* — SRP grids only (gridLayout srp)
+// Component set property is "Variant" with 4 options (verified live):
+// Simple / Sponsored / Manufacture — homepage, carousels, BDP (gridLayout default)
+// Sponsored Alt — SRP grid layout (the only Alt* variant that exists in Figma today)
 
 /**
  * Code Connect — BoatCard
@@ -44,13 +45,11 @@ figma.connect(
       'import { BoatCard } from "@/components/boats/boat-card"',
     ],
     props: {
-      figmaVariant: figma.enum("Property 1", {
+      figmaVariant: figma.enum("Variant", {
         Simple: "default",
         Sponsored: "default-sponsored",
         Manufacture: "default-manufacture",
-        AltSimple: "srp",
-        AltSponsored: "srp-sponsored",
-        AltManufacture: "srp-manufacture",
+        "Sponsored Alt": "srp-sponsored",
       }),
     },
     example: ({ figmaVariant }) => {

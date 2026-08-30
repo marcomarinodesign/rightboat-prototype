@@ -47,7 +47,7 @@ function FiltersDrawerMobileScrolled() {
 
 figma.connect(
   FiltersDrawerMobileOpen,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-5",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-7455",
   {
     imports: [
       'import { FiltersDrawer } from "@/components/filters/filters-drawer"',
@@ -59,7 +59,7 @@ figma.connect(
 
 figma.connect(
   FiltersDrawerMobileScrolled,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=337-9",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-10944",
   {
     imports: [
       'import { FiltersDrawer } from "@/components/filters/filters-drawer"',

@@ -33,7 +33,7 @@ function BdpInactiveVariantCSheetOpened({ boatType = "Powerboats" }: { boatType?
 
 figma.connect(
   BdpInactiveVariantCSheetHalf,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=212-2243",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-5703",
   {
     imports: [
       '// Variant C — page: src/app/boats-for-sale/seacamper/24/rb226195-alt/page.tsx',
@@ -48,7 +48,7 @@ figma.connect(
 
 figma.connect(
   BdpInactiveVariantCSheetOpened,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=212-2414",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-5630",
   {
     imports: [
       '// Variant C — opened: same route ?overlay=full',

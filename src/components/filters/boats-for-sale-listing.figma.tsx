@@ -27,7 +27,7 @@ function SrpArchivedGridView() {
 
 figma.connect(
   SrpSplitView,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=279-1422",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=558-6909",
   {
     imports: [
       "// Live SRP: src/app/boats-for-sale/page.tsx",
@@ -38,15 +38,7 @@ figma.connect(
   }
 )
 
-figma.connect(
-  SrpArchivedGridView,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=83-737",
-  {
-    imports: [
-      "// Archived Q2 A/B: src/app/archive/srp-grid/page.tsx",
-      'import { BoatsForSaleListing } from "@/components/filters/boats-for-sale-listing"',
-      'import { listingBoats } from "@/data/boats"',
-    ],
-    example: () => <SrpArchivedGridView />,
-  }
-)
+// Archived Q2 A/B (4-col grid + drawer): the Figma frame 83-737 no longer exists
+// (verified 2026-08-30 — deleted from El-Captain-DS). The prototype route
+// src/app/archive/srp-grid/page.tsx remains the only artifact; no Code Connect
+// mapping is published for it. Do not evolve.

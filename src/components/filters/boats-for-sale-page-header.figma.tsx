@@ -1,6 +1,6 @@
 // COMPONENT: SRP / Page Header — El-Captain-DS → Complex Components
 // FIGMA FILE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS
-// NODE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=301-77
+// NODE: https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=595-9355
 // LAST SYNC: 2026-05-21
 
 /**
@@ -31,7 +31,7 @@ function BoatsForSalePageHeader() {
 
 figma.connect(
   BoatsForSalePageHeader,
-  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=301-77",
+  "https://www.figma.com/design/VOCH4pGubqSYza7CbL30c7/El-Captain-DS?node-id=595-9355",
   {
     imports: [
       'import Link from "next/link"',
