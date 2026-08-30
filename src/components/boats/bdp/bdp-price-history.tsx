@@ -106,7 +106,7 @@ export function BdpPriceHistory({
                   >
                     <XAxis
                       dataKey="label"
-                      tick={{ fontSize: 10, fill: "#94a3b8" }}
+                      tick={{ fontSize: 10, fill: "var(--neutral-400)" }}
                       axisLine={false}
                       tickLine={false}
                       interval={0}
@@ -115,7 +115,7 @@ export function BdpPriceHistory({
                       domain={[0, maxPrice]}
                       ticks={yTicks}
                       tickFormatter={formatPriceLabel}
-                      tick={{ fontSize: 10, fill: "#94a3b8" }}
+                      tick={{ fontSize: 10, fill: "var(--neutral-400)" }}
                       axisLine={false}
                       tickLine={false}
                     />

@@ -88,7 +88,7 @@ export function FSBOPhotoUploader({ currentCount, onAdd }: FSBOPhotoUploaderProp
         onDrop={handleDrop}
         className={[
           "flex h-[250px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed text-center transition-colors",
-          isDragging ? "border-primary bg-[#f4f9ff]" : "border-[#e4e5e9] bg-[#fafafa]",
+          isDragging ? "border-primary bg-tag-bg" : "border-border bg-muted",
           atLimit ? "pointer-events-none opacity-50" : "cursor-pointer",
         ].join(" ")}
       >

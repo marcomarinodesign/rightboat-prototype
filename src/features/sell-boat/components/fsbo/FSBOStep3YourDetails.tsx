@@ -34,11 +34,11 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
       {/* ── Email (read-only) ── */}
       <div className="flex flex-col gap-1 pt-7">
         <Label className="text-sm font-bold text-foreground leading-5">Email</Label>
-        <div className="flex items-center gap-2 h-11 px-3.5 rounded-xl border border-[#e4e5e9] bg-[#fafafa] text-sm">
+        <div className="flex items-center gap-2 h-11 px-3.5 rounded-xl border border-border bg-muted text-sm">
           <LockIcon />
-          <span className="truncate text-[#9699a0]">{email || "seller@example.com"}</span>
+          <span className="truncate text-neutral-400">{email || "seller@example.com"}</span>
         </div>
-        <p className="text-xs text-[#9699a0] pt-2">
+        <p className="text-xs text-neutral-400 pt-2">
           Entered at the start.{" "}
           <a
             href="/fsbo"
@@ -82,7 +82,7 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
         {errors.phone && (
           <p className="text-sm text-destructive">{errors.phone.message}</p>
         )}
-        <p className="text-xs text-[#9699a0] pt-2">
+        <p className="text-xs text-neutral-400 pt-2">
           Only shared with interested buyers — never displayed publicly.
         </p>
       </div>
@@ -98,7 +98,7 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
           {...register("password")}
           error={errors.password?.message}
         />
-        <p className="text-xs text-[#9699a0] pt-2">
+        <p className="text-xs text-neutral-400 pt-2">
           This creates your Rightboat account so you can manage your listing.
         </p>
       </div>
@@ -118,7 +118,7 @@ export function FSBOStep3YourDetails({ form }: FSBOStep3YourDetailsProps) {
               />
               <label
                 htmlFor="gdprConsent"
-                className="text-sm text-[#9699a0] leading-5 cursor-pointer"
+                className="text-sm text-neutral-400 leading-5 cursor-pointer"
               >
                 I agree to Rightboat&apos;s{" "}
                 <a
@@ -161,7 +161,7 @@ function LockIcon() {
       viewBox="0 0 14 14"
       fill="none"
       aria-hidden="true"
-      className="shrink-0 text-[#9699a0]"
+      className="shrink-0 text-neutral-400"
     >
       <rect x="2" y="6" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
       <path

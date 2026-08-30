@@ -37,7 +37,7 @@ export function BoatTypeSelector({ value, onChange, error }: BoatTypeSelectorPro
                 "rounded-xl border-2 p-3.5 transition-colors duration-[var(--transition-duration-fast)]",
                 "min-h-16",
                 "border-border bg-card text-foreground hover:border-primary hover:bg-muted",
-                isSelected && "border-primary bg-[#f4f9ff] text-primary hover:border-primary hover:bg-[#f4f9ff]"
+                isSelected && "border-primary bg-tag-bg text-primary hover:border-primary hover:bg-tag-bg"
               )}
               aria-pressed={isSelected}
             >

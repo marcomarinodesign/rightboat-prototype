@@ -33,7 +33,7 @@ export function PackageCard({
         "relative block rounded-xl border-2 p-[22px] cursor-pointer transition-colors",
         selected
           ? "border-primary bg-white"
-          : "border-[#e4e5e9] bg-white hover:border-primary/40"
+          : "border-border bg-white hover:border-primary/40"
       )}
     >
       <input
@@ -52,7 +52,7 @@ export function PackageCard({
           "absolute top-4 right-4 flex items-center justify-center w-5 h-5 rounded-full border-2 transition-colors",
           selected
             ? "border-primary bg-primary text-white"
-            : "border-[#e4e5e9] bg-transparent"
+            : "border-border bg-transparent"
         )}
         aria-hidden="true"
       >
@@ -84,11 +84,11 @@ export function PackageCard({
         <span className="text-[30px] font-extrabold tracking-[-0.75px] text-foreground leading-9">
           ${price}
         </span>
-        <span className="text-sm text-[#9699a0] font-medium">/{billing}</span>
+        <span className="text-sm text-neutral-400 font-medium">/{billing}</span>
       </div>
 
       {/* Divider */}
-      <div className="mt-4 border-t border-[#e4e5e9]" />
+      <div className="mt-4 border-t border-border" />
 
       {/* Features */}
       <ul className="pt-4 flex flex-col gap-2.5">

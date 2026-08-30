@@ -61,7 +61,7 @@ export function FSBOStep2Photos({ form, photos, onPhotosChange, onSkip }: FSBOSt
       )}
 
       {/* Tips for great photos */}
-      <div className="rounded-xl bg-[#f4f9ff] p-4 flex flex-col gap-2">
+      <div className="rounded-xl bg-tag-bg p-4 flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <Lightbulb className="h-4 w-4 shrink-0 text-foreground" aria-hidden="true" />
           <p className="text-base font-bold text-foreground">Tips for great photos</p>

@@ -15,7 +15,7 @@ export function FSBOAIBanner({ filledFields, onDismiss, className }: FSBOAIBanne
   return (
     <div
       className={cn(
-        "rounded-xl bg-[#f4f9ff] flex items-center gap-3 px-3 py-2",
+        "rounded-xl bg-tag-bg flex items-center gap-3 px-3 py-2",
         className
       )}
       role="status"

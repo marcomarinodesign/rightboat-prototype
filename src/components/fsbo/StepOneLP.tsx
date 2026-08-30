@@ -28,10 +28,10 @@ const modelOptions = popularModels.map((m) => ({
 }))
 
 const LP_SELECT_TRIGGER =
-  "h-12 w-full rounded-[14px] border-white bg-white px-4 text-left text-base font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] hover:border-white sm:text-lg"
+  "h-12 w-full rounded-[14px] border-white bg-white px-4 text-left text-base font-normal text-foreground shadow-sm hover:border-white sm:text-lg"
 
 const LP_INPUT =
-  "h-12 w-full rounded-[14px] border-white bg-white px-4 text-base font-normal text-[#13022c] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] sm:text-lg"
+  "h-12 w-full rounded-[14px] border-white bg-white px-4 text-base font-normal text-foreground shadow-sm sm:text-lg"
 
 const currentYear = new Date().getFullYear()
 const yearOptions = Array.from({ length: currentYear - 1900 + 2 }, (_, i) => {
@@ -164,7 +164,7 @@ export function StepOneLP({
           <Button
             type="submit"
             size="lg"
-            className="h-12 w-full shrink-0 rounded-[12px] bg-[#0257fc] px-6 text-base font-semibold text-white hover:bg-[#024ae0] sm:text-lg"
+            className="h-12 w-full shrink-0 rounded-[12px] bg-primary px-6 text-base font-semibold text-white hover:bg-primary/90 sm:text-lg"
             disabled={isSubmitting}
           >
             Sell your boat
