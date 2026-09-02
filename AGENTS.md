@@ -28,3 +28,11 @@ Nautical marketplace prototype. Next.js + Tailwind + Framer Motion.
 ## Cursor — reglas Figma / design system
 
 Las reglas detalladas para implementar diseños con Figma MCP están en `.cursor/rules/figma-design-system.mdc` (tokens, carpetas `ui` / `patterns`, flujo MCP).
+
+## Cursor Cloud specific instructions
+
+- Package manager is npm (`package-lock.json`). The startup update script runs `npm install` for you.
+- Standard commands live in `package.json` scripts: `npm run dev` (Next.js dev server on port 3000, Turbopack), `npm run build`, `npm run lint`. No `.env`/`.env.local` is required to run the app locally.
+- No automated test suite exists (there is no `test` script). Playwright is a devDependency used only by the `scripts/figma-*` capture utilities, not by an app test runner — don't expect `npm test` to work.
+- `npm run lint` currently reports pre-existing errors/warnings, mostly in `scripts/*.cjs` (`require()` imports) and `*.figma.tsx` Code Connect files. These are not caused by app code and are not startup blockers; treat lint failures as pre-existing unless they touch files you changed.
+- The live SRP is `/boats-for-sale` (filters sidebar + boat grid); the archived 4-col grid at `/archive/srp-grid` is not the product default. Boat detail pages and some listing fields use placeholder/dummy prototype data (e.g. `"Value"` fields, and a card may route to a sample detail page), which is expected prototype behavior — not an environment bug.
